@@ -1,0 +1,24 @@
+{
+    "name": "jamesblanksby/gpxtoolbox",
+    "type": "library",
+    "version": "1.0.0",
+    "description": "A simple library for creating, parsing and modifying GPX files.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Blanksby",
+            "email": "james@blanks.by",
+            "homepage": "https://blanks.by"
+        }
+    ],
+    "require": {
+        "lib-libxml": "*",
+        "ext-simplexml": "*",
+        "ext-dom": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "GPXToolbox\\": "src/GPXToolbox/"
+        }
+    }
+}
