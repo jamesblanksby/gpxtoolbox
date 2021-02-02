@@ -39,7 +39,7 @@ class Route
 
     /**
      * GPS route number.
-     * @var int|null
+     * @var integer|null
      */
     public $number = null;
 

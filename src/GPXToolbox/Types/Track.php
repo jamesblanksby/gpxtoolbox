@@ -39,7 +39,7 @@ class Track
 
     /**
      * GPS track number.
-     * @var int|null
+     * @var integer|null
      */
     public $number = null;
 

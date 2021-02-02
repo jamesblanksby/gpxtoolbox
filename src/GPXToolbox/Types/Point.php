@@ -106,7 +106,7 @@ class Point
 
     /**
      * Number of satellites used to calculate the GPX fix.
-     * @var int|null
+     * @var integer|null
      */
     public $sat = null;
 
@@ -136,7 +136,7 @@ class Point
 
     /**
      * ID of DGPS station used in differential correction.
-     * @var int|null
+     * @var integer|null
      */
     public $dgpsid = null;
 
