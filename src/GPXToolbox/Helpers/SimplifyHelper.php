@@ -12,7 +12,7 @@ class SimplifyHelper
      * @param float $toleranceSq
      * @return Point[]
      */
-    public static function radialDistance(array $points, float $toleranceSq) : array
+    public static function simplifyDistance(array $points, float $toleranceSq) : array
     {
         $length = count($points);
         $prevPoint = $points[0];
@@ -21,7 +21,7 @@ class SimplifyHelper
         for ($i = 1; $i < $length; $i++) {
             $point = $points[$i];
             
-            if (self::getSquareDistance($point, $prevPoint) > $toleranceSq) {
+            if (DistanceHelper::getSquareDistance($point, $prevPoint) > $toleranceSq) {
                 $newPoints []= $point;
                 $prevPoint = $point;
             }
@@ -58,7 +58,7 @@ class SimplifyHelper
             $maxSquareDistance = 0;
 
             for ($i = ($first + 1); $i < $last; $i++) {
-                $squareDistance = self::getSquareSegmentDistance($points[$i], $points[$first], $points[$last]);
+                $squareDistance = DistanceHelper::getSquareSegmentDistance($points[$i], $points[$first], $points[$last]);
 
                 if ($squareDistance > $maxSquareDistance) {
                     $index = $i;
@@ -87,52 +87,5 @@ class SimplifyHelper
         }
 
         return $newPoints;
-    }
-
-    /**
-     * Square distance between two points.
-     * @param Point $a
-     * @param Point $b
-     * @return float
-     */
-    protected static function getSquareDistance(Point $a, Point $b) : float
-    {
-        $dx = ($a->lat - $b->lat);
-        $dy = ($a->lon - $b->lon);
-        
-        return (($dx * $dx) + ($dy * $dy));
-    }
-
-    /**
-     * Square distance from a point to a segment.
-     * @param Point $a
-     * @param Point $b
-     * @param Point $c
-     * @return float
-     */
-    private static function getSquareSegmentDistance(Point $a, Point $b, Point $c) : float
-    {
-        $x = $b->lat;
-        $y = $b->lon;
-
-        $dx = ($c->lat - $x);
-        $dy = ($c->lon - $y);
-        
-        if ($dx !== 0 || $dy !== 0) {
-            $t = ((($a->lat - $x) * $dx + ($a->lon - $y) * $dy) / (($dx * $dx) + ($dy * $dy)));
-
-            if ($t > 1) {
-                $x = $c->lat;
-                $y = $c->lon;
-            } elseif ($t > 0) {
-                $x += ($dx * $t);
-                $y += ($dy * $t);
-            }
-        }
-
-        $dx = ($a->lat - $x);
-        $dy = ($a->lon - $y);
-        
-        return (($dx * $dx) + ($dy * $dy));
     }
 }

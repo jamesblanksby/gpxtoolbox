@@ -29,7 +29,7 @@ class Segment
 
         $toleranceSq = ($tolerance * $tolerance);
 
-        $points = $highestQuality ? $points : SimplifyHelper::radialDistance($points, $toleranceSq);
+        $points = $highestQuality ? $points : SimplifyHelper::simplifyDistance($points, $toleranceSq);
         $points = SimplifyHelper::simplifyDouglasPeucker($points, $toleranceSq);
 
         $this->points = $points;
