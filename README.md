@@ -33,7 +33,7 @@ Loads and parses a GPX file.
 
 #### Return values:
 
-* `\GPXToolbox\Types\GPX`: Parsed GPX data.
+* `GPX`: Parsed GPX data.
 
 <hr>
 
@@ -47,13 +47,13 @@ Parses a GPX XML string.
 
 #### Return values:
 
-* `GPXToolbox\Types\GPX`: Parsed GPX data.
+* `GPX`: Parsed GPX data.
 
 <hr>
 
-### `GPXToolbox\Types\GPX::simplify([float $tolerance, bool $highestQuality,])`;
+### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
 
-Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify` may also be called on a single `GPXToolbox\Types\Segment` with the same parameters.
+Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify` may also be called on `Track` and `Segment` with the same parameters.
 
 ####  Parameters:
 
@@ -62,7 +62,7 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 
 #### Return values:
 
-* `GPXToolbox\Types\GPX`: GPX data with simplified polyline points.
+* `GPX`: GPX data with simplified polyline points.
 
 
 ## 🔧 Configuration

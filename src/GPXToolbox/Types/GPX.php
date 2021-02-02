@@ -55,12 +55,12 @@ class GPX
      */
     public function simplify(float $tolerance = 1.0, bool $highestQuality = false) : GPX
     {
-        if (is_null($this->trk->trkseg)) {
+        if (is_null($this->trk)) {
             return $this;
         }
 
-        foreach ($this->trk->trkseg as &$segment) {
-            $segment->simplify($tolerance, $highestQuality);
+        foreach ($this->trk as &$trk) {
+            $trk->simplify($tolerance, $highestQuality);
         }
 
         return $this;

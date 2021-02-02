@@ -57,6 +57,25 @@ class Track
     public $trkseg = null;
 
     /**
+     * Simplify path by removing extra points with given tolerance.
+     * @param float $tolerance
+     * @param boolean $highestQuality
+     * @return Track
+     */
+    public function simplify(float $tolerance = 1.0, bool $highestQuality = false) : Track
+    {
+        if (is_null($this->trkseg)) {
+            return $this;
+        }
+
+        foreach ($this->trkseg as &$trkseg) {
+            $trkseg->simplify($tolerance, $highestQuality);
+        }
+
+        return $this;
+    }
+
+    /**
      * Array representation of track data.
      * @return array
      */
