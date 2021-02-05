@@ -29,6 +29,11 @@ class GPXToolbox
     const FORMAT_JSON = 'json';
 
     /**
+     * GeoJSON file save format.
+     */
+    const FORMAT_GEOJSON = 'geojson';
+
+    /**
      * Pretty print when saving.
      * @var boolean
      */

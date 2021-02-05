@@ -7,12 +7,12 @@ use GPXToolbox\GPXToolbox;
 
 class DistanceHelper
 {
-   /**
-     * Squared distance between two points.
-     * @param Point $a
-     * @param Point $b
-     * @return float
-     */
+    /**
+      * Squared distance between two points.
+      * @param Point $a
+      * @param Point $b
+      * @return float
+      */
     public static function getSquareDistance(Point $a, Point $b) : float
     {
         $dx = ($a->lat - $b->lat);

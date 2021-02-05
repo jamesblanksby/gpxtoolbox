@@ -7,6 +7,7 @@ use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\GPXToolbox;
 
 class GPX
@@ -82,6 +83,10 @@ class GPX
             case GPXToolbox::FORMAT_JSON:
                 $json = $this->toJSON();
                 return file_put_contents($path, $json);
+            break;
+            case GPXToolbox::FORMAT_GEOJSON:
+                $geojson = $this->toGeoJSON();
+                return file_put_contents($path, $geojson);
             break;
             default:
                 throw new \RuntimeException('Unsupported file format');
@@ -162,5 +167,18 @@ class GPX
     public function toJSON() : string
     {
         return json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
+    }
+
+    /**
+     * GeoJSON encoded representation of GPX file.
+     * @return string
+     */
+    public function toGeoJSON()
+    {
+        $collection = GeoJSONHelper::createCollection($this);
+
+        $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
+
+        return $geojson;
     }
 }

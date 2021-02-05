@@ -7,7 +7,7 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 
 * Full* support for [official specification](http://www.topografix.com/GPX/1/1).
 * High performance polyline simplification.
-* GPX, JSON and PHP Array output.
+* GPX, GeoJSON, JSON and PHP Array output.
 
 \* Extensions coming soon!
 
