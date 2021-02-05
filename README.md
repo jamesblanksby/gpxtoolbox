@@ -42,6 +42,16 @@ Parses a GPX XML string.
 
 <hr>
 
+### `GPX::bounds()`
+
+Returns the geographical bounds for a given GPX file. `bounds` may also be called on `Track` and `Segment`.
+
+#### Return values:
+
+* `array`: Array containing longitude and latitude bounds.
+
+<hr>
+
 ### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
 
 Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify` may also be called on `Track` and `Segment` with the same parameters.

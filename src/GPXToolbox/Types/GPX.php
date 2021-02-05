@@ -6,6 +6,7 @@ use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
+use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\GPXToolbox;
@@ -47,6 +48,18 @@ class GPX
      * @var string
      */
     public $creator = '';
+
+    /**
+     * Calculate GPX bounds.
+     * @return array
+     */
+    public function bounds() : array
+    {
+        $points = $this->getPoints();
+        $bounds = GeoHelper::getBounds($points);
+
+        return $bounds;
+    }
 
     /**
      * Simplify path by removing extra points with given tolerance.
@@ -180,5 +193,24 @@ class GPX
         $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
 
         return $geojson;
+    }
+
+    /**
+     * Recursively gather GPX points.
+     * @return array
+     */
+    public function getPoints() : array
+    {
+        $points = [];
+
+        if (is_null($this->trk)) {
+            return $points;
+        }
+        
+        foreach ($this->trk as $trk) {
+            $points = array_merge($points, $trk->getPoints());
+        }
+
+        return $points;
     }
 }

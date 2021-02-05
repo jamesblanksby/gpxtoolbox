@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 
 class Track
@@ -57,6 +58,18 @@ class Track
     public $trkseg = null;
 
     /**
+     * Calculate Track bounds.
+     * @return array
+     */
+    public function bounds() : array
+    {
+        $points = $this->getPoints();
+        $bounds = GeoHelper::getBounds($points);
+
+        return $bounds;
+    }
+
+    /**
      * Simplify path by removing extra points with given tolerance.
      * @param float $tolerance
      * @param boolean $highestQuality
@@ -91,5 +104,24 @@ class Track
             'type'   => $this->type,
             'trkseg' => SerializationHelper::toArray($this->trkseg),
         ];
+    }
+
+    /**
+     * Recursively gather Track points.
+     * @return array
+     */
+    public function getPoints() : array
+    {
+        $points = [];
+
+        if (is_null($this->trkseg)) {
+            return $points;
+        }
+        
+        foreach ($this->trkseg as $trkseg) {
+            $points = array_merge($points, $trkseg->getPoints());
+        }
+
+        return $points;
     }
 }
