@@ -8,7 +8,7 @@ class Collection
      * Collection type.
      * @var string
      */
-    public $type = 'FeatureCollection';
+    protected $type = 'FeatureCollection';
 
     /**
      * A list of features.

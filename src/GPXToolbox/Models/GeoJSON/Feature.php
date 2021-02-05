@@ -8,7 +8,7 @@ class Feature
      * Feature type.
      * @var string
      */
-    public $type = 'Feature';
+    protected $type = 'Feature';
 
     /**
      * Geometry object representing points, curves,
