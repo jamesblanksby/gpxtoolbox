@@ -22,7 +22,7 @@ class MetadataParser
         $metadata->copyright = isset($node->copyright) ? CopyrightParser::parse($node->copyright) : null;
         $metadata->links     = isset($node->link) ? LinkParser::parse($node->link) : null;
         $metadata->time      = isset($node->time) ? DateTimeParser::parse($node->time) : null;
-        $metadata->keywords  = isset($node->keywords) ? $node->keywords : null;
+        $metadata->keywords  = isset($node->keywords) ? (string) $node->keywords : null;
         $metadata->bounds    = isset($node->bounds) ? BoundsParser::parse($node->bounds) : null;
 
         return $metadata;
