@@ -86,7 +86,7 @@ class GeoJSONHelper
     }
 
     /**
-     * UCreate GeoJSON track feature.
+     * Create GeoJSON track feature.
      * @param Track $trk
      * @return Feature
      */
