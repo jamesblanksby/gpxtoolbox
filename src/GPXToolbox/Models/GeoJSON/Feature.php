@@ -11,7 +11,7 @@ class Feature
     public $type = 'Feature';
 
     /**
-     * Geometry object represents points, curves,
+     * Geometry object representing points, curves,
      * and surfaces in coordinate space.
      * @var Geometry
      */
