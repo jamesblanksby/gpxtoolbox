@@ -12,15 +12,6 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 \* Extensions coming soon!
 
 
-## ⚡️ Installation
-
-Using [Composer](https://getcomposer.org):
-
-```php
-$ composer require jamesblanksby/gpxtoolbox
-```
-
-
 ## 🤖 API
 
 ### `GPXToolbox::load(string $filename)`

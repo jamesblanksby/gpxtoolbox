@@ -1,5 +1,5 @@
 {
-    "name": "jamesblanksby/gpxtoolbox",
+    "name": "thisismyengine/gpxtoolbox",
     "type": "library",
     "version": "1.1.0",
     "description": "A simple library for creating, parsing and modifying GPX files.",
