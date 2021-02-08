@@ -69,4 +69,16 @@ class Geometry
     {
         return array_push($this->coordinates, [$lon, $lat,]);
     }
+
+    /**
+     * Array representation of geometry data.
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'type'        => $this->type,
+            'coordinates' => $this->coordinates,
+        ];
+    }
 }

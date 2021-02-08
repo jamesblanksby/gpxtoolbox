@@ -189,6 +189,7 @@ class GPX
     public function toGeoJSON()
     {
         $collection = GeoJSONHelper::createCollection($this);
+        $collection = $collection->toArray();
 
         $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
 

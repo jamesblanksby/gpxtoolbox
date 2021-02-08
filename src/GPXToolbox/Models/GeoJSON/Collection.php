@@ -2,6 +2,8 @@
 
 namespace GPXToolbox\Models\GeoJSON;
 
+use GPXToolbox\Helpers\SerializationHelper;
+
 class Collection
 {
     /**
@@ -30,5 +32,18 @@ class Collection
     public function addFeature(Feature $feature) : bool
     {
         return array_push($this->features, $feature);
+    }
+
+    /**
+     * Array representation of collection data.
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return SerializationHelper::filterEmpty([
+            'type'       => $this->type,
+            'features'   => SerializationHelper::toArray($this->features),
+            'properties' => $this->properties,
+        ]);
     }
 }

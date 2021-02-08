@@ -2,6 +2,8 @@
 
 namespace GPXToolbox\Models\GeoJSON;
 
+use GPXToolbox\Helpers\SerializationHelper;
+
 class Feature
 {
     /**
@@ -29,5 +31,18 @@ class Feature
     public function __construct($geometryType)
     {
         $this->geometry = new Geometry($geometryType);
+    }
+
+    /**
+     * Array representation of feature data.
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'type'       => $this->type,
+            'geometry'   => SerializationHelper::toArray($this->geometry),
+            'properties' => $this->properties,
+        ];
     }
 }
