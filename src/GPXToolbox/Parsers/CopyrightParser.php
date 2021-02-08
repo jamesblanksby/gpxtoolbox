@@ -37,12 +37,12 @@ class CopyrightParser
         }
 
         if (!empty($copyright->year)) {
-            $child = $document->createElement('year', $copyright->year);
+            $child = $doc->createElement('year', $copyright->year);
             $node->appendChild($child);
         }
 
         if (!empty($copyright->license)) {
-            $child = $document->createElement('license', $copyright->license);
+            $child = $doc->createElement('license', $copyright->license);
             $node->appendChild($child);
         }
 
