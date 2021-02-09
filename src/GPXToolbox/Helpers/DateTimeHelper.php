@@ -6,15 +6,17 @@ class DateTimeHelper
 {
     /**
      * Format DateTime.
-     * @param \DateTime $datetime
+     * @param mixed $datetime
      * @param string $format
      * @param string $timezone
-     * @return string
+     * @return string|null
      */
-    public function format(\DateTime $datetime, string $format = 'c', string $timezone = 'UTC') : string
+    public function format($datetime, string $format = 'c', string $timezone = 'UTC') : ?string
     {
-        $datetime->setTimezone(new \DateTimeZone($timezone));
-        $formatted = $datetime->format($format);
+        if ($datetime instanceof \DateTime) {
+            $datetime->setTimezone(new \DateTimeZone($timezone));
+            $formatted = $datetime->format($format);
+        }
 
         return $formatted;
     }
