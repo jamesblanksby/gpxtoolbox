@@ -22,8 +22,8 @@ class SegmentParser
             if (isset($node->trkpt)) {
                 $segment->points = [];
                 
-                foreach ($node->trkpt as $point) {
-                    $segment->points []= PointParser::parse($point);
+                foreach ($node->trkpt as $trkpt) {
+                    $segment->points []= PointParser::parse($trkpt);
                 }
             }
 
@@ -44,8 +44,8 @@ class SegmentParser
         $node = $doc->createElement('trkseg');
 
         if (!empty($segment->points)) {
-            foreach ($segment->points as $point) {
-                $node->appendChild(PointParser::toXML($point, Point::TRACKPOINT, $doc));
+            foreach ($segment->points as $trkpt) {
+                $node->appendChild(PointParser::toXML($trkpt, Point::TRACKPOINT, $doc));
             }
         }
 

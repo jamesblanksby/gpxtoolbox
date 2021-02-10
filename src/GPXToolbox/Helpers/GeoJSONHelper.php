@@ -74,8 +74,8 @@ class GeoJSONHelper
         $feature = new Feature(Geometry::LINE_STRING);
 
         if (!is_null($rte->points)) {
-            foreach ($rte->points as $point) {
-                $feature->geometry->addCoordinates($point->lon, $point->lat);
+            foreach ($rte->points as $rtept) {
+                $feature->geometry->addCoordinates($rtept->lon, $rtept->lat);
             }
         }
 
@@ -100,8 +100,8 @@ class GeoJSONHelper
                     continue;
                 }
 
-                foreach ($trkseg->points as $point) {
-                    $feature->geometry->addCoordinates($point->lon, $point->lat);
+                foreach ($trkseg->points as $trkpt) {
+                    $feature->geometry->addCoordinates($trkpt->lon, $trkpt->lat);
                 }
             }
         }
