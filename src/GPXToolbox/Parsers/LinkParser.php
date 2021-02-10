@@ -11,7 +11,7 @@ class LinkParser
      * @param \SimpleXMLElement[]|\SimpleXMLElement $nodes
      * @return Link[]
      */
-    public function parse($nodes) : array
+    public static function parse($nodes) : array
     {
         $links = [];
 

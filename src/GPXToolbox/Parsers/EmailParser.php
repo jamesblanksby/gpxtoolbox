@@ -11,7 +11,7 @@ class EmailParser
      * @param \SimpleXMLElement $node
      * @return Email
      */
-    public function parse(\SimpleXMLElement $node) : Email
+    public static function parse(\SimpleXMLElement $node) : Email
     {
         $email = new Email();
 

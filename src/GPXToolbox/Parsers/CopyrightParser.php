@@ -11,7 +11,7 @@ class CopyrightParser
      * @param \SimpleXMLElement $node
      * @return Copyright
      */
-    public function parse(\SimpleXMLElement $node) : Copyright
+    public static function parse(\SimpleXMLElement $node) : Copyright
     {
         $copyright = new Copyright();
 

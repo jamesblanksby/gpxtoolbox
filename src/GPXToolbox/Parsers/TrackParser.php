@@ -11,7 +11,7 @@ class TrackParser
      * @param \SimpleXMLElement[] $nodes
      * @return array
      */
-    public function parse($nodes) : array
+    public static function parse($nodes) : array
     {
         $tracks = [];
 

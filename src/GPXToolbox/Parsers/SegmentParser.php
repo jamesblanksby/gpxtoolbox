@@ -12,7 +12,7 @@ class SegmentParser
      * @param \SimpleXMLElement[] $nodes
      * @return Segment[]
      */
-    public function parse($nodes) : array
+    public static function parse($nodes) : array
     {
         $segments = [];
 

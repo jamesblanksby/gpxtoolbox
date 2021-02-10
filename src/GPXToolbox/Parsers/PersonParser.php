@@ -11,7 +11,7 @@ class PersonParser
      * @param \SimpleXMLElement $node
      * @return Person
      */
-    public function parse(\SimpleXMLElement $node) : Person
+    public static function parse(\SimpleXMLElement $node) : Person
     {
         $person = new Person();
 

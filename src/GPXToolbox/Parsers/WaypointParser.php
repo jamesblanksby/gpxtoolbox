@@ -11,7 +11,7 @@ class WaypointParser
      * @param \SimpleXMLElement[] $nodes
      * @return Point[]
      */
-    public function parse($nodes) : array
+    public static function parse($nodes) : array
     {
         $waypoints = [];
 

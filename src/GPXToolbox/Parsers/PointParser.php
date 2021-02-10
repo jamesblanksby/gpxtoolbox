@@ -12,7 +12,7 @@ class PointParser
      * @param \SimpleXMLElement $node
      * @return Point
      */
-    public function parse(\SimpleXMLElement $node) : Point
+    public static function parse(\SimpleXMLElement $node) : Point
     {
         $point = new Point();
 

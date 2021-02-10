@@ -12,7 +12,7 @@ class MetadataParser
      * @param \SimpleXMLElement $node
      * @return Metadata
      */
-    public function parse(\SimpleXMLElement $node) : Metadata
+    public static function parse(\SimpleXMLElement $node) : Metadata
     {
         $metadata = new Metadata();
 

@@ -11,7 +11,7 @@ class RouteParser
      * @param \SimpleXMLElement[] $nodes
      * @return Route[]
      */
-    public function parse($nodes) : array
+    public static function parse($nodes) : array
     {
         $routes = [];
 

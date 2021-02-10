@@ -11,7 +11,7 @@ class BoundsParser
      * @param \SimpleXMLElement $node
      * @return Bounds
      */
-    public function parse(\SimpleXMLElement $node) : Bounds
+    public static function parse(\SimpleXMLElement $node) : Bounds
     {
         $bounds = new Bounds();
 
