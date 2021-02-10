@@ -51,6 +51,25 @@ class Segment
     }
 
     /**
+     * Gather Segment points.
+     * @return array
+     */
+    public function getPoints() : array
+    {
+        return $this->points;
+    }
+
+    /**
+     * Add track point to segment.
+     * @param Point $lon
+     * @return boolean
+     */
+    public function addPoint(Point $trkpt) : bool
+    {
+        return array_push($this->points, $trkpt);
+    }
+
+    /**
      * Array representation of segment data.
      * @return array
      */
@@ -59,14 +78,5 @@ class Segment
         return [
             'points' => SerializationHelper::toArray($this->points),
         ];
-    }
-
-    /**
-     * Gather Segment points.
-     * @return array
-     */
-    public function getPoints() : array
-    {
-        return $this->points;
     }
 }
