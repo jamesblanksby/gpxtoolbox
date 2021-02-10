@@ -51,9 +51,19 @@ class Route
 
     /**
      * A list of route points.
-     * @var Point[]|null
+     * @var Point[]
      */
-    public $points = null;
+    public $points = [];
+
+    /**
+     * Add point to route.
+     * @param Point $rtept
+     * @return boolean
+     */
+    public function addPoint(Point $rtept) : bool
+    {
+        return array_push($this->points, $rtept);
+    }
 
     /**
      * Array representation of route data.

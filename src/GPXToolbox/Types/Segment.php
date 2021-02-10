@@ -10,9 +10,9 @@ class Segment
 {
     /**
      * A list of track points.
-     * @var Point[]|null
+     * @var Point[]
      */
-    public $points = null;
+    public $points = [];
 
     /**
      * Calculate Segment bounds.
@@ -60,8 +60,8 @@ class Segment
     }
 
     /**
-     * Add track point to segment.
-     * @param Point $lon
+     * Add point to segment.
+     * @param Point $trkpt
      * @return boolean
      */
     public function addPoint(Point $trkpt) : bool
