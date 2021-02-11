@@ -21,7 +21,7 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 * Maximum elevation
 * Elevation gain
 * Elevation loss
-* Average pace (m/km)
+* Average pace (minutes per km)
 * Average speed (kph)
 
 ## 🤖 API
@@ -90,13 +90,13 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 
 ## 🔧 Configuration
 
-| Name                        | Type           | Default | Example                                        |
-|-----------------------------|----------------|---------|------------------------------------------------|
-| `PRETTY_PRINT`              | Boolean        | true    | `GPXToolbox::PRETTY_PRINT = true`              |
-| `DISTANCE_THRESHOLD`        | Float\|Boolean | 2       | `GPXToolbox::DISTANCE_THRESHOLD = 2`           |
-| `MOVING_DISTANCE_THRESHOLD` | Float          | 0.25    | `GPXToolbox::MOVING_DISTANCE_THRESHOLD = 0.25` |
-| `MOVING_DURATION_THRESHOLD` | Float          | 5       | `GPXToolbox::MOVING_DURATION_THRESHOLD = 5`    |
-| `ELEVATION_THRESHOLD`       | Float\|Boolean | 5       | `GPXToolbox::ELEVATION_THRESHOLD = 5`          |
+| Name                        | Type               | Default   |
+|-----------------------------|--------------------|-----------|
+| `PRETTY_PRINT`              | `boolean`          | `true`    |
+| `DISTANCE_THRESHOLD`        | `float`\|`boolean` | `2`       |
+| `MOVING_DISTANCE_THRESHOLD` | `float`            | `0.25`    |
+| `MOVING_DURATION_THRESHOLD` | `float`            | `5`       |
+| `ELEVATION_THRESHOLD`       | `float`\|`boolean` | `5`       |
 
 
 ## 📖 Examples
