@@ -19,7 +19,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public function getDistance(Point $a, Point $b) : float
+    public static function getDistance(Point $a, Point $b) : float
     {
         return self::get3dDistance($a, $b);
     }
@@ -30,7 +30,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public function get2dDistance(Point $a, Point $b) : float
+    public static function get2dDistance(Point $a, Point $b) : float
     {
         $dy = deg2rad(($b->lon - $a->lon));
         $dx = deg2rad(($b->lat - $a->lat));
@@ -47,7 +47,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public function get3dDistance(Point $a, Point $b) : float
+    public static function get3dDistance(Point $a, Point $b) : float
     {
         $planar = self::get2dDistance($a, $b);
         $height = abs(($b->ele - $a->ele));
