@@ -55,7 +55,7 @@ class GPXToolbox
     public static $MOVING_DISTANCE_THRESHOLD = 0.25;
 
     /**
-     * Maximium duration in seconds between points to be considered moving.
+     * Maximum duration in seconds between points to be considered moving.
      * Used in conjuction with $MOVING_DISTANCE_THRESHOLD.
      * @var float
      */
