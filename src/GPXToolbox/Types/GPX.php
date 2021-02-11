@@ -2,11 +2,13 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Models\Stats;
 use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
 use GPXToolbox\Helpers\GeoHelper;
+use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\GPXToolbox;
@@ -59,6 +61,18 @@ class GPX
         $bounds = GeoHelper::getBounds($points);
 
         return $bounds;
+    }
+
+    /**
+     * Calculate GPX stats.
+     * @return Stats
+     */
+    public function stats() : Stats
+    {
+        $points = $this->getPoints();
+        $stats = StatsHelper::calculateStats($points);
+
+        return $stats;
     }
 
     /**

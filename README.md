@@ -7,10 +7,22 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 
 * Full* support for [official specification](http://www.topografix.com/GPX/1/1).
 * High performance polyline simplification.
+* Statistics calculation.
 * GPX, GeoJSON, JSON and PHP Array output.
 
 \* Extensions coming soon!
 
+### Statistics calculation
+
+* Smoothed distance
+* Moving duration
+* Total duration
+* Minimum elevation
+* Maximum elevation
+* Elevation gain
+* Elevation loss
+* Average pace (m/km)
+* Average speed (kph)
 
 ## 🤖 API
 
@@ -49,6 +61,16 @@ Returns the geographical bounds for a given GPX file. `bounds` may also be calle
 #### Return values:
 
 * `array`: Array containing longitude and latitude bounds.
+
+<hr>
+
+### `GPX::stats()`
+
+Returns the statistical data such as distance, moving time and elevation gain for a given GPX file. `stats` may also be called on `Track` and `Segment`.
+
+#### Return values:
+
+* `Stats`: Stats data.
 
 <hr>
 

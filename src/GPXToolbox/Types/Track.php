@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Models\Stats;
 use GPXToolbox\Helpers\GeoHelper;
+use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 
 class Track
@@ -67,6 +69,18 @@ class Track
         $bounds = GeoHelper::getBounds($points);
 
         return $bounds;
+    }
+
+    /**
+     * Calculate Track stats.
+     * @return Stats
+     */
+    public function stats() : Stats
+    {
+        $points = $this->getPoints();
+        $stats = StatsHelper::calculateStats($points);
+
+        return $stats;
     }
 
     /**

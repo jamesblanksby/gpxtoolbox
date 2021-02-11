@@ -40,6 +40,35 @@ class GPXToolbox
     public static $PRETTY_PRINT = true;
 
     /**
+     * Minimum distance in meters difference between points threshold.
+     * Disabled when false.
+     * @var float|boolean
+     */
+    public static $DISTANCE_THRESHOLD = 2;
+
+    /**
+     * Minimum distance in meters to be covered
+     * between points to be considered moving.
+     * Used in conjuction with $MOVING_DURATION_THRESHOLD.
+     * @var float
+     */
+    public static $MOVING_DISTANCE_THRESHOLD = 0.25;
+
+    /**
+     * Maximium duration in seconds between points to be considered moving.
+     * Used in conjuction with $MOVING_DISTANCE_THRESHOLD.
+     * @var float
+     */
+    public static $MOVING_DURATION_THRESHOLD = 5;
+
+    /**
+     * Minimum elevation in meters difference between points threshold.
+     * Disabled when false.
+     * @var float|boolean
+     */
+    public static $ELEVATION_THRESHOLD = 5;
+
+    /**
      * Load GPX file.
      * @param string $filename
      * @return GPX

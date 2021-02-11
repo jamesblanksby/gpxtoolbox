@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Models\Stats;
 use GPXToolbox\Helpers\GeoHelper;
+use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Helpers\SimplifyHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 
@@ -24,6 +26,18 @@ class Segment
         $bounds = GeoHelper::getBounds($points);
 
         return $bounds;
+    }
+
+    /**
+     * Calculate Segment stats.
+     * @return Stats
+     */
+    public function stats() : Stats
+    {
+        $points = $this->getPoints();
+        $stats = StatsHelper::calculateStats($points);
+
+        return $stats;
     }
 
     /**

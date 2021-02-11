@@ -8,6 +8,54 @@ use GPXToolbox\GPXToolbox;
 class DistanceHelper
 {
     /**
+     * Radius of planet earch.
+     * @var int
+     */
+    const EARTH_RADIUS = 6371000;
+
+    /**
+     * Calculate distance between two points.
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
+    public function getDistance(Point $a, Point $b) : float
+    {
+        return self::get3dDistance($a, $b);
+    }
+
+    /**
+     * Calculate 2d distance between two points.
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
+    public function get2dDistance(Point $a, Point $b) : float
+    {
+        $dy = deg2rad(($b->lon - $a->lon));
+        $dx = deg2rad(($b->lat - $a->lat));
+
+        $r = (sin(($dx / 2)) * sin(($dx / 2)) + cos(deg2rad($a->lat)) * cos(deg2rad($b->lat)) * sin(($dy / 2)) * sin(($dy / 2)));
+        $c = (2 * atan2(sqrt($r), sqrt((1 - $r))));
+
+        return (self::EARTH_RADIUS * $c);
+    }
+
+    /**
+     * Calculate 3d distance between two points.
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
+    public function get3dDistance(Point $a, Point $b) : float
+    {
+        $planar = self::get2dDistance($a, $b);
+        $height = abs(($b->ele - $a->ele));
+
+        return sqrt((pow($planar, 2) + pow($height, 2)));
+    }
+
+    /**
       * Squared distance between two points.
       * @param Point $a
       * @param Point $b
