@@ -56,7 +56,7 @@ Parses a GPX XML string.
 
 ### `GPX::bounds()`
 
-Returns the geographical bounds for a given GPX file. `bounds` may also be called on `Track` and `Segment`.
+Returns the geographical bounds for a given GPX file. `bounds()` may also be called on `Track` and `Segment`.
 
 #### Return values:
 
@@ -66,7 +66,7 @@ Returns the geographical bounds for a given GPX file. `bounds` may also be calle
 
 ### `GPX::stats()`
 
-Returns the statistical data such as distance, moving time and elevation gain for a given GPX file. `stats` may also be called on `Track` and `Segment`.
+Returns the statistical data such as distance, moving time and elevation gain for a given GPX file. `stats()` may also be called on `Track` and `Segment`.
 
 #### Return values:
 
@@ -76,7 +76,7 @@ Returns the statistical data such as distance, moving time and elevation gain fo
 
 ### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
 
-Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify` may also be called on `Track` and `Segment` with the same parameters.
+Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify()` may also be called on `Track` and `Segment` with the same parameters.
 
 ####  Parameters:
 
