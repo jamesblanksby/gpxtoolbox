@@ -92,13 +92,13 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 
 Use `GPXToolbox`'s static variables to modify behaviour.
 
-| Name                        | Type               | Default   |
-|-----------------------------|--------------------|-----------|
-| `PRETTY_PRINT`              | `boolean`          | `true`    |
-| `DISTANCE_THRESHOLD`        | `float`\|`boolean` | `2`       |
-| `MOVING_DISTANCE_THRESHOLD` | `float`            | `0.25`    |
-| `MOVING_DURATION_THRESHOLD` | `float`            | `5`       |
-| `ELEVATION_THRESHOLD`       | `float`\|`boolean` | `5`       |
+| Name                        | Type               | Default    |
+|-----------------------------|--------------------|------------|
+| `$PRETTY_PRINT`              | `boolean`          | `true`    |
+| `$DISTANCE_THRESHOLD`        | `float`\|`boolean` | `2`       |
+| `$MOVING_DISTANCE_THRESHOLD` | `float`            | `0.25`    |
+| `$MOVING_DURATION_THRESHOLD` | `float`            | `5`       |
+| `$ELEVATION_THRESHOLD`       | `float`\|`boolean` | `5`       |
 
 
 ## 📖 Examples
