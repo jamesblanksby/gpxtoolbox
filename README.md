@@ -90,9 +90,13 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 
 ## 🔧 Configuration
 
-| Name           | Description               | Type    | Default | Example                             |
-|----------------|---------------------------|---------|---------|-------------------------------------|
-| `PRETTY_PRINT` | Pretty print when saving. | Boolean | true    | `GPXToolbox::$PRETTY_PRINT = true;` |
+| Name                        | Description                                                                      | Type           | Default | Example                                        |
+|-----------------------------|----------------------------------------------------------------------------------|----------------|---------|------------------------------------------------|
+| `PRETTY_PRINT`              | Pretty print when saving.                                                        | Boolean        | true    | `GPXToolbox::PRETTY_PRINT = true`              |
+| `DISTANCE_THRESHOLD`        | Minimum distance in meters difference between points threshold.                  | Float\|Boolean | 2       | `GPXToolbox::DISTANCE_THRESHOLD = 2`           |
+| `MOVING_DISTANCE_THRESHOLD` | Minimum distance in meters to be covered between points to be considered moving. | Float          | 0.25    | `GPXToolbox::MOVING_DISTANCE_THRESHOLD = 0.25` |
+| `MOVING_DURATION_THRESHOLD` | Maximum duration in seconds between points to be considered moving.              | Float          | 5       | `GPXToolbox::MOVING_DURATION_THRESHOLD = 5`    |
+| `ELEVATION_THRESHOLD`       | Minimum elevation in meters difference between points threshold.                 | Float\|Boolean | 5       | `GPXToolbox::ELEVATION_THRESHOLD = 5`          |
 
 
 ## 📖 Examples
