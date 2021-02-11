@@ -12,7 +12,7 @@ class StatsHelper
      * @param Point[] $points
      * @return Stats
      */
-    public function calculateStats(array $points) : Stats
+    public static function calculateStats(array $points) : Stats
     {
         $stats = new Stats();
 
