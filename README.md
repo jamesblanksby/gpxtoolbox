@@ -90,6 +90,8 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 
 ## 🔧 Configuration
 
+Use `GPXToolbox`'s static variables to modify behaviour.
+
 | Name                        | Type               | Default   |
 |-----------------------------|--------------------|-----------|
 | `PRETTY_PRINT`              | `boolean`          | `true`    |
