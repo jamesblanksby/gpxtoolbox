@@ -94,6 +94,10 @@ class StatsHelper
                 continue;
             }
 
+            if (!($point->time instanceof \DateTime) && !($lastPoint->time instanceof \DateTime)) {
+                continue;
+            }
+
             $distanceDifference = DistanceHelper::getDistance($lastPoint, $point);
             $durationDifference = ($point->time->getTimestamp() - $lastPoint->time->getTimestamp());
 
