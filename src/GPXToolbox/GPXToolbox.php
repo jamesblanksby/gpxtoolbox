@@ -34,10 +34,11 @@ class GPXToolbox
     const FORMAT_GEOJSON = 'geojson';
 
     /**
-     * Pretty print when saving.
-     * @var boolean
+     * Number of decimal place precision for latitude and longitude values.
+     * Six decimal places provides approximately 10cm of exactness.
+     * @var integer
      */
-    public static $PRETTY_PRINT = true;
+    public static $COORDINATE_PRECISION = 6;
 
     /**
      * Minimum distance in meters difference between points threshold.
@@ -45,6 +46,13 @@ class GPXToolbox
      * @var float|boolean
      */
     public static $DISTANCE_THRESHOLD = 2;
+
+    /**
+     * Minimum elevation in meters difference between points threshold.
+     * Disabled when false.
+     * @var float|boolean
+     */
+    public static $ELEVATION_THRESHOLD = 5;
 
     /**
      * Minimum distance in meters to be covered
@@ -62,11 +70,10 @@ class GPXToolbox
     public static $MOVING_DURATION_THRESHOLD = 5;
 
     /**
-     * Minimum elevation in meters difference between points threshold.
-     * Disabled when false.
-     * @var float|boolean
+     * Pretty print when saving.
+     * @var boolean
      */
-    public static $ELEVATION_THRESHOLD = 5;
+    public static $PRETTY_PRINT = true;
 
     /**
      * Load GPX file.

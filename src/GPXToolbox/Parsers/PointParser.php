@@ -4,6 +4,7 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Point;
 use GPXToolbox\Helpers\DateTimeHelper;
+use GPXToolbox\GPXToolbox;
 
 class PointParser
 {
@@ -16,8 +17,8 @@ class PointParser
     {
         $point = new Point();
 
-        $point->lat           = isset($node['lat']) ? (float) $node['lat'] : null;
-        $point->lon           = isset($node['lon']) ? (float) $node['lon'] : null;
+        $point->lat           = isset($node['lat']) ? round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION) : null;
+        $point->lon           = isset($node['lon']) ? round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION) : null;
         $point->ele           = isset($node->ele) ? (float) $node->ele : null;
         $point->time          = isset($node->time) ? DateTimeParser::parse($node->time) : null;
         $point->magvar        = isset($node->magvar) ? (float) $node->magvar : null;

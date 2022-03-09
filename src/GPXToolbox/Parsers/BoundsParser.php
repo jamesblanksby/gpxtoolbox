@@ -3,6 +3,7 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Bounds;
+use GPXToolbox\GPXToolbox;
 
 class BoundsParser
 {
@@ -15,10 +16,10 @@ class BoundsParser
     {
         $bounds = new Bounds();
 
-        $bounds->minlat = isset($node['minlat']) ? (float) $node['minlat'] : null;
-        $bounds->minlon = isset($node['minlon']) ? (float) $node['minlon'] : null;
-        $bounds->maxlat = isset($node['maxlat']) ? (float) $node['maxlat'] : null;
-        $bounds->maxlon = isset($node['maxlon']) ? (float) $node['maxlon'] : null;
+        $bounds->minlat = isset($node['minlat']) ? round((float) $node['minlat'], GPXToolbox::$COORDINATE_PRECISION) : null;
+        $bounds->minlon = isset($node['minlon']) ? round((float) $node['minlon'], GPXToolbox::$COORDINATE_PRECISION) : null;
+        $bounds->maxlat = isset($node['maxlat']) ? round((float) $node['maxlat'], GPXToolbox::$COORDINATE_PRECISION) : null;
+        $bounds->maxlon = isset($node['maxlon']) ? round((float) $node['maxlon'], GPXToolbox::$COORDINATE_PRECISION) : null;
 
         return $bounds;
     }
