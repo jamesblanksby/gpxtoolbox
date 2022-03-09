@@ -96,6 +96,7 @@ Use `GPXToolbox`'s static variables to modify behaviour.
 |------------------------------|--------------------|---------|
 | `$COORDINATE_PRECISION`      | `integer`          | `6`     |
 | `$DISTANCE_THRESHOLD`        | `float`\|`boolean` | `2`     |
+| `$ELEVATION_PRECISION`       | `integer`          | `2`     |
 | `$ELEVATION_THRESHOLD`       | `float`\|`boolean` | `5`     |
 | `$MOVING_DISTANCE_THRESHOLD` | `float`            | `0.25`  |
 | `$MOVING_DURATION_THRESHOLD` | `float`            | `5`     |

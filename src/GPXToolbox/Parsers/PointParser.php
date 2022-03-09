@@ -19,7 +19,7 @@ class PointParser
 
         $point->lat           = isset($node['lat']) ? round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION) : null;
         $point->lon           = isset($node['lon']) ? round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION) : null;
-        $point->ele           = isset($node->ele) ? (float) $node->ele : null;
+        $point->ele           = isset($node->ele) ? round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION) : null;
         $point->time          = isset($node->time) ? DateTimeParser::parse($node->time) : null;
         $point->magvar        = isset($node->magvar) ? (float) $node->magvar : null;
         $point->geoidheight   = isset($node->geoidheight) ? (float) $node->geoidheight : null;

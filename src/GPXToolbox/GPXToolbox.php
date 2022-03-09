@@ -48,6 +48,12 @@ class GPXToolbox
     public static $DISTANCE_THRESHOLD = 2;
 
     /**
+     * Number of decimal place precision for elevation values.
+     * @var integer
+     */
+    public static $ELEVATION_PRECISION = 2;
+
+    /**
      * Minimum elevation in meters difference between points threshold.
      * Disabled when false.
      * @var float|boolean
