@@ -17,7 +17,7 @@ class Feature
      * and surfaces in coordinate space.
      * @var Geometry
      */
-    public $geometry = null;
+    public $geometry;
 
     /**
      * A list of properties.
