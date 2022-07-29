@@ -42,7 +42,7 @@ class Collection
      * @param mixed $value
      * @return self
      */
-    public function addProperty(string $key, mixed $value) : self
+    public function addProperty(string $key, $value) : self
     {
         $this->properties [$key]= $value;
 
