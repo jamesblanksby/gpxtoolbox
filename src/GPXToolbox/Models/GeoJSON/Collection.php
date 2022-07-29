@@ -58,7 +58,7 @@ class Collection
         return SerializationHelper::filterEmpty([
             'type'       => $this->type,
             'features'   => SerializationHelper::toArray($this->features),
-            'properties' => SerializationHelper::toArray($this->properties),
+            'properties' => $this->properties,
         ]);
     }
 }

@@ -55,7 +55,7 @@ class Feature
         return [
             'type'       => $this->type,
             'geometry'   => SerializationHelper::toArray($this->geometry),
-            'properties' => SerializationHelper::toArray($this->properties),
+            'properties' => $this->properties,
         ];
     }
 }
