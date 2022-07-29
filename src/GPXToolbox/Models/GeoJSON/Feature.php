@@ -37,11 +37,13 @@ class Feature
      * Add property to feature.
      * @param string $key
      * @param string $value
-     * @return string
+     * @return self
      */
-    public function addProperty(string $key, string $value) : string
+    public function addProperty(string $key, string $value) : self
     {
-        return $this->properties [$key]= $value;
+        $this->properties [$key]= $value;
+        
+        return $this;
     }
 
     /**

@@ -63,11 +63,13 @@ class Geometry
      * Add coordinates to geometry.
      * @param float $lon
      * @param float $lat
-     * @return boolean
+     * @return self
      */
-    public function addCoordinates(float $lon, float $lat) : bool
+    public function addCoordinates(float $lon, float $lat) : self
     {
-        return array_push($this->coordinates, [$lon, $lat,]);
+        array_push($this->coordinates, [$lon, $lat,]);
+
+        return $this;
     }
 
     /**

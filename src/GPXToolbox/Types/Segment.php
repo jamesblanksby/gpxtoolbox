@@ -76,11 +76,13 @@ class Segment
     /**
      * Add point to segment.
      * @param Point $trkpt
-     * @return boolean
+     * @return self
      */
-    public function addPoint(Point $trkpt) : bool
+    public function addPoint(Point $trkpt) : self
     {
-        return array_push($this->points, $trkpt);
+        array_push($this->points, $trkpt);
+
+        return $this;
     }
 
     /**

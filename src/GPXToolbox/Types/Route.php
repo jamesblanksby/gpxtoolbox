@@ -58,11 +58,13 @@ class Route
     /**
      * Add point to route.
      * @param Point $rtept
-     * @return boolean
+     * @return self
      */
-    public function addPoint(Point $rtept) : bool
+    public function addPoint(Point $rtept) : self
     {
-        return array_push($this->points, $rtept);
+        array_push($this->points, $rtept);
+
+        return $this;
     }
 
     /**

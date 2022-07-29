@@ -27,22 +27,26 @@ class Collection
     /**
      * Add feature to collection.
      * @param Feature $feature
-     * @return boolean
+     * @return self
      */
-    public function addFeature(Feature $feature) : bool
+    public function addFeature(Feature $feature) : self
     {
-        return array_push($this->features, $feature);
+        array_push($this->features, $feature);
+
+        return $this;
     }
 
     /**
      * Add property to collection.
      * @param string $key
      * @param string $value
-     * @return string
+     * @return self
      */
-    public function addProperty(string $key, string $value) : string
+    public function addProperty(string $key, string $value) : self
     {
-        return $this->properties [$key]= $value;
+        $this->properties [$key]= $value;
+
+        return $this;
     }
 
     /**
