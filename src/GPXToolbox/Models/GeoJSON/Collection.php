@@ -39,10 +39,10 @@ class Collection
     /**
      * Add property to collection.
      * @param string $key
-     * @param string $value
+     * @param mixed $value
      * @return self
      */
-    public function addProperty(string $key, string $value) : self
+    public function addProperty(string $key, mixed $value) : self
     {
         $this->properties [$key]= $value;
 
