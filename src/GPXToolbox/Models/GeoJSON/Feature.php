@@ -21,9 +21,9 @@ class Feature
 
     /**
      * A list of properties.
-     * @var array|null
+     * @var array
      */
-    public $properties = null;
+    public $properties = [];
 
     /**
      * Feature constructor.
@@ -31,6 +31,17 @@ class Feature
     public function __construct($geometryType)
     {
         $this->geometry = new Geometry($geometryType);
+    }
+
+    /**
+     * Add property to feature.
+     * @param string $key
+     * @param string $value
+     * @return string
+     */
+    public function addProperty(string $key, string $value) : string
+    {
+        return $this->properties [$key]= $value;
     }
 
     /**
@@ -42,7 +53,7 @@ class Feature
         return [
             'type'       => $this->type,
             'geometry'   => SerializationHelper::toArray($this->geometry),
-            'properties' => $this->properties,
+            'properties' => SerializationHelper::toArray($this->properties),
         ];
     }
 }

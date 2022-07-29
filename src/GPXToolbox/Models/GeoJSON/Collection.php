@@ -20,9 +20,9 @@ class Collection
 
     /**
      * A list of properties.
-     * @var array|null
+     * @var array
      */
-    public $properties = null;
+    public $properties = [];
 
     /**
      * Add feature to collection.
@@ -35,6 +35,17 @@ class Collection
     }
 
     /**
+     * Add property to collection.
+     * @param string $key
+     * @param string $value
+     * @return string
+     */
+    public function addProperty(string $key, string $value) : string
+    {
+        return $this->properties [$key]= $value;
+    }
+
+    /**
      * Array representation of collection data.
      * @return array
      */
@@ -43,7 +54,7 @@ class Collection
         return SerializationHelper::filterEmpty([
             'type'       => $this->type,
             'features'   => SerializationHelper::toArray($this->features),
-            'properties' => $this->properties,
+            'properties' => SerializationHelper::toArray($this->properties),
         ]);
     }
 }
