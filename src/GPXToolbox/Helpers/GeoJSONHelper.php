@@ -21,10 +21,6 @@ class GeoJSONHelper
     {
         $collection = new Collection();
 
-        if (!empty($gpx->metadata)) {
-            $collection->properties = $gpx->metadata->toArray();
-        }
-
         if (!empty($gpx->wpt)) {
             foreach ($gpx->wpt as $wpt) {
                 $collection->addFeature(self::createWaypointFeature($wpt));

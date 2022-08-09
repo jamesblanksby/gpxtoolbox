@@ -19,12 +19,6 @@ class Collection
     public $features = [];
 
     /**
-     * A list of properties.
-     * @var array
-     */
-    public $properties = [];
-
-    /**
      * Add feature to collection.
      * @param Feature $feature
      * @return self
@@ -32,19 +26,6 @@ class Collection
     public function addFeature(Feature $feature) : self
     {
         array_push($this->features, $feature);
-
-        return $this;
-    }
-
-    /**
-     * Add property to collection.
-     * @param string $key
-     * @param mixed $value
-     * @return self
-     */
-    public function addProperty(string $key, $value) : self
-    {
-        $this->properties [$key]= $value;
 
         return $this;
     }
@@ -58,7 +39,6 @@ class Collection
         return SerializationHelper::filterEmpty([
             'type'       => $this->type,
             'features'   => SerializationHelper::toArray($this->features),
-            'properties' => $this->properties,
         ]);
     }
 }
