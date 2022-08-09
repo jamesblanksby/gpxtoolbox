@@ -7,37 +7,37 @@ class Geometry
     /**
      * @var string
      */
-    const POINT = 'Point';
+    public const POINT = 'Point';
 
     /**
      * @var string
      */
-    const LINE_STRING = 'LineString';
+    public const LINE_STRING = 'LineString';
 
     /**
      * @var string
      */
-    const POLYGON = 'Polygon';
+    public const POLYGON = 'Polygon';
 
     /**
      * @var string
      */
-    const MULTI_POINT = 'MultiPoint';
+    public const MULTI_POINT = 'MultiPoint';
 
     /**
      * @var string
      */
-    const MULTI_LINE_STRING = 'MultiLineString';
+    public const MULTI_LINE_STRING = 'MultiLineString';
 
     /**
      * @var string
      */
-    const MULTI_POLYGON = 'MultiPolygon';
+    public const MULTI_POLYGON = 'MultiPolygon';
 
     /**
      * @var string
      */
-    const GEOMETRY_COLLECTION = 'GeometryCollection';
+    public const GEOMETRY_COLLECTION = 'GeometryCollection';
 
     /**
      * Geometry type.
@@ -65,7 +65,7 @@ class Geometry
      * @param float $lat
      * @return self
      */
-    public function addCoordinates(float $lon, float $lat) : self
+    public function addCoordinates(float $lon, float $lat): self
     {
         array_push($this->coordinates, [$lon, $lat,]);
 
@@ -76,7 +76,7 @@ class Geometry
      * Array representation of geometry data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'type'        => $this->type,

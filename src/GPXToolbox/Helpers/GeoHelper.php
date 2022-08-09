@@ -2,18 +2,20 @@
 
 namespace GPXToolbox\Helpers;
 
+use GPXToolbox\Types\Point;
+
 class GeoHelper
 {
     /**
      * Calculate bounds based on a list of points.
-     * @param array $points
+     * @param Point[] $points
      * @return array
      */
-    public static function getBounds(array $points) : array
+    public static function getBounds(array $points): array
     {
         $longitudes = [];
         $latitudes = [];
-        
+
         foreach ($points as $point) {
             $longitudes []= $point->lon;
             $latitudes []= $point->lat;

@@ -11,7 +11,7 @@ class LinkParser
      * @param \SimpleXMLElement[]|\SimpleXMLElement $nodes
      * @return Link[]
      */
-    public static function parse($nodes) : array
+    public static function parse($nodes): array
     {
         $links = [];
 
@@ -34,7 +34,7 @@ class LinkParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Link $link, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Link $link, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('link');
 
@@ -61,7 +61,7 @@ class LinkParser
      * @param \DOMDocument $doc
      * @return \DOMNode[]
      */
-    public static function toXMLArray(array $links, \DOMDocument $doc) : array
+    public static function toXMLArray(array $links, \DOMDocument $doc): array
     {
         $result = [];
 

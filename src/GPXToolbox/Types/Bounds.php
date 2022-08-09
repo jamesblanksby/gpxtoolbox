@@ -32,7 +32,7 @@ class Bounds
      * Array representation of bounds data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'minlat' => $this->minlat,

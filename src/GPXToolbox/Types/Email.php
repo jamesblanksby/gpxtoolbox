@@ -20,7 +20,7 @@ class Email
      * Array representation of email data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'id'     => $this->id,

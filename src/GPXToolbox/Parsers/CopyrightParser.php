@@ -11,7 +11,7 @@ class CopyrightParser
      * @param \SimpleXMLElement $node
      * @return Copyright
      */
-    public static function parse(\SimpleXMLElement $node) : Copyright
+    public static function parse(\SimpleXMLElement $node): Copyright
     {
         $copyright = new Copyright();
 
@@ -28,7 +28,7 @@ class CopyrightParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Copyright $copyright, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Copyright $copyright, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('copyright');
 

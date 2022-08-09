@@ -11,20 +11,20 @@ class Point
     * Waypoint GPX key.
     * @var string
     */
-    const WAYPOINT = 'wpt';
+    public const WAYPOINT = 'wpt';
 
     /**
      * Trackpoint GPX key.
      * @var string
      */
-    const TRACKPOINT = 'trkpt';
-    
+    public const TRACKPOINT = 'trkpt';
+
     /**
      * Routepoint GPX key.
      * @var string
      */
-    const ROUTEPOINT = 'rte';
-    
+    public const ROUTEPOINT = 'rte';
+
     /**
      * The latitude of the point. Decimal degrees, WGS84 datum.
      * @var float
@@ -144,7 +144,7 @@ class Point
      * Array representation of point data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'lat'           => $this->lat,

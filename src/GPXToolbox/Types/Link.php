@@ -15,7 +15,7 @@ class Link
      * @var string|null
      */
     public $text = null;
-    
+
     /**
      * Mime type of content.
      * @var string|null
@@ -26,7 +26,7 @@ class Link
      * Array representation of link data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'href' => $this->href,

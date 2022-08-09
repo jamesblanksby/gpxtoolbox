@@ -60,7 +60,7 @@ class Route
      * @param Point $rtept
      * @return self
      */
-    public function addPoint(Point $rtept) : self
+    public function addPoint(Point $rtept): self
     {
         array_push($this->points, $rtept);
 
@@ -71,7 +71,7 @@ class Route
      * Array representation of route data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'name'   => $this->name,

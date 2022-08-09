@@ -8,10 +8,10 @@ class WaypointParser
 {
     /**
      * Parses waypoint data.
-     * @param \SimpleXMLElement[] $nodes
+     * @param \SimpleXMLElement $nodes
      * @return Point[]
      */
-    public static function parse($nodes) : array
+    public static function parse($nodes): array
     {
         $waypoints = [];
 
@@ -28,7 +28,7 @@ class WaypointParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Point $wpt, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Point $wpt, \DOMDocument $doc): \DOMNode
     {
         $node = PointParser::toXML($wpt, Point::WAYPOINT, $doc);
 

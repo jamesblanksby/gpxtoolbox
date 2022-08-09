@@ -62,7 +62,7 @@ class Stats
      * Array representation of stats data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'distance'       => $this->distance,

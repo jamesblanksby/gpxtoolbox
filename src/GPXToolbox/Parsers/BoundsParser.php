@@ -12,7 +12,7 @@ class BoundsParser
      * @param \SimpleXMLElement $node
      * @return Bounds
      */
-    public static function parse(\SimpleXMLElement $node) : Bounds
+    public static function parse(\SimpleXMLElement $node): Bounds
     {
         $bounds = new Bounds();
 
@@ -30,24 +30,24 @@ class BoundsParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Bounds $bounds, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Bounds $bounds, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('bounds');
 
         if (!empty($bounds->minlat)) {
-            $node->setAttribute('minlat', $bounds->minlat);
+            $node->setAttribute('minlat', (string) $bounds->minlat);
         }
 
         if (!empty($bounds->minlon)) {
-            $node->setAttribute('minlon', $bounds->minlon);
+            $node->setAttribute('minlon', (string) $bounds->minlon);
         }
 
         if (!empty($bounds->maxlat)) {
-            $node->setAttribute('maxlat', $bounds->maxlat);
+            $node->setAttribute('maxlat', (string) $bounds->maxlat);
         }
 
         if (!empty($bounds->maxlon)) {
-            $node->setAttribute('maxlon', $bounds->maxlon);
+            $node->setAttribute('maxlon', (string) $bounds->maxlon);
         }
 
         return $node;

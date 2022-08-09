@@ -3,7 +3,6 @@
 namespace GPXToolbox\Helpers;
 
 use GPXToolbox\Types\Point;
-use GPXToolbox\GPXToolbox;
 
 class DistanceHelper
 {
@@ -11,7 +10,7 @@ class DistanceHelper
      * Radius of planet earch.
      * @var int
      */
-    const EARTH_RADIUS = 6371000;
+    public const EARTH_RADIUS = 6371000;
 
     /**
      * Calculate distance between two points.
@@ -19,7 +18,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public static function getDistance(Point $a, Point $b) : float
+    public static function getDistance(Point $a, Point $b): float
     {
         return self::get3dDistance($a, $b);
     }
@@ -30,7 +29,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public static function get2dDistance(Point $a, Point $b) : float
+    public static function get2dDistance(Point $a, Point $b): float
     {
         $dy = deg2rad(($b->lon - $a->lon));
         $dx = deg2rad(($b->lat - $a->lat));
@@ -47,7 +46,7 @@ class DistanceHelper
      * @param Point $b
      * @return float
      */
-    public static function get3dDistance(Point $a, Point $b) : float
+    public static function get3dDistance(Point $a, Point $b): float
     {
         $planar = self::get2dDistance($a, $b);
         $height = abs(($b->ele - $a->ele));
@@ -61,11 +60,11 @@ class DistanceHelper
       * @param Point $b
       * @return float
       */
-    public static function getSquareDistance(Point $a, Point $b) : float
+    public static function getSquareDistance(Point $a, Point $b): float
     {
         $dx = ($a->lat - $b->lat);
         $dy = ($a->lon - $b->lon);
-        
+
         return (($dx * $dx) + ($dy * $dy));
     }
 
@@ -76,29 +75,27 @@ class DistanceHelper
      * @param Point $c
      * @return float
      */
-    public static function getSquareSegmentDistance(Point $a, Point $b, Point $c) : float
+    public static function getSquareSegmentDistance(Point $a, Point $b, Point $c): float
     {
         $x = $b->lat;
         $y = $b->lon;
 
         $dx = ($c->lat - $x);
         $dy = ($c->lon - $y);
-        
-        if ($dx !== 0 || $dy !== 0) {
-            $t = ((($a->lat - $x) * $dx + ($a->lon - $y) * $dy) / (($dx * $dx) + ($dy * $dy)));
 
-            if ($t > 1) {
-                $x = $c->lat;
-                $y = $c->lon;
-            } elseif ($t > 0) {
-                $x += ($dx * $t);
-                $y += ($dy * $t);
-            }
+        $t = ((($a->lat - $x) * $dx + ($a->lon - $y) * $dy) / (($dx * $dx) + ($dy * $dy)));
+
+        if ($t > 1) {
+            $x = $c->lat;
+            $y = $c->lon;
+        } elseif ($t > 0) {
+            $x += ($dx * $t);
+            $y += ($dy * $t);
         }
 
         $dx = ($a->lat - $x);
         $dy = ($a->lon - $y);
-        
+
         return (($dx * $dx) + ($dy * $dy));
     }
 }

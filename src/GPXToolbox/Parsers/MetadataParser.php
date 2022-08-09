@@ -12,7 +12,7 @@ class MetadataParser
      * @param \SimpleXMLElement $node
      * @return Metadata
      */
-    public static function parse(\SimpleXMLElement $node) : Metadata
+    public static function parse(\SimpleXMLElement $node): Metadata
     {
         $metadata = new Metadata();
 
@@ -34,7 +34,7 @@ class MetadataParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Metadata $metadata, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Metadata $metadata, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('metadata');
 
@@ -42,22 +42,22 @@ class MetadataParser
             $child = $doc->createElement('name', $metadata->name);
             $node->appendChild($child);
         }
-        
+
         if (!empty($metadata->desc)) {
             $child = $doc->createElement('desc', $metadata->desc);
             $node->appendChild($child);
         }
-        
+
         if (!empty($metadata->author)) {
             $child = PersonParser::toXML($metadata->author, $doc);
             $node->appendChild($child);
         }
-        
+
         if (!empty($metadata->copyright)) {
             $child = CopyrightParser::toXML($metadata->copyright, $doc);
             $node->appendChild($child);
         }
-        
+
         if (!empty($metadata->links)) {
             $children = LinkParser::toXMLArray($metadata->links, $doc);
             foreach ($children as $child) {

@@ -2,22 +2,23 @@
 
 namespace GPXToolbox\Parsers;
 
+use GPXToolbox\Types\Point;
 use GPXToolbox\Types\Route;
 
 class RouteParser
 {
     /**
      * Parses route data.
-     * @param \SimpleXMLElement[] $nodes
+     * @param \SimpleXMLElement $nodes
      * @return Route[]
      */
-    public static function parse($nodes) : array
+    public static function parse($nodes): array
     {
         $routes = [];
 
         foreach ($nodes as $node) {
             $rte = new Route();
-            
+
             $rte->name   = isset($node->name) ? (string) $node->name : null;
             $rte->cmt    = isset($node->cmt) ? (string) $node->cmt : null;
             $rte->desc   = isset($node->desc) ? (string) $node->desc : null;
@@ -36,20 +37,64 @@ class RouteParser
 
             $routes []= $rte;
         }
-        
+
 
         return $routes;
     }
 
     /**
      * XML representation of route data.
-     * @param Point $rte
+     * @param Route $rte
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Point $rte, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Route $rte, \DOMDocument $doc): \DOMNode
     {
-        $node = PointParser::toXML($rte, Point::WAYPOINT, $doc);
+        $node = $doc->createElement('rte');
+
+        if (!empty($rte->name)) {
+            $child = $doc->createElement('name', $rte->name);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->cmt)) {
+            $child = $doc->createElement('cmt', $rte->cmt);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->desc)) {
+            $child = $doc->createElement('desc', $rte->desc);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->src)) {
+            $child = $doc->createElement('src', $rte->src);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->links)) {
+            $children = LinkParser::toXMLArray($rte->links, $doc);
+            foreach ($children as $child) {
+                $node->appendChild($child);
+            }
+        }
+
+        if (!empty($rte->number)) {
+            $child = $doc->createElement('number', (string) $rte->number);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->type)) {
+            $child = $doc->createElement('type', $rte->type);
+            $node->appendChild($child);
+        }
+
+        if (!empty($rte->points)) {
+            $children = PointParser::toXMLArray($rte->points, Point::ROUTEPOINT, $doc);
+            foreach ($children as $child) {
+                $node->appendChild($child);
+            }
+        }
 
         return $node;
     }

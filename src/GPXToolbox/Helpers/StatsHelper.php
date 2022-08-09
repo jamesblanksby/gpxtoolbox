@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Helpers;
 
+use GPXToolbox\Types\Point;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\GPXToolbox;
 
@@ -12,7 +13,7 @@ class StatsHelper
      * @param Point[] $points
      * @return Stats
      */
-    public static function calculateStats(array $points) : Stats
+    public static function calculateStats(array $points): Stats
     {
         $stats = new Stats();
 
@@ -43,7 +44,7 @@ class StatsHelper
      * @param Point[] $points
      * @return float
      */
-    public static function calculateDistance(array $points) : float
+    public static function calculateDistance(array $points): float
     {
         $distance = 0.0;
 
@@ -79,7 +80,7 @@ class StatsHelper
      * @param Point[] $points
      * @return integer
      */
-    public static function calculateMovingDuration(array $points) : int
+    public static function calculateMovingDuration(array $points): int
     {
         $duration = 0;
 
@@ -116,7 +117,7 @@ class StatsHelper
      * @param Point[] $points
      * @return array
      */
-    public static function calculateElevationGainLoss(array $points) : array
+    public static function calculateElevationGainLoss(array $points): array
     {
         $elevationGain = 0.0;
         $elevationLoss = 0.0;
@@ -131,7 +132,7 @@ class StatsHelper
                 $lastPoint = $point;
                 continue;
             }
-            
+
             $difference = ($point->ele - $lastPoint->ele);
 
             if (GPXToolbox::$ELEVATION_THRESHOLD !== false) {

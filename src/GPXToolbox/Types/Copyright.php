@@ -26,7 +26,7 @@ class Copyright
      * Array representation of copyright data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'author'  => $this->author,

@@ -2,13 +2,13 @@
 
 namespace GPXToolbox\Helpers;
 
-use GPXToolbox\Types\Point;
-use GPXToolbox\Types\Route;
 use GPXToolbox\Types\Track;
-use GPXToolbox\Models\GeoJSON\Collection;
-use GPXToolbox\Models\GeoJSON\Feature;
+use GPXToolbox\Types\Route;
+use GPXToolbox\Types\Point;
+use GPXToolbox\Types\GPX;
 use GPXToolbox\Models\GeoJSON\Geometry;
-use GPXToolbox\GPXToolbox;
+use GPXToolbox\Models\GeoJSON\Feature;
+use GPXToolbox\Models\GeoJSON\Collection;
 
 class GeoJSONHelper
 {
@@ -17,7 +17,7 @@ class GeoJSONHelper
      * @param GPX $gpx
      * @return Collection
      */
-    public static function createCollection($gpx) : Collection
+    public static function createCollection(GPX $gpx): Collection
     {
         $collection = new Collection();
 
@@ -47,7 +47,7 @@ class GeoJSONHelper
      * @param Point $wpt
      * @return Feature
      */
-    public static function createWaypointFeature($wpt) : Feature
+    public static function createWaypointFeature($wpt): Feature
     {
         $feature = new Feature(Geometry::POINT);
 
@@ -65,17 +65,17 @@ class GeoJSONHelper
      * @param Route $rte
      * @return Feature
      */
-    public static function createRouteFeature($rte) : Feature
+    public static function createRouteFeature($rte): Feature
     {
         $feature = new Feature(Geometry::LINE_STRING);
 
-        if (!is_null($rte->points)) {
+        if (!empty($rte->points)) {
             foreach ($rte->points as $rtept) {
                 $feature->geometry->addCoordinates($rtept->lon, $rtept->lat);
             }
         }
 
-        $properties = array_diff_key($trk->toArray(), array_flip(['points',]));
+        $properties = array_diff_key($rte->toArray(), array_flip(['points',]));
         $feature->properties = $properties;
 
         return $feature;
@@ -86,13 +86,13 @@ class GeoJSONHelper
      * @param Track $trk
      * @return Feature
      */
-    public static function createTrackFeature($trk) : Feature
+    public static function createTrackFeature($trk): Feature
     {
         $feature = new Feature(Geometry::LINE_STRING);
 
         if (!is_null($trk->trkseg)) {
             foreach ($trk->trkseg as $trkseg) {
-                if (is_null($trkseg->points)) {
+                if (empty($trkseg->points)) {
                     continue;
                 }
 

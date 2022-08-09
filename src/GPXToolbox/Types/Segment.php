@@ -20,7 +20,7 @@ class Segment
      * Calculate Segment bounds.
      * @return array
      */
-    public function bounds() : array
+    public function bounds(): array
     {
         $points = $this->getPoints();
         $bounds = GeoHelper::getBounds($points);
@@ -32,7 +32,7 @@ class Segment
      * Calculate Segment stats.
      * @return Stats
      */
-    public function stats() : Stats
+    public function stats(): Stats
     {
         $points = $this->getPoints();
         $stats = StatsHelper::calculateStats($points);
@@ -44,14 +44,14 @@ class Segment
      * Simplify path by removing extra points with given tolerance.
      * @param float $tolerance
      * @param boolean $highestQuality
-     * @return Segment
+     * @return self
      */
-    public function simplify(float $tolerance = 1.0, bool $highestQuality = false) : Segment
+    public function simplify(float $tolerance = 1.0, bool $highestQuality = false): self
     {
         $points = $this->getPoints();
 
         if (count($points) < 2) {
-            return $points;
+            return $this;
         }
 
         $toleranceSq = ($tolerance * $tolerance);
@@ -68,7 +68,7 @@ class Segment
      * Gather Segment points.
      * @return array
      */
-    public function getPoints() : array
+    public function getPoints(): array
     {
         return $this->points;
     }
@@ -78,7 +78,7 @@ class Segment
      * @param Point $trkpt
      * @return self
      */
-    public function addPoint(Point $trkpt) : self
+    public function addPoint(Point $trkpt): self
     {
         array_push($this->points, $trkpt);
 
@@ -89,7 +89,7 @@ class Segment
      * Array representation of segment data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'points' => SerializationHelper::toArray($this->points),

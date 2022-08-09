@@ -8,10 +8,10 @@ class TrackParser
 {
     /**
      * Parses track data.
-     * @param \SimpleXMLElement[] $nodes
+     * @param \SimpleXMLElement $nodes
      * @return array
      */
-    public static function parse($nodes) : array
+    public static function parse($nodes): array
     {
         $tracks = [];
 
@@ -39,7 +39,7 @@ class TrackParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Track $trk, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Track $trk, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('trk');
 
@@ -71,7 +71,7 @@ class TrackParser
         }
 
         if (!empty($trk->number)) {
-            $child = $doc->createElement('number', $trk->number);
+            $child = $doc->createElement('number', (string) $trk->number);
             $node->appendChild($child);
         }
 

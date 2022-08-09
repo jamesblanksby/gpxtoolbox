@@ -2,15 +2,15 @@
 
 namespace GPXToolbox\Types;
 
-use GPXToolbox\Models\Stats;
-use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\WaypointParser;
-use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
-use GPXToolbox\Helpers\GeoHelper;
+use GPXToolbox\Parsers\RouteParser;
+use GPXToolbox\Parsers\MetadataParser;
+use GPXToolbox\Models\Stats;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\GeoJSONHelper;
+use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\GPXToolbox;
 
 class GPX
@@ -23,7 +23,7 @@ class GPX
 
     /**
      * A list of way points.
-     * @var Waypoint[];
+     * @var Point[];
      */
     public $wpt = [];
 
@@ -55,7 +55,7 @@ class GPX
      * Calculate GPX bounds.
      * @return array
      */
-    public function bounds() : array
+    public function bounds(): array
     {
         $points = $this->getPoints();
         $bounds = GeoHelper::getBounds($points);
@@ -67,7 +67,7 @@ class GPX
      * Calculate GPX stats.
      * @return Stats
      */
-    public function stats() : Stats
+    public function stats(): Stats
     {
         $points = $this->getPoints();
         $stats = StatsHelper::calculateStats($points);
@@ -81,9 +81,9 @@ class GPX
      * @param boolean $highestQuality
      * @return GPX
      */
-    public function simplify(float $tolerance = 1.0, bool $highestQuality = false) : GPX
+    public function simplify(float $tolerance = 1.0, bool $highestQuality = false): GPX
     {
-        if (is_null($this->trk)) {
+        if (empty($this->trk)) {
             return $this;
         }
 
@@ -100,32 +100,33 @@ class GPX
      * @param string $format
      * @return boolean
      */
-    public function save(string $path, string $format) : bool
+    public function save(string $path, string $format): bool
     {
         switch ($format) {
             case GPXToolbox::FORMAT_GPX:
                 $doc = $this->toXML();
-                return $doc->save($path);
-            break;
+                $result = $doc->save($path);
+                break;
             case GPXToolbox::FORMAT_JSON:
                 $json = $this->toJSON();
-                return file_put_contents($path, $json);
-            break;
+                $result = file_put_contents($path, $json);
+                break;
             case GPXToolbox::FORMAT_GEOJSON:
                 $geojson = $this->toGeoJSON();
-                return file_put_contents($path, $geojson);
-            break;
+                $result = file_put_contents($path, $geojson);
+                break;
             default:
                 throw new \RuntimeException('Unsupported file format');
-            break;
         }
+
+        return $result;
     }
 
     /**
      * Array representation of GPX file.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return SerializationHelper::filterEmpty([
             'metadata' => SerializationHelper::toArray($this->metadata),
@@ -141,7 +142,7 @@ class GPX
      * XML representation of GPX file.
      * @return \DOMDocument
      */
-    public function toXML() : \DOMDocument
+    public function toXML(): \DOMDocument
     {
         $doc = new \DOMDocument('1.0', 'UTF-8');
         $gpx = $doc->createElementNS('http://www.topografix.com/GPX/1/1', 'gpx');
@@ -152,7 +153,7 @@ class GPX
         if (!empty($this->metadata)) {
             $gpx->appendChild(MetadataParser::toXML($this->metadata, $doc));
         }
-        
+
         if (!empty($this->wpt)) {
             foreach ($this->wpt as $wpt) {
                 $gpx->appendChild(WaypointParser::toXML($wpt, $doc));
@@ -176,7 +177,7 @@ class GPX
             'xsi:schemaLocation',
             'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
         );
-        
+
         $doc->appendChild($gpx);
 
         if (GPXToolbox::$PRETTY_PRINT) {
@@ -191,7 +192,7 @@ class GPX
      * JSON encoded representation of GPX file.
      * @return string
      */
-    public function toJSON() : string
+    public function toJSON(): string
     {
         return json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
     }
@@ -214,14 +215,14 @@ class GPX
      * Recursively gather GPX points.
      * @return array
      */
-    public function getPoints() : array
+    public function getPoints(): array
     {
         $points = [];
 
-        if (is_null($this->trk)) {
+        if (empty($this->trk)) {
             return $points;
         }
-        
+
         foreach ($this->trk as $trk) {
             $points = array_merge($points, $trk->getPoints());
         }

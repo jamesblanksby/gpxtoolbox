@@ -13,7 +13,7 @@ class PointParser
      * @param \SimpleXMLElement $node
      * @return Point
      */
-    public static function parse(\SimpleXMLElement $node) : Point
+    public static function parse(\SimpleXMLElement $node): Point
     {
         $point = new Point();
 
@@ -47,20 +47,20 @@ class PointParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Point $point, string $key, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Point $point, string $key, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement($key);
 
         if (!empty($point->lat)) {
-            $node->setAttribute('lat', $point->lat);
+            $node->setAttribute('lat', (string) $point->lat);
         }
 
         if (!empty($point->lon)) {
-            $node->setAttribute('lon', $point->lon);
+            $node->setAttribute('lon', (string) $point->lon);
         }
 
         if (!empty($point->ele)) {
-            $child = $doc->createElement('ele', $point->ele);
+            $child = $doc->createElement('ele', (string) $point->ele);
             $node->appendChild($child);
         }
 
@@ -70,12 +70,12 @@ class PointParser
         }
 
         if (!empty($point->magvar)) {
-            $child = $doc->createElement('magvar', $point->magvar);
+            $child = $doc->createElement('magvar', (string) $point->magvar);
             $node->appendChild($child);
         }
 
         if (!empty($point->geoidheight)) {
-            $child = $doc->createElement('geoidheight', $point->geoidheight);
+            $child = $doc->createElement('geoidheight', (string) $point->geoidheight);
             $node->appendChild($child);
         }
 
@@ -117,35 +117,53 @@ class PointParser
         }
 
         if (!empty($point->sat)) {
-            $child = $doc->createElement('sat', $point->sat);
+            $child = $doc->createElement('sat', (string) $point->sat);
             $node->appendChild($child);
         }
 
         if (!empty($point->hdop)) {
-            $child = $doc->createElement('hdop', $point->hdop);
+            $child = $doc->createElement('hdop', (string) $point->hdop);
             $node->appendChild($child);
         }
 
         if (!empty($point->vdop)) {
-            $child = $doc->createElement('vdop', $point->vdop);
+            $child = $doc->createElement('vdop', (string) $point->vdop);
             $node->appendChild($child);
         }
 
         if (!empty($point->pdop)) {
-            $child = $doc->createElement('pdop', $point->pdop);
+            $child = $doc->createElement('pdop', (string) $point->pdop);
             $node->appendChild($child);
         }
 
         if (!empty($point->ageofdgpsdata)) {
-            $child = $doc->createElement('ageofdgpsdata', $point->ageofdgpsdata);
+            $child = $doc->createElement('ageofdgpsdata', (string) $point->ageofdgpsdata);
             $node->appendChild($child);
         }
 
         if (!empty($point->dgpsid)) {
-            $child = $doc->createElement('dgpsid', $point->dgpsid);
+            $child = $doc->createElement('dgpsid', (string) $point->dgpsid);
             $node->appendChild($child);
         }
 
         return $node;
+    }
+
+    /**
+     * XML representation of array point data.
+     * @param Point[] $points
+     * @param string $key
+     * @param \DOMDocument $doc
+     * @return \DOMNode[]
+     */
+    public static function toXMLArray(array $points, string $key, \DOMDocument $doc): array
+    {
+        $result = [];
+
+        foreach ($points as $point) {
+            $result []= self::toXML($point, $key, $doc);
+        }
+
+        return $result;
     }
 }

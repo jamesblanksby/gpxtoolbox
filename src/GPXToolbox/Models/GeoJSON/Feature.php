@@ -39,10 +39,10 @@ class Feature
      * @param mixed $value
      * @return self
      */
-    public function addProperty(string $key, $value) : self
+    public function addProperty(string $key, $value): self
     {
         $this->properties [$key]= $value;
-        
+
         return $this;
     }
 
@@ -50,7 +50,7 @@ class Feature
      * Array representation of feature data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'type'       => $this->type,

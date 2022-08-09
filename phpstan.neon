@@ -1,0 +1,7 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    ignoreErrors:
+        - '/Variable \$[\w]+ might not be defined\./'
+    reportUnmatchedIgnoredErrors: false

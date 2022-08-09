@@ -10,7 +10,7 @@ class DateTimeParser
      * @param string $timezone
      * @return \DateTime
      */
-    public static function parse($value, string $timezone = 'UTC') : \DateTime
+    public static function parse($value, string $timezone = 'UTC'): \DateTime
     {
         $timezone = new \DateTimeZone($timezone);
         $datetime = new \DateTime($value, $timezone);

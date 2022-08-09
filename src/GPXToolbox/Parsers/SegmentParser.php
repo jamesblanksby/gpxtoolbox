@@ -9,10 +9,10 @@ class SegmentParser
 {
     /**
      * Parses segment data.
-     * @param \SimpleXMLElement[] $nodes
+     * @param \SimpleXMLElement $nodes
      * @return Segment[]
      */
-    public static function parse($nodes) : array
+    public static function parse($nodes): array
     {
         $segments = [];
 
@@ -21,7 +21,7 @@ class SegmentParser
 
             if (isset($node->trkpt)) {
                 $segment->points = [];
-                
+
                 foreach ($node->trkpt as $trkpt) {
                     $segment->points []= PointParser::parse($trkpt);
                 }
@@ -39,7 +39,7 @@ class SegmentParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Segment $segment, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Segment $segment, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('trkseg');
 
@@ -58,7 +58,7 @@ class SegmentParser
      * @param \DOMDocument $doc
      * @return \DOMNode[]
      */
-    public static function toXMLArray(array $segments, \DOMDocument $doc) : array
+    public static function toXMLArray(array $segments, \DOMDocument $doc): array
     {
         $result = [];
 

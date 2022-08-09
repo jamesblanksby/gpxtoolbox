@@ -12,7 +12,7 @@ class SimplifyHelper
      * @param float $toleranceSq
      * @return Point[]
      */
-    public static function simplifyDistance(array $points, float $toleranceSq) : array
+    public static function simplifyDistance(array $points, float $toleranceSq): array
     {
         $length = count($points);
         $prevPoint = $points[0];
@@ -20,7 +20,7 @@ class SimplifyHelper
 
         for ($i = 1; $i < $length; $i++) {
             $point = $points[$i];
-            
+
             if (DistanceHelper::getSquareDistance($point, $prevPoint) > $toleranceSq) {
                 $newPoints []= $point;
                 $prevPoint = $point;
@@ -40,19 +40,16 @@ class SimplifyHelper
      * @param float $toleranceSq
      * @return Point[]
      */
-    public static function simplifyDouglasPeucker(array $points, float $toleranceSq) : array
+    public static function simplifyDouglasPeucker(array $points, float $toleranceSq): array
     {
         $length = count($points);
-        $markers = array_fill(0, ($length - 1), null);
         $first = 0;
         $last = ($length - 1);
-        
+
         $firstStack = [];
         $lastStack = [];
-        
-        $newPoints  = [];
 
-        $markers[$first] = $markers[$last] = 1;
+        $newPoints  = [];
 
         while ($last) {
             $maxSquareDistance = 0;
@@ -67,8 +64,6 @@ class SimplifyHelper
             }
 
             if ($maxSquareDistance > $toleranceSq) {
-                $markers[$index] = 1;
-                
                 $firstStack []= $first;
                 $lastStack []= $index;
 
@@ -81,9 +76,7 @@ class SimplifyHelper
         }
 
         for ($i = 0; $i < $length; $i++) {
-            if ($markers[$i]) {
-                $newPoints []= $points[$i];
-            }
+            $newPoints []= $points[$i];
         }
 
         return $newPoints;

@@ -23,7 +23,7 @@ class Collection
      * @param Feature $feature
      * @return self
      */
-    public function addFeature(Feature $feature) : self
+    public function addFeature(Feature $feature): self
     {
         array_push($this->features, $feature);
 
@@ -34,7 +34,7 @@ class Collection
      * Array representation of collection data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return SerializationHelper::filterEmpty([
             'type'       => $this->type,

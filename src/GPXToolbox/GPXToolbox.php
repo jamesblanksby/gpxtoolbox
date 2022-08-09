@@ -14,24 +14,24 @@ class GPXToolbox
      * GPX creator signature.
      * @var string
      */
-    const SIGNATURE = 'GPXToolbox';
-    
+    public const SIGNATURE = 'GPXToolbox';
+
     /**
      * GPX file save format.
      * @var string
      */
-    const FORMAT_GPX = 'gpx';
+    public const FORMAT_GPX = 'gpx';
 
     /**
      * JSON file save format.
      * @var string
      */
-    const FORMAT_JSON = 'json';
+    public const FORMAT_JSON = 'json';
 
     /**
      * GeoJSON file save format.
      */
-    const FORMAT_GEOJSON = 'geojson';
+    public const FORMAT_GEOJSON = 'geojson';
 
     /**
      * Number of decimal place precision for latitude and longitude values.
@@ -86,7 +86,7 @@ class GPXToolbox
      * @param string $filename
      * @return GPX
      */
-    public static function load(string $filename) : GPX
+    public static function load(string $filename): GPX
     {
         if (!file_exists($filename)) {
             throw new \RuntimeException('No such file');
@@ -102,7 +102,7 @@ class GPXToolbox
      * @param string $xml
      * @return GPX
      */
-    public static function parse(string $xml) : GPX
+    public static function parse(string $xml): GPX
     {
         $data = simplexml_load_string($xml);
 

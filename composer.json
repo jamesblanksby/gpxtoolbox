@@ -10,6 +10,9 @@
             "email": "james@thisismyengine.com"
         }
     ],
+    "config": {
+		"sort-packages": true
+	},
     "require": {
         "lib-libxml": "*",
         "ext-simplexml": "*",
@@ -19,5 +22,13 @@
         "psr-4": {
             "GPXToolbox\\": "src/GPXToolbox/"
         }
-    }
+    },
+    "require-dev": {
+		"friendsofphp/php-cs-fixer": "^3.8",
+		"phpstan/phpstan": "^1.8"
+	},
+    "scripts": {
+		"csfix": "php vendor/bin/php-cs-fixer fix",
+		"analyse": "vendor/bin/phpstan analyse --memory-limit 1G"
+	}
 }

@@ -63,7 +63,7 @@ class Track
      * Calculate Track bounds.
      * @return array
      */
-    public function bounds() : array
+    public function bounds(): array
     {
         $points = $this->getPoints();
         $bounds = GeoHelper::getBounds($points);
@@ -75,7 +75,7 @@ class Track
      * Calculate Track stats.
      * @return Stats
      */
-    public function stats() : Stats
+    public function stats(): Stats
     {
         $points = $this->getPoints();
         $stats = StatsHelper::calculateStats($points);
@@ -89,7 +89,7 @@ class Track
      * @param boolean $highestQuality
      * @return Track
      */
-    public function simplify(float $tolerance = 1.0, bool $highestQuality = false) : Track
+    public function simplify(float $tolerance = 1.0, bool $highestQuality = false): Track
     {
         if (is_null($this->trkseg)) {
             return $this;
@@ -106,7 +106,7 @@ class Track
      * Array representation of track data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'name'   => $this->name,
@@ -124,14 +124,14 @@ class Track
      * Recursively gather Track points.
      * @return array
      */
-    public function getPoints() : array
+    public function getPoints(): array
     {
         $points = [];
 
         if (is_null($this->trkseg)) {
             return $points;
         }
-        
+
         foreach ($this->trkseg as $trkseg) {
             $points = array_merge($points, $trkseg->getPoints());
         }

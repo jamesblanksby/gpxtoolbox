@@ -11,7 +11,7 @@ class EmailParser
      * @param \SimpleXMLElement $node
      * @return Email
      */
-    public static function parse(\SimpleXMLElement $node) : Email
+    public static function parse(\SimpleXMLElement $node): Email
     {
         $email = new Email();
 
@@ -27,7 +27,7 @@ class EmailParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Email $email, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Email $email, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('email');
 

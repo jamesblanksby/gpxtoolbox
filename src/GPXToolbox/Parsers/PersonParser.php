@@ -11,7 +11,7 @@ class PersonParser
      * @param \SimpleXMLElement $node
      * @return Person
      */
-    public static function parse(\SimpleXMLElement $node) : Person
+    public static function parse(\SimpleXMLElement $node): Person
     {
         $person = new Person();
 
@@ -28,7 +28,7 @@ class PersonParser
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Person $person, \DOMDocument $doc) : \DOMNode
+    public static function toXML(Person $person, \DOMDocument $doc): \DOMNode
     {
         $node = $doc->createElement('author');
 

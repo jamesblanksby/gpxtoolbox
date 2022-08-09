@@ -14,7 +14,7 @@ class Person
 
     /**
      * Email address.
-     * @var string|null
+     * @var Email|null
      */
     public $email = null;
 
@@ -28,7 +28,7 @@ class Person
      * Array representation of person data.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'name'  => $this->name,

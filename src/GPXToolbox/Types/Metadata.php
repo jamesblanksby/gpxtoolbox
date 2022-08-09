@@ -24,7 +24,7 @@ class Metadata
      * @var Person|null
      */
     public $author = null;
-    
+
     /**
      * Copyright and license information governing use of the file.
      * @var Copyright|null
@@ -53,15 +53,15 @@ class Metadata
     /**
      * Minimum and maximum coordinates which
      * describe the extent of the coordinates in the file.
-     * @var Bounds[]|null
+     * @var Bounds|null
      */
-    public $bounds = [];
+    public $bounds = null;
 
     /**
      * Array representation of metadata.
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'name'      => $this->name,
