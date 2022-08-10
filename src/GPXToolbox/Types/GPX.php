@@ -43,13 +43,13 @@ class GPX
      * Version of the file.
      * @var string
      */
-    public $version = '';
+    public $version = '1.1';
 
     /**
      * Creator of the file.
      * @var string
      */
-    public $creator = '';
+    public $creator = 'GPXToolbox';
 
     /**
      * Calculate GPX bounds.
