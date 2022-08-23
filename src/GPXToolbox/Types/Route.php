@@ -3,6 +3,7 @@
 namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class Route
 {
@@ -50,6 +51,12 @@ class Route
     public $type = null;
 
     /**
+     * A list of extensions.
+     * @var ExtensionInterface[]
+     */
+    public $extensions = [];
+
+    /**
      * A list of route points.
      * @var Point[]
      */
@@ -74,14 +81,15 @@ class Route
     public function toArray(): array
     {
         return [
-            'name'   => $this->name,
-            'cmt'    => $this->cmt,
-            'desc'   => $this->desc,
-            'src'    => $this->src,
-            'links'  => SerializationHelper::toArray($this->links),
-            'number' => $this->number,
-            'type'   => $this->type,
-            'points' => SerializationHelper::toArray($this->points),
+            'name'       => $this->name,
+            'cmt'        => $this->cmt,
+            'desc'       => $this->desc,
+            'src'        => $this->src,
+            'links'      => SerializationHelper::toArray($this->links),
+            'number'     => $this->number,
+            'type'       => $this->type,
+            'extensions' => SerializationHelper::toArray($this->extensions),
+            'points'     => SerializationHelper::toArray($this->points),
         ];
     }
 }

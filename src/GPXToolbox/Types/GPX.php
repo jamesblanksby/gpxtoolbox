@@ -2,19 +2,32 @@
 
 namespace GPXToolbox\Types;
 
-use GPXToolbox\Parsers\WaypointParser;
-use GPXToolbox\Parsers\TrackParser;
-use GPXToolbox\Parsers\RouteParser;
-use GPXToolbox\Parsers\MetadataParser;
-use GPXToolbox\Models\Stats;
-use GPXToolbox\Helpers\StatsHelper;
-use GPXToolbox\Helpers\SerializationHelper;
-use GPXToolbox\Helpers\GeoJSONHelper;
-use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Helpers\GeoHelper;
+use GPXToolbox\Helpers\GeoJSONHelper;
+use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Models\Stats;
+use GPXToolbox\Parsers\MetadataParser;
+use GPXToolbox\Parsers\RouteParser;
+use GPXToolbox\Parsers\TrackParser;
+use GPXToolbox\Parsers\WaypointParser;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class GPX
 {
+    /**
+     * Version of the file.
+     * @var string
+     */
+    public $version = '1.1';
+
+    /**
+     * Creator of the file.
+     * @var string
+     */
+    public $creator = 'GPXToolbox';
+
     /**
      * Metadata about the file.
      * @var Metadata|null
@@ -40,16 +53,10 @@ class GPX
     public $trk = [];
 
     /**
-     * Version of the file.
-     * @var string
+     * A list of extensions.
+     * @var ExtensionInterface[]
      */
-    public $version = '1.1';
-
-    /**
-     * Creator of the file.
-     * @var string
-     */
-    public $creator = 'GPXToolbox';
+    public $extensions = [];
 
     /**
      * Calculate GPX bounds.
@@ -129,12 +136,13 @@ class GPX
     public function toArray(): array
     {
         return SerializationHelper::filterEmpty([
-            'metadata' => SerializationHelper::toArray($this->metadata),
-            'wpt'      => SerializationHelper::toArray($this->wpt),
-            'rte'      => SerializationHelper::toArray($this->rte),
-            'trk'      => SerializationHelper::toArray($this->trk),
-            'version'  => $this->version,
-            'creator'  => $this->creator,
+            'version'    => $this->version,
+            'creator'    => $this->creator,
+            'metadata'   => SerializationHelper::toArray($this->metadata),
+            'wpt'        => SerializationHelper::toArray($this->wpt),
+            'rte'        => SerializationHelper::toArray($this->rte),
+            'trk'        => SerializationHelper::toArray($this->trk),
+            'extensions' => SerializationHelper::toArray($this->extensions),
         ]);
     }
 

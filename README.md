@@ -5,12 +5,11 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 
 ## Features
 
-* Full* support for [official specification](http://www.topografix.com/GPX/1/1).
+* Full support for [official specification](http://www.topografix.com/GPX/1/1).
 * High performance polyline simplification.
 * Statistics calculation.
+* Extension interface.
 * GPX, GeoJSON, JSON and PHP Array output.
-
-\* Extensions coming soon!
 
 ### Statistics calculation
 
@@ -23,6 +22,10 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 * Elevation loss
 * Average pace (minutes per km)
 * Average speed (kph)
+
+### Extension Interface
+
+* Garmin TrackPointExtension ([v1](https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd) and [v2](https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd))
 
 ## 🤖 API
 
@@ -51,6 +54,18 @@ Parses a GPX XML string.
 #### Return values:
 
 * `GPX`: Parsed GPX data.
+
+<hr>
+
+### `GPXToolbox::addExtension(string $extension)`
+
+Add extension interface.
+
+*  `$extension`: An extension implementing the `ExtensionInterface` class.
+
+##### Return values:
+
+* `GPXToolbox`: `$this` for method chaining.
 
 <hr>
 

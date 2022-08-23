@@ -27,6 +27,8 @@ class SegmentParser
                 }
             }
 
+            $segment->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+
             $segments []= $segment;
         }
 

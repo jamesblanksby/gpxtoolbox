@@ -35,6 +35,8 @@ class RouteParser
                 }
             }
 
+            $rte->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+
             $routes []= $rte;
         }
 

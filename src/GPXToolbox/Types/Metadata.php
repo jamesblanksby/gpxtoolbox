@@ -4,6 +4,7 @@ namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class Metadata
 {
@@ -58,20 +59,27 @@ class Metadata
     public $bounds = null;
 
     /**
+     * A list of extensions.
+     * @var ExtensionInterface[]
+     */
+    public $extensions = [];
+
+    /**
      * Array representation of metadata.
      * @return array
      */
     public function toArray(): array
     {
         return [
-            'name'      => $this->name,
-            'desc'      => $this->desc,
-            'author'    => SerializationHelper::toArray($this->author),
-            'copyright' => SerializationHelper::toArray($this->copyright),
-            'links'     => SerializationHelper::toArray($this->links),
-            'time'      => DateTimeHelper::format($this->time),
-            'keywords'  => $this->keywords,
-            'bounds'    => SerializationHelper::toArray($this->bounds),
+            'name'       => $this->name,
+            'desc'       => $this->desc,
+            'author'     => SerializationHelper::toArray($this->author),
+            'copyright'  => SerializationHelper::toArray($this->copyright),
+            'links'      => SerializationHelper::toArray($this->links),
+            'time'       => DateTimeHelper::format($this->time),
+            'keywords'   => $this->keywords,
+            'bounds'     => SerializationHelper::toArray($this->bounds),
+            'extensions' => SerializationHelper::toArray($this->extensions),
         ];
     }
 }

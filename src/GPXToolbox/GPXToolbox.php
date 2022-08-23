@@ -2,11 +2,13 @@
 
 namespace GPXToolbox;
 
-use GPXToolbox\Types\GPX;
+use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
-use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
+use GPXToolbox\Parsers\WaypointParser;
+use GPXToolbox\Types\Extensions\TrackPointExtension;
+use GPXToolbox\Types\GPX;
 
 class GPXToolbox
 {
@@ -82,6 +84,20 @@ class GPXToolbox
     public static $PRETTY_PRINT = true;
 
     /**
+     * A list of namespace extensions.
+     * @var array
+     */
+    public static $EXTENSIONS = [];
+
+    /**
+     * GPXToolbox constructor.
+     */
+    public function __construct()
+    {
+        $this->addExtension(TrackPointExtension::class);
+    }
+
+    /**
      * Load GPX file.
      * @param string $filename
      * @return GPX
@@ -108,13 +124,26 @@ class GPXToolbox
 
         $gpx = new GPX();
 
-        $gpx->metadata = isset($data->metadata) ? MetadataParser::parse($data->metadata) : null;
-        $gpx->wpt      = isset($data->wpt) ? WaypointParser::parse($data->wpt) : null;
-        $gpx->rte      = isset($data->rte) ? RouteParser::parse($data->rte) : null;
-        $gpx->trk      = isset($data->trk) ? TrackParser::parse($data->trk) : null;
-        $gpx->version  = isset($data['version']) ? (string) $data['version'] : null;
-        $gpx->creator  = isset($data['creator']) ? (string) $data['creator'] : null;
+        $gpx->version    = isset($data['version']) ? (string) $data['version'] : null;
+        $gpx->creator    = isset($data['creator']) ? (string) $data['creator'] : null;
+        $gpx->metadata   = isset($data->metadata) ? MetadataParser::parse($data->metadata) : null;
+        $gpx->wpt        = isset($data->wpt) ? WaypointParser::parse($data->wpt) : null;
+        $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : null;
+        $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : null;
+        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions->children()) : null;
 
         return $gpx;
+    }
+
+    /**
+     * Add extension to GPXToolbox.
+     * @param string $extension
+     * @return self
+     */
+    public function addExtension(string $extension): self
+    {
+        array_push(self::$EXTENSIONS, $extension);
+
+        return $this;
     }
 }

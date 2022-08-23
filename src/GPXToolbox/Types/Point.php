@@ -4,6 +4,7 @@ namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class Point
 {
@@ -141,6 +142,12 @@ class Point
     public $dgpsid = null;
 
     /**
+     * A list of extensions.
+     * @var ExtensionInterface[]
+     */
+    public $extensions = [];
+
+    /**
      * Array representation of point data.
      * @return array
      */
@@ -165,6 +172,7 @@ class Point
             'pdop'          => $this->pdop,
             'ageofdgpsdata' => $this->ageofdgpsdata,
             'dgpsid'        => $this->dgpsid,
+            'extensions'    => SerializationHelper::toArray($this->extensions),
         ];
     }
 }

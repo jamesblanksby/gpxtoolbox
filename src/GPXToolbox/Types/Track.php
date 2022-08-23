@@ -2,10 +2,11 @@
 
 namespace GPXToolbox\Types;
 
-use GPXToolbox\Models\Stats;
 use GPXToolbox\Helpers\GeoHelper;
-use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Models\Stats;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class Track
 {
@@ -51,6 +52,12 @@ class Track
      * @var string|null
      */
     public $type = null;
+
+    /**
+     * A list of extensions.
+     * @var ExtensionInterface[]
+     */
+    public $extensions = [];
 
     /**
      * A Track Segment holds a list of Track Points
@@ -109,14 +116,15 @@ class Track
     public function toArray(): array
     {
         return [
-            'name'   => $this->name,
-            'cmt'    => $this->cmt,
-            'desc'   => $this->desc,
-            'src'    => $this->src,
-            'links'  => SerializationHelper::toArray($this->links),
-            'number' => $this->number,
-            'type'   => $this->type,
-            'trkseg' => SerializationHelper::toArray($this->trkseg),
+            'name'       => $this->name,
+            'cmt'        => $this->cmt,
+            'desc'       => $this->desc,
+            'src'        => $this->src,
+            'links'      => SerializationHelper::toArray($this->links),
+            'number'     => $this->number,
+            'type'       => $this->type,
+            'extensions' => SerializationHelper::toArray($this->extensions),
+            'trkseg'     => SerializationHelper::toArray($this->trkseg),
         ];
     }
 

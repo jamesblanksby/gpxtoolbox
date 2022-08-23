@@ -16,14 +16,15 @@ class MetadataParser
     {
         $metadata = new Metadata();
 
-        $metadata->name      = isset($node->name) ? (string) $node->name : null;
-        $metadata->desc      = isset($node->desc) ? (string) $node->desc : null;
-        $metadata->author    = isset($node->author) ? PersonParser::parse($node->author) : null;
-        $metadata->copyright = isset($node->copyright) ? CopyrightParser::parse($node->copyright) : null;
-        $metadata->links     = isset($node->link) ? LinkParser::parse($node->link) : null;
-        $metadata->time      = isset($node->time) ? DateTimeParser::parse($node->time) : null;
-        $metadata->keywords  = isset($node->keywords) ? (string) $node->keywords : null;
-        $metadata->bounds    = isset($node->bounds) ? BoundsParser::parse($node->bounds) : null;
+        $metadata->name       = isset($node->name) ? (string) $node->name : null;
+        $metadata->desc       = isset($node->desc) ? (string) $node->desc : null;
+        $metadata->author     = isset($node->author) ? PersonParser::parse($node->author) : null;
+        $metadata->copyright  = isset($node->copyright) ? CopyrightParser::parse($node->copyright) : null;
+        $metadata->links      = isset($node->link) ? LinkParser::parse($node->link) : null;
+        $metadata->time       = isset($node->time) ? DateTimeParser::parse($node->time) : null;
+        $metadata->keywords   = isset($node->keywords) ? (string) $node->keywords : null;
+        $metadata->bounds     = isset($node->bounds) ? BoundsParser::parse($node->bounds) : null;
+        $metadata->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
 
         return $metadata;
     }

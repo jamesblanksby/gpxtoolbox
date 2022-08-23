@@ -2,11 +2,12 @@
 
 namespace GPXToolbox\Types;
 
-use GPXToolbox\Models\Stats;
 use GPXToolbox\Helpers\GeoHelper;
-use GPXToolbox\Helpers\StatsHelper;
-use GPXToolbox\Helpers\SimplifyHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Helpers\SimplifyHelper;
+use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Models\Stats;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 
 class Segment
 {
@@ -15,6 +16,12 @@ class Segment
      * @var Point[]
      */
     public $points = [];
+
+    /**
+     * A list of extensions.
+     * @var ExtensionInterface[]
+     */
+    public $extensions = [];
 
     /**
      * Calculate Segment bounds.
@@ -92,7 +99,8 @@ class Segment
     public function toArray(): array
     {
         return [
-            'points' => SerializationHelper::toArray($this->points),
+            'points'     => SerializationHelper::toArray($this->points),
+            'extensions' => SerializationHelper::toArray($this->extensions),
         ];
     }
 }

@@ -18,14 +18,15 @@ class TrackParser
         foreach ($nodes as $node) {
             $trk = new Track();
 
-            $trk->name   = isset($node->name) ? (string) $node->name : null;
-            $trk->cmt    = isset($node->cmt) ? (string) $node->cmt : null;
-            $trk->desc   = isset($node->desc) ? (string) $node->desc : null;
-            $trk->src    = isset($node->src) ? (string) $node->src : null;
-            $trk->links  = isset($node->link) ? LinkParser::parse($node->link) : null;
-            $trk->number = isset($node->number) ? (int) $node->number : null;
-            $trk->type   = isset($node->type) ? (string) $node->type : null;
-            $trk->trkseg = isset($node->trkseg) ? SegmentParser::parse($node->trkseg) : null;
+            $trk->name       = isset($node->name) ? (string) $node->name : null;
+            $trk->cmt        = isset($node->cmt) ? (string) $node->cmt : null;
+            $trk->desc       = isset($node->desc) ? (string) $node->desc : null;
+            $trk->src        = isset($node->src) ? (string) $node->src : null;
+            $trk->links      = isset($node->link) ? LinkParser::parse($node->link) : null;
+            $trk->number     = isset($node->number) ? (int) $node->number : null;
+            $trk->type       = isset($node->type) ? (string) $node->type : null;
+            $trk->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+            $trk->trkseg     = isset($node->trkseg) ? SegmentParser::parse($node->trkseg) : null;
 
             $tracks []= $trk;
         }

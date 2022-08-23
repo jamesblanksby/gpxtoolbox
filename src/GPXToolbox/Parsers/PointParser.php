@@ -36,6 +36,7 @@ class PointParser
         $point->pdop          = isset($node->pdop) ? (float) $node->pdop : null;
         $point->ageofdgpsdata = isset($node->ageofdgpsdata) ? (float) $node->ageofdgpsdata : null;
         $point->dgpsid        = isset($node->dgpsid) ? (int) $node->dgpsid : null;
+        $point->extensions    = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
 
         return $point;
     }
@@ -43,13 +44,13 @@ class PointParser
     /**
      * XML representation of point data.
      * @param Point $point
-     * @param string $key
+     * @param string $name
      * @param \DOMDocument $doc
      * @return \DOMNode
      */
-    public static function toXML(Point $point, string $key, \DOMDocument $doc): \DOMNode
+    public static function toXML(Point $point, string $name, \DOMDocument $doc): \DOMNode
     {
-        $node = $doc->createElement($key);
+        $node = $doc->createElement($name);
 
         if (!empty($point->lat)) {
             $node->setAttribute('lat', (string) $point->lat);
