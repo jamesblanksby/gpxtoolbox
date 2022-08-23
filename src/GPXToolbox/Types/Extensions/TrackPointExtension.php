@@ -82,13 +82,13 @@ class TrackPointExtension implements ExtensionInterface
     public function toArray(): array
     {
         return [
-            'atemp' => $this->atemp,
-            'wtemp' => $this->wtemp,
-            'depth' => $this->depth,
-            'hr' => $this->hr,
-            'cad' => $this->cad,
-            'speed' => $this->speed,
-            'course' => $this->course,
+            'atemp'   => $this->atemp,
+            'wtemp'   => $this->wtemp,
+            'depth'   => $this->depth,
+            'hr'      => $this->hr,
+            'cad'     => $this->cad,
+            'speed'   => $this->speed,
+            'course'  => $this->course,
             'bearing' => $this->bearing,
         ];
     }
