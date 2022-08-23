@@ -88,6 +88,6 @@ class TrackPointExtensionParser implements ExtensionParserInterface
      */
     private static function createElementName(string $name): string
     {
-        return sprintf('%s:%s', TrackPointExtension::EXTENSION_PREFIX, $name);
+        return sprintf('gpxtx:%s', $name);
     }
 }

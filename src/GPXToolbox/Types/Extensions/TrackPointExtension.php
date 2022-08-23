@@ -22,12 +22,6 @@ class TrackPointExtension implements ExtensionInterface
     ];
 
     /**
-     * XML namespace and element prefix of extension.
-     * @var string
-     */
-    public const EXTENSION_PREFIX = 'gpxtpx';
-
-    /**
      * Extension parser fully qualified class name.
      * @var string
      */

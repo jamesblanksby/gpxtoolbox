@@ -17,12 +17,6 @@ interface ExtensionInterface
     public const EXTENSION_NAMESPACE = '';
 
     /**
-     * XML namespace and element prefix of extension.
-     * @var string
-     */
-    public const EXTENSION_PREFIX = '';
-
-    /**
      * Extension parser fully qualified class name.
      * @var string
      */
