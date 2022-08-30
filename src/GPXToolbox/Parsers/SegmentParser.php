@@ -51,6 +51,14 @@ class SegmentParser
             }
         }
 
+        if (!empty($segment->extensions)) {
+            $child = $doc->createElement('extension');
+            $node->appendChild($child);
+            foreach ($segment->extensions as $extension) {
+                $child->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
         return $node;
     }
 

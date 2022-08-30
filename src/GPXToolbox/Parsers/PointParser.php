@@ -147,6 +147,14 @@ class PointParser
             $node->appendChild($child);
         }
 
+        if (!empty($point->extensions)) {
+            $child = $doc->createElement('extension');
+            $node->appendChild($child);
+            foreach ($point->extensions as $extension) {
+                $child->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
         return $node;
     }
 

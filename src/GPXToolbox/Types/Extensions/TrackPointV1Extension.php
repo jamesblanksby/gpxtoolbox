@@ -2,9 +2,9 @@
 
 namespace GPXToolbox\Types\Extensions;
 
-use GPXToolbox\Parsers\Extensions\TrackPointExtensionParser;
+use GPXToolbox\Parsers\Extensions\TrackPointV1ExtensionParser;
 
-class TrackPointExtension implements ExtensionInterface
+class TrackPointV1Extension implements ExtensionInterface
 {
     /**
      * Name of extension.
@@ -13,19 +13,28 @@ class TrackPointExtension implements ExtensionInterface
     public const EXTENSION_NAME = 'TrackPointExtension';
 
     /**
-     * XML namespace of extension.
-     * @var string|array
+     * Name of extension prefix
+     * @var string|null
      */
-    public const EXTENSION_NAMESPACE = [
-        'http://www.garmin.com/xmlschemas/TrackPointExtension/v1',
-        'http://www.garmin.com/xmlschemas/TrackPointExtension/v2',
-    ];
+    public const EXTENSION_PREFIX = 'gpxtx';
+
+    /**
+     * XML namespace of extension.
+     * @var string
+     */
+    public const EXTENSION_NAMESPACE = 'http://www.garmin.com/xmlschemas/TrackPointExtension/v1';
+
+    /**
+     * XML schema definition.
+     * @var string
+     */
+    public const EXTENSION_SCHEMA = 'http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd';
 
     /**
      * Extension parser fully qualified class name.
      * @var string
      */
-    public const EXTENSION_PARSER = TrackPointExtensionParser::class;
+    public const EXTENSION_PARSER = TrackPointV1ExtensionParser::class;
 
     /**
      * Air temperature in degrees Celsius.
@@ -58,24 +67,6 @@ class TrackPointExtension implements ExtensionInterface
     public $cad = null;
 
     /**
-     * Speed in meters per second.
-     * @var float|null
-     */
-    public $speed = null;
-
-    /**
-     * Course angle measured in degrees.
-     * @var float|null
-     */
-    public $course = null;
-
-    /**
-     * Bearing angle measured in degrees.
-     * @var float|null
-     */
-    public $bearing = null;
-
-    /**
      * Array representation of track point extension data.
      * @return array
      */
@@ -87,9 +78,6 @@ class TrackPointExtension implements ExtensionInterface
             'depth'   => $this->depth,
             'hr'      => $this->hr,
             'cad'     => $this->cad,
-            'speed'   => $this->speed,
-            'course'  => $this->course,
-            'bearing' => $this->bearing,
         ];
     }
 }

@@ -81,6 +81,14 @@ class TrackParser
             $node->appendChild($child);
         }
 
+        if (!empty($trk->extensions)) {
+            $child = $doc->createElement('extension');
+            $node->appendChild($child);
+            foreach ($trk->extensions as $extension) {
+                $child->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
         if (!empty($trk->trkseg)) {
             $children = SegmentParser::toXMLArray($trk->trkseg, $doc);
             foreach ($children as $child) {

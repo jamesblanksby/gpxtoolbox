@@ -81,6 +81,14 @@ class MetadataParser
             $node->appendChild($child);
         }
 
+        if (!empty($metadata->extensions)) {
+            $child = $doc->createElement('extension');
+            $node->appendChild($child);
+            foreach ($metadata->extensions as $extension) {
+                $child->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
         return $node;
     }
 }

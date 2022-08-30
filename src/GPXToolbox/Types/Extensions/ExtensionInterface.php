@@ -11,10 +11,22 @@ interface ExtensionInterface
     public const EXTENSION_NAME = '';
 
     /**
+     * Name of extension prefix
+     * @var string|null
+     */
+    public const EXTENSION_PREFIX = null;
+
+    /**
      * XML namespace of extension.
-     * @var string|array
+     * @var string
      */
     public const EXTENSION_NAMESPACE = '';
+
+    /**
+     * XML schema definition.
+     * @var string
+     */
+    public const EXTENSION_SCHEMA = '';
 
     /**
      * Extension parser fully qualified class name.

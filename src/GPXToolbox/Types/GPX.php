@@ -8,6 +8,7 @@ use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Models\Stats;
+use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
@@ -180,10 +181,36 @@ class GPX
             }
         }
 
+        if (!empty($this->extensions)) {
+            foreach ($this->extensions as $extension) {
+                $gpx->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
+        $schemaLocationArray = [
+            'http://www.topografix.com/GPX/1/1',
+            'http://www.topografix.com/GPX/1/1/gpx.xsd',
+        ];
+
+        foreach (ExtensionParser::$PARSED_EXTENSIONS as $extension) {
+            if (empty($extension::EXTENSION_PREFIX)) {
+                continue;
+            }
+
+            $gpx->setAttributeNS(
+                'http://www.w3.org/2000/xmlns/',
+                sprintf('xmlns:%s', $extension::EXTENSION_PREFIX),
+                $extension::EXTENSION_NAMESPACE
+            );
+
+            $schemaLocationArray[] = $extension::EXTENSION_NAMESPACE;
+            $schemaLocationArray[] = $extension::EXTENSION_SCHEMA;
+        }
+
         $gpx->setAttributeNS(
             'http://www.w3.org/2001/XMLSchema-instance',
             'xsi:schemaLocation',
-            'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
+            implode(' ', $schemaLocationArray)
         );
 
         $doc->appendChild($gpx);
