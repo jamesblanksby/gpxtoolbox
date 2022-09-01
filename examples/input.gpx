@@ -11,7 +11,7 @@
     <time>2012-10-24T23:22:51.000Z</time>
   </metadata>
   <trk>
-    <name>Untitled</name>
+    <name>Input</name>
     <trkseg>
       <trkpt lon="-77.02016168273985" lat="38.92747367732227">
         <ele>25.600000381469727</ele>
@@ -40,7 +40,7 @@
           </gpxtpx:TrackPointExtension>
         </extensions>
       </trkpt>
-      <trkpt lon="-77.0200021751225" lat="38.927735360339284">
+      <trkpt lon="-77.0200121751225" lat="38.927735360339284">
         <ele>40.0</ele>
         <time>2012-10-24T23:30:03.000Z</time>
         <extensions>
