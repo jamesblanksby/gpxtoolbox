@@ -27,6 +27,7 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 
 * Garmin TrackPointExtension ([v1](https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd) and [v2](https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd))
 
+
 ## 🤖 API
 
 ### `GPXToolbox::load(string $filename)`
