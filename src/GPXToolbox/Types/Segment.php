@@ -7,7 +7,7 @@ use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\SimplifyHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Models\Stats;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class Segment
 {
@@ -19,7 +19,7 @@ class Segment
 
     /**
      * A list of extensions.
-     * @var ExtensionInterface[]
+     * @var ExtensionAbstract[]
      */
     public $extensions = [];
 

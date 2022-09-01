@@ -3,16 +3,14 @@
 namespace GPXToolbox\Parsers\Extensions;
 
 use GPXToolbox\Types\Extensions\StyleLineExtension;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class StyleLineExtensionParser implements ExtensionParserInterface
 {
     /**
-     * Parses style line extension data.
-     * @param \SimpleXMLElement $node
-     * @return ExtensionInterface
+     * @inheritDoc
      */
-    public static function parse(\SimpleXMLElement $node): ExtensionInterface
+    public static function parse(\SimpleXMLElement $node): ExtensionAbstract
     {
         $extension = new StyleLineExtension();
 
@@ -27,14 +25,11 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     }
 
     /**
-     * XML representation of track point extension data.
-     * @param ExtensionInterface $extension
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @inheritDoc
      */
-    public static function toXML(ExtensionInterface $extension, \DOMDocument $doc): \DOMNode
+    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
     {
-        $node = $doc->createElement(StyleLineExtension::EXTENSION_NAME);
+        $node = $doc->createElement(StyleLineExtension::$EXTENSION_NAME);
 
         $node->setAttribute('xmlns', 'http://www.topografix.com/GPX/gpx_style/0/2');
 

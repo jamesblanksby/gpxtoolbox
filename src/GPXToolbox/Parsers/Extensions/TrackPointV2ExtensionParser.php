@@ -3,16 +3,14 @@
 namespace GPXToolbox\Parsers\Extensions;
 
 use GPXToolbox\Types\Extensions\TrackPointV2Extension;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class TrackPointV2ExtensionParser implements ExtensionParserInterface
 {
     /**
-     * Parses track point extension data.
-     * @param \SimpleXMLElement $node
-     * @return ExtensionInterface
+     * @inheritDoc
      */
-    public static function parse(\SimpleXMLElement $node): ExtensionInterface
+    public static function parse(\SimpleXMLElement $node): ExtensionAbstract
     {
         $extension = new TrackPointV2Extension();
 
@@ -29,14 +27,11 @@ class TrackPointV2ExtensionParser implements ExtensionParserInterface
     }
 
     /**
-     * XML representation of track point extension data.
-     * @param ExtensionInterface $extension
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @inheritDoc
      */
-    public static function toXML(ExtensionInterface $extension, \DOMDocument $doc): \DOMNode
+    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
     {
-        $node = $doc->createElement(self::createElementName(TrackPointV2Extension::EXTENSION_NAME));
+        $node = $doc->createElement(self::createElementName(TrackPointV2Extension::$EXTENSION_NAME));
 
         if (!empty($extension->atemp)) {
             $child = $doc->createElement(self::createElementName('atemp'), $extension->atemp);
@@ -88,6 +83,6 @@ class TrackPointV2ExtensionParser implements ExtensionParserInterface
      */
     private static function createElementName(string $name): string
     {
-        return sprintf('%s:%s', TrackPointV2Extension::EXTENSION_PREFIX, $name);
+        return sprintf('%s:%s', TrackPointV2Extension::$EXTENSION_PREFIX, $name);
     }
 }

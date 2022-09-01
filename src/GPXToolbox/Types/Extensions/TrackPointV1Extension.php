@@ -4,37 +4,37 @@ namespace GPXToolbox\Types\Extensions;
 
 use GPXToolbox\Parsers\Extensions\TrackPointV1ExtensionParser;
 
-class TrackPointV1Extension implements ExtensionInterface
+class TrackPointV1Extension extends ExtensionAbstract
 {
     /**
-     * Name of extension.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_NAME = 'TrackPointExtension';
+    public static $EXTENSION_NAME = 'TrackPointExtension';
 
     /**
-     * Name of extension prefix
-     * @var string|null
-     */
-    public const EXTENSION_PREFIX = 'gpxtx';
-
-    /**
-     * XML namespace of extension.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_NAMESPACE = 'http://www.garmin.com/xmlschemas/TrackPointExtension/v1';
+    public static $EXTENSION_PREFIX = 'gpxtx';
 
     /**
-     * XML schema definition.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_SCHEMA = 'http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd';
+    public static $EXTENSION_NAMESPACE = 'http://www.garmin.com/xmlschemas/TrackPointExtension/v1';
 
     /**
-     * Extension parser fully qualified class name.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_PARSER = TrackPointV1ExtensionParser::class;
+    public static $EXTENSION_SCHEMA = 'http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd';
+
+    /**
+     * @inheritDoc
+     * @var string
+     */
+    public static $EXTENSION_PARSER = TrackPointV1ExtensionParser::class;
 
     /**
      * Air temperature in degrees Celsius.
@@ -67,7 +67,7 @@ class TrackPointV1Extension implements ExtensionInterface
     public $cad = null;
 
     /**
-     * Array representation of track point extension data.
+     * @inheritDoc
      * @return array
      */
     public function toArray(): array

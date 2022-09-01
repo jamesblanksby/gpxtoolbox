@@ -4,37 +4,37 @@ namespace GPXToolbox\Types\Extensions;
 
 use GPXToolbox\Parsers\Extensions\StyleLineExtensionParser;
 
-class StyleLineExtension implements ExtensionInterface
+class StyleLineExtension extends ExtensionAbstract
 {
     /**
-     * Name of extension.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_NAME = 'line';
+    public static $EXTENSION_NAME = 'line';
 
     /**
-     * Name of extension prefix
-     * @var string|null
-     */
-    public const EXTENSION_PREFIX = null;
-
-    /**
-     * XML namespace of extension.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_NAMESPACE = 'http://www.topografix.com/GPX/gpx_style/0/2';
+    public static $EXTENSION_PREFIX = null;
 
     /**
-     * XML schema definition.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_SCHEMA = 'http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd';
+    public static $EXTENSION_NAMESPACE = 'http://www.topografix.com/GPX/gpx_style/0/2';
 
     /**
-     * Extension parser fully qualified class name.
+     * @inheritDoc
      * @var string
      */
-    public const EXTENSION_PARSER = StyleLineExtensionParser::class;
+    public static $EXTENSION_SCHEMA = 'http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd';
+
+    /**
+     * @inheritDoc
+     * @var string
+     */
+    public static $EXTENSION_PARSER = StyleLineExtensionParser::class;
 
     /**
      * Hexadecimal RGB color.
@@ -73,7 +73,7 @@ class StyleLineExtension implements ExtensionInterface
     public $dasharray = null;
 
     /**
-     * Array representation of line style extension data.
+     * @inheritDoc
      * @return array
      */
     public function toArray(): array
