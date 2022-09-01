@@ -28,6 +28,40 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 * Garmin TrackPointExtension ([v1](https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd) and [v2](https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd))
 
 
+## 📖 Simple Example
+
+Load a GPX file and retrieve statistical data.
+
+```php
+<?php
+
+include 'vendor/autoload.php';
+
+$toolbox = new GPXToolbox\GPXToolbox();
+$gpx = $toolbox::load('examples/input.gpx');
+
+$stats = $gpx->stats();
+
+echo sprintf('<pre>%s</pre>', print_r($stats, true));
+```
+
+The above example will output:
+
+```
+GPXToolbox\Models\Stats Object
+(
+    [distance] => 3127.2724819324
+    [movingDuration] => 364
+    [totalDuration] => 948
+    [minElevation] => 25.6
+    [maxElevation] => 82.8
+    [elevationGain] => 115.2
+    [elevationLoss] => 92.2
+    [averagePace] => 116.39535796864
+    [averageSpeed] => 30.929068502628
+)
+```
+
 ## 🤖 API
 
 ### `GPXToolbox::load(string $filename)`
