@@ -3,9 +3,16 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class ExtensionParser
 {
+    /**
+     * Extensions which have beed parsed.
+     * @var ExtensionAbstract[]
+     */
+    public static $PARSED_EXTENSIONS = [];
+
     /**
      * Parses extension data.
      * @param \SimpleXMLElement $nodes
@@ -15,23 +22,52 @@ class ExtensionParser
     {
         $extensions = [];
 
-        $namespaces = $nodes->getNamespaces(true);
-
-        foreach ($namespaces as $nodeNamespace) {
-            foreach (GPXToolbox::$EXTENSIONS as $extension) {
-                $extensionNamespace = $extension::EXTENSION_NAMESPACE;
-                $extensionNamespace = is_array($extensionNamespace) ? $extensionNamespace : [$extensionNamespace,];
-
-                if (!in_array($nodeNamespace, $extensionNamespace)) {
-                    continue;
-                }
-
-                $node = $nodes->children($nodeNamespace)->{$extension::EXTENSION_NAME};
-
-                $extensions []= $extension::EXTENSION_PARSER::parse($node);
+        foreach (GPXToolbox::$EXTENSIONS as $extension) {
+            $children = $nodes->children($extension::$EXTENSION_NAMESPACE);
+            if (empty($children)) {
+                continue;
             }
+
+            $node = $children->{$extension::$EXTENSION_NAME};
+            if (empty($node)) {
+                continue;
+            }
+
+            $parser = $extension::$EXTENSION_PARSER;
+
+            $extensions []= $parser::parse($node);
         }
 
         return $extensions;
+    }
+
+    /**
+     * XML representation of extension data.
+     * @param ExtensionAbstract $extension
+     * @param \DOMDocument $doc
+     * @return \DOMNode
+     */
+    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
+    {
+        $parser = $extension::$EXTENSION_PARSER;
+
+        return $parser::toXML($extension, $doc);
+    }
+
+    /**
+     * XML representation of array extension data.
+     * @param ExtensionAbstract[] $extensions
+     * @param \DOMDocument $doc
+     * @return \DOMNode[]
+     */
+    public static function toXMLArray(array $extensions, \DOMDocument $doc): array
+    {
+        $result = [];
+
+        foreach ($extensions as $extension) {
+            $result []= self::toXML($extension, $doc);
+        }
+
+        return $result;
     }
 }

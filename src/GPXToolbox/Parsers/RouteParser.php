@@ -98,6 +98,14 @@ class RouteParser
             }
         }
 
+        if (!empty($rte->extensions)) {
+            $child = $doc->createElement('extension');
+            $node->appendChild($child);
+            foreach ($rte->extensions as $extension) {
+                $child->appendChild(ExtensionParser::toXML($extension, $doc));
+            }
+        }
+
         return $node;
     }
 }

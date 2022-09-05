@@ -6,7 +6,7 @@ use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Models\Stats;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class Track
 {
@@ -55,7 +55,7 @@ class Track
 
     /**
      * A list of extensions.
-     * @var ExtensionInterface[]
+     * @var ExtensionAbstract[]
      */
     public $extensions = [];
 

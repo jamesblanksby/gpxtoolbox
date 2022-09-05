@@ -3,7 +3,7 @@
 namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\SerializationHelper;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class Route
 {
@@ -52,7 +52,7 @@ class Route
 
     /**
      * A list of extensions.
-     * @var ExtensionInterface[]
+     * @var ExtensionAbstract[]
      */
     public $extensions = [];
 

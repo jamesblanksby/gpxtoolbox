@@ -4,7 +4,7 @@ namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class Point
 {
@@ -143,7 +143,7 @@ class Point
 
     /**
      * A list of extensions.
-     * @var ExtensionInterface[]
+     * @var ExtensionAbstract[]
      */
     public $extensions = [];
 

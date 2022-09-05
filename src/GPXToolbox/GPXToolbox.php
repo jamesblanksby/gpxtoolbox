@@ -7,7 +7,9 @@ use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
 use GPXToolbox\Parsers\WaypointParser;
-use GPXToolbox\Types\Extensions\TrackPointExtension;
+use GPXToolbox\Types\Extensions\StyleLineExtension;
+use GPXToolbox\Types\Extensions\TrackPointV1Extension;
+use GPXToolbox\Types\Extensions\TrackPointV2Extension;
 use GPXToolbox\Types\GPX;
 
 class GPXToolbox
@@ -94,7 +96,9 @@ class GPXToolbox
      */
     public function __construct()
     {
-        $this->addExtension(TrackPointExtension::class);
+        $this->addExtension(StyleLineExtension::class);
+        $this->addExtension(TrackPointV1Extension::class);
+        $this->addExtension(TrackPointV2Extension::class);
     }
 
     /**
@@ -130,7 +134,7 @@ class GPXToolbox
         $gpx->wpt        = isset($data->wpt) ? WaypointParser::parse($data->wpt) : null;
         $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : null;
         $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : null;
-        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions->children()) : null;
+        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions) : null;
 
         return $gpx;
     }

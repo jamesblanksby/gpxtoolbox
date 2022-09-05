@@ -8,11 +8,12 @@ use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Models\Stats;
+use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
 use GPXToolbox\Parsers\WaypointParser;
-use GPXToolbox\Types\Extensions\ExtensionInterface;
+use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
 class GPX
 {
@@ -54,7 +55,7 @@ class GPX
 
     /**
      * A list of extensions.
-     * @var ExtensionInterface[]
+     * @var ExtensionAbstract[]
      */
     public $extensions = [];
 
@@ -152,7 +153,7 @@ class GPX
      */
     public function toXML(): \DOMDocument
     {
-        $doc = new \DOMDocument('1.0', 'UTF-8');
+        $doc = new \DOMDocument('1.0', 'utf-8');
         $gpx = $doc->createElementNS('http://www.topografix.com/GPX/1/1', 'gpx');
 
         $gpx->setAttribute('version', $this->version);
@@ -180,10 +181,37 @@ class GPX
             }
         }
 
+        if (!empty($this->extensions)) {
+            $children = ExtensionParser::toXMLArray($this->extensions, $doc);
+            foreach ($children as $child) {
+                $gpx->appendChild($child);
+            }
+        }
+
+        $schemaLocationArray = [
+            'http://www.topografix.com/GPX/1/1',
+            'http://www.topografix.com/GPX/1/1/gpx.xsd',
+        ];
+
+        foreach (ExtensionParser::$PARSED_EXTENSIONS as $extension) {
+            if (empty($extension::$EXTENSION_PREFIX)) {
+                continue;
+            }
+
+            $gpx->setAttributeNS(
+                'http://www.w3.org/2000/xmlns/',
+                sprintf('xmlns:%s', $extension::$EXTENSION_PREFIX),
+                $extension::$EXTENSION_NAMESPACE
+            );
+
+            $schemaLocationArray[] = $extension::$EXTENSION_NAMESPACE;
+            $schemaLocationArray[] = $extension::$EXTENSION_SCHEMA;
+        }
+
         $gpx->setAttributeNS(
             'http://www.w3.org/2001/XMLSchema-instance',
             'xsi:schemaLocation',
-            'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd'
+            implode(' ', $schemaLocationArray)
         );
 
         $doc->appendChild($gpx);
