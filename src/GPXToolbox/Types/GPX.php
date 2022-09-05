@@ -204,8 +204,8 @@ class GPX
                 $extension::$EXTENSION_NAMESPACE
             );
 
-            $schemaLocationArray[] = $extension::$EXTENSION_NAMESPACE;
-            $schemaLocationArray[] = $extension::$EXTENSION_SCHEMA;
+            $schemaLocationArray []= $extension::$EXTENSION_NAMESPACE;
+            $schemaLocationArray []= $extension::$EXTENSION_SCHEMA;
         }
 
         $gpx->setAttributeNS(
