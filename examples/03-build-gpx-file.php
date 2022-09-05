@@ -79,10 +79,6 @@ foreach ($data_array as $data) {
     $extension = new TrackPointV1Extension();
     $extension->hr = $data['hr'];
 
-    if (!in_array($extension::class, ExtensionParser::$PARSED_EXTENSIONS)) {
-        ExtensionParser::$PARSED_EXTENSIONS []= $extension::class;
-    }
-
     $point->extensions []= $extension;
 
     $trkseg->points []= $point;

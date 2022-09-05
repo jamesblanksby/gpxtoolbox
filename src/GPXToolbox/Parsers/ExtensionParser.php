@@ -36,10 +36,6 @@ class ExtensionParser
             $parser = $extension::$EXTENSION_PARSER;
 
             $extensions []= $parser::parse($node);
-
-            if (!in_array($extension, self::$PARSED_EXTENSIONS)) {
-                self::$PARSED_EXTENSIONS []= $extension;
-            }
         }
 
         return $extensions;
