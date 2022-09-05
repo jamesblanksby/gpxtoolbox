@@ -14,11 +14,11 @@ class TrackPointV1ExtensionParser implements ExtensionParserInterface
     {
         $extension = new TrackPointV1Extension();
 
-        $extension->atemp   = isset($node->atemp) ? (float) $node->atemp : null;
-        $extension->wtemp   = isset($node->wtemp) ? (float) $node->wtemp : null;
-        $extension->depth   = isset($node->depth) ? (float) $node->depth : null;
-        $extension->hr      = isset($node->hr) ? (int) $node->hr : null;
-        $extension->cad     = isset($node->cad) ? (int) $node->cad : null;
+        $extension->atemp = isset($node->atemp) ? (float) $node->atemp : null;
+        $extension->wtemp = isset($node->wtemp) ? (float) $node->wtemp : null;
+        $extension->depth = isset($node->depth) ? (float) $node->depth : null;
+        $extension->hr    = isset($node->hr) ? (int) $node->hr : null;
+        $extension->cad   = isset($node->cad) ? (int) $node->cad : null;
 
         return $extension;
     }
