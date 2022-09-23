@@ -21,7 +21,7 @@ class StatsHelper
         $firstPoint = $points[0];
         $lastPoint = $points[($length - 1)];
 
-        $stats->distance = self::calculateDistance($points);
+        $stats->distance = round(self::calculateDistance($points), GPXToolbox::$DISTANCE_PRECISION);
         if (($firstPoint->time instanceof \DateTime) && ($lastPoint->time instanceof \DateTime)) {
             $stats->totalDuration = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
         }
@@ -35,7 +35,6 @@ class StatsHelper
         if ($stats->movingDuration !== 0) {
             $stats->averageSpeed = round((($stats->distance / 1000) / ($stats->movingDuration / 3600)), GPXToolbox::$SPEED_PRECISION);
         }
-        $stats->distance = round($stats->distance, GPXToolbox::$DISTANCE_PRECISION);
 
         return $stats;
     }
