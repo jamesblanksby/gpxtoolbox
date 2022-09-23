@@ -80,7 +80,7 @@ foreach ($data_array as $data) {
 
     $point->extensions []= $extension;
 
-    $trkseg->points []= $point;
+    $trkseg->addPoint($point);
 }
 
 $trk->trkseg []= $trkseg;
