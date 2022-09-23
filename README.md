@@ -51,15 +51,15 @@ The above example will output:
 ```
 GPXToolbox\Models\Stats Object
 (
-    [distance] => 3127.2724819324
+    [distance] => 3127.27
     [movingDuration] => 364
     [totalDuration] => 948
     [minElevation] => 25.6
     [maxElevation] => 82.8
     [elevationGain] => 115.2
     [elevationLoss] => 92.2
-    [averagePace] => 116.39535796864
-    [averageSpeed] => 30.929068502628
+    [averagePace] => 116.4
+    [averageSpeed] => 30.93
 )
 ```
 
@@ -146,9 +146,12 @@ Use `GPXToolbox`'s static variables to modify behaviour.
 | Name                         | Type               | Default |
 |------------------------------|--------------------|---------|
 | `$COORDINATE_PRECISION`      | `integer`          | `6`     |
+| `$DISTANCE_PRECISION`        | `integer`          | `2`     |
 | `$DISTANCE_THRESHOLD`        | `float`\|`boolean` | `2`     |
 | `$ELEVATION_PRECISION`       | `integer`          | `2`     |
 | `$ELEVATION_THRESHOLD`       | `float`\|`boolean` | `5`     |
+| `$PACE_PRECISION`            | `integer`          | `2`     |
+| `$SPEED_PRECISION`           | `integer`          | `2`     |
 | `$MOVING_DISTANCE_THRESHOLD` | `float`            | `0.25`  |
 | `$MOVING_DURATION_THRESHOLD` | `float`            | `5`     |
 | `$PRETTY_PRINT`              | `boolean`          | `true`  |

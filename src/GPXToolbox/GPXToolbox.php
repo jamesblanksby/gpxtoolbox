@@ -45,6 +45,12 @@ class GPXToolbox
     public static $COORDINATE_PRECISION = 6;
 
     /**
+     * Number of decimal place precision for distance values.
+     * @var integer
+     */
+    public static $DISTANCE_PRECISION = 2;
+
+    /**
      * Minimum distance in meters difference between points threshold.
      * Disabled when false.
      * @var float|boolean
@@ -63,6 +69,18 @@ class GPXToolbox
      * @var float|boolean
      */
     public static $ELEVATION_THRESHOLD = 5;
+
+    /**
+     * Number of decimal place precision for pace values.
+     * @var integer
+     */
+    public static $PACE_PRECISION = 2;
+
+    /**
+     * Number of decimal place precision for speed values.
+     * @var integer
+     */
+    public static $SPEED_PRECISION = 2;
 
     /**
      * Minimum distance in meters to be covered

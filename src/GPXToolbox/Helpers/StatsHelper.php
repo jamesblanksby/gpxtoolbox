@@ -30,11 +30,12 @@ class StatsHelper
         $stats->maxElevation = max(array_column($points, 'ele'));
         list($stats->elevationGain, $stats->elevationLoss) = self::calculateElevationGainLoss($points);
         if ($stats->distance !== 0) {
-            $stats->averagePace = ($stats->movingDuration / ($stats->distance / 1000));
+            $stats->averagePace = round(($stats->movingDuration / ($stats->distance / 1000)), GPXToolbox::$PACE_PRECISION);
         }
         if ($stats->movingDuration !== 0) {
-            $stats->averageSpeed = (($stats->distance / 1000) / ($stats->movingDuration / 3600));
+            $stats->averageSpeed = round((($stats->distance / 1000) / ($stats->movingDuration / 3600)), GPXToolbox::$SPEED_PRECISION);
         }
+        $stats->distance = round($stats->distance, GPXToolbox::$DISTANCE_PRECISION);
 
         return $stats;
     }
