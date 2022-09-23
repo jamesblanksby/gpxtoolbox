@@ -50,13 +50,12 @@ class StatsHelper
         $distance = 0.0;
 
         $length = count($points);
-        $lastPoint = null;
+        $lastPoint = $points[0];
 
         for ($i = 0; $i < $length; $i++) {
             $point = $points[$i];
 
             if ($i === 0) {
-                $lastPoint = $point;
                 continue;
             }
 
@@ -86,13 +85,12 @@ class StatsHelper
         $duration = 0;
 
         $length = count($points);
-        $lastPoint = null;
+        $lastPoint = $points[0];
 
         for ($i = 0; $i < $length; $i++) {
             $point = $points[$i];
 
             if ($i === 0) {
-                $lastPoint = $point;
                 continue;
             }
 
@@ -124,13 +122,12 @@ class StatsHelper
         $elevationLoss = 0.0;
 
         $length = count($points);
-        $lastPoint = null;
+        $lastPoint = $points[0];
 
         for ($i = 0; $i < $length; $i++) {
             $point = $points[$i];
 
             if ($i === 0) {
-                $lastPoint = $point;
                 continue;
             }
 
