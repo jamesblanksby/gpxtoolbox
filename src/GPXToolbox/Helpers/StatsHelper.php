@@ -111,7 +111,7 @@ class StatsHelper
     }
 
     /**
-     * Calculate cumulative elevation gain/loss
+     * Calculate cumulative elevation gain/loss.
      * @param Point[] $points
      * @return array
      */
