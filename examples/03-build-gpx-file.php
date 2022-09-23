@@ -1,6 +1,5 @@
 <?php
 
-use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\GPX;
 use GPXToolbox\Types\Link;
