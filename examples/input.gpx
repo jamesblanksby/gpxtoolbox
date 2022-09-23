@@ -616,6 +616,8 @@
           </gpxtpx:TrackPointExtension>
         </extensions>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lon="-77.01230415143073" lat="38.924231892451644">
         <ele>72.19999694824219</ele>
         <time>2012-10-24T23:33:42.000Z</time>
@@ -859,6 +861,10 @@
           </gpxtpx:TrackPointExtension>
         </extensions>
       </trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <trkseg>
       <trkpt lon="-77.01288635842502" lat="38.92032223753631">
         <ele>53.79999923706055</ele>
         <time>2012-10-24T23:35:45.000Z</time>
@@ -1174,6 +1180,8 @@
           </gpxtpx:TrackPointExtension>
         </extensions>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lon="-77.01977494172752" lat="38.92019617371261">
         <ele>36.0</ele>
         <time>2012-10-24T23:39:46.000Z</time>
@@ -1588,6 +1596,8 @@
           </gpxtpx:TrackPointExtension>
         </extensions>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lon="-77.02258019708097" lat="38.923895275220275">
         <ele>60.20000076293945</ele>
         <time>2012-10-24T23:42:55.000Z</time>
