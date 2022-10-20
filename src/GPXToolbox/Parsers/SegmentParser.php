@@ -4,12 +4,15 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Segment;
 use GPXToolbox\Types\Point;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class SegmentParser
 {
     /**
      * Parses segment data.
-     * @param \SimpleXMLElement $nodes
+     * @param SimpleXMLElement $nodes
      * @return Segment[]
      */
     public static function parse($nodes): array
@@ -38,10 +41,10 @@ class SegmentParser
     /**
      * XML representation of segment data.
      * @param Segment $segment
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Segment $segment, \DOMDocument $doc): \DOMNode
+    public static function toXML(Segment $segment, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('trkseg');
 
@@ -65,10 +68,10 @@ class SegmentParser
     /**
      * XML representation of array segment data.
      * @param Segment[] $segments
-     * @param \DOMDocument $doc
-     * @return \DOMNode[]
+     * @param DOMDocument $doc
+     * @return DOMNode[]
      */
-    public static function toXMLArray(array $segments, \DOMDocument $doc): array
+    public static function toXMLArray(array $segments, DOMDocument $doc): array
     {
         $result = [];
 

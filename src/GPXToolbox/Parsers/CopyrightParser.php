@@ -3,15 +3,18 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Copyright;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class CopyrightParser
 {
     /**
      * Parses copyright data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Copyright
      */
-    public static function parse(\SimpleXMLElement $node): Copyright
+    public static function parse(SimpleXMLElement $node): Copyright
     {
         $copyright = new Copyright();
 
@@ -25,10 +28,10 @@ class CopyrightParser
     /**
      * XML representation of copyright data.
      * @param Copyright $copyright
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Copyright $copyright, \DOMDocument $doc): \DOMNode
+    public static function toXML(Copyright $copyright, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('copyright');
 

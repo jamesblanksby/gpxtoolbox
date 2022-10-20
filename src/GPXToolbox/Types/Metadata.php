@@ -5,6 +5,7 @@ namespace GPXToolbox\Types;
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use DateTime;
 
 class Metadata
 {
@@ -40,7 +41,7 @@ class Metadata
 
     /**
      * The creation date of the file.
-     * @var \DateTime|null
+     * @var DateTime|null
      */
     public $time = null;
 

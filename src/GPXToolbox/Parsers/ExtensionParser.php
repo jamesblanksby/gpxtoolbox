@@ -4,6 +4,9 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\GPXToolbox;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class ExtensionParser
 {
@@ -15,7 +18,7 @@ class ExtensionParser
 
     /**
      * Parses extension data.
-     * @param \SimpleXMLElement $nodes
+     * @param SimpleXMLElement $nodes
      * @return array
      */
     public static function parse($nodes): array
@@ -44,10 +47,10 @@ class ExtensionParser
     /**
      * XML representation of extension data.
      * @param ExtensionAbstract $extension
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
+    public static function toXML(ExtensionAbstract $extension, DOMDocument $doc): DOMNode
     {
         $parser = $extension::$EXTENSION_PARSER;
 
@@ -57,10 +60,10 @@ class ExtensionParser
     /**
      * XML representation of array extension data.
      * @param ExtensionAbstract[] $extensions
-     * @param \DOMDocument $doc
-     * @return \DOMNode[]
+     * @param DOMDocument $doc
+     * @return DOMNode[]
      */
-    public static function toXMLArray(array $extensions, \DOMDocument $doc): array
+    public static function toXMLArray(array $extensions, DOMDocument $doc): array
     {
         $result = [];
 

@@ -4,15 +4,18 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Metadata;
 use GPXToolbox\Helpers\DateTimeHelper;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class MetadataParser
 {
     /**
      * Parses file metadata.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Metadata
      */
-    public static function parse(\SimpleXMLElement $node): Metadata
+    public static function parse(SimpleXMLElement $node): Metadata
     {
         $metadata = new Metadata();
 
@@ -32,10 +35,10 @@ class MetadataParser
     /**
      * XML representation of metadata.
      * @param Metadata $metadata
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Metadata $metadata, \DOMDocument $doc): \DOMNode
+    public static function toXML(Metadata $metadata, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('metadata');
 

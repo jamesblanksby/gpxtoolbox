@@ -5,6 +5,7 @@ namespace GPXToolbox\Types;
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use Datetime;
 
 class Point
 {
@@ -46,7 +47,7 @@ class Point
 
     /**
      * Creation/modification timestamp for element.
-     * @var \Datetime|null
+     * @var Datetime|null
      */
     public $time = null;
 

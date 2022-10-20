@@ -5,15 +5,18 @@ namespace GPXToolbox\Parsers;
 use GPXToolbox\Types\Point;
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\GPXToolbox;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class PointParser
 {
     /**
      * Parses point data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Point
      */
-    public static function parse(\SimpleXMLElement $node): Point
+    public static function parse(SimpleXMLElement $node): Point
     {
         $point = new Point();
 
@@ -45,10 +48,10 @@ class PointParser
      * XML representation of point data.
      * @param Point $point
      * @param string $name
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Point $point, string $name, \DOMDocument $doc): \DOMNode
+    public static function toXML(Point $point, string $name, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement($name);
 
@@ -162,10 +165,10 @@ class PointParser
      * XML representation of array point data.
      * @param Point[] $points
      * @param string $key
-     * @param \DOMDocument $doc
-     * @return \DOMNode[]
+     * @param DOMDocument $doc
+     * @return DOMNode[]
      */
-    public static function toXMLArray(array $points, string $key, \DOMDocument $doc): array
+    public static function toXMLArray(array $points, string $key, DOMDocument $doc): array
     {
         $result = [];
 

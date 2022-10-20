@@ -3,15 +3,18 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Person;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class PersonParser
 {
     /**
      * Parses person data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Person
      */
-    public static function parse(\SimpleXMLElement $node): Person
+    public static function parse(SimpleXMLElement $node): Person
     {
         $person = new Person();
 
@@ -25,10 +28,10 @@ class PersonParser
     /**
      * XML representation of person data.
      * @param Person $person
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Person $person, \DOMDocument $doc): \DOMNode
+    public static function toXML(Person $person, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('author');
 

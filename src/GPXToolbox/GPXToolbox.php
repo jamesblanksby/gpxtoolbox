@@ -11,6 +11,7 @@ use GPXToolbox\Types\Extensions\StyleLineExtension;
 use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\Extensions\TrackPointV2Extension;
 use GPXToolbox\Types\GPX;
+use RuntimeException;
 
 class GPXToolbox
 {
@@ -127,7 +128,7 @@ class GPXToolbox
     public static function load(string $filename): GPX
     {
         if (!file_exists($filename)) {
-            throw new \RuntimeException('No such file');
+            throw new RuntimeException('No such file');
         }
 
         $xml = file_get_contents($filename);

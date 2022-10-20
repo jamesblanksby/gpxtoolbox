@@ -5,6 +5,7 @@ namespace GPXToolbox\Helpers;
 use GPXToolbox\Types\Point;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\GPXToolbox;
+use DateTime;
 
 class StatsHelper
 {
@@ -22,7 +23,7 @@ class StatsHelper
         $lastPoint = $points[($length - 1)];
 
         $stats->distance = round(self::calculateDistance($points), GPXToolbox::$DISTANCE_PRECISION);
-        if (($firstPoint->time instanceof \DateTime) && ($lastPoint->time instanceof \DateTime)) {
+        if (($firstPoint->time instanceof DateTime) && ($lastPoint->time instanceof DateTime)) {
             $stats->totalDuration = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
         }
         $stats->movingDuration = self::calculateMovingDuration($points);
@@ -93,7 +94,7 @@ class StatsHelper
                 continue;
             }
 
-            if (!($point->time instanceof \DateTime) && !($lastPoint->time instanceof \DateTime)) {
+            if (!($point->time instanceof DateTime) && !($lastPoint->time instanceof DateTime)) {
                 continue;
             }
 

@@ -3,15 +3,18 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Email;
+use SimpleXMLElement;
+use DOMDocument;
+use DOMNode;
 
 class EmailParser
 {
     /**
      * Parses email data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Email
      */
-    public static function parse(\SimpleXMLElement $node): Email
+    public static function parse(SimpleXMLElement $node): Email
     {
         $email = new Email();
 
@@ -24,10 +27,10 @@ class EmailParser
     /**
      * XML representation of email data.
      * @param Email $email
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Email $email, \DOMDocument $doc): \DOMNode
+    public static function toXML(Email $email, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('email');
 

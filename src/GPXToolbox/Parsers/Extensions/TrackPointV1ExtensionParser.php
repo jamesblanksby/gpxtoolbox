@@ -4,13 +4,16 @@ namespace GPXToolbox\Parsers\Extensions;
 
 use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class TrackPointV1ExtensionParser implements ExtensionParserInterface
 {
     /**
      * @inheritDoc
      */
-    public static function parse(\SimpleXMLElement $node): ExtensionAbstract
+    public static function parse(SimpleXMLElement $node): ExtensionAbstract
     {
         $extension = new TrackPointV1Extension();
 
@@ -26,7 +29,7 @@ class TrackPointV1ExtensionParser implements ExtensionParserInterface
     /**
      * @inheritDoc
      */
-    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
+    public static function toXML(ExtensionAbstract $extension, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement(self::createElementName(TrackPointV1Extension::$EXTENSION_NAME));
 

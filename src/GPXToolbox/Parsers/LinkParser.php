@@ -3,12 +3,15 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Link;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class LinkParser
 {
     /**
      * Parses link data.
-     * @param \SimpleXMLElement[]|\SimpleXMLElement $nodes
+     * @param SimpleXMLElement[]|SimpleXMLElement $nodes
      * @return Link[]
      */
     public static function parse($nodes): array
@@ -31,10 +34,10 @@ class LinkParser
     /**
      * XML representation of link data.
      * @param Link $link
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Link $link, \DOMDocument $doc): \DOMNode
+    public static function toXML(Link $link, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('link');
 
@@ -58,10 +61,10 @@ class LinkParser
     /**
      * XML representation of array link data.
      * @param Link[] $links
-     * @param \DOMDocument $doc
-     * @return \DOMNode[]
+     * @param DOMDocument $doc
+     * @return DOMNode[]
      */
-    public static function toXMLArray(array $links, \DOMDocument $doc): array
+    public static function toXMLArray(array $links, DOMDocument $doc): array
     {
         $result = [];
 

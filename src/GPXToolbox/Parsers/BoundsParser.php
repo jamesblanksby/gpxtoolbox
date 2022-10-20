@@ -4,15 +4,18 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Bounds;
 use GPXToolbox\GPXToolbox;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class BoundsParser
 {
     /**
      * Parses bounds data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return Bounds
      */
-    public static function parse(\SimpleXMLElement $node): Bounds
+    public static function parse(SimpleXMLElement $node): Bounds
     {
         $bounds = new Bounds();
 
@@ -27,10 +30,10 @@ class BoundsParser
     /**
      * XML representation of bounds data.
      * @param Bounds $bounds
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Bounds $bounds, \DOMDocument $doc): \DOMNode
+    public static function toXML(Bounds $bounds, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('bounds');
 

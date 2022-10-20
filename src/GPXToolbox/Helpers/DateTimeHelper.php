@@ -2,6 +2,9 @@
 
 namespace GPXToolbox\Helpers;
 
+use DateTime;
+use DateTimeZone;
+
 class DateTimeHelper
 {
     /**
@@ -15,8 +18,8 @@ class DateTimeHelper
     {
         $formatted = null;
 
-        if ($datetime instanceof \DateTime) {
-            $datetime->setTimezone(new \DateTimeZone($timezone));
+        if ($datetime instanceof DateTime) {
+            $datetime->setTimezone(new DateTimeZone($timezone));
             $formatted = $datetime->format($format);
         }
 

@@ -3,12 +3,15 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Track;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class TrackParser
 {
     /**
      * Parses track data.
-     * @param \SimpleXMLElement $nodes
+     * @param SimpleXMLElement $nodes
      * @return array
      */
     public static function parse($nodes): array
@@ -37,10 +40,10 @@ class TrackParser
     /**
      * XML representation of track data.
      * @param Track $trk
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Track $trk, \DOMDocument $doc): \DOMNode
+    public static function toXML(Track $trk, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('trk');
 

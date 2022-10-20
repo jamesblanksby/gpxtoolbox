@@ -3,12 +3,15 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Point;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class WaypointParser
 {
     /**
      * Parses waypoint data.
-     * @param \SimpleXMLElement $nodes
+     * @param SimpleXMLElement $nodes
      * @return Point[]
      */
     public static function parse($nodes): array
@@ -25,10 +28,10 @@ class WaypointParser
     /**
      * XML representation of waypoint data.
      * @param Point $wpt
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Point $wpt, \DOMDocument $doc): \DOMNode
+    public static function toXML(Point $wpt, DOMDocument $doc): DOMNode
     {
         $node = PointParser::toXML($wpt, Point::WAYPOINT, $doc);
 

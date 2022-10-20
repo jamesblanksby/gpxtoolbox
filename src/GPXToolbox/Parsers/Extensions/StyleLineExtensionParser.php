@@ -4,13 +4,16 @@ namespace GPXToolbox\Parsers\Extensions;
 
 use GPXToolbox\Types\Extensions\StyleLineExtension;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class StyleLineExtensionParser implements ExtensionParserInterface
 {
     /**
      * @inheritDoc
      */
-    public static function parse(\SimpleXMLElement $node): ExtensionAbstract
+    public static function parse(SimpleXMLElement $node): ExtensionAbstract
     {
         $extension = new StyleLineExtension();
 
@@ -27,7 +30,7 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     /**
      * @inheritDoc
      */
-    public static function toXML(ExtensionAbstract $extension, \DOMDocument $doc): \DOMNode
+    public static function toXML(ExtensionAbstract $extension, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement(StyleLineExtension::$EXTENSION_NAME);
 
@@ -70,10 +73,10 @@ class StyleLineExtensionParser implements ExtensionParserInterface
 
     /**
      * Parses dasharray element data.
-     * @param \SimpleXMLElement $node
+     * @param SimpleXMLElement $node
      * @return array
      */
-    protected static function parseDasharray(\SimpleXMLElement $node): array
+    protected static function parseDasharray(SimpleXMLElement $node): array
     {
         $dasharray = [];
 
@@ -89,10 +92,10 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     /**
      * XML representation of dasharray element data.
      * @param array $dasharray
-     * @param \DOMDocument $doc
+     * @param DOMDocument $doc
      * @return array
      */
-    protected static function toXMLDasharrayArray(array $dasharray, \DOMDocument $doc): array
+    protected static function toXMLDasharrayArray(array $dasharray, DOMDocument $doc): array
     {
         $result = [];
 

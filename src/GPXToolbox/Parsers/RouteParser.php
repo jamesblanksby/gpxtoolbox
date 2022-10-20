@@ -4,12 +4,15 @@ namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Types\Point;
 use GPXToolbox\Types\Route;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
 
 class RouteParser
 {
     /**
      * Parses route data.
-     * @param \SimpleXMLElement $nodes
+     * @param SimpleXMLElement $nodes
      * @return Route[]
      */
     public static function parse($nodes): array
@@ -47,10 +50,10 @@ class RouteParser
     /**
      * XML representation of route data.
      * @param Route $rte
-     * @param \DOMDocument $doc
-     * @return \DOMNode
+     * @param DOMDocument $doc
+     * @return DOMNode
      */
-    public static function toXML(Route $rte, \DOMDocument $doc): \DOMNode
+    public static function toXML(Route $rte, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement('rte');
 

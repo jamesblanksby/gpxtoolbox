@@ -14,6 +14,8 @@ use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
 use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use DOMDocument;
+use RuntimeException;
 
 class GPX
 {
@@ -124,7 +126,7 @@ class GPX
                 $result = file_put_contents($path, $geojson);
                 break;
             default:
-                throw new \RuntimeException('Unsupported file format');
+                throw new RuntimeException('Unsupported file format');
         }
 
         return $result;
@@ -149,11 +151,11 @@ class GPX
 
     /**
      * XML representation of GPX file.
-     * @return \DOMDocument
+     * @return DOMDocument
      */
-    public function toXML(): \DOMDocument
+    public function toXML(): DOMDocument
     {
-        $doc = new \DOMDocument('1.0', 'utf-8');
+        $doc = new DOMDocument('1.0', 'utf-8');
         $gpx = $doc->createElementNS('http://www.topografix.com/GPX/1/1', 'gpx');
 
         $gpx->setAttribute('version', $this->version);
