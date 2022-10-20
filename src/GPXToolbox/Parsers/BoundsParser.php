@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Bounds;
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Types\Bounds;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;

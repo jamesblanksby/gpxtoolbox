@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Parsers\Extensions;
 
-use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;

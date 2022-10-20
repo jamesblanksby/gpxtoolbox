@@ -2,9 +2,9 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Point;
-use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Helpers\DateTimeHelper;
+use GPXToolbox\Types\Point;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;

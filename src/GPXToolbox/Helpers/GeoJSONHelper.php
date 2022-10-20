@@ -2,13 +2,13 @@
 
 namespace GPXToolbox\Helpers;
 
-use GPXToolbox\Types\Track;
-use GPXToolbox\Types\Route;
-use GPXToolbox\Types\Point;
-use GPXToolbox\Types\GPX;
-use GPXToolbox\Models\GeoJSON\Geometry;
-use GPXToolbox\Models\GeoJSON\Feature;
 use GPXToolbox\Models\GeoJSON\Collection;
+use GPXToolbox\Models\GeoJSON\Feature;
+use GPXToolbox\Models\GeoJSON\Geometry;
+use GPXToolbox\Types\GPX;
+use GPXToolbox\Types\Point;
+use GPXToolbox\Types\Route;
+use GPXToolbox\Types\Track;
 
 class GeoJSONHelper
 {

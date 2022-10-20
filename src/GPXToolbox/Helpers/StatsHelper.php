@@ -2,9 +2,9 @@
 
 namespace GPXToolbox\Helpers;
 
-use GPXToolbox\Types\Point;
-use GPXToolbox\Models\Stats;
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Models\Stats;
+use GPXToolbox\Types\Point;
 use DateTime;
 
 class StatsHelper

@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Segment;
 use GPXToolbox\Types\Point;
+use GPXToolbox\Types\Segment;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;

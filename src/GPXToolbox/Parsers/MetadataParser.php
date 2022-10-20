@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Metadata;
 use GPXToolbox\Helpers\DateTimeHelper;
+use GPXToolbox\Types\Metadata;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;

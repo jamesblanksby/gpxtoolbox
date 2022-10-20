@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Parsers\Extensions;
 
-use GPXToolbox\Types\Extensions\StyleLineExtension;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use GPXToolbox\Types\Extensions\StyleLineExtension;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;
