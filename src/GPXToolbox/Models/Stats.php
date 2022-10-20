@@ -38,13 +38,13 @@ class Stats
      * Elevation gain in meters.
      * @var float
      */
-    public $elevationGain = 0.0;
+    public $gainElevation = 0.0;
 
     /**
      * Elevation loss in meters.
      * @var float
      */
-    public $elevationLoss = 0.0;
+    public $lossElevation = 0.0;
 
     /**
      * Average moving pace in minutes per kilometer.
@@ -70,8 +70,8 @@ class Stats
             'totalDuration'  => $this->totalDuration,
             'minElevation'   => $this->minElevation,
             'maxElevation'   => $this->maxElevation,
-            'elevationGain'  => $this->elevationGain,
-            'elevationLoss'  => $this->elevationLoss,
+            'gainElevation'  => $this->gainElevation,
+            'lossElevation'  => $this->lossElevation,
             'averagePace'    => $this->averagePace,
             'averageSpeed'   => $this->averageSpeed,
         ];

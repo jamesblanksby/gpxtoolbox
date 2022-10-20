@@ -56,8 +56,8 @@ GPXToolbox\Models\Stats Object
     [totalDuration] => 948
     [minElevation] => 25.6
     [maxElevation] => 82.8
-    [elevationGain] => 115.2
-    [elevationLoss] => 92.2
+    [gainElevation] => 115.2
+    [lossElevation] => 92.2
     [averagePace] => 116.4
     [averageSpeed] => 30.93
 )

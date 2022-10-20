@@ -29,7 +29,7 @@ class StatsHelper
         $stats->movingDuration = self::calculateMovingDuration($points);
         $stats->minElevation = min(array_column($points, 'ele'));
         $stats->maxElevation = max(array_column($points, 'ele'));
-        list($stats->elevationGain, $stats->elevationLoss) = self::calculateElevationGainLoss($points);
+        list($stats->gainElevation, $stats->lossElevation) = self::calculateElevationGainLoss($points);
         if ($stats->distance !== 0) {
             $stats->averagePace = round(($stats->movingDuration / ($stats->distance / 1000)), GPXToolbox::$PACE_PRECISION);
         }
@@ -118,8 +118,8 @@ class StatsHelper
      */
     public static function calculateElevationGainLoss(array $points): array
     {
-        $elevationGain = 0.0;
-        $elevationLoss = 0.0;
+        $gainElevation = 0.0;
+        $lossElevation = 0.0;
 
         $length = count($points);
         $lastPoint = $points[0];
@@ -135,19 +135,19 @@ class StatsHelper
 
             if (GPXToolbox::$ELEVATION_THRESHOLD !== false) {
                 if (abs($difference) > GPXToolbox::$ELEVATION_THRESHOLD) {
-                    $elevationGain += $difference > 0 ? $difference : 0;
-                    $elevationLoss += $difference < 0 ? abs($difference) : 0;
+                    $gainElevation += $difference > 0 ? $difference : 0;
+                    $lossElevation += $difference < 0 ? abs($difference) : 0;
 
                     $lastPoint = $point;
                 }
             } else {
-                $elevationGain += $difference > 0 ? $difference : 0;
-                $elevationLoss += $difference < 0 ? abs($difference) : 0;
+                $gainElevation += $difference > 0 ? $difference : 0;
+                $lossElevation += $difference < 0 ? abs($difference) : 0;
 
                 $lastPoint = $point;
             }
         }
 
-        return [$elevationGain, $elevationLoss,];
+        return [$gainElevation, $lossElevation,];
     }
 }
