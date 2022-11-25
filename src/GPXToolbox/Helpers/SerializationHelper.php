@@ -6,8 +6,8 @@ class SerializationHelper
 {
     /**
      * Recursively remove empty array elements.
-     * @param array $array
-     * @return array
+     * @param mixed[] $array
+     * @return mixed[]
      */
     public static function filterEmpty(array $array): array
     {
@@ -29,7 +29,7 @@ class SerializationHelper
     /**
      * Recursively convert objects their array representation.
      * @param mixed $object
-     * @return array|null
+     * @return mixed[]|null
      */
     public static function toArray($object): ?array
     {

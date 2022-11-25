@@ -74,7 +74,7 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     /**
      * Parses dasharray element data.
      * @param SimpleXMLElement $node
-     * @return array
+     * @return string[]
      */
     protected static function parseDasharray(SimpleXMLElement $node): array
     {
@@ -91,9 +91,9 @@ class StyleLineExtensionParser implements ExtensionParserInterface
 
     /**
      * XML representation of dasharray element data.
-     * @param array $dasharray
+     * @param string[] $dasharray
      * @param DOMDocument $doc
-     * @return array
+     * @return DOMNode[]
      */
     protected static function toXMLDasharrayArray(array $dasharray, DOMDocument $doc): array
     {

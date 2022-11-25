@@ -49,7 +49,7 @@ class Segment
 
     /**
      * Gather Segment points.
-     * @return array
+     * @return Point[]
      */
     public function getPoints(): array
     {
@@ -58,7 +58,7 @@ class Segment
 
     /**
      * Calculate Segment bounds.
-     * @return array
+     * @return mixed[]
      */
     public function getBounds(): array
     {
@@ -106,7 +106,7 @@ class Segment
 
     /**
      * Array representation of segment data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

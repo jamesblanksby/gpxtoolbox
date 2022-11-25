@@ -106,7 +106,7 @@ class GPXToolbox
 
     /**
      * A list of namespace extensions.
-     * @var array
+     * @var string[]
      */
     public static $EXTENSIONS = [];
 

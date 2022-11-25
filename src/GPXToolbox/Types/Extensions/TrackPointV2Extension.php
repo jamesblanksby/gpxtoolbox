@@ -86,7 +86,7 @@ class TrackPointV2Extension extends ExtensionAbstract
 
     /**
      * @inheritDoc
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

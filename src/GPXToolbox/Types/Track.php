@@ -104,7 +104,7 @@ class Track
 
     /**
      * Recursively gather Track points.
-     * @return array
+     * @return Point[]
      */
     public function getPoints(): array
     {
@@ -123,7 +123,7 @@ class Track
 
     /**
      * Calculate Track bounds.
-     * @return array
+     * @return mixed[]
      */
     public function getBounds(): array
     {
@@ -166,7 +166,7 @@ class Track
 
     /**
      * Array representation of track data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

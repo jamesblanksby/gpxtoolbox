@@ -24,7 +24,7 @@ class Copyright
 
     /**
      * Array representation of copyright data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

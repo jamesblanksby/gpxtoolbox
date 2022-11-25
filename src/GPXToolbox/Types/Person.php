@@ -26,7 +26,7 @@ class Person
 
     /**
      * Array representation of person data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

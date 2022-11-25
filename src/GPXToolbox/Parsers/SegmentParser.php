@@ -23,8 +23,6 @@ class SegmentParser
             $segment = new Segment();
 
             if (isset($node->trkpt)) {
-                $segment->points = [];
-
                 foreach ($node->trkpt as $trkpt) {
                     $segment->addPoint(PointParser::parse($trkpt));
                 }

@@ -24,7 +24,7 @@ class Link
 
     /**
      * Array representation of link data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

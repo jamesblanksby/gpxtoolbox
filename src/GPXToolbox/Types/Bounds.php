@@ -30,7 +30,7 @@ class Bounds
 
     /**
      * Array representation of bounds data.
-     * @return array
+     * @return float[]
      */
     public function toArray(): array
     {

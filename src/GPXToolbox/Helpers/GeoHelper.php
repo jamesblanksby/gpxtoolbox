@@ -9,7 +9,7 @@ class GeoHelper
     /**
      * Calculate bounds based on a list of points.
      * @param Point[] $points
-     * @return array
+     * @return mixed[]
      */
     public static function getBounds(array $points): array
     {

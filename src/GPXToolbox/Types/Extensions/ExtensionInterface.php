@@ -6,7 +6,7 @@ interface ExtensionInterface
 {
     /**
      * Array representation of extension data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array;
 }

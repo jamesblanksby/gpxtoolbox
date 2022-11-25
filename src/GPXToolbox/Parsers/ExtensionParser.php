@@ -19,7 +19,7 @@ class ExtensionParser
     /**
      * Parses extension data.
      * @param SimpleXMLElement $nodes
-     * @return array
+     * @return ExtensionAbstract[]
      */
     public static function parse($nodes): array
     {

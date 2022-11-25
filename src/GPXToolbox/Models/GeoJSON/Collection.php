@@ -32,7 +32,7 @@ class Collection
 
     /**
      * Array representation of collection data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

@@ -91,7 +91,7 @@ class Metadata
 
     /**
      * Array representation of metadata.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

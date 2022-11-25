@@ -47,14 +47,15 @@ class Geometry
 
     /**
      * A list of coordinates.
-     * @var array
+     * @var mixed[]
      */
     public $coordinates = [];
 
     /**
      * Geometry constructor.
+     * @param string $type
      */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = $type;
     }
@@ -74,7 +75,7 @@ class Geometry
 
     /**
      * Array representation of geometry data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

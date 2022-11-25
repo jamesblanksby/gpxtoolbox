@@ -60,7 +60,7 @@ class Stats
 
     /**
      * Array representation of stats data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

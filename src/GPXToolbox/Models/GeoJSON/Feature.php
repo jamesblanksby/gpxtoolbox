@@ -21,16 +21,17 @@ class Feature
 
     /**
      * A list of properties.
-     * @var array
+     * @var mixed[]
      */
     public $properties = [];
 
     /**
      * Feature constructor.
+     * @param string $type
      */
-    public function __construct($geometryType)
+    public function __construct(string $type)
     {
-        $this->geometry = new Geometry($geometryType);
+        $this->geometry = new Geometry($type);
     }
 
     /**
@@ -48,7 +49,7 @@ class Feature
 
     /**
      * Array representation of feature data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

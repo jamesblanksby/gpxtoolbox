@@ -18,7 +18,7 @@ class Email
 
     /**
      * Array representation of email data.
-     * @return array
+     * @return string[]
      */
     public function toArray(): array
     {

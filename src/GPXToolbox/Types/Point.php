@@ -174,7 +174,7 @@ class Point
 
     /**
      * Array representation of point data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

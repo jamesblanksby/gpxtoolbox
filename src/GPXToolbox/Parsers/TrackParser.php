@@ -12,7 +12,7 @@ class TrackParser
     /**
      * Parses track data.
      * @param SimpleXMLElement $nodes
-     * @return array
+     * @return Track[]
      */
     public static function parse($nodes): array
     {

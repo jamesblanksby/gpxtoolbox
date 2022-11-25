@@ -100,7 +100,7 @@ class Route
 
     /**
      * Array representation of route data.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

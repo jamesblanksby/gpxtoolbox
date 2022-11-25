@@ -111,7 +111,7 @@ class GPX
 
     /**
      * Recursively gather GPX points.
-     * @return array
+     * @return Point[]
      */
     public function getPoints(): array
     {
@@ -130,7 +130,7 @@ class GPX
 
     /**
      * Calculate GPX bounds.
-     * @return array
+     * @return mixed[]
      */
     public function getBounds(): array
     {
@@ -201,7 +201,7 @@ class GPX
 
     /**
      * Array representation of GPX file.
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

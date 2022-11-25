@@ -31,8 +31,6 @@ class RouteParser
             $rte->type   = isset($node->type) ? (string) $node->type : null;
 
             if (isset($node->rtept)) {
-                $rte->points = [];
-
                 foreach ($node->rtept as $node) {
                     $rte->addPoint(PointParser::parse($node));
                 }
