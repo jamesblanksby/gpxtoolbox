@@ -7,6 +7,6 @@ include '../vendor/autoload.php';
 $toolbox = new GPXToolbox();
 $gpx = $toolbox::load('input.gpx');
 
-$stats = $gpx->stats();
+$stats = $gpx->getStats();
 
 echo sprintf('<pre>%s</pre>', print_r($stats, true));

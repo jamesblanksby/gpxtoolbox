@@ -51,7 +51,7 @@ class Segment
      * Calculate Segment bounds.
      * @return array
      */
-    public function bounds(): array
+    public function getBounds(): array
     {
         $points = $this->getPoints();
         $bounds = GeoHelper::getBounds($points);
@@ -63,7 +63,7 @@ class Segment
      * Calculate Segment stats.
      * @return Stats
      */
-    public function stats(): Stats
+    public function getStats(): Stats
     {
         $points = $this->getPoints();
         $stats = StatsHelper::calculateStats($points);

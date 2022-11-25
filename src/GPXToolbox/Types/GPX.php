@@ -113,7 +113,7 @@ class GPX
      * Calculate GPX bounds.
      * @return array
      */
-    public function bounds(): array
+    public function getBounds(): array
     {
         $points = $this->getPoints();
         $bounds = GeoHelper::getBounds($points);
@@ -125,7 +125,7 @@ class GPX
      * Calculate GPX stats.
      * @return Stats
      */
-    public function stats(): Stats
+    public function getStats(): Stats
     {
         $points = $this->getPoints();
         $stats = StatsHelper::calculateStats($points);

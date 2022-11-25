@@ -41,7 +41,7 @@ include 'vendor/autoload.php';
 $toolbox = new GPXToolbox\GPXToolbox();
 $gpx = $toolbox::load('examples/input.gpx');
 
-$stats = $gpx->stats();
+$stats = $gpx->getStats();
 
 echo sprintf('<pre>%s</pre>', print_r($stats, true));
 ```
