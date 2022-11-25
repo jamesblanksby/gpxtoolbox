@@ -175,7 +175,7 @@ class GPX
      * Save GPX to file.
      * @param string $path
      * @param string $format
-     * @return boolean
+     * @return int|false
      */
     public function save(string $path, string $format): bool
     {
@@ -197,23 +197,6 @@ class GPX
         }
 
         return $result;
-    }
-
-    /**
-     * Array representation of GPX file.
-     * @return mixed[]
-     */
-    public function toArray(): array
-    {
-        return SerializationHelper::filterEmpty([
-            'version'    => $this->version,
-            'creator'    => $this->creator,
-            'metadata'   => SerializationHelper::toArray($this->metadata),
-            'wpt'        => SerializationHelper::toArray($this->wpt),
-            'rte'        => SerializationHelper::toArray($this->rte),
-            'trk'        => SerializationHelper::toArray($this->trk),
-            'extensions' => SerializationHelper::toArray($this->extensions),
-        ]);
     }
 
     /**
@@ -294,15 +277,6 @@ class GPX
     }
 
     /**
-     * JSON encoded representation of GPX file.
-     * @return string
-     */
-    public function toJSON(): string
-    {
-        return json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
-    }
-
-    /**
      * GeoJSON encoded representation of GPX file.
      * @return string
      */
@@ -314,5 +288,31 @@ class GPX
         $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
 
         return $geojson;
+    }
+
+    /**
+     * JSON encoded representation of GPX file.
+     * @return string
+     */
+    public function toJSON(): string
+    {
+        return json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
+    }
+
+    /**
+     * Array representation of GPX file.
+     * @return mixed[]
+     */
+    public function toArray(): array
+    {
+        return SerializationHelper::filterEmpty([
+            'version'    => $this->version,
+            'creator'    => $this->creator,
+            'metadata'   => SerializationHelper::toArray($this->metadata),
+            'wpt'        => SerializationHelper::toArray($this->wpt),
+            'rte'        => SerializationHelper::toArray($this->rte),
+            'trk'        => SerializationHelper::toArray($this->trk),
+            'extensions' => SerializationHelper::toArray($this->extensions),
+        ]);
     }
 }

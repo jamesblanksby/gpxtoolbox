@@ -9,7 +9,7 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 * High performance polyline simplification.
 * Statistics calculation.
 * Extension interface.
-* GPX, GeoJSON, JSON and PHP Array output.
+* GPX, [GeoJSON](https://geojson.org), JSON and PHP Array output.
 
 ### Statistics calculation
 
@@ -65,7 +65,9 @@ GPXToolbox\Models\Stats Object
 
 ## 🤖 API
 
-### `GPXToolbox::load(string $filename)`
+### `GPXToolbox\GPXToolbox
+
+#### `GPXToolbox::load(string $filename)`
 
 Loads and parses a GPX file.
 
@@ -79,7 +81,7 @@ Loads and parses a GPX file.
 
 <hr>
 
-### `GPXToolbox::parse(string $xml)`
+#### `GPXToolbox::parse(string $xml)`
 
 Parses a GPX XML string.
 
@@ -93,21 +95,80 @@ Parses a GPX XML string.
 
 <hr>
 
-### `GPXToolbox::addExtension(string $extension)`
+#### `GPXToolbox::addExtension(string $extension)`
 
 Add extension interface.
 
-*  `$extension`: An extension implementing the `ExtensionInterface` class.
+* `$extension`: The fully qualified name of an extension implementing the `ExtensionInterface` class.
 
 ##### Return values:
 
 * `GPXToolbox`: `$this` for method chaining.
 
+
+### GPXToolbox\Types\GPX
+
+#### `GPX::addWaypoint(Point $wpt)`
+
+Add GPX waypoint.
+
+* `$wpt`: Waypoint `Point` object.
+
+##### Return values:
+
+* `GPX`: `$this` for method chaining.
+
 <hr>
 
-### `GPX::bounds()`
+#### `GPX::addRoute(Route $rte)`
 
-Returns the geographical bounds for a given GPX file. `bounds()` may also be called on `Track` and `Segment`.
+Add GPX route.
+
+* `$rte`: `Route` object.
+
+##### Return values:
+
+* `GPX`: `$this` for method chaining.
+
+<hr>
+
+#### `GPX::addTrack(Track $trk)`
+
+Add GPX track.
+
+* `$wpt`: `Track` object.
+
+##### Return values:
+
+* `GPX`: `$this` for method chaining.
+
+<hr>
+
+#### `GPX::addExtension(ExtensionAbstract $extension)`
+
+Add extension interface.
+
+* `$extension`: An extension implementing the `ExtensionInterface` class.
+
+##### Return values:
+
+* `GPX`: `$this` for method chaining.
+
+<hr>
+
+#### `GPX::getPoints()`
+
+Returns all track points points recursively. `getPoints()` may also be called on `Track` and `Segment`.
+
+#### Return values:
+
+* `array`: Array containing GPX track points.
+
+<hr>
+
+#### `GPX::getBounds()`
+
+Returns the geographical bounds for a given GPX file. `getBounds()` may also be called on `Track` and `Segment`.
 
 #### Return values:
 
@@ -115,9 +176,9 @@ Returns the geographical bounds for a given GPX file. `bounds()` may also be cal
 
 <hr>
 
-### `GPX::stats()`
+#### `GPX::getStats()`
 
-Returns the statistical data such as distance, moving time and elevation gain for a given GPX file. `stats()` may also be called on `Track` and `Segment`.
+Returns the statistical data such as distance, moving time and elevation gain for a given GPX file. `getStats()` may also be called on `Track` and `Segment`.
 
 #### Return values:
 
@@ -125,7 +186,7 @@ Returns the statistical data such as distance, moving time and elevation gain fo
 
 <hr>
 
-### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
+#### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
 
 Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify()` may also be called on `Track` and `Segment` with the same parameters.
 
@@ -137,6 +198,53 @@ Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikiped
 #### Return values:
 
 * `GPX`: GPX data with simplified polyline points.
+
+<hr>
+
+#### `GPX::save(string $path, string $format)`
+
+Save GPX to file.
+
+* `$path`: Path to the file where to save the data.
+* `$format`: Output format of saved data.
+
+#### Return values:
+
+* `int|boolean`: The number of bytes that were saved to the file, or `false` on failure. 
+
+<hr>
+
+#### `GPX::toXML()`
+
+The XML representation of GPX file.
+
+#### Return values:
+
+* `DOMDocument`: GPX data as an XML document.
+
+<hr>
+
+#### `GPX::toGeoJSON()`
+
+GeoJSON encoded representation of GPX file.
+
+* `string`: GPX data as a GeoJSON string.
+
+<hr>
+
+#### `GPX::toJSON()`
+
+JSON encoded representation of GPX file.
+
+* `string`: GPX data as a JSON string.
+
+<hr>
+
+#### `GPX::toArray()`
+
+Array representation of GPX file.
+
+* `array`: GPX data as a PHP array.
 
 
 ## 🔧 Configuration
