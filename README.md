@@ -65,7 +65,7 @@ GPXToolbox\Models\Stats Object
 
 ## 🤖 API
 
-### `GPXToolbox\GPXToolbox
+### GPXToolbox\GPXToolbox
 
 #### `GPXToolbox::load(string $filename)`
 
