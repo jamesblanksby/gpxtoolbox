@@ -110,6 +110,25 @@ class GPX
     }
 
     /**
+     * Recursively gather GPX points.
+     * @return array
+     */
+    public function getPoints(): array
+    {
+        $points = [];
+
+        if (empty($this->trk)) {
+            return $points;
+        }
+
+        foreach ($this->trk as $trk) {
+            $points = array_merge($points, $trk->getPoints());
+        }
+
+        return $points;
+    }
+
+    /**
      * Calculate GPX bounds.
      * @return array
      */
@@ -295,24 +314,5 @@ class GPX
         $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
 
         return $geojson;
-    }
-
-    /**
-     * Recursively gather GPX points.
-     * @return array
-     */
-    public function getPoints(): array
-    {
-        $points = [];
-
-        if (empty($this->trk)) {
-            return $points;
-        }
-
-        foreach ($this->trk as $trk) {
-            $points = array_merge($points, $trk->getPoints());
-        }
-
-        return $points;
     }
 }

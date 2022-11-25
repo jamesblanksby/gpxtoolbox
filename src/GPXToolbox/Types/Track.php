@@ -103,6 +103,25 @@ class Track
     }
 
     /**
+     * Recursively gather Track points.
+     * @return array
+     */
+    public function getPoints(): array
+    {
+        $points = [];
+
+        if (is_null($this->trkseg)) {
+            return $points;
+        }
+
+        foreach ($this->trkseg as $trkseg) {
+            $points = array_merge($points, $trkseg->getPoints());
+        }
+
+        return $points;
+    }
+
+    /**
      * Calculate Track bounds.
      * @return array
      */
@@ -162,24 +181,5 @@ class Track
             'extensions' => SerializationHelper::toArray($this->extensions),
             'trkseg'     => SerializationHelper::toArray($this->trkseg),
         ];
-    }
-
-    /**
-     * Recursively gather Track points.
-     * @return array
-     */
-    public function getPoints(): array
-    {
-        $points = [];
-
-        if (is_null($this->trkseg)) {
-            return $points;
-        }
-
-        foreach ($this->trkseg as $trkseg) {
-            $points = array_merge($points, $trkseg->getPoints());
-        }
-
-        return $points;
     }
 }

@@ -48,6 +48,15 @@ class Segment
     }
 
     /**
+     * Gather Segment points.
+     * @return array
+     */
+    public function getPoints(): array
+    {
+        return $this->points;
+    }
+
+    /**
      * Calculate Segment bounds.
      * @return array
      */
@@ -93,15 +102,6 @@ class Segment
         $this->points = $points;
 
         return $this;
-    }
-
-    /**
-     * Gather Segment points.
-     * @return array
-     */
-    public function getPoints(): array
-    {
-        return $this->points;
     }
 
     /**
