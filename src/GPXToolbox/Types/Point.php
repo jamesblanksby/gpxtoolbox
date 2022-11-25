@@ -149,6 +149,18 @@ class Point
     public $extensions = [];
 
     /**
+     * Add link to point.
+     * @param Link $link
+     * @return self
+    */
+    public function addLink(Link $link): self
+    {
+        array_push($this->links, $link);
+
+        return $this;
+    }
+
+    /**
      * Add extension to point.
      * @param ExtensionAbstract $extension
      * @return self
