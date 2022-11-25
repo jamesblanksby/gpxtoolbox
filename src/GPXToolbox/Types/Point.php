@@ -149,6 +149,18 @@ class Point
     public $extensions = [];
 
     /**
+     * Add extension to point.
+     * @param ExtensionAbstract $extension
+     * @return self
+    */
+    public function addExtension(ExtensionAbstract $extension): self
+    {
+        array_push($this->extensions, $extension);
+
+        return $this;
+    }
+
+    /**
      * Array representation of point data.
      * @return array
      */

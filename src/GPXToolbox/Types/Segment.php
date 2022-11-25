@@ -24,6 +24,30 @@ class Segment
     public $extensions = [];
 
     /**
+     * Add point to segment.
+     * @param Point $trkpt
+     * @return self
+     */
+    public function addPoint(Point $trkpt): self
+    {
+        array_push($this->points, $trkpt);
+
+        return $this;
+    }
+
+    /**
+     * Add extension to segment.
+     * @param ExtensionAbstract $extension
+     * @return self
+     */
+    public function addExtension(ExtensionAbstract $extension): self
+    {
+        array_push($this->extensions, $extension);
+
+        return $this;
+    }
+
+    /**
      * Calculate Segment bounds.
      * @return array
      */
@@ -78,18 +102,6 @@ class Segment
     public function getPoints(): array
     {
         return $this->points;
-    }
-
-    /**
-     * Add point to segment.
-     * @param Point $trkpt
-     * @return self
-     */
-    public function addPoint(Point $trkpt): self
-    {
-        array_push($this->points, $trkpt);
-
-        return $this;
     }
 
     /**

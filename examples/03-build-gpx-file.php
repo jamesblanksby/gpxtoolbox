@@ -58,7 +58,7 @@ $metadata->desc = 'Example GPX file built using GPXToolbox';
 $link = new Link();
 $link->href = 'https://github.com/jamesblanksby/gpxtoolbox';
 $link->text = 'GPXToolbox';
-$metadata->links []= $link;
+$metadata->addLink($link);
 
 $gpx->metadata = $metadata;
 
@@ -79,14 +79,14 @@ foreach ($data_array as $data) {
     $extension = new TrackPointV1Extension();
     $extension->hr = $data['hr'];
 
-    $point->extensions []= $extension;
+    $point->addExtension($extension);
 
     $trkseg->addPoint($point);
 }
 
-$trk->trkseg []= $trkseg;
+$trk->addSegment($trkseg);
 
-$gpx->trk []= $trk;
+$gpx->addTrack($trk);
 
 header('Content-Type: application/xml');
 echo $gpx->toXML()->saveXML();

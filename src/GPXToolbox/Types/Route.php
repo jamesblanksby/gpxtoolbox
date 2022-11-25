@@ -63,6 +63,30 @@ class Route
     public $points = [];
 
     /**
+     * Add link to route.
+     * @param Link $link
+     * @return self
+     */
+    public function addLink(Link $link): self
+    {
+        array_push($this->links, $link);
+
+        return $this;
+    }
+
+    /**
+     * Add extension to route.
+     * @param ExtensionAbstract $extension
+     * @return self
+     */
+    public function addExtension(ExtensionAbstract $extension): self
+    {
+        array_push($this->extensions, $extension);
+
+        return $this;
+    }
+
+    /**
      * Add point to route.
      * @param Point $rtept
      * @return self

@@ -26,7 +26,7 @@ class SegmentParser
                 $segment->points = [];
 
                 foreach ($node->trkpt as $trkpt) {
-                    $segment->points []= PointParser::parse($trkpt);
+                    $segment->addPoint(PointParser::parse($trkpt));
                 }
             }
 

@@ -66,6 +66,30 @@ class Metadata
     public $extensions = [];
 
     /**
+     * Add link to metadata.
+     * @param Link $link
+     * @return self
+    */
+    public function addLink(Link $link): self
+    {
+        array_push($this->links, $link);
+
+        return $this;
+    }
+
+    /**
+     * Add extension to metadata.
+     * @param ExtensionAbstract $extension
+     * @return self
+    */
+    public function addExtension(ExtensionAbstract $extension): self
+    {
+        array_push($this->extensions, $extension);
+
+        return $this;
+    }
+
+    /**
      * Array representation of metadata.
      * @return array
      */

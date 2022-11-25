@@ -34,7 +34,7 @@ class RouteParser
                 $rte->points = [];
 
                 foreach ($node->rtept as $node) {
-                    $rte->points []= PointParser::parse($node);
+                    $rte->addPoint(PointParser::parse($node));
                 }
             }
 

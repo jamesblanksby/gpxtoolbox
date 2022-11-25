@@ -62,6 +62,54 @@ class GPX
     public $extensions = [];
 
     /**
+     * Add waypoint to gpx.
+     * @param Point $wpt
+     * @return self
+    */
+    public function addWaypoint(Point $wpt): self
+    {
+        array_push($this->wpt, $wpt);
+
+        return $this;
+    }
+
+    /**
+     * Add route to gpx.
+     * @param Route $rte
+     * @return self
+    */
+    public function addRoute(Route $rte): self
+    {
+        array_push($this->rte, $rte);
+
+        return $this;
+    }
+
+    /**
+     * Add track to gpx.
+     * @param Track $trk
+     * @return self
+    */
+    public function addTrack(Track $trk): self
+    {
+        array_push($this->trk, $trk);
+
+        return $this;
+    }
+
+    /**
+     * Add extension to gpx.
+     * @param ExtensionAbstract $extension
+     * @return self
+    */
+    public function addExtension(ExtensionAbstract $extension): self
+    {
+        array_push($this->extensions, $extension);
+
+        return $this;
+    }
+
+    /**
      * Calculate GPX bounds.
      * @return array
      */
