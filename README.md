@@ -25,8 +25,9 @@ A simple library for creating, parsing and modifying [GPX files](https://en.wiki
 
 ### Extension Interface
 
-* [GPX StyleLineExtension](http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd)
-* Garmin TrackPointExtension ([v1](https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd) and [v2](https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd))
+* Garmin [TrackPointExtensionv1](https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd)
+* Garmin [TrackPointExtensionv2](https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd)
+* GPX [StyleLineExtension](http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd)
 
 
 ## 📖 Simple Example
