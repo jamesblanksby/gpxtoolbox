@@ -64,6 +64,8 @@ GPXToolbox\Models\Stats Object
 )
 ```
 
+See the [examples](./examples) directory for more…
+
 ## 🤖 API
 
 ### GPXToolbox\GPXToolbox
