@@ -22,20 +22,14 @@ class RouteParser
         foreach ($nodes as $node) {
             $rte = new Route();
 
-            $rte->name   = isset($node->name) ? (string) $node->name : null;
-            $rte->cmt    = isset($node->cmt) ? (string) $node->cmt : null;
-            $rte->desc   = isset($node->desc) ? (string) $node->desc : null;
-            $rte->src    = isset($node->src) ? (string) $node->src : null;
-            $rte->links  = isset($node->link) ? LinkParser::parse($node->link) : null;
-            $rte->number = isset($node->number) ? (int) $node->number : null;
-            $rte->type   = isset($node->type) ? (string) $node->type : null;
-
-            if (isset($node->rtept)) {
-                foreach ($node->rtept as $node) {
-                    $rte->addPoint(PointParser::parse($node));
-                }
-            }
-
+            $rte->name       = isset($node->name) ? (string) $node->name : null;
+            $rte->cmt        = isset($node->cmt) ? (string) $node->cmt : null;
+            $rte->desc       = isset($node->desc) ? (string) $node->desc : null;
+            $rte->src        = isset($node->src) ? (string) $node->src : null;
+            $rte->links      = isset($node->link) ? LinkParser::parse($node->link) : null;
+            $rte->number     = isset($node->number) ? (int) $node->number : null;
+            $rte->type       = isset($node->type) ? (string) $node->type : null;
+            $rte->points     = isset($node->rtept) ? PointParser::parse($node->rtept) : null;
             $rte->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
 
             $routes []= $rte;
@@ -93,7 +87,7 @@ class RouteParser
         }
 
         if (!empty($rte->points)) {
-            $children = PointParser::toXMLArray($rte->points, Point::ROUTEPOINT, $doc);
+            $children = PointParser::toXMLArray($rte->points, Point::WAYPOINT, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }

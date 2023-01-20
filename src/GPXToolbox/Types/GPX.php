@@ -10,9 +10,9 @@ use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
+use GPXToolbox\Parsers\PointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
-use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 use DOMDocument;
 use RuntimeException;
@@ -217,7 +217,7 @@ class GPX
 
         if (!empty($this->wpt)) {
             foreach ($this->wpt as $wpt) {
-                $gpx->appendChild(WaypointParser::toXML($wpt, $doc));
+                $gpx->appendChild(PointParser::toXML($wpt, Point::WAYPOINT, $doc));
             }
         }
 

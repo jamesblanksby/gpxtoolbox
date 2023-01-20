@@ -88,12 +88,12 @@ class Route
 
     /**
      * Add point to route.
-     * @param Point $rtept
+     * @param Point $point
      * @return self
      */
-    public function addPoint(Point $rtept): self
+    public function addPoint(Point $point): self
     {
-        array_push($this->points, $rtept);
+        array_push($this->points, $point);
 
         return $this;
     }

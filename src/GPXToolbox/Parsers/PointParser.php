@@ -13,47 +13,53 @@ class PointParser
 {
     /**
      * Parses point data.
-     * @param SimpleXMLElement $node
-     * @return Point
+     * @param SimpleXMLElement $nodes
+     * @return Point[]
      */
-    public static function parse(SimpleXMLElement $node): Point
+    public static function parse($nodes): array
     {
-        $point = new Point();
+        $points = [];
 
-        $point->lat           = isset($node['lat']) ? round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION) : null;
-        $point->lon           = isset($node['lon']) ? round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION) : null;
-        $point->ele           = isset($node->ele) ? round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION) : null;
-        $point->time          = isset($node->time) ? DateTimeParser::parse($node->time) : null;
-        $point->magvar        = isset($node->magvar) ? (float) $node->magvar : null;
-        $point->geoidheight   = isset($node->geoidheight) ? (float) $node->geoidheight : null;
-        $point->name          = isset($node->name) ? (string) $node->name : null;
-        $point->cmt           = isset($node->cmt) ? (string) $node->cmt : null;
-        $point->desc          = isset($node->desc) ? (string) $node->desc : null;
-        $point->src           = isset($node->src) ? (string) $node->src : null;
-        $point->links         = isset($node->links) ? LinkParser::parse($node->link) : null;
-        $point->sym           = isset($node->sym) ? (string) $node->sym : null;
-        $point->fix           = isset($node->fix) ? (string) $node->fix : null;
-        $point->sat           = isset($node->sat) ? (int) $node->sat : null;
-        $point->hdop          = isset($node->hdop) ? (float) $node->hdop : null;
-        $point->vdop          = isset($node->vdop) ? (float) $node->vdop : null;
-        $point->pdop          = isset($node->pdop) ? (float) $node->pdop : null;
-        $point->ageofdgpsdata = isset($node->ageofdgpsdata) ? (float) $node->ageofdgpsdata : null;
-        $point->dgpsid        = isset($node->dgpsid) ? (int) $node->dgpsid : null;
-        $point->extensions    = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+        foreach ($nodes as $node) {
+            $point = new Point();
 
-        return $point;
+            $point->lat           = isset($node['lat']) ? round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION) : null;
+            $point->lon           = isset($node['lon']) ? round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION) : null;
+            $point->ele           = isset($node->ele) ? round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION) : null;
+            $point->time          = isset($node->time) ? DateTimeParser::parse($node->time) : null;
+            $point->magvar        = isset($node->magvar) ? (float) $node->magvar : null;
+            $point->geoidheight   = isset($node->geoidheight) ? (float) $node->geoidheight : null;
+            $point->name          = isset($node->name) ? (string) $node->name : null;
+            $point->cmt           = isset($node->cmt) ? (string) $node->cmt : null;
+            $point->desc          = isset($node->desc) ? (string) $node->desc : null;
+            $point->src           = isset($node->src) ? (string) $node->src : null;
+            $point->links         = isset($node->links) ? LinkParser::parse($node->link) : null;
+            $point->sym           = isset($node->sym) ? (string) $node->sym : null;
+            $point->fix           = isset($node->fix) ? (string) $node->fix : null;
+            $point->sat           = isset($node->sat) ? (int) $node->sat : null;
+            $point->hdop          = isset($node->hdop) ? (float) $node->hdop : null;
+            $point->vdop          = isset($node->vdop) ? (float) $node->vdop : null;
+            $point->pdop          = isset($node->pdop) ? (float) $node->pdop : null;
+            $point->ageofdgpsdata = isset($node->ageofdgpsdata) ? (float) $node->ageofdgpsdata : null;
+            $point->dgpsid        = isset($node->dgpsid) ? (int) $node->dgpsid : null;
+            $point->extensions    = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+
+            $points []= $point;
+        }
+
+        return $points;
     }
 
     /**
      * XML representation of point data.
      * @param Point $point
-     * @param string $name
+     * @param string $key
      * @param DOMDocument $doc
      * @return DOMNode
      */
-    public static function toXML(Point $point, string $name, DOMDocument $doc): DOMNode
+    public static function toXML(Point $point, string $key, DOMDocument $doc): DOMNode
     {
-        $node = $doc->createElement($name);
+        $node = $doc->createElement($key);
 
         if (!empty($point->lat)) {
             $node->setAttribute('lat', (string) $point->lat);

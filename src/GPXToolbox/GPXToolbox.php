@@ -4,9 +4,9 @@ namespace GPXToolbox;
 
 use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
+use GPXToolbox\Parsers\PointParser;
 use GPXToolbox\Parsers\RouteParser;
 use GPXToolbox\Parsers\TrackParser;
-use GPXToolbox\Parsers\WaypointParser;
 use GPXToolbox\Types\Extensions\StyleLineExtension;
 use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\Extensions\TrackPointV2Extension;
@@ -150,7 +150,7 @@ class GPXToolbox
         $gpx->version    = isset($data['version']) ? (string) $data['version'] : null;
         $gpx->creator    = isset($data['creator']) ? (string) $data['creator'] : null;
         $gpx->metadata   = isset($data->metadata) ? MetadataParser::parse($data->metadata) : null;
-        $gpx->wpt        = isset($data->wpt) ? WaypointParser::parse($data->wpt) : null;
+        $gpx->wpt        = isset($data->wpt) ? PointParser::parse($data->wpt) : null;
         $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : null;
         $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : null;
         $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions) : null;
