@@ -47,7 +47,7 @@ class GeoJSONHelper
      * @param Point $wpt
      * @return Feature
      */
-    public static function createWaypointFeature($wpt): Feature
+    public static function createWaypointFeature(Point $wpt): Feature
     {
         $feature = new Feature(Geometry::POINT);
 
@@ -65,7 +65,7 @@ class GeoJSONHelper
      * @param Route $rte
      * @return Feature
      */
-    public static function createRouteFeature($rte): Feature
+    public static function createRouteFeature(Route $rte): Feature
     {
         $feature = new Feature(Geometry::LINE_STRING);
 
@@ -86,7 +86,7 @@ class GeoJSONHelper
      * @param Track $trk
      * @return Feature
      */
-    public static function createTrackFeature($trk): Feature
+    public static function createTrackFeature(Track $trk): Feature
     {
         $feature = new Feature(Geometry::LINE_STRING);
 
