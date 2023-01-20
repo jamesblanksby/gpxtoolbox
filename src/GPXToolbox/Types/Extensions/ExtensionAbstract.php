@@ -44,7 +44,7 @@ abstract class ExtensionAbstract implements ExtensionInterface
         $classname = get_class($this);
 
         if (!in_array($classname, ExtensionParser::$PARSED_EXTENSIONS)) {
-            ExtensionParser::$PARSED_EXTENSIONS []= $classname;
+            ExtensionParser::$PARSED_EXTENSIONS []= $this;
         }
     }
 }
