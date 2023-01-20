@@ -175,7 +175,8 @@ class GPX
      * Save GPX to file.
      * @param string $path
      * @param string $format
-     * @return int|false
+     * @return int|boolean
+     * @throws RuntimeException
      */
     public function save(string $path, string $format): bool
     {

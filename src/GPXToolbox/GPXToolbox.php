@@ -124,6 +124,7 @@ class GPXToolbox
      * Load GPX file.
      * @param string $filename
      * @return GPX
+     * @throws RuntimeException
      */
     public static function load(string $filename): GPX
     {
