@@ -281,12 +281,12 @@ class GPX
      * GeoJSON encoded representation of GPX file.
      * @return string
      */
-    public function toGeoJSON()
+    public function toGeoJSON(): string
     {
         $collection = GeoJSONHelper::createCollection($this);
         $collection = $collection->toArray();
 
-        $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
+        $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null) ?: '';
 
         return $geojson;
     }
@@ -297,7 +297,9 @@ class GPX
      */
     public function toJSON(): string
     {
-        return json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null);
+        $json = json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null) ?: '';
+
+        return $json;
     }
 
     /**
