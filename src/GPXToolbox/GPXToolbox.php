@@ -134,6 +134,10 @@ class GPXToolbox
 
         $xml = file_get_contents($filename);
 
+        if (!$xml) {
+            throw new RuntimeException('Failed to read file');
+        }
+
         return self::parse($xml);
     }
 
