@@ -178,7 +178,14 @@ class GPX
      * @return int|boolean
      * @throws RuntimeException
      */
-    public function save(string $path, string $format): bool
+    /**
+     * Undocumented function
+     *
+     * @param string $path
+     * @param string $format
+     * @return int|false
+     */
+    public function save(string $path, string $format): int|bool
     {
         switch ($format) {
             case GPXToolbox::FORMAT_GPX:
