@@ -111,7 +111,7 @@ class Segment
     public function toArray(): array
     {
         return [
-            'points'     => SerializationHelper::toArray($this->points),
+            'trkpt'      => SerializationHelper::toArray($this->points),
             'extensions' => SerializationHelper::toArray($this->extensions),
         ];
     }

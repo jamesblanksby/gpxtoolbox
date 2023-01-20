@@ -100,7 +100,7 @@ class Metadata
             'desc'       => $this->desc,
             'author'     => SerializationHelper::toArray($this->author),
             'copyright'  => SerializationHelper::toArray($this->copyright),
-            'links'      => SerializationHelper::toArray($this->links),
+            'link'       => SerializationHelper::toArray($this->links),
             'time'       => DateTimeHelper::format($this->time),
             'keywords'   => $this->keywords,
             'bounds'     => SerializationHelper::toArray($this->bounds),

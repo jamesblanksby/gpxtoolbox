@@ -113,7 +113,7 @@ class Route
             'number'     => $this->number,
             'type'       => $this->type,
             'extensions' => SerializationHelper::toArray($this->extensions),
-            'points'     => SerializationHelper::toArray($this->points),
+            'rtept'      => SerializationHelper::toArray($this->points),
         ];
     }
 }

@@ -175,7 +175,7 @@ class Track
             'cmt'        => $this->cmt,
             'desc'       => $this->desc,
             'src'        => $this->src,
-            'links'      => SerializationHelper::toArray($this->links),
+            'link'       => SerializationHelper::toArray($this->links),
             'number'     => $this->number,
             'type'       => $this->type,
             'extensions' => SerializationHelper::toArray($this->extensions),
