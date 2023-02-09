@@ -157,13 +157,13 @@ class GPXToolbox
 
         $gpx = new GPX();
 
-        $gpx->version    = isset($data['version']) ? (string) $data['version'] : null;
-        $gpx->creator    = isset($data['creator']) ? (string) $data['creator'] : null;
-        $gpx->metadata   = isset($data->metadata) ? MetadataParser::parse($data->metadata) : null;
-        $gpx->wpt        = isset($data->wpt) ? PointParser::parse($data->wpt) : null;
-        $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : null;
-        $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : null;
-        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions) : null;
+        $gpx->version    = isset($data['version']) ? (string) $data['version'] : $gpx->version;
+        $gpx->creator    = isset($data['creator']) ? (string) $data['creator'] : $gpx->creator;
+        $gpx->metadata   = isset($data->metadata) ? MetadataParser::parse($data->metadata) : $gpx->metadata;
+        $gpx->wpt        = isset($data->wpt) ? PointParser::parse($data->wpt) : $gpx->wpt;
+        $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : $gpx->rte;
+        $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : $gpx->trk;
+        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions) : $gpx->extensions;
 
         return $gpx;
     }
