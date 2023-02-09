@@ -145,10 +145,15 @@ class GPXToolbox
      * Parse GPX data string.
      * @param string $xml
      * @return GPX
+     * @throws RuntimeException
      */
     public static function parse(string $xml): GPX
     {
         $data = simplexml_load_string($xml);
+
+        if (!$data) {
+            throw new RuntimeException('Failed to load XML');
+        }
 
         $gpx = new GPX();
 
