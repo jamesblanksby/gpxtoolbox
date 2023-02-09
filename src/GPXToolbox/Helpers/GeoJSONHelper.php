@@ -51,8 +51,7 @@ class GeoJSONHelper
     {
         $feature = new Feature(Geometry::POINT);
 
-        $feature->geometry->addCoordinates($wpt->lon, $wpt->lat);
-        $feature->geometry->coordinates = $feature->geometry->coordinates[0];
+        array_push($feature->geometry->coordinates, $wpt->lon, $wpt->lat);
 
         $properties = array_diff_key($wpt->toArray(), array_flip(['lat', 'lon',]));
         $feature->properties = $properties;
