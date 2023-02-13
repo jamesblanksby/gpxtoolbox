@@ -7,6 +7,7 @@ use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
@@ -17,7 +18,7 @@ use GPXToolbox\Types\Extensions\ExtensionAbstract;
 use DOMDocument;
 use RuntimeException;
 
-class GPX
+class GPX implements ArraySerializableInterface
 {
     /**
      * Version of the file.

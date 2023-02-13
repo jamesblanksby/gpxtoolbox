@@ -3,8 +3,9 @@
 namespace GPXToolbox\Models\GeoJSON;
 
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 
-class Collection
+class Collection implements ArraySerializableInterface
 {
     /**
      * Collection type.

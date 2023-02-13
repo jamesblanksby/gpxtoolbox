@@ -3,8 +3,9 @@
 namespace GPXToolbox\Models\GeoJSON;
 
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 
-class Feature
+class Feature implements ArraySerializableInterface
 {
     /**
      * Feature type.

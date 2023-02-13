@@ -4,10 +4,11 @@ namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 use DateTime;
 
-class Metadata
+class Metadata implements ArraySerializableInterface
 {
     /**
      * The name of the GPX file.

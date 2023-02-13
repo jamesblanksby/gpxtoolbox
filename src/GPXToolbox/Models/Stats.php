@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Models;
 
-class Stats
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Stats implements ArraySerializableInterface
 {
     /**
      * Distance in meters.

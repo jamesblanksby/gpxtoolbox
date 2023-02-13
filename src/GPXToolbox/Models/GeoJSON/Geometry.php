@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Models\GeoJSON;
 
-class Geometry
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Geometry implements ArraySerializableInterface
 {
     /**
      * @var string

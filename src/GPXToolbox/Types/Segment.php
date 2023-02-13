@@ -6,10 +6,11 @@ use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\SimplifyHelper;
 use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
-class Segment
+class Segment implements ArraySerializableInterface
 {
     /**
      * A list of track points.

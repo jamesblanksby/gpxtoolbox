@@ -2,11 +2,8 @@
 
 namespace GPXToolbox\Types\Extensions;
 
-interface ExtensionInterface
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+interface ExtensionInterface extends ArraySerializableInterface
 {
-    /**
-     * Array representation of extension data.
-     * @return mixed[]
-     */
-    public function toArray(): array;
 }

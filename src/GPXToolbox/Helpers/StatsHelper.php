@@ -94,7 +94,7 @@ class StatsHelper
                 continue;
             }
 
-            if (!($point->time instanceof DateTime) && !($lastPoint->time instanceof DateTime)) {
+            if (!($point->time instanceof DateTime) || !($lastPoint->time instanceof DateTime)) {
                 continue;
             }
 

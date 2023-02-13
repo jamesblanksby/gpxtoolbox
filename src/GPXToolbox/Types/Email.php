@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
-class Email
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Email implements ArraySerializableInterface
 {
     /**
      * ID half of email address.

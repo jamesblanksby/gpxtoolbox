@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
-class Link
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Link implements ArraySerializableInterface
 {
     /**
      * URL of hyperlink.

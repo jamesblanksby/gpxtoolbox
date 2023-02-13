@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
-class Bounds
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Bounds implements ArraySerializableInterface
 {
     /**
      * The minimum latitude.

@@ -2,6 +2,8 @@
 
 namespace GPXToolbox\Helpers;
 
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
 class SerializationHelper
 {
     /**
@@ -27,22 +29,23 @@ class SerializationHelper
     }
 
     /**
-     * Recursively convert objects their array representation.
-     * @param mixed $object
+     * Recursively convert ArraySerializable objects
+     * to their array representation.
+     * @param ArraySerializableInterface[]|ArraySerializableInterface|null $value
      * @return mixed[]|null
      */
-    public static function toArray($object): ?array
+    public static function toArray($value): ?array
     {
-        if (!is_array($object)) {
-            return !is_null($object) ? $object->toArray() : null;
+        if (is_array($value)) {
+            $result = [];
+
+            foreach ($value as $object) {
+                $result []= $object->toArray();
+            }
+
+            return $result;
         }
 
-        $result = [];
-
-        foreach ($object as $item) {
-            $result []= $item->toArray();
-        }
-
-        return $result;
+        return !is_null($value) ? $value->toArray() : null;
     }
 }

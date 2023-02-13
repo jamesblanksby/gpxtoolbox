@@ -3,8 +3,9 @@
 namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 
-class Person
+class Person implements ArraySerializableInterface
 {
     /**
      * Name of person or organization.

@@ -2,7 +2,9 @@
 
 namespace GPXToolbox\Types;
 
-class Copyright
+use GPXToolbox\Interfaces\ArraySerializableInterface;
+
+class Copyright implements ArraySerializableInterface
 {
     /**
      * Copyright holder.

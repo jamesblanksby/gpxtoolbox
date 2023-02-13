@@ -4,10 +4,11 @@ namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\DateTimeHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 use Datetime;
 
-class Point
+class Point implements ArraySerializableInterface
 {
     /**
     * Waypoint GPX key.

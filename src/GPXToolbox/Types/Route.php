@@ -3,9 +3,10 @@
 namespace GPXToolbox\Types;
 
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
-class Route
+class Route implements ArraySerializableInterface
 {
     /**
      * GPS name of route.

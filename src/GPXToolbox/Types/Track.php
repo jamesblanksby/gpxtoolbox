@@ -5,10 +5,11 @@ namespace GPXToolbox\Types;
 use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
-class Track
+class Track implements ArraySerializableInterface
 {
     /**
      * GPS name of track.
