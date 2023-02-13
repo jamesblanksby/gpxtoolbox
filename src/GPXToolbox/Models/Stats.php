@@ -26,13 +26,13 @@ class Stats implements ArraySerializableInterface
 
     /**
      * Minimum elevation in meters.
-     * @var float
+     * @var float|null
      */
     public $minElevation = INF;
 
     /**
      * Maximium elevation in meters.
-     * @var float
+     * @var float|null
      */
     public $maxElevation = 0.0;
 
