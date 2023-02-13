@@ -27,8 +27,8 @@ class StatsHelper
             $stats->totalDuration = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
         }
         $stats->movingDuration = self::calculateMovingDuration($points);
-        $stats->minElevation = min(array_column($points, 'ele'));
-        $stats->maxElevation = max(array_column($points, 'ele'));
+        $stats->minElevation = min(array_column($points, 'ele')) ?? $stats->minElevation;
+        $stats->maxElevation = max(array_column($points, 'ele')) ?? $stats->maxElevation;
         list($stats->gainElevation, $stats->lossElevation) = self::calculateElevationGainLoss($points);
         if ($stats->distance !== 0) {
             $stats->averagePace = round(($stats->movingDuration / ($stats->distance / 1000)), GPXToolbox::$PACE_PRECISION);
