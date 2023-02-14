@@ -47,16 +47,16 @@ class LinkParser
     {
         $node = $doc->createElement('link');
 
-        if (!empty($link->href)) {
+        if ($link->href) {
             $node->setAttribute('href', $link->href);
         }
 
-        if (!empty($link->text)) {
+        if ($link->text) {
             $child = $doc->createElement('text', $link->text);
             $node->appendChild($child);
         }
 
-        if (!empty($link->type)) {
+        if ($link->type) {
             $child = $doc->createElement('type', $link->type);
             $node->appendChild($child);
         }

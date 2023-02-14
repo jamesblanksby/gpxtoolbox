@@ -36,7 +36,7 @@ class Metadata implements ArraySerializableInterface
 
     /**
      * URLs associated with the location described in the file.
-     * @var Link[]|null
+     * @var Link[]
      */
     public $links = [];
 

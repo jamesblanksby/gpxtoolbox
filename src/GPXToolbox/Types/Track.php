@@ -38,9 +38,9 @@ class Track implements ArraySerializableInterface
 
     /**
      * Links to external information about track.
-     * @var Link[]|null
+     * @var Link[]
      */
-    public $links = null;
+    public $links = [];
 
     /**
      * GPS track number.
@@ -63,9 +63,9 @@ class Track implements ArraySerializableInterface
     /**
      * A Track Segment holds a list of Track Points
      * which are logically connected in order.
-     * @var Segment[]|null
+     * @var Segment[]
      */
-    public $trkseg = null;
+    public $trkseg = [];
 
     /**
      * Add link to track.
@@ -111,7 +111,7 @@ class Track implements ArraySerializableInterface
     {
         $points = [];
 
-        if (is_null($this->trkseg)) {
+        if (!$this->trkseg) {
             return $points;
         }
 
@@ -154,7 +154,7 @@ class Track implements ArraySerializableInterface
      */
     public function simplify(float $tolerance = 1.0, bool $highestQuality = false): Track
     {
-        if (is_null($this->trkseg)) {
+        if (!$this->trkseg) {
             return $this;
         }
 

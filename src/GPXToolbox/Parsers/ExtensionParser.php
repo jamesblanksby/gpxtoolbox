@@ -27,12 +27,12 @@ class ExtensionParser
 
         foreach (GPXToolbox::$EXTENSIONS as $extension) {
             $children = $nodes->children($extension::$EXTENSION_NAMESPACE);
-            if (empty($children)) {
+            if (!$children) {
                 continue;
             }
 
             $node = $children->{$extension::$EXTENSION_NAME};
-            if (empty($node)) {
+            if (!$node) {
                 continue;
             }
 

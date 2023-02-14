@@ -89,7 +89,7 @@ class GeoJSONHelper
     {
         $feature = new Feature(Geometry::LINE_STRING);
 
-        if (!is_null($trk->trkseg)) {
+        if ($trk->trkseg) {
             foreach ($trk->trkseg as $trkseg) {
                 if (empty($trkseg->points)) {
                     continue;

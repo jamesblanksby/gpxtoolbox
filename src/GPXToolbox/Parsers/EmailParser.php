@@ -38,11 +38,11 @@ class EmailParser
     {
         $node = $doc->createElement('email');
 
-        if (!empty($email->id)) {
+        if ($email->id) {
             $node->setAttribute('id', $email->id);
         }
 
-        if (!empty($email->domain)) {
+        if ($email->domain) {
             $node->setAttribute('domain', $email->domain);
         }
 

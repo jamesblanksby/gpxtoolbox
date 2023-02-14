@@ -60,49 +60,52 @@ class MetadataParser
     {
         $node = $doc->createElement('metadata');
 
-        if (!empty($metadata->name)) {
+        if ($metadata->name) {
             $child = $doc->createElement('name', $metadata->name);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->desc)) {
+        if ($metadata->desc) {
             $child = $doc->createElement('desc', $metadata->desc);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->author)) {
+        if ($metadata->author) {
             $child = PersonParser::toXML($metadata->author, $doc);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->copyright)) {
+        if ($metadata->copyright) {
             $child = CopyrightParser::toXML($metadata->copyright, $doc);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->links)) {
+        if ($metadata->links) {
             $children = LinkParser::toXMLArray($metadata->links, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }
         }
 
-        if (!empty($metadata->time)) {
-            $child = $doc->createElement('time', DateTimeHelper::format($metadata->time));
-            $node->appendChild($child);
+        if ($metadata->time) {
+            $time = DateTimeHelper::format($metadata->time);
+            if (!is_null($time)) {
+                $child = $doc->createElement('time', $time);
+                $node->appendChild($child);
+            }
         }
 
-        if (!empty($metadata->keywords)) {
+        if ($metadata->keywords) {
             $child = $doc->createElement('keywords', $metadata->keywords);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->bounds)) {
+        if ($metadata->bounds) {
             $child = BoundsParser::toXML($metadata->bounds, $doc);
             $node->appendChild($child);
         }
 
-        if (!empty($metadata->extensions)) {
+        if ($metadata->extensions) {
             $child = $doc->createElement('extension');
             $node->appendChild($child);
             foreach ($metadata->extensions as $extension) {

@@ -7,6 +7,7 @@ use GPXToolbox\Types\Extensions\StyleLineExtension;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;
+use TypeError;
 
 class StyleLineExtensionParser implements ExtensionParserInterface
 {
@@ -41,39 +42,44 @@ class StyleLineExtensionParser implements ExtensionParserInterface
 
     /**
      * @inheritDoc
+     * @throws TypeError
      */
     public static function toXML(ExtensionInterface $extension, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement(StyleLineExtension::$EXTENSION_NAME);
 
+        if (!$extension instanceof StyleLineExtension) {
+            throw new TypeError(sprintf('Argument #1 ($extension) must be of type %s, %s given', StyleLineExtension::class, get_class($extension)));
+        }
+
         $node->setAttribute('xmlns', 'http://www.topografix.com/GPX/gpx_style/0/2');
 
-        if (!empty($extension->color)) {
+        if ($extension->color) {
             $child = $doc->createElement('color', $extension->color);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->opacity)) {
-            $child = $doc->createElement('opacity', $extension->opacity);
+        if ($extension->opacity) {
+            $child = $doc->createElement('opacity', (string) $extension->opacity);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->width)) {
-            $child = $doc->createElement('width', $extension->width);
+        if ($extension->width) {
+            $child = $doc->createElement('width', (string) $extension->width);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->pattern)) {
+        if ($extension->pattern) {
             $child = $doc->createElement('pattern', $extension->pattern);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->linecap)) {
+        if ($extension->linecap) {
             $child = $doc->createElement('linecap', $extension->linecap);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->dasharray)) {
+        if ($extension->dasharray) {
             $children = self::toXMLDasharrayArray($extension->dasharray, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
@@ -94,6 +100,11 @@ class StyleLineExtensionParser implements ExtensionParserInterface
 
         foreach ($node->dash as $node) {
             $attributes = $node->attributes();
+
+            if (is_null($attributes)) {
+                continue;
+            }
+
             $dasharray []= (string) $attributes['mark'];
             $dasharray []= (string) $attributes['space'];
         }

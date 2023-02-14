@@ -7,6 +7,7 @@ use GPXToolbox\Types\Extensions\TrackPointV2Extension;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;
+use TypeError;
 
 class TrackPointV2ExtensionParser implements ExtensionParserInterface
 {
@@ -47,48 +48,53 @@ class TrackPointV2ExtensionParser implements ExtensionParserInterface
 
     /**
      * @inheritDoc
+     * @throws TypeError
      */
     public static function toXML(ExtensionInterface $extension, DOMDocument $doc): DOMNode
     {
+        if (!$extension instanceof TrackPointV2Extension) {
+            throw new TypeError(sprintf('Argument #1 ($extension) must be of type %s, %s given', TrackPointV2Extension::class, get_class($extension)));
+        }
+
         $node = $doc->createElement(self::createElementName(TrackPointV2Extension::$EXTENSION_NAME));
 
-        if (!empty($extension->atemp)) {
-            $child = $doc->createElement(self::createElementName('atemp'), $extension->atemp);
+        if ($extension->atemp) {
+            $child = $doc->createElement(self::createElementName('atemp'), (string) $extension->atemp);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->wtemp)) {
-            $child = $doc->createElement(self::createElementName('wtemp'), $extension->wtemp);
+        if ($extension->wtemp) {
+            $child = $doc->createElement(self::createElementName('wtemp'), (string) $extension->wtemp);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->depth)) {
-            $child = $doc->createElement(self::createElementName('depth'), $extension->depth);
+        if ($extension->depth) {
+            $child = $doc->createElement(self::createElementName('depth'), (string) $extension->depth);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->hr)) {
-            $child = $doc->createElement(self::createElementName('hr'), $extension->hr);
+        if ($extension->hr) {
+            $child = $doc->createElement(self::createElementName('hr'), (string) $extension->hr);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->cad)) {
-            $child = $doc->createElement(self::createElementName('cad'), $extension->cad);
+        if ($extension->cad) {
+            $child = $doc->createElement(self::createElementName('cad'), (string) $extension->cad);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->speed)) {
-            $child = $doc->createElement(self::createElementName('speed'), $extension->speed);
+        if ($extension->speed) {
+            $child = $doc->createElement(self::createElementName('speed'), (string) $extension->speed);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->course)) {
-            $child = $doc->createElement(self::createElementName('course'), $extension->course);
+        if ($extension->course) {
+            $child = $doc->createElement(self::createElementName('course'), (string) $extension->course);
             $node->appendChild($child);
         }
 
-        if (!empty($extension->bearing)) {
-            $child = $doc->createElement(self::createElementName('bearing'), $extension->bearing);
+        if ($extension->bearing) {
+            $child = $doc->createElement(self::createElementName('bearing'), (string) $extension->bearing);
             $node->appendChild($child);
         }
 

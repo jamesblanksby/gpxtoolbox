@@ -45,13 +45,13 @@ class SegmentParser
     {
         $node = $doc->createElement('trkseg');
 
-        if (!empty($segment->points)) {
+        if ($segment->points) {
             foreach ($segment->points as $trkpt) {
                 $node->appendChild(PointParser::toXML($trkpt, Point::TRACKPOINT, $doc));
             }
         }
 
-        if (!empty($segment->extensions)) {
+        if ($segment->extensions) {
             $child = $doc->createElement('extension');
             $node->appendChild($child);
             foreach ($segment->extensions as $extension) {

@@ -67,51 +67,51 @@ class RouteParser
     {
         $node = $doc->createElement('rte');
 
-        if (!empty($rte->name)) {
+        if ($rte->name) {
             $child = $doc->createElement('name', $rte->name);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->cmt)) {
+        if ($rte->cmt) {
             $child = $doc->createElement('cmt', $rte->cmt);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->desc)) {
+        if ($rte->desc) {
             $child = $doc->createElement('desc', $rte->desc);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->src)) {
+        if ($rte->src) {
             $child = $doc->createElement('src', $rte->src);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->links)) {
+        if ($rte->links) {
             $children = LinkParser::toXMLArray($rte->links, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }
         }
 
-        if (!empty($rte->number)) {
+        if ($rte->number) {
             $child = $doc->createElement('number', (string) $rte->number);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->type)) {
+        if ($rte->type) {
             $child = $doc->createElement('type', $rte->type);
             $node->appendChild($child);
         }
 
-        if (!empty($rte->points)) {
+        if ($rte->points) {
             $children = PointParser::toXMLArray($rte->points, Point::WAYPOINT, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }
         }
 
-        if (!empty($rte->extensions)) {
+        if ($rte->extensions) {
             $child = $doc->createElement('extension');
             $node->appendChild($child);
             foreach ($rte->extensions as $extension) {

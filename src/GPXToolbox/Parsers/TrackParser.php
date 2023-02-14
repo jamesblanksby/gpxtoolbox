@@ -65,44 +65,44 @@ class TrackParser
     {
         $node = $doc->createElement('trk');
 
-        if (!empty($trk->name)) {
+        if ($trk->name) {
             $child = $doc->createElement('name', $trk->name);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->cmt)) {
+        if ($trk->cmt) {
             $child = $doc->createElement('cmt', $trk->cmt);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->desc)) {
+        if ($trk->desc) {
             $child = $doc->createElement('desc', $trk->desc);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->src)) {
+        if ($trk->src) {
             $child = $doc->createElement('src', $trk->src);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->links)) {
+        if ($trk->links) {
             $children = LinkParser::toXMLArray($trk->links, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }
         }
 
-        if (!empty($trk->number)) {
+        if ($trk->number) {
             $child = $doc->createElement('number', (string) $trk->number);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->type)) {
+        if ($trk->type) {
             $child = $doc->createElement('type', $trk->type);
             $node->appendChild($child);
         }
 
-        if (!empty($trk->extensions)) {
+        if ($trk->extensions) {
             $child = $doc->createElement('extension');
             $node->appendChild($child);
             foreach ($trk->extensions as $extension) {
@@ -110,7 +110,7 @@ class TrackParser
             }
         }
 
-        if (!empty($trk->trkseg)) {
+        if ($trk->trkseg) {
             $children = SegmentParser::toXMLArray($trk->trkseg, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);

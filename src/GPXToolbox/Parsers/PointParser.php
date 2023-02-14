@@ -101,102 +101,105 @@ class PointParser
     {
         $node = $doc->createElement($key);
 
-        if (!empty($point->lat)) {
+        if ($point->lat) {
             $node->setAttribute('lat', (string) $point->lat);
         }
 
-        if (!empty($point->lon)) {
+        if ($point->lon) {
             $node->setAttribute('lon', (string) $point->lon);
         }
 
-        if (!empty($point->ele)) {
+        if ($point->ele) {
             $child = $doc->createElement('ele', (string) $point->ele);
             $node->appendChild($child);
         }
 
-        if (!empty($point->time)) {
-            $child = $doc->createElement('time', DateTimeHelper::format($point->time));
-            $node->appendChild($child);
+        if ($point->time) {
+            $time = DateTimeHelper::format($point->time);
+            if (!is_null($time)) {
+                $child = $doc->createElement('time', $time);
+                $node->appendChild($child);
+            }
         }
 
-        if (!empty($point->magvar)) {
+        if ($point->magvar) {
             $child = $doc->createElement('magvar', (string) $point->magvar);
             $node->appendChild($child);
         }
 
-        if (!empty($point->geoidheight)) {
+        if ($point->geoidheight) {
             $child = $doc->createElement('geoidheight', (string) $point->geoidheight);
             $node->appendChild($child);
         }
 
-        if (!empty($point->name)) {
+        if ($point->name) {
             $child = $doc->createElement('name', $point->name);
             $node->appendChild($child);
         }
 
-        if (!empty($point->cmt)) {
+        if ($point->cmt) {
             $child = $doc->createElement('cmt', $point->cmt);
             $node->appendChild($child);
         }
 
-        if (!empty($point->desc)) {
+        if ($point->desc) {
             $child = $doc->createElement('desc', $point->desc);
             $node->appendChild($child);
         }
 
-        if (!empty($point->src)) {
+        if ($point->src) {
             $child = $doc->createElement('src', $point->src);
             $node->appendChild($child);
         }
 
-        if (!empty($point->links)) {
+        if ($point->links) {
             $children = LinkParser::toXMLArray($point->links, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }
         }
 
-        if (!empty($point->sym)) {
+        if ($point->sym) {
             $child = $doc->createElement('sym', $point->sym);
             $node->appendChild($child);
         }
 
-        if (!empty($point->fix)) {
+        if ($point->fix) {
             $child = $doc->createElement('fix', $point->fix);
             $node->appendChild($child);
         }
 
-        if (!empty($point->sat)) {
+        if ($point->sat) {
             $child = $doc->createElement('sat', (string) $point->sat);
             $node->appendChild($child);
         }
 
-        if (!empty($point->hdop)) {
+        if ($point->hdop) {
             $child = $doc->createElement('hdop', (string) $point->hdop);
             $node->appendChild($child);
         }
 
-        if (!empty($point->vdop)) {
+        if ($point->vdop) {
             $child = $doc->createElement('vdop', (string) $point->vdop);
             $node->appendChild($child);
         }
 
-        if (!empty($point->pdop)) {
+        if ($point->pdop) {
             $child = $doc->createElement('pdop', (string) $point->pdop);
             $node->appendChild($child);
         }
 
-        if (!empty($point->ageofdgpsdata)) {
+        if ($point->ageofdgpsdata) {
             $child = $doc->createElement('ageofdgpsdata', (string) $point->ageofdgpsdata);
             $node->appendChild($child);
         }
 
-        if (!empty($point->dgpsid)) {
+        if ($point->dgpsid) {
             $child = $doc->createElement('dgpsid', (string) $point->dgpsid);
             $node->appendChild($child);
         }
 
-        if (!empty($point->extensions)) {
+        if ($point->extensions) {
             $child = $doc->createElement('extension');
             $node->appendChild($child);
             foreach ($point->extensions as $extension) {

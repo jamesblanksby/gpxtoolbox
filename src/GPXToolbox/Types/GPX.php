@@ -118,7 +118,7 @@ class GPX implements ArraySerializableInterface
     {
         $points = [];
 
-        if (empty($this->trk)) {
+        if (!$this->trk) {
             return $points;
         }
 
@@ -161,7 +161,7 @@ class GPX implements ArraySerializableInterface
      */
     public function simplify(float $tolerance = 1.0, bool $highestQuality = false): GPX
     {
-        if (empty($this->trk)) {
+        if (!$this->trk) {
             return $this;
         }
 
@@ -213,29 +213,29 @@ class GPX implements ArraySerializableInterface
         $gpx->setAttribute('version', $this->version);
         $gpx->setAttribute('creator', $this->creator ? $this->creator : GPXToolbox::SIGNATURE);
 
-        if (!empty($this->metadata)) {
+        if ($this->metadata) {
             $gpx->appendChild(MetadataParser::toXML($this->metadata, $doc));
         }
 
-        if (!empty($this->wpt)) {
+        if ($this->wpt) {
             foreach ($this->wpt as $wpt) {
                 $gpx->appendChild(PointParser::toXML($wpt, Point::WAYPOINT, $doc));
             }
         }
 
-        if (!empty($this->rte)) {
+        if ($this->rte) {
             foreach ($this->rte as $rte) {
                 $gpx->appendChild(RouteParser::toXML($rte, $doc));
             }
         }
 
-        if (!empty($this->trk)) {
+        if ($this->trk) {
             foreach ($this->trk as $trk) {
                 $gpx->appendChild(TrackParser::toXML($trk, $doc));
             }
         }
 
-        if (!empty($this->extensions)) {
+        if ($this->extensions) {
             $children = ExtensionParser::toXMLArray($this->extensions, $doc);
             foreach ($children as $child) {
                 $gpx->appendChild($child);
@@ -248,7 +248,7 @@ class GPX implements ArraySerializableInterface
         ];
 
         foreach (ExtensionParser::$PARSED_EXTENSIONS as $extension) {
-            if (empty($extension::$EXTENSION_PREFIX)) {
+            if (!$extension::$EXTENSION_PREFIX) {
                 continue;
             }
 
@@ -287,7 +287,7 @@ class GPX implements ArraySerializableInterface
         $collection = GeoJSONHelper::createCollection($this);
         $collection = $collection->toArray();
 
-        $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null) ?: '';
+        $geojson = json_encode($collection, GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : 0) ?: '';
 
         return $geojson;
     }
@@ -298,7 +298,7 @@ class GPX implements ArraySerializableInterface
      */
     public function toJSON(): string
     {
-        $json = json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : null) ?: '';
+        $json = json_encode($this->toArray(), GPXToolbox::$PRETTY_PRINT ? JSON_PRETTY_PRINT : 0) ?: '';
 
         return $json;
     }

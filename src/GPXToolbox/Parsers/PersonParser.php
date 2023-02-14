@@ -41,17 +41,17 @@ class PersonParser
     {
         $node = $doc->createElement('author');
 
-        if (!empty($person->name)) {
+        if ($person->name) {
             $child = $doc->createElement('name', $person->name);
             $node->appendChild($child);
         }
 
-        if (!empty($person->email)) {
+        if ($person->email) {
             $child = EmailParser::toXML($person->email, $doc);
             $node->appendChild($child);
         }
 
-        if (!empty($person->link)) {
+        if ($person->link) {
             $child = LinkParser::toXML($person->link, $doc);
             $node->appendChild($child);
         }

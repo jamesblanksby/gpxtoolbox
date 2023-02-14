@@ -41,16 +41,16 @@ class CopyrightParser
     {
         $node = $doc->createElement('copyright');
 
-        if (!empty($copyright->author)) {
+        if ($copyright->author) {
             $node->setAttribute('author', $copyright->author);
         }
 
-        if (!empty($copyright->year)) {
+        if ($copyright->year) {
             $child = $doc->createElement('year', $copyright->year);
             $node->appendChild($child);
         }
 
-        if (!empty($copyright->license)) {
+        if ($copyright->license) {
             $child = $doc->createElement('license', $copyright->license);
             $node->appendChild($child);
         }

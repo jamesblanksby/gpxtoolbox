@@ -91,9 +91,9 @@ class Point implements ArraySerializableInterface
 
     /**
      * Link to additional information about the point.
-     * @var Link[]|null
+     * @var Link[]
      */
-    public $links = null;
+    public $links = [];
 
     /**
      * Text of GPS symbol name.

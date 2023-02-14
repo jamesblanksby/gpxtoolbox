@@ -45,19 +45,19 @@ class BoundsParser
     {
         $node = $doc->createElement('bounds');
 
-        if (!empty($bounds->minlat)) {
+        if ($bounds->minlat) {
             $node->setAttribute('minlat', (string) $bounds->minlat);
         }
 
-        if (!empty($bounds->minlon)) {
+        if ($bounds->minlon) {
             $node->setAttribute('minlon', (string) $bounds->minlon);
         }
 
-        if (!empty($bounds->maxlat)) {
+        if ($bounds->maxlat) {
             $node->setAttribute('maxlat', (string) $bounds->maxlat);
         }
 
-        if (!empty($bounds->maxlon)) {
+        if ($bounds->maxlon) {
             $node->setAttribute('maxlon', (string) $bounds->maxlon);
         }
 

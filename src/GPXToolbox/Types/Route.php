@@ -35,9 +35,9 @@ class Route implements ArraySerializableInterface
 
     /**
      * Links to external information about the route.
-     * @var Link[]|null
+     * @var Link[]
      */
-    public $links = null;
+    public $links = [];
 
     /**
      * GPS route number.
