@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Link implements ArraySerializableInterface
@@ -30,10 +31,10 @@ class Link implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'href' => $this->href,
             'text' => $this->text,
             'type' => $this->type,
-        ];
+        ]);
     }
 }

@@ -111,9 +111,9 @@ class Segment implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'trkpt'      => SerializationHelper::toArray($this->points),
             'extensions' => SerializationHelper::toArray($this->extensions),
-        ];
+        ]);
     }
 }

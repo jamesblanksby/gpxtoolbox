@@ -179,7 +179,7 @@ class Point implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'lat'           => $this->lat,
             'lon'           => $this->lon,
             'ele'           => $this->ele,
@@ -199,6 +199,6 @@ class Point implements ArraySerializableInterface
             'ageofdgpsdata' => $this->ageofdgpsdata,
             'dgpsid'        => $this->dgpsid,
             'extensions'    => SerializationHelper::toArray($this->extensions),
-        ];
+        ]);
     }
 }

@@ -31,10 +31,10 @@ class Person implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'name'  => $this->name,
             'email' => SerializationHelper::toArray($this->email),
             'link'  => SerializationHelper::toArray($this->link),
-        ];
+        ]);
     }
 }

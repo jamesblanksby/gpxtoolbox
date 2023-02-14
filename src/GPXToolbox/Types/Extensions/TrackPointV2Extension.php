@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types\Extensions;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Parsers\Extensions\TrackPointV2ExtensionParser;
 
 class TrackPointV2Extension extends ExtensionAbstract
@@ -85,7 +86,7 @@ class TrackPointV2Extension extends ExtensionAbstract
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'atemp'   => $this->atemp,
             'wtemp'   => $this->wtemp,
             'depth'   => $this->depth,
@@ -94,6 +95,6 @@ class TrackPointV2Extension extends ExtensionAbstract
             'speed'   => $this->speed,
             'course'  => $this->course,
             'bearing' => $this->bearing,
-        ];
+        ]);
     }
 }

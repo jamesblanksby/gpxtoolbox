@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types\Extensions;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Parsers\Extensions\StyleLineExtensionParser;
 
 class StyleLineExtension extends ExtensionAbstract
@@ -68,13 +69,13 @@ class StyleLineExtension extends ExtensionAbstract
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'color'     => $this->color,
             'opacity'   => $this->opacity,
             'width'     => $this->width,
             'pattern'   => $this->pattern,
             'linecap'   => $this->linecap,
             'dasharray' => $this->dasharray,
-        ];
+        ]);
     }
 }

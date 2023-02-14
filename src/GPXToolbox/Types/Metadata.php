@@ -96,7 +96,7 @@ class Metadata implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'name'       => $this->name,
             'desc'       => $this->desc,
             'author'     => SerializationHelper::toArray($this->author),
@@ -106,6 +106,6 @@ class Metadata implements ArraySerializableInterface
             'keywords'   => $this->keywords,
             'bounds'     => SerializationHelper::toArray($this->bounds),
             'extensions' => SerializationHelper::toArray($this->extensions),
-        ];
+        ]);
     }
 }

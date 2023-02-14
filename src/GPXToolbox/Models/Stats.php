@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Models;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Stats implements ArraySerializableInterface
@@ -66,7 +67,7 @@ class Stats implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'distance'       => $this->distance,
             'movingDuration' => $this->movingDuration,
             'totalDuration'  => $this->totalDuration,
@@ -76,6 +77,6 @@ class Stats implements ArraySerializableInterface
             'lossElevation'  => $this->lossElevation,
             'averagePace'    => $this->averagePace,
             'averageSpeed'   => $this->averageSpeed,
-        ];
+        ]);
     }
 }

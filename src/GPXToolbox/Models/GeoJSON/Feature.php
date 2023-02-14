@@ -54,10 +54,10 @@ class Feature implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'type'       => $this->type,
             'geometry'   => SerializationHelper::toArray($this->geometry),
             'properties' => $this->properties,
-        ];
+        ]);
     }
 }

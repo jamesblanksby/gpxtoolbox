@@ -105,7 +105,7 @@ class Route implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'name'       => $this->name,
             'cmt'        => $this->cmt,
             'desc'       => $this->desc,
@@ -115,6 +115,6 @@ class Route implements ArraySerializableInterface
             'type'       => $this->type,
             'extensions' => SerializationHelper::toArray($this->extensions),
             'rtept'      => SerializationHelper::toArray($this->points),
-        ];
+        ]);
     }
 }

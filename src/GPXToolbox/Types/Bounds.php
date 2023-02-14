@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Bounds implements ArraySerializableInterface
@@ -32,15 +33,15 @@ class Bounds implements ArraySerializableInterface
 
     /**
      * Array representation of bounds data.
-     * @return float[]
+     * @return mixed[]
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'minlat' => $this->minlat,
             'minlon' => $this->minlon,
             'maxlat' => $this->maxlat,
             'maxlon' => $this->maxlon,
-        ];
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Models\GeoJSON;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Geometry implements ArraySerializableInterface
@@ -81,9 +82,9 @@ class Geometry implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'type'        => $this->type,
             'coordinates' => $this->coordinates,
-        ];
+        ]);
     }
 }

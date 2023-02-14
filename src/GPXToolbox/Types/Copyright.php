@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Copyright implements ArraySerializableInterface
@@ -30,10 +31,10 @@ class Copyright implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'author'  => $this->author,
             'year'    => $this->year,
             'license' => $this->license,
-        ];
+        ]);
     }
 }

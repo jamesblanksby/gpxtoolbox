@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Types;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
 
 class Email implements ArraySerializableInterface
@@ -20,13 +21,13 @@ class Email implements ArraySerializableInterface
 
     /**
      * Array representation of email data.
-     * @return string[]
+     * @return mixed[]
      */
     public function toArray(): array
     {
-        return [
+        return SerializationHelper::filterEmpty([
             'id'     => $this->id,
             'domain' => $this->domain,
-        ];
+        ]);
     }
 }
