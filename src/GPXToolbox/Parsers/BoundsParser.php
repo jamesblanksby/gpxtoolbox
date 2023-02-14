@@ -19,10 +19,18 @@ class BoundsParser
     {
         $bounds = new Bounds();
 
-        $bounds->minlat = isset($node['minlat']) ? round((float) $node['minlat'], GPXToolbox::$COORDINATE_PRECISION) : $bounds->minlat;
-        $bounds->minlon = isset($node['minlon']) ? round((float) $node['minlon'], GPXToolbox::$COORDINATE_PRECISION) : $bounds->minlon;
-        $bounds->maxlat = isset($node['maxlat']) ? round((float) $node['maxlat'], GPXToolbox::$COORDINATE_PRECISION) : $bounds->maxlat;
-        $bounds->maxlon = isset($node['maxlon']) ? round((float) $node['maxlon'], GPXToolbox::$COORDINATE_PRECISION) : $bounds->maxlon;
+        if (isset($node['minlat'])) {
+            $bounds->minlat = round((float) $node['minlat'], GPXToolbox::$COORDINATE_PRECISION);
+        }
+        if (isset($node['minlon'])) {
+            $bounds->minlon = round((float) $node['minlon'], GPXToolbox::$COORDINATE_PRECISION);
+        }
+        if (isset($node['maxlat'])) {
+            $bounds->maxlat = round((float) $node['maxlat'], GPXToolbox::$COORDINATE_PRECISION);
+        }
+        if (isset($node['maxlon'])) {
+            $bounds->maxlon = round((float) $node['maxlon'], GPXToolbox::$COORDINATE_PRECISION);
+        }
 
         return $bounds;
     }
