@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Parsers\Extensions;
 
-use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 use DOMDocument;
 use DOMNode;
 use SimpleXMLElement;
@@ -12,15 +12,15 @@ interface ExtensionParserInterface
     /**
      * Parses extension data.
      * @param SimpleXMLElement $node
-     * @return ExtensionAbstract
+     * @return ExtensionInterface
      */
-    public static function parse(SimpleXMLElement $node): ExtensionAbstract;
+    public static function parse(SimpleXMLElement $node): ExtensionInterface;
 
     /**
      * XML representation of extension data.
-     * @param ExtensionAbstract $extension
+     * @param ExtensionInterface $extension
      * @param DOMDocument $doc
      * @return DOMNode
      */
-    public static function toXML(ExtensionAbstract $extension, DOMDocument $doc): DOMNode;
+    public static function toXML(ExtensionInterface $extension, DOMDocument $doc): DOMNode;
 }

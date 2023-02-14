@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Parsers\Extensions;
 
-use GPXToolbox\Types\Extensions\ExtensionAbstract;
+use GPXToolbox\Types\Extensions\ExtensionInterface;
 use GPXToolbox\Types\Extensions\StyleLineExtension;
 use DOMDocument;
 use DOMNode;
@@ -13,7 +13,7 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     /**
      * @inheritDoc
      */
-    public static function parse(SimpleXMLElement $node): ExtensionAbstract
+    public static function parse(SimpleXMLElement $node): ExtensionInterface
     {
         $extension = new StyleLineExtension();
 
@@ -30,7 +30,7 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     /**
      * @inheritDoc
      */
-    public static function toXML(ExtensionAbstract $extension, DOMDocument $doc): DOMNode
+    public static function toXML(ExtensionInterface $extension, DOMDocument $doc): DOMNode
     {
         $node = $doc->createElement(StyleLineExtension::$EXTENSION_NAME);
 

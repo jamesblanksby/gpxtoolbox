@@ -8,31 +8,26 @@ class TrackPointV2Extension extends ExtensionAbstract
 {
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_NAME = 'TrackPointExtension';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_PREFIX = 'gpxtx';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_NAMESPACE = 'http://www.garmin.com/xmlschemas/TrackPointExtension/v2';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_SCHEMA = 'http://www.garmin.com/xmlschemas/TrackPointExtensionv2.xsd';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_PARSER = TrackPointV2ExtensionParser::class;
 

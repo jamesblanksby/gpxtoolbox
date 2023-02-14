@@ -7,37 +7,32 @@ use GPXToolbox\Parsers\ExtensionParser;
 abstract class ExtensionAbstract implements ExtensionInterface
 {
     /**
-     * Name of extension.
-     * @var string;
+     * @inheritDoc
      */
     public static $EXTENSION_NAME = '';
 
     /**
-     * Name of extension prefix.
-     * @var string|null
+     * @inheritDoc
      */
     public static $EXTENSION_PREFIX = null;
 
     /**
-     * XML namespace of extension.
-     * @var string
+     * @inheritDoc
      */
     public static $EXTENSION_NAMESPACE = '';
 
     /**
-     * XML schema definition.
-     * @var string
+     * @inheritDoc
      */
     public static $EXTENSION_SCHEMA = '';
 
     /**
-     * Extension parser fully qualified class name.
-     * @var string
+     * @inheritDoc
      */
     public static $EXTENSION_PARSER = '';
 
     /**
-     * ExtensionAbstract constructor.
+     * @inheritDoc
      */
     final public function __construct()
     {

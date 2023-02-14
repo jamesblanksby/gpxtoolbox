@@ -8,31 +8,21 @@ class StyleLineExtension extends ExtensionAbstract
 {
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_NAME = 'line';
 
     /**
      * @inheritDoc
-     * @var string
-     */
-    public static $EXTENSION_PREFIX = null;
-
-    /**
-     * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_NAMESPACE = 'http://www.topografix.com/GPX/gpx_style/0/2';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_SCHEMA = 'http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd';
 
     /**
      * @inheritDoc
-     * @var string
      */
     public static $EXTENSION_PARSER = StyleLineExtensionParser::class;
 
