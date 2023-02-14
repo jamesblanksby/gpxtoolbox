@@ -21,9 +21,15 @@ class LinkParser
         foreach ($nodes as $node) {
             $link = new Link();
 
-            $link->href = isset($node['href']) ? (string) $node['href'] : null;
-            $link->text = isset($node->text) ? (string) $node->text : null;
-            $link->type = isset($node->type) ? (string) $node->type : null;
+            if (isset($node['href'])) {
+                $link->href = (string) $node['href'];
+            }
+            if (isset($node->text)) {
+                $link->text = (string) $node->text;
+            }
+            if (isset($node->type)) {
+                $link->type = (string) $node->type;
+            }
 
             $links []= $link;
         }

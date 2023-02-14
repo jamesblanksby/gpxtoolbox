@@ -18,9 +18,15 @@ class CopyrightParser
     {
         $copyright = new Copyright();
 
-        $copyright->author  = isset($node['author']) ? (string) $node['author'] : null;
-        $copyright->year    = isset($node->year) ? (string) $node->year : null;
-        $copyright->license = isset($node->license) ? (string) $node->license : null;
+        if (isset($node['author'])) {
+            $copyright->author = (string) $node['author'];
+        }
+        if (isset($node->year)) {
+            $copyright->year = (string) $node->year;
+        }
+        if (isset($node->license)) {
+            $copyright->license = (string) $node->license;
+        }
 
         return $copyright;
     }

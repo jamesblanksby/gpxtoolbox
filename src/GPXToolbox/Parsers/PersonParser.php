@@ -18,9 +18,15 @@ class PersonParser
     {
         $person = new Person();
 
-        $person->name  = isset($node->name) ? (string) $node->name : null;
-        $person->email = isset($node->email) ? EmailParser::parse($node->email) : null;
-        $person->link  = isset($node->link) ? LinkParser::parse($node->link)[0] : null;
+        if (isset($node->name)) {
+            $person->name = (string) $node->name;
+        }
+        if (isset($node->email)) {
+            $person->email = EmailParser::parse($node->email);
+        }
+        if (isset($node->link)) {
+            $person->link = LinkParser::parse($node->link)[0];
+        }
 
         return $person;
     }

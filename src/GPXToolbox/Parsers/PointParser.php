@@ -23,26 +23,66 @@ class PointParser
         foreach ($nodes as $node) {
             $point = new Point();
 
-            $point->lat           = isset($node['lat']) ? round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION) : null;
-            $point->lon           = isset($node['lon']) ? round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION) : null;
-            $point->ele           = isset($node->ele) ? round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION) : null;
-            $point->time          = isset($node->time) ? DateTimeParser::parse($node->time) : null;
-            $point->magvar        = isset($node->magvar) ? (float) $node->magvar : null;
-            $point->geoidheight   = isset($node->geoidheight) ? (float) $node->geoidheight : null;
-            $point->name          = isset($node->name) ? (string) $node->name : null;
-            $point->cmt           = isset($node->cmt) ? (string) $node->cmt : null;
-            $point->desc          = isset($node->desc) ? (string) $node->desc : null;
-            $point->src           = isset($node->src) ? (string) $node->src : null;
-            $point->links         = isset($node->links) ? LinkParser::parse($node->link) : null;
-            $point->sym           = isset($node->sym) ? (string) $node->sym : null;
-            $point->fix           = isset($node->fix) ? (string) $node->fix : null;
-            $point->sat           = isset($node->sat) ? (int) $node->sat : null;
-            $point->hdop          = isset($node->hdop) ? (float) $node->hdop : null;
-            $point->vdop          = isset($node->vdop) ? (float) $node->vdop : null;
-            $point->pdop          = isset($node->pdop) ? (float) $node->pdop : null;
-            $point->ageofdgpsdata = isset($node->ageofdgpsdata) ? (float) $node->ageofdgpsdata : null;
-            $point->dgpsid        = isset($node->dgpsid) ? (int) $node->dgpsid : null;
-            $point->extensions    = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+            if (isset($node['lat'])) {
+                $point->lat = round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION);
+            }
+            if (isset($node['lon'])) {
+                $point->lon = round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION);
+            }
+            if (isset($node->ele)) {
+                $point->ele = round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION);
+            }
+            if (isset($node->time)) {
+                $point->time = DateTimeParser::parse($node->time);
+            }
+            if (isset($node->magvar)) {
+                $point->magvar = (float) $node->magvar;
+            }
+            if (isset($node->geoidheight)) {
+                $point->geoidheight = (float) $node->geoidheight;
+            }
+            if (isset($node->name)) {
+                $point->name = (string) $node->name;
+            }
+            if (isset($node->cmt)) {
+                $point->cmt = (string) $node->cmt;
+            }
+            if (isset($node->desc)) {
+                $point->desc = (string) $node->desc;
+            }
+            if (isset($node->src)) {
+                $point->src = (string) $node->src;
+            }
+            if (isset($node->links)) {
+                $point->links = LinkParser::parse($node->link);
+            }
+            if (isset($node->sym)) {
+                $point->sym = (string) $node->sym;
+            }
+            if (isset($node->fix)) {
+                $point->fix = (string) $node->fix;
+            }
+            if (isset($node->sat)) {
+                $point->sat = (int) $node->sat;
+            }
+            if (isset($node->hdop)) {
+                $point->hdop = (float) $node->hdop;
+            }
+            if (isset($node->vdop)) {
+                $point->vdop = (float) $node->vdop;
+            }
+            if (isset($node->pdop)) {
+                $point->pdop = (float) $node->pdop;
+            }
+            if (isset($node->ageofdgpsdata)) {
+                $point->ageofdgpsdata = (float) $node->ageofdgpsdata;
+            }
+            if (isset($node->dgpsid)) {
+                $point->dgpsid = (int) $node->dgpsid;
+            }
+            if (isset($node->extensions)) {
+                $point->extensions = ExtensionParser::parse($node->extensions);
+            }
 
             $points []= $point;
         }

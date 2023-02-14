@@ -18,8 +18,12 @@ class EmailParser
     {
         $email = new Email();
 
-        $email->id     = isset($node['id']) ? (string) $node['id'] : null;
-        $email->domain = isset($node['domain']) ? (string) $node['domain'] : null;
+        if (isset($node['id'])) {
+            $email->id = (string) $node['id'];
+        }
+        if (isset($node['domain'])) {
+            $email->domain = (string) $node['domain'];
+        }
 
         return $email;
     }

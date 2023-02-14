@@ -17,12 +17,24 @@ class StyleLineExtensionParser implements ExtensionParserInterface
     {
         $extension = new StyleLineExtension();
 
-        $extension->color     = isset($node->color) ? (string) $node->color : null;
-        $extension->opacity   = isset($node->opacity) ? (float) $node->opacity : null;
-        $extension->width     = isset($node->width) ? (float) $node->width : null;
-        $extension->pattern   = isset($node->pattern) ? (string) $node->pattern : null;
-        $extension->linecap   = isset($node->linecap) ? (string) $node->linecap : null;
-        $extension->dasharray = isset($node->dasharray) ? self::parseDasharray($node->dasharray) : null;
+        if (isset($node->color)) {
+            $extension->color = (string) $node->color;
+        }
+        if (isset($node->opacity)) {
+            $extension->opacity = (float) $node->opacity;
+        }
+        if (isset($node->width)) {
+            $extension->width = (float) $node->width;
+        }
+        if (isset($node->pattern)) {
+            $extension->pattern = (string) $node->pattern;
+        }
+        if (isset($node->linecap)) {
+            $extension->linecap = (string) $node->linecap;
+        }
+        if (isset($node->dasharray)) {
+            $extension->dasharray = self::parseDasharray($node->dasharray);
+        }
 
         return $extension;
     }

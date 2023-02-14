@@ -22,15 +22,33 @@ class RouteParser
         foreach ($nodes as $node) {
             $rte = new Route();
 
-            $rte->name       = isset($node->name) ? (string) $node->name : null;
-            $rte->cmt        = isset($node->cmt) ? (string) $node->cmt : null;
-            $rte->desc       = isset($node->desc) ? (string) $node->desc : null;
-            $rte->src        = isset($node->src) ? (string) $node->src : null;
-            $rte->links      = isset($node->link) ? LinkParser::parse($node->link) : null;
-            $rte->number     = isset($node->number) ? (int) $node->number : null;
-            $rte->type       = isset($node->type) ? (string) $node->type : null;
-            $rte->points     = isset($node->rtept) ? PointParser::parse($node->rtept) : null;
-            $rte->extensions = isset($node->extensions) ? ExtensionParser::parse($node->extensions) : null;
+            if (isset($node->name)) {
+                $rte->name = (string) $node->name;
+            }
+            if (isset($node->cmt)) {
+                $rte->cmt = (string) $node->cmt;
+            }
+            if (isset($node->desc)) {
+                $rte->desc = (string) $node->desc;
+            }
+            if (isset($node->src)) {
+                $rte->src = (string) $node->src;
+            }
+            if (isset($node->link)) {
+                $rte->links = LinkParser::parse($node->link);
+            }
+            if (isset($node->number)) {
+                $rte->number = (int) $node->number;
+            }
+            if (isset($node->type)) {
+                $rte->type = (string) $node->type;
+            }
+            if (isset($node->rtept)) {
+                $rte->points = PointParser::parse($node->rtept);
+            }
+            if (isset($node->extensions)) {
+                $rte->extensions = ExtensionParser::parse($node->extensions);
+            }
 
             $routes []= $rte;
         }
