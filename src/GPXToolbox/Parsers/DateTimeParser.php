@@ -9,11 +9,11 @@ class DateTimeParser
 {
     /**
      * Parses datetime string with timezone.
-     * @param mixed $value
+     * @param string $value
      * @param string $timezone
      * @return DateTime
      */
-    public static function parse($value, string $timezone = 'UTC'): DateTime
+    public static function parse(string $value, string $timezone = 'UTC'): DateTime
     {
         $timezone = new DateTimeZone($timezone);
         $datetime = new DateTime($value, $timezone);
