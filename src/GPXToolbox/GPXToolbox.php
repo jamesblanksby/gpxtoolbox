@@ -2,11 +2,7 @@
 
 namespace GPXToolbox;
 
-use GPXToolbox\Parsers\ExtensionParser;
-use GPXToolbox\Parsers\MetadataParser;
-use GPXToolbox\Parsers\PointParser;
-use GPXToolbox\Parsers\RouteParser;
-use GPXToolbox\Parsers\TrackParser;
+use GPXToolbox\Parsers\GPXParser;
 use GPXToolbox\Types\Extensions\StyleLineExtension;
 use GPXToolbox\Types\Extensions\TrackPointV1Extension;
 use GPXToolbox\Types\Extensions\TrackPointV2Extension;
@@ -149,21 +145,13 @@ class GPXToolbox
      */
     public static function parse(string $xml): GPX
     {
-        $data = simplexml_load_string($xml);
+        $node = simplexml_load_string($xml);
 
-        if (!$data) {
+        if (!$node) {
             throw new RuntimeException('Failed to load XML');
         }
 
-        $gpx = new GPX();
-
-        $gpx->version    = isset($data['version']) ? (string) $data['version'] : $gpx->version;
-        $gpx->creator    = isset($data['creator']) ? (string) $data['creator'] : $gpx->creator;
-        $gpx->metadata   = isset($data->metadata) ? MetadataParser::parse($data->metadata) : $gpx->metadata;
-        $gpx->wpt        = isset($data->wpt) ? PointParser::parse($data->wpt) : $gpx->wpt;
-        $gpx->rte        = isset($data->rte) ? RouteParser::parse($data->rte) : $gpx->rte;
-        $gpx->trk        = isset($data->trk) ? TrackParser::parse($data->trk) : $gpx->trk;
-        $gpx->extensions = isset($data->extensions) ? ExtensionParser::parse($data->extensions) : $gpx->extensions;
+        $gpx = GPXParser::parse($node);
 
         return $gpx;
     }
