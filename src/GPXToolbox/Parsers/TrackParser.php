@@ -10,6 +10,49 @@ use SimpleXMLElement;
 class TrackParser
 {
     /**
+     * Track attribute definition.
+     * @var string[][]
+     */
+    private static $attributeMap = [
+        'name' => [
+            'key' => 'name',
+            'parser' => 'string',
+        ],
+        'cmt' => [
+            'key' => 'cmt',
+            'parser' => 'string',
+        ],
+        'desc' => [
+            'key' => 'desc',
+            'parser' => 'string',
+        ],
+        'src' => [
+            'key' => 'src',
+            'parser' => 'string',
+        ],
+        'link' => [
+            'key' => 'links',
+            'parser' => LinkParser::class,
+        ],
+        'number' => [
+            'key' => 'number',
+            'parser' => 'integer',
+        ],
+        'type' => [
+            'key' => 'type',
+            'parser' => 'string',
+        ],
+        'extensions' => [
+            'key' => 'extensions',
+            'parser' => ExtensionParser::class,
+        ],
+        'trkseg' => [
+            'key' => 'trkseg',
+            'parser' => SegmentParser::class,
+        ],
+    ];
+
+    /**
      * Parses track data.
      * @param SimpleXMLElement $nodes
      * @return Track[]
@@ -21,32 +64,17 @@ class TrackParser
         foreach ($nodes as $node) {
             $trk = new Track();
 
-            if (isset($node->name)) {
-                $trk->name = (string) $node->name;
-            }
-            if (isset($node->cmt)) {
-                $trk->cmt = (string) $node->cmt;
-            }
-            if (isset($node->desc)) {
-                $trk->desc = (string) $node->desc;
-            }
-            if (isset($node->src)) {
-                $trk->src = (string) $node->src;
-            }
-            if (isset($node->link)) {
-                $trk->links = LinkParser::parse($node->link);
-            }
-            if (isset($node->number)) {
-                $trk->number = (int) $node->number;
-            }
-            if (isset($node->type)) {
-                $trk->type = (string) $node->type;
-            }
-            if (isset($node->extensions)) {
-                $trk->extensions = ExtensionParser::parse($node->extensions);
-            }
-            if (isset($node->trkseg)) {
-                $trk->trkseg = SegmentParser::parse($node->trkseg);
+            foreach (self::$attributeMap as $key => $attribute) {
+                if (!isset($node->{$key})) {
+                    continue;
+                }
+
+                if (!method_exists($attribute['parser'], 'parse')) {
+                    $trk->{$attribute['key']} = $node->{$key};
+                    settype($trk->{$attribute['key']}, $attribute['parser']);
+                } else {
+                    $trk->{$attribute['key']} = $attribute['parser']::parse($node->{$key});
+                }
             }
 
             $tracks []= $trk;
