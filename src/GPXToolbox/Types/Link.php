@@ -31,7 +31,7 @@ class Link implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'href' => $this->href,
             'text' => $this->text,
             'type' => $this->type,

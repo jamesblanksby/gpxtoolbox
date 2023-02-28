@@ -68,7 +68,7 @@ class TrackPointV1Extension extends ExtensionAbstract
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'atemp'   => $this->atemp,
             'wtemp'   => $this->wtemp,
             'depth'   => $this->depth,

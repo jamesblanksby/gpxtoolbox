@@ -309,7 +309,7 @@ class GPX implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'version'    => $this->version,
             'creator'    => $this->creator,
             'metadata'   => SerializationHelper::toArray($this->metadata),

@@ -37,7 +37,7 @@ class Bounds implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'minlat' => $this->minlat,
             'minlon' => $this->minlon,
             'maxlat' => $this->maxlat,

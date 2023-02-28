@@ -11,18 +11,18 @@ class SerializationHelper
      * @param mixed[] $array
      * @return mixed[]
      */
-    public static function filterEmpty(array $array): array
+    public static function filterNotNull(array $array): array
     {
         foreach ($array as &$item) {
             if (!is_array($item)) {
                 continue;
             }
 
-            $item = self::filterEmpty($item);
+            $item = self::filterNotNull($item);
         }
 
         $array = array_filter($array, function ($item) {
-            return !empty($item);
+            return !is_null($item) && (!is_array($item) || count($item));
         });
 
         return $array;

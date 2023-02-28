@@ -37,7 +37,7 @@ class Collection implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'type'       => $this->type,
             'features'   => SerializationHelper::toArray($this->features),
         ]);

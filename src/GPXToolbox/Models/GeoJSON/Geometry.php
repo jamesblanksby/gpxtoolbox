@@ -82,7 +82,7 @@ class Geometry implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'type'        => $this->type,
             'coordinates' => $this->coordinates,
         ]);

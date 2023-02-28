@@ -171,7 +171,7 @@ class Track implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'name'       => $this->name,
             'cmt'        => $this->cmt,
             'desc'       => $this->desc,

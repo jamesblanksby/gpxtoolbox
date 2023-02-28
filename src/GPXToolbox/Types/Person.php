@@ -31,7 +31,7 @@ class Person implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'name'  => $this->name,
             'email' => SerializationHelper::toArray($this->email),
             'link'  => SerializationHelper::toArray($this->link),

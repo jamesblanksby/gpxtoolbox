@@ -193,7 +193,7 @@ class Point implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'lat'           => $this->lat,
             'lon'           => $this->lon,
             'ele'           => $this->ele,

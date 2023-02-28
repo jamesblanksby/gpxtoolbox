@@ -67,7 +67,7 @@ class Stats implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'distance'       => $this->distance,
             'movingDuration' => $this->movingDuration,
             'totalDuration'  => $this->totalDuration,

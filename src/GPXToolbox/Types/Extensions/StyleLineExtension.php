@@ -69,7 +69,7 @@ class StyleLineExtension extends ExtensionAbstract
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'color'     => $this->color,
             'opacity'   => $this->opacity,
             'width'     => $this->width,

@@ -31,7 +31,7 @@ class Copyright implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'author'  => $this->author,
             'year'    => $this->year,
             'license' => $this->license,

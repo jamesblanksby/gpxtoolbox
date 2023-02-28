@@ -25,7 +25,7 @@ class Email implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'id'     => $this->id,
             'domain' => $this->domain,
         ]);

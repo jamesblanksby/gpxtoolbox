@@ -96,7 +96,7 @@ class Metadata implements ArraySerializableInterface
      */
     public function toArray(): array
     {
-        return SerializationHelper::filterEmpty([
+        return SerializationHelper::filterNotNull([
             'name'       => $this->name,
             'desc'       => $this->desc,
             'author'     => SerializationHelper::toArray($this->author),
