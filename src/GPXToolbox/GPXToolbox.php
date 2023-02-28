@@ -145,6 +145,7 @@ class GPXToolbox
      */
     public static function parse(string $xml): GPX
     {
+        libxml_use_internal_errors(true);
         $node = simplexml_load_string($xml);
 
         if (!$node) {
