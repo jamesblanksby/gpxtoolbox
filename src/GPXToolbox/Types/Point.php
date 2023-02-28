@@ -26,7 +26,13 @@ class Point implements ArraySerializableInterface
      * Routepoint GPX key.
      * @var string
      */
-    public const ROUTEPOINT = 'rte';
+    public const ROUTEPOINT = 'rtept';
+
+    /**
+     * GPX key.
+     * @var string
+     */
+    public $key;
 
     /**
      * The latitude of the point. Decimal degrees, WGS84 datum.
@@ -148,6 +154,14 @@ class Point implements ArraySerializableInterface
      * @var ExtensionAbstract[]
      */
     public $extensions = [];
+
+    /**
+     * Point constructor.
+     */
+    public function __construct(string $key)
+    {
+        $this->key = $key;
+    }
 
     /**
      * Add link to point.

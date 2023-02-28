@@ -2,7 +2,6 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Point;
 use GPXToolbox\Types\Route;
 use DOMDocument;
 use DOMNode;
@@ -105,7 +104,7 @@ class RouteParser
         }
 
         if ($rte->points) {
-            $children = PointParser::toXMLArray($rte->points, Point::WAYPOINT, $doc);
+            $children = PointParser::toXMLArray($rte->points, $doc);
             foreach ($children as $child) {
                 $node->appendChild($child);
             }

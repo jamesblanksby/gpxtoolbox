@@ -219,7 +219,7 @@ class GPX implements ArraySerializableInterface
 
         if ($this->wpt) {
             foreach ($this->wpt as $wpt) {
-                $gpx->appendChild(PointParser::toXML($wpt, Point::WAYPOINT, $doc));
+                $gpx->appendChild(PointParser::toXML($wpt, $doc));
             }
         }
 

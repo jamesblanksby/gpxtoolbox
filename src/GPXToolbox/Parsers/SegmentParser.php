@@ -2,7 +2,6 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\Types\Point;
 use GPXToolbox\Types\Segment;
 use DOMDocument;
 use DOMNode;
@@ -47,7 +46,7 @@ class SegmentParser
 
         if ($segment->points) {
             foreach ($segment->points as $trkpt) {
-                $node->appendChild(PointParser::toXML($trkpt, Point::TRACKPOINT, $doc));
+                $node->appendChild(PointParser::toXML($trkpt, $doc));
             }
         }
 

@@ -21,7 +21,7 @@ class PointParser
         $points = [];
 
         foreach ($nodes as $node) {
-            $point = new Point();
+            $point = new Point($node->getName());
 
             if (isset($node['lat'])) {
                 $point->lat = round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION);
@@ -93,13 +93,12 @@ class PointParser
     /**
      * XML representation of point data.
      * @param Point $point
-     * @param string $key
      * @param DOMDocument $doc
      * @return DOMNode
      */
-    public static function toXML(Point $point, string $key, DOMDocument $doc): DOMNode
+    public static function toXML(Point $point, DOMDocument $doc): DOMNode
     {
-        $node = $doc->createElement($key);
+        $node = $doc->createElement($point->key);
 
         if ($point->lat) {
             $node->setAttribute('lat', (string) $point->lat);
@@ -213,16 +212,15 @@ class PointParser
     /**
      * XML representation of array point data.
      * @param Point[] $points
-     * @param string $key
      * @param DOMDocument $doc
      * @return DOMNode[]
      */
-    public static function toXMLArray(array $points, string $key, DOMDocument $doc): array
+    public static function toXMLArray(array $points, DOMDocument $doc): array
     {
         $result = [];
 
         foreach ($points as $point) {
-            $result []= self::toXML($point, $key, $doc);
+            $result []= self::toXML($point, $doc);
         }
 
         return $result;
