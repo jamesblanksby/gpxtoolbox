@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx>
+    <wpt lat="-80.688897" lon="-52.525442">
+		<ele>29.39</ele>
+		<time>2004-08-09T10:10:30+00:00</time>
+	</wpt>
+	<trkpt lat="-55.704596" lon="-32.528228">
+		<ele>48.62</ele>
+		<time>2004-08-09T10:20:00+00:00</time>
+	</trkpt>
+	<rtept lat="-61.552498" lon="33.495067">
+		<ele>17.15</ele>
+		<time>2004-08-09T10:40:00+00:00</time>
+	</rtept>
+</gpx>

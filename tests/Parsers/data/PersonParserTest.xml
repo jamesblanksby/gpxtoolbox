@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx>
+    <author>
+        <name>John Doe</name>
+        <email id="john.doe" domain="example.com"/>
+        <link href="https://www.example.com/">
+            <text>example.com</text>
+            <type>text/html</type>
+        </link>
+    </author>
+</gpx>

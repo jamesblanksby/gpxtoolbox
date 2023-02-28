@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx
+	xmlns="http://www.topografix.com/GPX/1/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" creator="GPXToolbox" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+	<metadata>
+		<name>GPXToolbox Test</name>
+		<desc>A GPX file used in development unit tests</desc>
+		<author>
+			<name>John Doe</name>
+			<email id="john.doe" domain="example.com"/>
+			<link href="https://www.example.com/">
+				<text>example.com</text>
+				<type>text/html</type>
+			</link>
+		</author>
+		<copyright author="John Doe">
+			<year>2004</year>
+			<license>https://opensource.org/license/mit/</license>
+		</copyright>
+		<link href="https://www.example.com/">
+			<text>example.com</text>
+			<type>text/html</type>
+		</link>
+		<time>2004-08-09T10:30:00+00:00</time>
+		<keywords>GPXToolbox, GPX, Test</keywords>
+		<bounds minlat="-90" minlon="-180" maxlat="90" maxlon="180"/>
+	</metadata>
+	<wpt lat="-80.688897" lon="-52.525442">
+		<ele>29.4</ele>
+		<time>2004-08-09T10:10:30+00:00</time>
+	</wpt>
+	<wpt lat="-92.173776" lon="71.977676">
+		<ele>17.74</ele>
+		<time>2004-08-09T10:10:50+00:00</time>
+	</wpt>
+	<wpt lat="-74.810241" lon="83.282911">
+		<ele>95.83</ele>
+		<time>2004-08-09T10:10:55+00:00</time>
+	</wpt>
+	<wpt lat="52.804218" lon="29.330932">
+		<ele>55</ele>
+		<time>2004-08-09T10:11:05+00:00</time>
+	</wpt>
+	<wpt lat="79.077988" lon="-2.491562">
+		<ele>25.57</ele>
+		<time>2004-08-09T10:11:10+00:00</time>
+	</wpt>
+	<wpt lat="-155.315905" lon="-68.1387">
+		<ele>20.9</ele>
+		<time>2004-08-09T10:11:35+00:00</time>
+	</wpt>
+	<wpt lat="-117.466362" lon="25.374709">
+		<ele>32.11</ele>
+		<time>2004-08-09T10:11:50+00:00</time>
+	</wpt>
+	<wpt lat="144.707937" lon="7.712205">
+		<ele>53.04</ele>
+		<time>2004-08-09T10:12:00+00:00</time>
+	</wpt>
+	<rte>
+		<name>Route Test</name>
+		<desc>A fictional test route</desc>
+		<rtept lat="-61.552498" lon="33.495067">
+			<ele>17.16</ele>
+			<time>2004-08-09T10:40:00+00:00</time>
+		</rtept>
+		<rtept lat="6.971699" lon="-82.919599">
+			<ele>78.02</ele>
+			<time>2004-08-09T10:50:00+00:00</time>
+		</rtept>
+		<rtept lat="-143.175841" lon="80.046284">
+			<ele>29.06</ele>
+			<time>2004-08-09T10:55:00+00:00</time>
+		</rtept>
+		<rtept lat="116.891376" lon="79.637345">
+			<ele>6.29</ele>
+			<time>2004-08-09T11:05:00+00:00</time>
+		</rtept>
+		<rtept lat="61.825362" lon="55.522186">
+			<ele>17.05</ele>
+			<time>2004-08-09T11:10:00+00:00</time>
+		</rtept>
+		<rtept lat="-63.04173" lon="-71.642838">
+			<ele>72.83</ele>
+			<time>2004-08-09T11:40:00+00:00</time>
+		</rtept>
+		<rtept lat="55.640259" lon="70.654683">
+			<ele>46.26</ele>
+			<time>2004-08-09T11:50:00+00:00</time>
+		</rtept>
+		<rtept lat="-88.975426" lon="-5.789424">
+			<ele>30.76</ele>
+			<time>2004-08-09T11:55:00+00:00</time>
+		</rtept>
+	</rte>
+	<trk>
+		<name>Track Test</name>
+		<desc>A fictional test track</desc>
+		<trkseg>
+			<trkpt lat="-55.704596" lon="-32.528228">
+				<ele>48.62</ele>
+				<time>2004-08-09T10:20:00+00:00</time>
+			</trkpt>
+			<trkpt lat="-17.523521" lon="-144.04474">
+				<ele>52.89</ele>
+				<time>2004-08-09T10:25:00+00:00</time>
+			</trkpt>
+			<trkpt lat="-20.269574" lon="-150.317639">
+				<ele>96.03</ele>
+				<time>2004-08-09T10:35:00+00:00</time>
+			</trkpt>
+			<trkpt lat="53.15088" lon="-24.117582">
+				<ele>26.07</ele>
+				<time>2004-08-09T10:45:00+00:00</time>
+			</trkpt>
+			<trkpt lat="62.393368" lon="-92.724684">
+				<ele>33.23</ele>
+				<time>2004-08-09T10:50:00+00:00</time>
+			</trkpt>
+			<trkpt lat="-17.579905" lon="130.920152">
+				<ele>2.84</ele>
+				<time>2004-08-09T11:25:00+00:00</time>
+			</trkpt>
+			<trkpt lat="66.831287" lon="-66.751247">
+				<ele>59.36</ele>
+				<time>2004-08-09T11:30:00+00:00</time>
+			</trkpt>
+			<trkpt lat="50.200689" lon="-54.558193">
+				<ele>56.95</ele>
+				<time>2004-08-09T11:45:00+00:00</time>
+			</trkpt>
+		</trkseg>
+		<trkseg>
+			<trkpt lat="-76.546246" lon="-6.873981">
+				<ele>81.74</ele>
+				<time>2004-08-09T10:00:00+00:00</time>
+			</trkpt>
+			<trkpt lat="34.705773" lon="137.585642">
+				<ele>91.39</ele>
+				<time>2004-08-09T10:20:00+00:00</time>
+			</trkpt>
+			<trkpt lat="84.027992" lon="-4.413117">
+				<ele>13.5</ele>
+				<time>2004-08-09T10:30:00+00:00</time>
+			</trkpt>
+			<trkpt lat="-76.459788" lon="23.287524">
+				<ele>66.63</ele>
+				<time>2004-08-09T10:50:00+00:00</time>
+			</trkpt>
+			<trkpt lat="12.546939" lon="-152.040752">
+				<ele>4.39</ele>
+				<time>2004-08-09T10:55:00+00:00</time>
+			</trkpt>
+			<trkpt lat="84.564306" lon="69.146827">
+				<ele>38.24</ele>
+				<time>2004-08-09T11:05:00+00:00</time>
+			</trkpt>
+			<trkpt lat="26.887158" lon="-18.154042">
+				<ele>11.25</ele>
+				<time>2004-08-09T11:35:00+00:00</time>
+			</trkpt>
+			<trkpt lat="-14.909439" lon="-32.698506">
+				<ele>83.19</ele>
+				<time>2004-08-09T11:55:00+00:00</time>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx>
+    <metadata>
+		<name>GPXToolbox Test</name>
+		<desc>A GPX file used in development unit tests</desc>
+		<time>2004-08-09T10:30:00+00:00</time>
+		<keywords>GPXToolbox, GPX, Test</keywords>
+	</metadata>
+</gpx>
