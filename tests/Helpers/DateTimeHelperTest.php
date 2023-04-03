@@ -5,6 +5,7 @@ namespace GPXToolbox\Tests\Helpers;
 use GPXToolbox\Helpers\DateTimeHelper;
 use PHPUnit\Framework\TestCase;
 use DateTime;
+use DateTimeInterface;
 
 final class DateTimeHelperTest extends TestCase
 {
@@ -14,7 +15,7 @@ final class DateTimeHelperTest extends TestCase
     public function testDateTimeFormat(): void
     {
         $datetime = new DateTime('2004-08-09T10:30:00+00:00');
-        $format = 'Y-m-d H:i:s';
+        $format = DateTimeInterface::ATOM;
 
         $this->assertEquals($datetime->format($format), DateTimeHelper::format($datetime, $format));
     }
@@ -25,10 +26,10 @@ final class DateTimeHelperTest extends TestCase
     public function testDateTimeFormatWithTimezone(): void
     {
         $datetime = new DateTime('2004-08-09T10:30:00+00:00');
-        $format = 'Y-m-d H:i:s';
+        $format = DateTimeInterface::ATOM;
         $timezone = '+02:00';
 
-        $this->assertEquals('2004-08-09 12:30:00', DateTimeHelper::format($datetime, $format, $timezone));
+        $this->assertEquals('2004-08-09T12:30:00+02:00', DateTimeHelper::format($datetime, $format, $timezone));
     }
 
     /**
