@@ -71,7 +71,11 @@ class Geometry implements ArraySerializableInterface
      */
     public function addCoordinates(float $lon, float $lat): self
     {
-        array_push($this->coordinates, [$lon, $lat,]);
+        if ($this->type === self::POINT) {
+            $this->coordinates = [$lon, $lat,];
+        } else {
+            array_push($this->coordinates, [$lon, $lat,]);
+        }
 
         return $this;
     }
