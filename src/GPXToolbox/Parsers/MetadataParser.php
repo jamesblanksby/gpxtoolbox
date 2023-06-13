@@ -3,6 +3,7 @@
 namespace GPXToolbox\Parsers;
 
 use GPXToolbox\Helpers\DateTimeHelper;
+use GPXToolbox\Parsers\Values\DateTimeParser;
 use GPXToolbox\Types\Metadata;
 use DOMDocument;
 use DOMNode;
@@ -11,43 +12,64 @@ use SimpleXMLElement;
 class MetadataParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'name' => [
+            'name' => 'name',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'desc' => [
+            'name' => 'desc',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'author' => [
+            'name' => 'author',
+            'type' => 'element',
+            'parser' => PersonParser::class,
+        ],
+        'copyright' => [
+            'name' => 'copyright',
+            'type' => 'element',
+            'parser' => CopyrightParser::class,
+        ],
+        'link' => [
+            'name' => 'links',
+            'type' => 'element',
+            'parser' => LinkParser::class,
+        ],
+        'time' => [
+            'name' => 'time',
+            'type' => 'element',
+            'parser' => DateTimeParser::class,
+        ],
+        'keywords' => [
+            'name' => 'keywords',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'bounds' => [
+            'name' => 'bounds',
+            'type' => 'element',
+            'parser' => BoundsParser::class,
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => ExtensionParser::class,
+        ],
+    ];
+
+    /**
      * Parses file metadata.
      * @param SimpleXMLElement $node
      * @return Metadata
      */
     public static function parse(SimpleXMLElement $node): Metadata
     {
-        $metadata = new Metadata();
-
-        if (isset($node->name)) {
-            $metadata->name = (string) $node->name;
-        }
-        if (isset($node->desc)) {
-            $metadata->desc = (string) $node->desc;
-        }
-        if (isset($node->author)) {
-            $metadata->author = PersonParser::parse($node->author);
-        }
-        if (isset($node->copyright)) {
-            $metadata->copyright = CopyrightParser::parse($node->copyright);
-        }
-        if (isset($node->link)) {
-            $metadata->links = LinkParser::parse($node->link);
-        }
-        if (isset($node->time)) {
-            $metadata->time = DateTimeParser::parse($node->time);
-        }
-        if (isset($node->keywords)) {
-            $metadata->keywords = (string) $node->keywords;
-        }
-        if (isset($node->bounds)) {
-            $metadata->bounds = BoundsParser::parse($node->bounds);
-        }
-        if (isset($node->extensions)) {
-            $metadata->extensions= ExtensionParser::parse($node->extensions);
-        }
-
-        return $metadata;
+        return XMLElementParser::parse($node, new Metadata(), self::$map);
     }
 
     /**

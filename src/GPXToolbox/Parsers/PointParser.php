@@ -2,8 +2,10 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\GPXToolbox;
 use GPXToolbox\Helpers\DateTimeHelper;
+use GPXToolbox\Parsers\Values\CoordinateParser;
+use GPXToolbox\Parsers\Values\DateTimeParser;
+use GPXToolbox\Parsers\Values\ElevationParser;
 use GPXToolbox\Types\Point;
 use DOMDocument;
 use DOMNode;
@@ -11,6 +13,107 @@ use SimpleXMLElement;
 
 class PointParser
 {
+    /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'lat' => [
+            'name' => 'lat',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+        'lon' => [
+            'name' => 'lon',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+        'ele' => [
+            'name' => 'ele',
+            'type' => 'element',
+            'parser' => ElevationParser::class,
+        ],
+        'time' => [
+            'name' => 'time',
+            'type' => 'element',
+            'parser' => DateTimeParser::class,
+        ],
+        'magvar' => [
+            'name' => 'magvar',
+            'type' => 'element',
+            'parser' => 'float',
+        ],
+        'name' => [
+            'name' => 'name',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'cmt' => [
+            'name' => 'cmt',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'desc' => [
+            'name' => 'desc',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'src' => [
+            'name' => 'src',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'link' => [
+            'name' => 'links',
+            'type' => 'element',
+            'parser' => LinkParser::class,
+        ],
+        'sym' => [
+            'name' => 'sym',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'fix' => [
+            'name' => 'fix',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'sat' => [
+            'name' => 'sat',
+            'type' => 'element',
+            'parser' => 'integer',
+        ],
+        'hdop' => [
+            'name' => 'hdop',
+            'type' => 'element',
+            'parser' => 'float',
+        ],
+        'vdop' => [
+            'name' => 'vdop',
+            'type' => 'element',
+            'parser' => 'float',
+        ],
+        'pdop' => [
+            'name' => 'pdop',
+            'type' => 'element',
+            'parser' => 'float',
+        ],
+        'ageofgpsdata' => [
+            'name' => 'ageofgpsdata',
+            'type' => 'element',
+            'parser' => 'float',
+        ],
+        'dgpsid' => [
+            'name' => 'dgpsid',
+            'type' => 'element',
+            'parser' => 'integer',
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => ExtensionParser::class,
+        ],
+    ];
+
     /**
      * Parses point data.
      * @param SimpleXMLElement $nodes
@@ -21,70 +124,7 @@ class PointParser
         $points = [];
 
         foreach ($nodes as $node) {
-            $point = new Point($node->getName());
-
-            if (isset($node['lat'])) {
-                $point->lat = round((float) $node['lat'], GPXToolbox::$COORDINATE_PRECISION);
-            }
-            if (isset($node['lon'])) {
-                $point->lon = round((float) $node['lon'], GPXToolbox::$COORDINATE_PRECISION);
-            }
-            if (isset($node->ele)) {
-                $point->ele = round((float) $node->ele, GPXToolbox::$ELEVATION_PRECISION);
-            }
-            if (isset($node->time)) {
-                $point->time = DateTimeParser::parse($node->time);
-            }
-            if (isset($node->magvar)) {
-                $point->magvar = (float) $node->magvar;
-            }
-            if (isset($node->geoidheight)) {
-                $point->geoidheight = (float) $node->geoidheight;
-            }
-            if (isset($node->name)) {
-                $point->name = (string) $node->name;
-            }
-            if (isset($node->cmt)) {
-                $point->cmt = (string) $node->cmt;
-            }
-            if (isset($node->desc)) {
-                $point->desc = (string) $node->desc;
-            }
-            if (isset($node->src)) {
-                $point->src = (string) $node->src;
-            }
-            if (isset($node->links)) {
-                $point->links = LinkParser::parse($node->link);
-            }
-            if (isset($node->sym)) {
-                $point->sym = (string) $node->sym;
-            }
-            if (isset($node->fix)) {
-                $point->fix = (string) $node->fix;
-            }
-            if (isset($node->sat)) {
-                $point->sat = (int) $node->sat;
-            }
-            if (isset($node->hdop)) {
-                $point->hdop = (float) $node->hdop;
-            }
-            if (isset($node->vdop)) {
-                $point->vdop = (float) $node->vdop;
-            }
-            if (isset($node->pdop)) {
-                $point->pdop = (float) $node->pdop;
-            }
-            if (isset($node->ageofdgpsdata)) {
-                $point->ageofdgpsdata = (float) $node->ageofdgpsdata;
-            }
-            if (isset($node->dgpsid)) {
-                $point->dgpsid = (int) $node->dgpsid;
-            }
-            if (isset($node->extensions)) {
-                $point->extensions = ExtensionParser::parse($node->extensions);
-            }
-
-            $points []= $point;
+            $points []= XMLElementParser::parse($node, new Point($node->getName()), self::$map);
         }
 
         return $points;

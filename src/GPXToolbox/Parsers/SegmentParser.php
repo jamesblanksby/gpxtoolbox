@@ -10,6 +10,22 @@ use SimpleXMLElement;
 class SegmentParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'trkpt' => [
+            'name' => 'points',
+            'type' => 'element',
+            'parser' => PointParser::class,
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => PointParser::class,
+        ],
+    ];
+
+    /**
      * Parses segment data.
      * @param SimpleXMLElement $nodes
      * @return Segment[]
@@ -19,16 +35,8 @@ class SegmentParser
         $segments = [];
 
         foreach ($nodes as $node) {
-            $segment = new Segment();
-
-            if (isset($node->trkpt)) {
-                $segment->points = PointParser::parse($node->trkpt);
-            }
-            if (isset($node->extensions)) {
-                $segment->extensions = ExtensionParser::parse($node->extensions);
-            }
-
-            $segments []= $segment;
+            $segments []= XMLElementParser::parse($node, new Segment(), self::$map);
+            ;
         }
 
         return $segments;

@@ -10,6 +10,57 @@ use SimpleXMLElement;
 class RouteParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'name' => [
+            'name' => 'name',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'cmt' => [
+            'name' => 'cmt',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'desc' => [
+            'name' => 'desc',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'src' => [
+            'name' => 'src',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'link' => [
+            'name' => 'links',
+            'type' => 'element',
+            'parser' => LinkParser::class,
+        ],
+        'number' => [
+            'name' => 'number',
+            'type' => 'element',
+            'parser' => 'integer',
+        ],
+        'type' => [
+            'name' => 'type',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'rtept' => [
+            'name' => 'points',
+            'type' => 'element',
+            'parser' => PointParser::class,
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => ExtensionParser::class,
+        ],
+    ];
+
+    /**
      * Parses route data.
      * @param SimpleXMLElement $nodes
      * @return Route[]
@@ -19,37 +70,7 @@ class RouteParser
         $routes = [];
 
         foreach ($nodes as $node) {
-            $rte = new Route();
-
-            if (isset($node->name)) {
-                $rte->name = (string) $node->name;
-            }
-            if (isset($node->cmt)) {
-                $rte->cmt = (string) $node->cmt;
-            }
-            if (isset($node->desc)) {
-                $rte->desc = (string) $node->desc;
-            }
-            if (isset($node->src)) {
-                $rte->src = (string) $node->src;
-            }
-            if (isset($node->link)) {
-                $rte->links = LinkParser::parse($node->link);
-            }
-            if (isset($node->number)) {
-                $rte->number = (int) $node->number;
-            }
-            if (isset($node->type)) {
-                $rte->type = (string) $node->type;
-            }
-            if (isset($node->rtept)) {
-                $rte->points = PointParser::parse($node->rtept);
-            }
-            if (isset($node->extensions)) {
-                $rte->extensions = ExtensionParser::parse($node->extensions);
-            }
-
-            $routes []= $rte;
+            $routes []= XMLElementParser::parse($node, new Route(), self::$map);
         }
 
 

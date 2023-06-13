@@ -1,6 +1,6 @@
 <?php
 
-namespace GPXToolbox\Parsers;
+namespace GPXToolbox\Parsers\Values;
 
 use DateTime;
 use DateTimeZone;

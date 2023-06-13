@@ -10,25 +10,34 @@ use SimpleXMLElement;
 class CopyrightParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'author' => [
+            'name' => 'author',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+        'year' => [
+            'name' => 'year',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'license' => [
+            'name' => 'license',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+    ];
+
+    /**
      * Parses copyright data.
      * @param SimpleXMLElement $node
      * @return Copyright
      */
     public static function parse(SimpleXMLElement $node): Copyright
     {
-        $copyright = new Copyright();
-
-        if (isset($node['author'])) {
-            $copyright->author = (string) $node['author'];
-        }
-        if (isset($node->year)) {
-            $copyright->year = (string) $node->year;
-        }
-        if (isset($node->license)) {
-            $copyright->license = (string) $node->license;
-        }
-
-        return $copyright;
+        return XMLElementParser::parse($node, new Copyright(), self::$map);
     }
 
     /**

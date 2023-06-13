@@ -10,6 +10,27 @@ use SimpleXMLElement;
 class LinkParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'href' => [
+            'name' => 'href',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+        'text' => [
+            'name' => 'text',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'type' => [
+            'name' => 'type',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+    ];
+
+    /**
      * Parses link data.
      * @param SimpleXMLElement[]|SimpleXMLElement $nodes
      * @return Link[]
@@ -19,19 +40,7 @@ class LinkParser
         $links = [];
 
         foreach ($nodes as $node) {
-            $link = new Link();
-
-            if (isset($node['href'])) {
-                $link->href = (string) $node['href'];
-            }
-            if (isset($node->text)) {
-                $link->text = (string) $node->text;
-            }
-            if (isset($node->type)) {
-                $link->type = (string) $node->type;
-            }
-
-            $links []= $link;
+            $links []= XMLElementParser::parse($node, new Link(), self::$map);
         }
 
         return $links;

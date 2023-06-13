@@ -10,23 +10,35 @@ use SimpleXMLElement;
 class PersonParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'name' => [
+            'name' => 'name',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'email' => [
+            'name' => 'email',
+            'type' => 'element',
+            'parser' => EmailParser::class,
+        ],
+        'link' => [
+            'name' => 'link',
+            'type' => 'element',
+            'parser' => LinkParser::class,
+        ],
+    ];
+
+    /**
      * Parses person data.
      * @param SimpleXMLElement $node
      * @return Person
      */
     public static function parse(SimpleXMLElement $node): Person
     {
-        $person = new Person();
-
-        if (isset($node->name)) {
-            $person->name = (string) $node->name;
-        }
-        if (isset($node->email)) {
-            $person->email = EmailParser::parse($node->email);
-        }
-        if (isset($node->link)) {
-            $person->link = LinkParser::parse($node->link)[0];
-        }
+        $person = XMLElementParser::parse($node, new Person(), self::$map);
+        $person->link = reset($person->link);
 
         return $person;
     }

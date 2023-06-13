@@ -10,22 +10,29 @@ use DOMNode;
 class EmailParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'id' => [
+            'name' => 'id',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+        'domain' => [
+            'name' => 'domain',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+    ];
+
+    /**
      * Parses email data.
      * @param SimpleXMLElement $node
      * @return Email
      */
     public static function parse(SimpleXMLElement $node): Email
     {
-        $email = new Email();
-
-        if (isset($node['id'])) {
-            $email->id = (string) $node['id'];
-        }
-        if (isset($node['domain'])) {
-            $email->domain = (string) $node['domain'];
-        }
-
-        return $email;
+        return XMLElementParser::parse($node, new Email(), self::$map);
     }
 
     /**

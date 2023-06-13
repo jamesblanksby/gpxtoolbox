@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Parsers;
 
-use GPXToolbox\GPXToolbox;
+use GPXToolbox\Parsers\Values\CoordinateParser;
 use GPXToolbox\Types\Bounds;
 use DOMDocument;
 use DOMNode;
@@ -11,28 +11,39 @@ use SimpleXMLElement;
 class BoundsParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'minlat' => [
+            'name' => 'minlat',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+        'minlon' => [
+            'name' => 'minlon',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+        'maxlat' => [
+            'name' => 'maxlat',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+        'maxlon' => [
+            'name' => 'maxlon',
+            'type' => 'attribute',
+            'parser' => CoordinateParser::class,
+        ],
+    ];
+
+    /**
      * Parses bounds data.
      * @param SimpleXMLElement $node
      * @return Bounds
      */
     public static function parse(SimpleXMLElement $node): Bounds
     {
-        $bounds = new Bounds();
-
-        if (isset($node['minlat'])) {
-            $bounds->minlat = round((float) $node['minlat'], GPXToolbox::$COORDINATE_PRECISION);
-        }
-        if (isset($node['minlon'])) {
-            $bounds->minlon = round((float) $node['minlon'], GPXToolbox::$COORDINATE_PRECISION);
-        }
-        if (isset($node['maxlat'])) {
-            $bounds->maxlat = round((float) $node['maxlat'], GPXToolbox::$COORDINATE_PRECISION);
-        }
-        if (isset($node['maxlon'])) {
-            $bounds->maxlon = round((float) $node['maxlon'], GPXToolbox::$COORDINATE_PRECISION);
-        }
-
-        return $bounds;
+        return XMLElementParser::parse($node, new Bounds(), self::$map);
     }
 
     /**

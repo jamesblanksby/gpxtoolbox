@@ -10,6 +10,57 @@ use SimpleXMLElement;
 class TrackParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'name' => [
+            'name' => 'name',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'cmt' => [
+            'name' => 'cmt',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'desc' => [
+            'name' => 'desc',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'src' => [
+            'name' => 'src',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'link' => [
+            'name' => 'links',
+            'type' => 'element',
+            'parser' => LinkParser::class,
+        ],
+        'number' => [
+            'name' => 'number',
+            'type' => 'element',
+            'parser' => 'integer',
+        ],
+        'type' => [
+            'name' => 'type',
+            'type' => 'element',
+            'parser' => 'string',
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => ExtensionParser::class,
+        ],
+        'trkseg' => [
+            'name' => 'trkseg',
+            'type' => 'element',
+            'parser' => SegmentParser::class,
+        ],
+    ];
+
+    /**
      * Parses track data.
      * @param SimpleXMLElement $nodes
      * @return Track[]
@@ -19,37 +70,7 @@ class TrackParser
         $tracks = [];
 
         foreach ($nodes as $node) {
-            $trk = new Track();
-
-            if (isset($node->name)) {
-                $trk->name = (string) $node->name;
-            }
-            if (isset($node->cmt)) {
-                $trk->cmt = (string) $node->cmt;
-            }
-            if (isset($node->desc)) {
-                $trk->desc = (string) $node->desc;
-            }
-            if (isset($node->src)) {
-                $trk->src = (string) $node->src;
-            }
-            if (isset($node->link)) {
-                $trk->links = LinkParser::parse($node->link);
-            }
-            if (isset($node->number)) {
-                $trk->number = (int) $node->number;
-            }
-            if (isset($node->type)) {
-                $trk->type = (string) $node->type;
-            }
-            if (isset($node->extensions)) {
-                $trk->extensions = ExtensionParser::parse($node->extensions);
-            }
-            if (isset($node->trkseg)) {
-                $trk->trkseg = SegmentParser::parse($node->trkseg);
-            }
-
-            $tracks []= $trk;
+            $tracks []= XMLElementParser::parse($node, new Track(), self::$map);
         }
 
         return $tracks;

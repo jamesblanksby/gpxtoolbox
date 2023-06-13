@@ -8,36 +8,53 @@ use SimpleXMLElement;
 class GPXParser
 {
     /**
+     * @var array<mixed>
+     */
+    private static $map = [
+        'version' => [
+            'name' => 'version',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+        'creator' => [
+            'name' => 'creator',
+            'type' => 'attribute',
+            'parser' => 'string',
+        ],
+        'metadata' => [
+            'name' => 'metadata',
+            'type' => 'element',
+            'parser' => MetadataParser::class,
+        ],
+        'wpt' => [
+            'name' => 'wpt',
+            'type' => 'element',
+            'parser' => PointParser::class,
+        ],
+        'rte' => [
+            'name' => 'rte',
+            'type' => 'element',
+            'parser' => RouteParser::class,
+        ],
+        'trk' => [
+            'name' => 'trk',
+            'type' => 'element',
+            'parser' => TrackParser::class,
+        ],
+        'extensions' => [
+            'name' => 'extensions',
+            'type' => 'element',
+            'parser' => ExtensionParser::class,
+        ],
+    ];
+
+    /**
      * Parses GPX data.
      * @param SimpleXMLElement $node
      * @return GPX
      */
     public static function parse(SimpleXMLElement $node): GPX
     {
-        $gpx = new GPX();
-
-        if (isset($node['version'])) {
-            $gpx->version = (string) $node['version'];
-        }
-        if (isset($node['creator'])) {
-            $gpx->creator = (string) $node['creator'];
-        }
-        if (isset($node->metadata)) {
-            $gpx->metadata = MetadataParser::parse($node->metadata);
-        }
-        if (isset($node->wpt)) {
-            $gpx->wpt = PointParser::parse($node->wpt);
-        }
-        if (isset($node->rte)) {
-            $gpx->rte = RouteParser::parse($node->rte);
-        }
-        if (isset($node->trk)) {
-            $gpx->trk = TrackParser::parse($node->trk);
-        }
-        if (isset($node->extensions)) {
-            $gpx->extensions = ExtensionParser::parse($node->extensions);
-        }
-
-        return $gpx;
+        return XMLElementParser::parse($node, new GPX(), self::$map);
     }
 }
