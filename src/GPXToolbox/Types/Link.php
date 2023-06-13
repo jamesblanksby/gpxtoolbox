@@ -27,7 +27,7 @@ class Link implements ArraySerializableInterface
 
     /**
      * Array representation of link data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

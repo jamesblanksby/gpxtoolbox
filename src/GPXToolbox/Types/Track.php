@@ -38,7 +38,7 @@ class Track implements ArraySerializableInterface
 
     /**
      * Links to external information about track.
-     * @var Link[]
+     * @var array<Link>
      */
     public $links = [];
 
@@ -56,14 +56,14 @@ class Track implements ArraySerializableInterface
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
     /**
      * A Track Segment holds a list of Track Points
      * which are logically connected in order.
-     * @var Segment[]
+     * @var array<Segment>
      */
     public $trkseg = [];
 
@@ -105,7 +105,7 @@ class Track implements ArraySerializableInterface
 
     /**
      * Recursively gather Track points.
-     * @return Point[]
+     * @return array<Point>
      */
     public function getPoints(): array
     {
@@ -124,7 +124,7 @@ class Track implements ArraySerializableInterface
 
     /**
      * Calculate Track bounds.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function getBounds(): array
     {
@@ -167,7 +167,7 @@ class Track implements ArraySerializableInterface
 
     /**
      * Array representation of track data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

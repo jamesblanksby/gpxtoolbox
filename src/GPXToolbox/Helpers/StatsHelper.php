@@ -11,7 +11,7 @@ class StatsHelper
 {
     /**
      * Calculate statistics from a list of points.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @return Stats
      */
     public static function calculateStats(array $points): Stats
@@ -42,7 +42,7 @@ class StatsHelper
 
     /**
      * Calculate distance between a list of points.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @return float
      */
     public static function calculateDistance(array $points): float
@@ -77,7 +77,7 @@ class StatsHelper
 
     /**
      * Calculate time spent moving.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @return integer
      */
     public static function calculateMovingDuration(array $points): int
@@ -113,8 +113,8 @@ class StatsHelper
 
     /**
      * Calculate cumulative elevation gain/loss.
-     * @param Point[] $points
-     * @return float[]
+     * @param array<Point> $points
+     * @return array<float>
      */
     public static function calculateElevationGainLoss(array $points): array
     {

@@ -22,7 +22,7 @@ class Feature implements ArraySerializableInterface
 
     /**
      * A list of properties.
-     * @var mixed[]
+     * @var array<mixed>
      */
     public $properties = [];
 
@@ -50,7 +50,7 @@ class Feature implements ArraySerializableInterface
 
     /**
      * Array representation of feature data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

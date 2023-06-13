@@ -50,7 +50,7 @@ class Geometry implements ArraySerializableInterface
 
     /**
      * A list of coordinates.
-     * @var mixed[]
+     * @var array<mixed>
      */
     public $coordinates = [];
 
@@ -82,7 +82,7 @@ class Geometry implements ArraySerializableInterface
 
     /**
      * Array representation of geometry data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

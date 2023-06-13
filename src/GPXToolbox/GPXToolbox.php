@@ -102,7 +102,7 @@ class GPXToolbox
 
     /**
      * A list of namespace extensions.
-     * @var string[]
+     * @var array<string>
      */
     public static $EXTENSIONS = [];
 

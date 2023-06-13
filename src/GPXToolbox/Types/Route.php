@@ -35,7 +35,7 @@ class Route implements ArraySerializableInterface
 
     /**
      * Links to external information about the route.
-     * @var Link[]
+     * @var array<Link>
      */
     public $links = [];
 
@@ -53,13 +53,13 @@ class Route implements ArraySerializableInterface
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
     /**
      * A list of route points.
-     * @var Point[]
+     * @var array<Point>
      */
     public $points = [];
 
@@ -101,7 +101,7 @@ class Route implements ArraySerializableInterface
 
     /**
      * Array representation of route data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

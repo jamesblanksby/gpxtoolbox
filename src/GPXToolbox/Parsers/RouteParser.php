@@ -63,7 +63,7 @@ class RouteParser
     /**
      * Parses route data.
      * @param SimpleXMLElement $nodes
-     * @return Route[]
+     * @return array<int, Route>
      */
     public static function parse($nodes): array
     {

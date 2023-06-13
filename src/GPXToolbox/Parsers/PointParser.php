@@ -117,7 +117,7 @@ class PointParser
     /**
      * Parses point data.
      * @param SimpleXMLElement $nodes
-     * @return Point[]
+     * @return array<int, Point>
      */
     public static function parse($nodes): array
     {
@@ -251,9 +251,9 @@ class PointParser
 
     /**
      * XML representation of array point data.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @param DOMDocument $doc
-     * @return DOMNode[]
+     * @return array<DOMNode>
      */
     public static function toXMLArray(array $points, DOMDocument $doc): array
     {

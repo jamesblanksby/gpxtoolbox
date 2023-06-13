@@ -63,7 +63,7 @@ class Stats implements ArraySerializableInterface
 
     /**
      * Array representation of stats data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

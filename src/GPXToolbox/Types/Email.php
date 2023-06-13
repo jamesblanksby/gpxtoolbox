@@ -21,7 +21,7 @@ class Email implements ArraySerializableInterface
 
     /**
      * Array representation of email data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

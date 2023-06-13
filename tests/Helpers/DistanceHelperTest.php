@@ -49,7 +49,7 @@ final class DistanceHelperTest extends TestCase
     }
 
     /**
-     * @return Point[]
+     * @return array<Point>
      */
     protected function providePoints(): array
     {

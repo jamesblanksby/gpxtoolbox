@@ -28,7 +28,7 @@ class SegmentParser
     /**
      * Parses segment data.
      * @param SimpleXMLElement $nodes
-     * @return Segment[]
+     * @return array<int, Segment>
      */
     public static function parse($nodes): array
     {
@@ -36,7 +36,6 @@ class SegmentParser
 
         foreach ($nodes as $node) {
             $segments []= XMLElementParser::parse($node, new Segment(), self::$map);
-            ;
         }
 
         return $segments;
@@ -71,9 +70,9 @@ class SegmentParser
 
     /**
      * XML representation of array segment data.
-     * @param Segment[] $segments
+     * @param array<Segment> $segments
      * @param DOMDocument $doc
-     * @return DOMNode[]
+     * @return array<DOMNode>
      */
     public static function toXMLArray(array $segments, DOMDocument $doc): array
     {

@@ -11,9 +11,9 @@ class XMLElementParser
      * @param SimpleXMLElement $node
      * @param ArraySerializableInterface $object
      * @param array<mixed> $map
-     * @return mixed
+     * @return ArraySerializableInterface
      */
-    public static function parse(SimpleXMLElement $node, ArraySerializableInterface $object, array $map): mixed
+    public static function parse(SimpleXMLElement $node, ArraySerializableInterface $object, array $map): ArraySerializableInterface
     {
         foreach ($map as $key => $element) {
             if ($element['type'] === 'attribute') {

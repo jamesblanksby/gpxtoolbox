@@ -8,8 +8,8 @@ class SerializationHelper
 {
     /**
      * Recursively remove empty array elements.
-     * @param mixed[] $array
-     * @return mixed[]
+     * @param array<mixed> $array
+     * @return array<mixed>
      */
     public static function filterNotNull(array $array): array
     {
@@ -31,8 +31,8 @@ class SerializationHelper
     /**
      * Recursively convert ArraySerializable objects
      * to their array representation.
-     * @param ArraySerializableInterface[]|ArraySerializableInterface|null $value
-     * @return mixed[]|null
+     * @param array<ArraySerializableInterface>|ArraySerializableInterface|null $value
+     * @return array<mixed>|null
      */
     public static function toArray($value): ?array
     {

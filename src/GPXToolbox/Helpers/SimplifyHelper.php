@@ -8,9 +8,9 @@ class SimplifyHelper
 {
     /**
      * Basic distance based simplification.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @param float $toleranceSq
-     * @return Point[]
+     * @return array<Point>
      */
     public static function simplifyDistance(array $points, float $toleranceSq): array
     {
@@ -36,9 +36,9 @@ class SimplifyHelper
 
     /**
      * Optimized Douglas-Peucker simplification algorithm with recursion elimination.
-     * @param Point[] $points
+     * @param array<Point> $points
      * @param float $toleranceSq
-     * @return Point[]
+     * @return array<Point>
      */
     public static function simplifyDouglasPeucker(array $points, float $toleranceSq): array
     {

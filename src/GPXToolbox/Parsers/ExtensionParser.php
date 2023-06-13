@@ -12,14 +12,14 @@ class ExtensionParser
 {
     /**
      * Extensions which have beed parsed.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public static $PARSED_EXTENSIONS = [];
 
     /**
      * Parses extension data.
      * @param SimpleXMLElement $nodes
-     * @return ExtensionAbstract[]
+     * @return array<ExtensionAbstract>
      */
     public static function parse($nodes): array
     {
@@ -59,9 +59,9 @@ class ExtensionParser
 
     /**
      * XML representation of array extension data.
-     * @param ExtensionAbstract[] $extensions
+     * @param array<ExtensionAbstract> $extensions
      * @param DOMDocument $doc
-     * @return DOMNode[]
+     * @return array<DOMNode>
      */
     public static function toXMLArray(array $extensions, DOMDocument $doc): array
     {

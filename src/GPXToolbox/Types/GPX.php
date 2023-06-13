@@ -40,25 +40,25 @@ class GPX implements ArraySerializableInterface
 
     /**
      * A list of way points.
-     * @var Point[];
+     * @var array<Point>;
      */
     public $wpt = [];
 
     /**
      * A list of routes.
-     * @var Route[]
+     * @var array<Route>
      */
     public $rte = [];
 
     /**
      * A list of tracks.
-     * @var Track[]
+     * @var array<Track>
      */
     public $trk = [];
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
@@ -112,7 +112,7 @@ class GPX implements ArraySerializableInterface
 
     /**
      * Recursively gather GPX points.
-     * @return Point[]
+     * @return array<Point>
      */
     public function getPoints(): array
     {
@@ -131,7 +131,7 @@ class GPX implements ArraySerializableInterface
 
     /**
      * Calculate GPX bounds.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function getBounds(): array
     {
@@ -305,7 +305,7 @@ class GPX implements ArraySerializableInterface
 
     /**
      * Array representation of GPX file.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

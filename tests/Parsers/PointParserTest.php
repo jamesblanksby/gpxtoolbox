@@ -17,7 +17,7 @@ final class PointParserTest extends ParserTestAbstract
     protected $testParserClass = PointParser::class;
 
     /**
-     * @var Point[]
+     * @var array<Point>
      */
     protected $testInstances = [];
 
@@ -108,7 +108,7 @@ final class PointParserTest extends ParserTestAbstract
 
     /**
      * @param DOMDocument $doc
-     * @return DOMNode[]
+     * @return array<DOMNode>
      */
     protected function convertToXML(DOMDocument $doc): array
     {

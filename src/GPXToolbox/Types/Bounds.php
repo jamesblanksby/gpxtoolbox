@@ -33,7 +33,7 @@ class Bounds implements ArraySerializableInterface
 
     /**
      * Array representation of bounds data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

@@ -27,7 +27,7 @@ class Copyright implements ArraySerializableInterface
 
     /**
      * Array representation of copyright data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

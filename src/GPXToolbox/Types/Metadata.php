@@ -36,7 +36,7 @@ class Metadata implements ArraySerializableInterface
 
     /**
      * URLs associated with the location described in the file.
-     * @var Link[]
+     * @var array<Link>
      */
     public $links = [];
 
@@ -62,7 +62,7 @@ class Metadata implements ArraySerializableInterface
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
@@ -92,7 +92,7 @@ class Metadata implements ArraySerializableInterface
 
     /**
      * Array representation of metadata.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

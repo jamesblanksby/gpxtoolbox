@@ -97,7 +97,7 @@ class Point implements ArraySerializableInterface
 
     /**
      * Link to additional information about the point.
-     * @var Link[]
+     * @var array<Link>
      */
     public $links = [];
 
@@ -151,7 +151,7 @@ class Point implements ArraySerializableInterface
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
@@ -189,7 +189,7 @@ class Point implements ArraySerializableInterface
 
     /**
      * Array representation of point data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

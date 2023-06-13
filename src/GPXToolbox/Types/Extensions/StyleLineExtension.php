@@ -59,13 +59,13 @@ class StyleLineExtension extends ExtensionAbstract
 
     /**
      * List of marks and spaces in pixels.
-     * @var string[]|null
+     * @var array<string>|null
      */
     public $dasharray = null;
 
     /**
      * @inheritDoc
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

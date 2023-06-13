@@ -15,7 +15,7 @@ class Collection implements ArraySerializableInterface
 
     /**
      * A list of features.
-     * @var Feature[]
+     * @var array<Feature>
      */
     public $features = [];
 
@@ -33,7 +33,7 @@ class Collection implements ArraySerializableInterface
 
     /**
      * Array representation of collection data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {

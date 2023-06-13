@@ -32,8 +32,8 @@ class LinkParser
 
     /**
      * Parses link data.
-     * @param SimpleXMLElement[]|SimpleXMLElement $nodes
-     * @return Link[]
+     * @param array<SimpleXMLElement>|SimpleXMLElement $nodes
+     * @return array<int, Link>
      */
     public static function parse($nodes): array
     {
@@ -75,9 +75,9 @@ class LinkParser
 
     /**
      * XML representation of array link data.
-     * @param Link[] $links
+     * @param array<Link> $links
      * @param DOMDocument $doc
-     * @return DOMNode[]
+     * @return array<DOMNode>
      */
     public static function toXMLArray(array $links, DOMDocument $doc): array
     {

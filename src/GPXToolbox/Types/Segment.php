@@ -14,13 +14,13 @@ class Segment implements ArraySerializableInterface
 {
     /**
      * A list of track points.
-     * @var Point[]
+     * @var array<Point>
      */
     public $points = [];
 
     /**
      * A list of extensions.
-     * @var ExtensionAbstract[]
+     * @var array<ExtensionAbstract>
      */
     public $extensions = [];
 
@@ -50,7 +50,7 @@ class Segment implements ArraySerializableInterface
 
     /**
      * Gather Segment points.
-     * @return Point[]
+     * @return array<Point>
      */
     public function getPoints(): array
     {
@@ -59,7 +59,7 @@ class Segment implements ArraySerializableInterface
 
     /**
      * Calculate Segment bounds.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function getBounds(): array
     {
@@ -107,7 +107,7 @@ class Segment implements ArraySerializableInterface
 
     /**
      * Array representation of segment data.
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function toArray(): array
     {
