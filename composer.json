@@ -37,8 +37,15 @@
         "phpunit/phpunit": "^10.0"
     },
     "scripts": {
-		"csfix": "php vendor/bin/php-cs-fixer fix",
-		"analyse": "vendor/bin/phpstan analyse --memory-limit 1G",
+		"cs:check": [
+			"@putenv PHP_CS_FIXER_IGNORE_ENV=1",
+			"php-cs-fixer fix --dry-run --diff --ansi"
+		],
+		"cs:fix": [
+			"@putenv PHP_CS_FIXER_IGNORE_ENV=1",
+			"php-cs-fixer fix --ansi"
+		],
+		"stan": "phpstan analyse -c phpstan.neon --memory-limit 1G --ansi",
         "test": "./vendor/bin/phpunit tests"
 	}
 }
