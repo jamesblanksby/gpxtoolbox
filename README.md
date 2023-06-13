@@ -1,5 +1,9 @@
 # 🗺 GPXToolbox
 
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/jamesblanksby/gpxtoolbox)](https://codeclimate.com/github/jamesblanksby/gpxtoolbox)
+[![Latest version](https://img.shields.io/packagist/v/jamesblanksby/gpxtoolbox)](https://packagist.org/packages/jamesblanksby/gpxtoolbox)
+[![Downloads](https://img.shields.io/packagist/dm/jamesblanksby/gpxtoolbox)](https://packagist.org/packages/jamesblanksby/gpxtoolbox)
+
 A simple library for creating, parsing and modifying [GPX files](https://en.wikipedia.org/wiki/GPS_Exchange_Format).
 
 
