@@ -165,7 +165,7 @@ Add extension interface.
 
 #### `GPX::getPoints()`
 
-Returns all track points points recursively. `getPoints()` may also be called on `Track` and `Segment`.
+Returns all track points recursively. `getPoints()` may also be called on `Track` and `Segment`.
 
 #### Return values:
 
