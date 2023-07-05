@@ -64,10 +64,12 @@ class StatsHelper
             if (GPXToolbox::$DISTANCE_THRESHOLD !== false) {
                 if ($difference > GPXToolbox::$DISTANCE_THRESHOLD) {
                     $distance += $difference;
+
                     $lastPoint = $point;
                 }
             } else {
                 $distance += $difference;
+
                 $lastPoint = $point;
             }
         }
