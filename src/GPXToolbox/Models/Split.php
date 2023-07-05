@@ -2,10 +2,12 @@
 
 namespace GPXToolbox\Models;
 
+use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\StatsHelper;
+use GPXToolbox\Interfaces\ArraySerializableInterface;
 use GPXToolbox\Types\Point;
 
-class Split
+class Split implements ArraySerializableInterface
 {
     /**
      * @var int
@@ -35,9 +37,9 @@ class Split
 
     /**
      * Split statistical data.
-     * @var Stats|null
+     * @var Stats
      */
-    public $stats = null;
+    public $stats;
 
     /**
      * Split constructor.
@@ -47,5 +49,17 @@ class Split
     {
         $this->points = $points;
         $this->stats = StatsHelper::calculateStats($points);
+    }
+
+    /**
+     * Array representation of split data.
+     * @return array<mixed>
+     */
+    public function toArray(): array
+    {
+        return SerializationHelper::filterNotNull([
+            'points' => SerializationHelper::toArray($this->points),
+            'stats'  => $this->stats->toArray(),
+        ]);
     }
 }
