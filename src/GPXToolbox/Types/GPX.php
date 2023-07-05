@@ -6,8 +6,10 @@ use GPXToolbox\GPXToolbox;
 use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\GeoJSONHelper;
 use GPXToolbox\Helpers\SerializationHelper;
+use GPXToolbox\Helpers\SplitsHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
+use GPXToolbox\Models\Split;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Parsers\ExtensionParser;
 use GPXToolbox\Parsers\MetadataParser;
@@ -151,6 +153,19 @@ class GPX implements ArraySerializableInterface
         $stats = StatsHelper::calculateStats($points);
 
         return $stats;
+    }
+
+    /**
+     * Calculate GPX interval splits.
+     * @param integer|null $interval
+     * @return array<Split>
+     */
+    public function getSplits(?int $interval): array
+    {
+        $points = $this->getPoints();
+        $splits = SplitsHelper::calculateSplits($points, $interval);
+
+        return $splits;
     }
 
     /**

@@ -5,8 +5,10 @@ namespace GPXToolbox\Types;
 use GPXToolbox\Helpers\GeoHelper;
 use GPXToolbox\Helpers\SerializationHelper;
 use GPXToolbox\Helpers\SimplifyHelper;
+use GPXToolbox\Helpers\SplitsHelper;
 use GPXToolbox\Helpers\StatsHelper;
 use GPXToolbox\Interfaces\ArraySerializableInterface;
+use GPXToolbox\Models\Split;
 use GPXToolbox\Models\Stats;
 use GPXToolbox\Types\Extensions\ExtensionAbstract;
 
@@ -79,6 +81,19 @@ class Segment implements ArraySerializableInterface
         $stats = StatsHelper::calculateStats($points);
 
         return $stats;
+    }
+
+    /**
+     * Calculate Segment interval splits.
+     * @param integer|null $interval
+     * @return array<Split>
+     */
+    public function getSplits(?int $interval): array
+    {
+        $points = $this->getPoints();
+        $splits = SplitsHelper::calculateSplits($points, $interval);
+
+        return $splits;
     }
 
     /**

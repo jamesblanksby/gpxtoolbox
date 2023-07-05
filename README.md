@@ -193,7 +193,21 @@ Returns the statistical data such as distance, moving time and elevation gain fo
 
 <hr>
 
-#### `GPX::simplify([float $tolerance, bool $highestQuality,])`;
+#### `GPX::getSplits([int $interval,])`
+
+Returns track points and statistical data for a given distance interval.
+
+####  Parameters:
+
+* `$interval`: Distance in meters for each split [Default: `1000`] *(Optional)*.
+
+#### Return values:
+
+* `Stats`: Array containing `Split` objects. 
+
+<hr>
+
+#### `GPX::simplify([float $tolerance, bool $highestQuality,])`
 
 Simplifies a polyline using a combination of [Douglas-Peucker](http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) and Radial Distance algorithms. `simplify()` may also be called on `Track` and `Segment` with the same parameters.
 
