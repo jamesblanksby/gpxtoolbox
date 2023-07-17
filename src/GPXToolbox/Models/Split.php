@@ -20,16 +20,6 @@ class Split implements ArraySerializableInterface
     public const DISTANCE_5KM = 5000;
 
     /**
-     * @var float
-     */
-    public const DISTANCE_1MI = 1609.344;
-
-    /**
-     * @var float
-     */
-    public const DISTANCE_5MI = 8046.72;
-
-    /**
      * A list of split points.
      * @var array<Point>
      */
