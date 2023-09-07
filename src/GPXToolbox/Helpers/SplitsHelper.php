@@ -41,9 +41,13 @@ class SplitsHelper
             if (GPXToolbox::$DISTANCE_THRESHOLD !== false) {
                 if ($difference > GPXToolbox::$DISTANCE_THRESHOLD) {
                     $distance += $difference;
+
+                    $lastPoint = $point;
                 }
             } else {
                 $distance += $difference;
+
+                $lastPoint = $point;
             }
 
             if ($distance >= $interval) {
@@ -53,8 +57,6 @@ class SplitsHelper
                 $distance = 0.0;
                 $splitPoints = [];
             }
-
-            $lastPoint = $point;
         }
 
         $split = new Split($splitPoints);
