@@ -13,7 +13,7 @@ class SplitsHelper
      * @param integer|null $interval
      * @return array<Split>
      */
-    public static function calculateSplits(array $points, ?int $interval): array
+    public static function calculateSplits(array $points, ?int $interval = null): array
     {
         $splits = [];
 

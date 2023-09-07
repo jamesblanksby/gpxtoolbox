@@ -160,7 +160,7 @@ class GPX implements ArraySerializableInterface
      * @param integer|null $interval
      * @return array<Split>
      */
-    public function getSplits(?int $interval): array
+    public function getSplits(?int $interval = null): array
     {
         $points = $this->getPoints();
         $splits = SplitsHelper::calculateSplits($points, $interval);
