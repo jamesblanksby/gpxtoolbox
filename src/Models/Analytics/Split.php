@@ -13,11 +13,6 @@ class Split extends Model
     use HasStatistics;
 
     /**
-     * @var array|null Statistics calculated for the split.
-     */
-    public $statistics = null;
-
-    /**
      * @var PointCollection A list of points within the split.
      */
     public $points;
@@ -31,7 +26,6 @@ class Split extends Model
     {
         $this->points = new PointCollection();
         parent::__construct($collection);
-        $this->statistics = $this->getStatistics();
     }
 
     /**

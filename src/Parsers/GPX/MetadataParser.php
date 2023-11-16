@@ -23,26 +23,26 @@ class MetadataParser extends GPXTypeParser
         ],
         'author' => [
             'type' => 'node',
-            'parser' => [AuthorParser::class, 'parse',],
+            'callable' => [AuthorParser::class, 'parse',],
         ],
         'copyright' => [
             'type' => 'node',
-            'parser' => [CopyrightParser::class, 'parse',],
+            'callable' => [CopyrightParser::class, 'parse',],
         ],
         'link' => [
             'type' => 'node',
-            'parser' => [LinkParser::class, 'parse',],
+            'callable' => [LinkParser::class, 'parse',],
         ],
         'time' => [
             'type' => 'node',
-            'parser' => [GPXParser::class, 'parseDateTime',],
+            'callable' => [GPXParser::class, 'parseDateTime',],
         ],
         'keywords' => [
             'type' => 'node',
         ],
         'bounds' => [
             'type' => 'node',
-            'parser' => [BoundsParser::class, 'parse',],
+            'callable' => [BoundsParser::class, 'parse',],
         ],
     ];
 

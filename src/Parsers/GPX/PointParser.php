@@ -26,11 +26,11 @@ class PointParser extends GPXTypeParser
         ],
         'ele' => [
             'type' => 'node',
-            'cast' => 'float',
+            'callable' => [GPXParser::class, 'parseElevation',],
         ],
         'time' => [
             'type' => 'node',
-            'parser' => [GPXParser::class, 'parseDateTime',],
+            'callable' => [GPXParser::class, 'parseDateTime',],
         ],
         'magvar' => [
             'type' => 'node',
@@ -50,7 +50,7 @@ class PointParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'parser' => [LinkParser::class, 'parse',],
+            'callable' => [LinkParser::class, 'parse',],
         ],
         'sym' => [
             'type' => 'node',

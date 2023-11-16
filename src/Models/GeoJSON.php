@@ -29,12 +29,12 @@ class GeoJSON extends Model
     }
 
     /**
-     * Set a list of features associated with the feature.
+     * Set a list of features associated with the collection.
      *
-     * @param array<int|string,int,string>
+     * @param FeatureCollection
      * @return $this
      */
-    public function setFeatures(array $features)
+    public function setFeatures($features)
     {
         $this->getFeatures()->fill($features);
 
@@ -44,7 +44,6 @@ class GeoJSON extends Model
     /**
      * Add a feature to the collection.
      *
-     * @param string $key
      * @param mixed $value
      * @return $this
      */

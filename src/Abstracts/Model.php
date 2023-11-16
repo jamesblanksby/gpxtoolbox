@@ -7,6 +7,7 @@ use GPXToolbox\Interfaces\Fillable;
 use GPXToolbox\Interfaces\Jsonable;
 use GPXToolbox\Traits\HasArrayable;
 use ReflectionClass;
+use ReflectionNamedType;
 
 abstract class Model implements Arrayable, Fillable, Jsonable
 {
@@ -14,7 +15,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
 
     /**
      * Model constructor.
-     * 
+     *
      * @param array|Arrayable|null $collection
      */
     public function __construct($collection = null)
@@ -42,7 +43,13 @@ abstract class Model implements Arrayable, Fillable, Jsonable
             $property->setAccessible(true);
 
             if ($property->hasType()) {
-                $class = $property->getType()->getName();
+                $type = $property->getType();
+
+                if (!$type instanceof ReflectionNamedType) {
+                    continue;
+                }
+
+                $class = $type->getName();
                 if (class_exists($class) && (!is_object($value) || get_class($value) !== $class)) {
                     $value = new $class(...$value);
                 }

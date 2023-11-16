@@ -14,14 +14,29 @@ class GPXToolbox
     public const SIGNATURE = 'GPXToolbox';
 
     /**
+     * @var Configuration The configuration instance.
+     */
+    protected static $configuration;
+
+    /**
+     * GPXToolbox constructor.
+     *
+     * @param Configuration|null $configuration
+     */
+    public function __construct(?Configuration $configuration = null)
+    {
+        self::$configuration = $configuration ?? self::getConfiguration();
+    }
+
+    /**
      * Load GPX data from a file.
      *
      * @param string $filename
-     * @return mixed
+     * @return GPX
      *
      * @throws RuntimeException If the file is not found or cannot be read.
      */
-    public static function load(string $filename)
+    public function load(string $filename)
     {
         if (!file_exists($filename)) {
             throw new RuntimeException(sprintf('File not found: %s', $filename));
@@ -33,18 +48,18 @@ class GPXToolbox
             throw new RuntimeException(sprintf('Failed to read file: %s', $filename));
         }
 
-        return self::parse($xml);
+        return $this->parse($xml);
     }
 
     /**
      * Parse GPX data from an XML string.
      *
      * @param string $xml
-     * @return mixed
+     * @return GPX
      *
      * @throws RuntimeException If there is an issue loading or parsing the XML.
      */
-    public static function parse(string $xml)
+    public function parse(string $xml)
     {
         libxml_use_internal_errors(true);
         $node = simplexml_load_string($xml);
@@ -69,11 +84,11 @@ class GPXToolbox
      * @param string $filename
      * @param string $format
      * @param GPX $gpx
+     * @return int
      *
      * @throws RuntimeException If there is an issue saving the GPX file.
-     * @return int
      */
-    public static function save(string $filename, string $format, GPX $gpx): int
+    public function save(string $filename, string $format, GPX $gpx): int
     {
         $format = strtolower($format);
 
@@ -98,5 +113,15 @@ class GPXToolbox
         }
 
         return $result;
+    }
+
+    /**
+     * Get the current configuration instance.
+     *
+     * @return Configuration
+     */
+    public static function getConfiguration()
+    {
+        return self::$configuration ?? new Configuration();
     }
 }

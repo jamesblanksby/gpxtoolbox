@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Abstracts\GPX;
 
+use GPXToolbox\Abstracts\Collection;
 use SimpleXMLElement;
 
 abstract class GPXTypeParser
@@ -18,6 +19,7 @@ abstract class GPXTypeParser
      * Extracts an associative array of properties from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
+     * @param array $parseMap
      * @return array
      */
     protected static function propertiesFromXML(SimpleXMLElement $node, array $parseMap): array
@@ -45,8 +47,8 @@ abstract class GPXTypeParser
                 continue;
             }
 
-            if (isset($schema['parser'])) {
-                $value = call_user_func($schema['parser'], $value);
+            if (isset($schema['callable'])) {
+                $value = call_user_func($schema['callable'], $value);
             } elseif (isset($schema['cast'])) {
                 settype($value, $schema['cast']);
             } else {

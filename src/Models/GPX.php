@@ -4,7 +4,6 @@ namespace GPXToolbox\Models;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 use GPXToolbox\GPXToolbox;
-use GPXToolbox\Models\GeoJSON;
 use GPXToolbox\Models\GeoJSON\Feature;
 use GPXToolbox\Models\GeoJSON\Geometry;
 use GPXToolbox\Models\GPX\Metadata;

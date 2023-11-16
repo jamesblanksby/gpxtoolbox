@@ -22,7 +22,7 @@ class AuthorParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'parser' => [LinkParser::class, 'parse',],
+            'callable' => [LinkParser::class, 'parse',],
         ],
     ];
 

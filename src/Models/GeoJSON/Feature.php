@@ -56,7 +56,7 @@ class Feature extends Model
      */
     public function addProperty(string $key, $value)
     {
-        $this->getProperties()->add($key, $value);
+        $this->getProperties()->set($key, $value);
 
         return $this;
     }

@@ -9,6 +9,7 @@ use GPXToolbox\Parsers\GPX\RouteParser;
 use GPXToolbox\Parsers\GPX\TrackParser;
 use GPXToolbox\Parsers\GPX\WaypointParser;
 use DateTimeImmutable;
+use GPXToolbox\GPXToolbox;
 use SimpleXMLElement;
 
 class GPXParser extends GPXTypeParser
@@ -27,19 +28,19 @@ class GPXParser extends GPXTypeParser
         ],
         'metadata' => [
             'type' => 'node',
-            'parser' => [MetadataParser::class, 'parse',],
+            'callable' => [MetadataParser::class, 'parse',],
         ],
         'wpt' => [
             'type' => 'node',
-            'parser' => [WaypointParser::class, 'parse',],
+            'callable' => [WaypointParser::class, 'parse',],
         ],
         'rte' => [
             'type' => 'node',
-            'parser' => [RouteParser::class, 'parse',],
+            'callable' => [RouteParser::class, 'parse',],
         ],
         'trk' => [
             'type' => 'node',
-            'parser' => [TrackParser::class, 'parse',],
+            'callable' => [TrackParser::class, 'parse',],
         ],
     ];
 
@@ -57,6 +58,17 @@ class GPXParser extends GPXTypeParser
     }
 
     /**
+     * Parse a coordinate value from a string.
+     *
+     * @param string $value
+     * @return float
+     */
+    public static function parseCoordinate(string $value): float
+    {
+        return round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
+    }
+
+    /**
      * Parse a string representation of a date and time.
      *
      * @param string $value
@@ -65,5 +77,16 @@ class GPXParser extends GPXTypeParser
     public static function parseDateTime(string $value): DateTimeImmutable
     {
         return new DateTimeImmutable($value);
+    }
+
+    /**
+     * Parse an elevation value from a string.
+     *
+     * @param string $value
+     * @return float
+     */
+    public static function parseElevation(string $value): float
+    {
+        return round((float) $value, GPXToolbox::getConfiguration()->getElevationPrecision());
     }
 }

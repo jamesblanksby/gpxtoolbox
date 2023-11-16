@@ -17,7 +17,7 @@ class SegmentParser extends GPXTypeParser
     protected static $parseMap = [
         'trkpt' => [
             'type' => 'node',
-            'parser' => [PointParser::class, 'parse',],
+            'callable' => [PointParser::class, 'parse',],
         ],
     ];
 

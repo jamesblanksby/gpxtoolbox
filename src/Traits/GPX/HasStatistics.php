@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Traits\GPX;
 
+use GPXToolbox\GPXToolbox;
 use GPXToolbox\Helpers\GPX\PointHelper;
 use GPXToolbox\Models\Analytics\Statistics;
 use GPXToolbox\Models\GPX\PointCollection;
@@ -17,12 +18,9 @@ trait HasStatistics
     {
         $points = $this->getPoints();
 
-        list($distance) = self::getDistance($points);
-        list($movingDuration, $totalDuration) = self::getDuration($points);
-        list($minElevation, $maxElevation, $gainElevation, $lossElevation) = self::getElevation($points);
-
-        // @TODO averagePace
-        // @TODO averageSpeed
+        list($distance) = $this->getDistance($points);
+        list($movingDuration, $totalDuration) = $this->getDuration($points);
+        list($minElevation, $maxElevation, $gainElevation, $lossElevation) = $this->getElevation($points);
 
         $properties = compact(
             'distance',
@@ -34,7 +32,18 @@ trait HasStatistics
             'lossElevation',
         );
 
-        return new Statistics($properties);
+        $statistics = new Statistics($properties);
+
+        list($averagePace, $averageSpeed) = $this->getAverage($statistics);
+
+        $properties = compact(
+            'averagePace',
+            'averageSpeed',
+        );
+
+        $statistics->fill($properties);
+
+        return $statistics;
     }
 
     /**
@@ -43,21 +52,33 @@ trait HasStatistics
      * @param PointCollection $points
      * @return array<float>
      */
-    protected static function getDistance(PointCollection $points): array
+    protected function getDistance(PointCollection $points): array
     {
+        $prevPoint = $points->first();
+
         $distance = 0.0;
+
+        $configuration = GPXToolbox::getConfiguration();
+        $distanceThreshold = $configuration->getDistanceThreshold();
 
         for ($a = 0; $a < $points->count(); $a++) {
             if ($a === 0) {
                 continue;
             }
 
-            $difference = PointHelper::get3dDistance($points->get($a), $points->get(($a - 1)));
+            $point = $points->get($a);
 
-            // @TODO validate distance threshold
+            $difference = PointHelper::get3dDistance($prevPoint, $point);
 
-            $distance += $difference;
+            $isDistanceWithinThreshold = (!$distanceThreshold || $difference > $distanceThreshold);
+
+            if ($isDistanceWithinThreshold) {
+                $distance += $difference;
+                $prevPoint = $point;
+            }
         }
+
+        $distance = round($distance, $configuration->getDistancePrecision());
 
         return [$distance,];
     }
@@ -68,24 +89,37 @@ trait HasStatistics
      * @param PointCollection $points
      * @return array<int>
      */
-    public static function getDuration(PointCollection $points): array
+    protected function getDuration(PointCollection $points): array
     {
         $firstPoint = $points->first();
         $lastPoint = $points->last();
+        $prevPoint = $firstPoint;
 
         $moving = 0;
         $total = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
+
+        $configuration = GPXToolbox::getConfiguration();
+        $distanceThreshold = $configuration->getDistanceThreshold();
+        $movingDurationThreshold = $configuration->getMovingDurationThreshold();
 
         for ($a = 0; $a < $points->count(); $a++) {
             if ($a === 0) {
                 continue;
             }
 
-            $difference = ($points->get($a)->time->getTimestamp() - $points->get(($a - 1))->time->getTimestamp());
+            $point = $points->get($a);
 
-            // @TODO validate movement threshold
+            $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
+            $durationDifference = abs(($prevPoint->time->getTimestamp() - $point->time->getTimestamp()));
 
-            $moving += $difference;
+            $isDistanceWithinThreshold = (!$distanceThreshold || $distanceDifference > $distanceThreshold);
+            $isDurationWithinThreshold = (!$movingDurationThreshold || $durationDifference < $movingDurationThreshold);
+
+            if ($isDistanceWithinThreshold && $isDurationWithinThreshold) {
+                $moving += $durationDifference;
+            }
+
+            $prevPoint = $point;
         }
 
         return [$moving, $total,];
@@ -97,8 +131,10 @@ trait HasStatistics
      * @param PointCollection $points
      * @return array<float>
      */
-    public static function getElevation(PointCollection $points): array
+    protected function getElevation(PointCollection $points): array
     {
+        $prevPoint = $points->first();
+
         $elevationArray = array_map(function ($point) {
             return $point->getElevation();
         }, $points->all());
@@ -108,19 +144,51 @@ trait HasStatistics
         $gain = 0.0;
         $loss = 0.0;
 
+        $elevationThreshold = GPXToolbox::getConfiguration()->getElevationThreshold();
+
         for ($a = 0; $a < $points->count(); $a++) {
             if ($a === 0) {
                 continue;
             }
 
-            $difference = ($points->get($a)->getElevation() - $points->get(($a - 1))->getElevation());
+            $point = $points->get($a);
 
-            // @TODO validate elevation threshold
+            $difference = ($prevPoint->getElevation() - $point->getElevation());
 
-            $gain += $difference > 0 ? $difference : 0;
-            $loss += $difference < 0 ? abs($difference) : 0;
+            $isDistanceWithinThreshold = (!$elevationThreshold || abs($difference) > $elevationThreshold);
+
+            if ($isDistanceWithinThreshold) {
+                $gain += $difference > 0 ? $difference : 0;
+                $loss += $difference < 0 ? abs($difference) : 0;
+                $prevPoint = $point;
+            }
         }
 
         return [$min, $max, $gain, $loss,];
+    }
+
+    /**
+     * Calculate the average values based on the provided statistics.
+     *
+     * @param Statistics $statistics
+     * @return array
+     */
+    protected function getAverage(Statistics $statistics): array
+    {
+        $pace = 0.0;
+        $speed = 0.0;
+
+        $distance = $statistics->getDistance();
+        $movingDuration = $statistics->getMovingDuration();
+
+        $pace = ($movingDuration / ($distance / 1000));
+        $speed = (($distance / 1000) / ($movingDuration / 3600));
+
+        $configuration = GPXToolbox::getConfiguration();
+
+        $pace = round($pace, $configuration->getPacePrecision());
+        $speed = round($speed, $configuration->getSpeedPrecision());
+
+        return [$pace, $speed,];
     }
 }

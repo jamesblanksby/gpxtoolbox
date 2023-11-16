@@ -2,8 +2,10 @@
 
 namespace GPXToolbox\Traits\GPX;
 
+use GPXToolbox\GPXToolbox;
 use GPXToolbox\Helpers\GPX\PointHelper;
 use GPXToolbox\Models\Analytics\SplitCollection;
+use GPXToolbox\Models\GPX\PointCollection;
 
 trait HasSplits
 {
@@ -17,34 +19,38 @@ trait HasSplits
     {
         $points = $this->getPoints();
 
-        $splits = new SplitCollection();
+        $prevPoint = $points->first();
 
         $distance = 0.0;
-        $splitPoints = [];
+        $distanceThreshold = GPXToolbox::getConfiguration()->getDistanceThreshold();
 
-        for ($a = 0; $a < count($points); $a++) {
-            $point = $points[$a];
+        $splits = new SplitCollection();
+        $splitPoints = new PointCollection();
 
-            $splitPoints[] = $point;
+        for ($a = 0; $a < $points->count(); $a++) {
+            $point = $points->get($a);
+
+            $splitPoints->add($point);
 
             if ($a === 0) {
                 continue;
             }
 
-            $difference = PointHelper::get3dDistance($point, $points[($a - 1)]);
+            $difference = PointHelper::get3dDistance($prevPoint, $point);
 
-            // @TODO validate distance threshold
-
-            $distance += $difference;
+            if (!$distanceThreshold || $difference > $distanceThreshold) {
+                $distance += $difference;
+                $prevPoint = $point;
+            }
 
             if ($distance < $interval) {
                 continue;
             }
 
-            $splits->addSplit($splitPoints);
+            $splits->addSplit(clone $splitPoints);
 
             $distance = 0.0;
-            $splitPoints = [];
+            $splitPoints->clear();
         }
 
         $splits->addSplit($splitPoints);

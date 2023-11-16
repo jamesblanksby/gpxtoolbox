@@ -29,7 +29,7 @@ class RouteParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'parser' => [LinkParser::class, 'parse',],
+            'callable' => [LinkParser::class, 'parse',],
         ],
         'number' => [
             'type' => 'node',
@@ -40,7 +40,7 @@ class RouteParser extends GPXTypeParser
         ],
         'rtept' => [
             'type' => 'node',
-            'parser' => [PointParser::class, 'parse',],
+            'callable' => [PointParser::class, 'parse',],
         ],
     ];
 

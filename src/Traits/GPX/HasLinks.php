@@ -32,7 +32,7 @@ trait HasLinks
 
         return $this;
     }
-    
+
     /**
      * Get a list of links associated with the split.
      *

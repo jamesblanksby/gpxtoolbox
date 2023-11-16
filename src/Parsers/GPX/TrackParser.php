@@ -29,7 +29,7 @@ class TrackParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'parser' => [LinkParser::class, 'parse',],
+            'callable' => [LinkParser::class, 'parse',],
         ],
         'number' => [
             'type' => 'node',
@@ -40,7 +40,7 @@ class TrackParser extends GPXTypeParser
         ],
         'trkseg' => [
             'type' => 'node',
-            'parser' => [SegmentParser::class, 'parse',],
+            'callable' => [SegmentParser::class, 'parse',],
         ],
     ];
 
