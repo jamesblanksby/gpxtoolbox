@@ -3,6 +3,7 @@
 namespace GPXToolbox\Models\GeoJSON;
 
 use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Models\GPX\PointCollection;
 
 class Geometry extends Model
 {
@@ -38,6 +39,23 @@ class Geometry extends Model
         $this->coordinates = new CoordinateCollection();
         parent::__construct($collection);
         $this->type = $type;
+    }
+
+    /**
+     * Set a list of points associated with the geometry.
+     *
+     * @param FeatureCollection
+     * @return $this
+     */
+    public function setCoordinates(PointCollection $coordinates)
+    {
+        if ($this->type === self::POINT) {
+            $coordinates = $coordinates->first();
+        }
+
+        $this->coordinates->fill($coordinates);
+
+        return $this;
     }
 
     /**

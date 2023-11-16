@@ -160,9 +160,7 @@ class GPX extends GPXType
 
         foreach ($this->getRoutes() as $route) {
             $feature = new Feature(Geometry::LINE_STRING);
-            foreach ($route->getPoints() as $point) {
-                $feature->getGeometry()->addCoordinate($point->getLongitude(), $point->getLatitude());
-            }
+            $feature->getGeometry()->setCoordinates($route->getPoints());
 
             $properties = array_diff_key($route->toArray(), array_flip(['rtept',]));
             $feature->setProperties($properties);
@@ -172,9 +170,7 @@ class GPX extends GPXType
 
         foreach ($this->getTracks() as $track) {
             $feature = new Feature(Geometry::LINE_STRING);
-            foreach ($track->getPoints() as $point) {
-                $feature->getGeometry()->addCoordinate($point->getLongitude(), $point->getLatitude());
-            }
+            $feature->getGeometry()->setCoordinates($route->getPoints());
 
             $properties = array_diff_key($track->toArray(), array_flip(['trkseg',]));
             $feature->setProperties($properties);
