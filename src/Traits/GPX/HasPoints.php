@@ -19,7 +19,7 @@ trait HasPoints
     /**
      * Set a list of points.
      *
-     * @param PointCollection
+     * @param PointCollection $points
      * @return $this
      */
     public function setPoints(PointCollection $points)
@@ -45,7 +45,7 @@ trait HasPoints
     /**
      * Get the bounds of a list of points.
      *
-     * @return array
+     * @return Bounds
      */
     public function getBounds()
     {

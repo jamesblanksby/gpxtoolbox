@@ -10,10 +10,10 @@ trait HasLinks
     /**
      * Set a list of links associated with the collection.
      *
-     * @param array<Link>
+     * @param LinkCollection $links
      * @return $this
      */
-    public function setLinks(array $links)
+    public function setLinks(LinkCollection $links)
     {
         $this->getLinks()->fill($links);
 

@@ -74,7 +74,7 @@ class PointHelper
     {
         $lineLengthSq = self::getSquaredDistance($b, $c);
 
-        if ($lineLengthSq === 0) {
+        if ($lineLengthSq === 0.0) {
             return self::getSquaredDistance($a, $b);
         }
 
@@ -134,9 +134,9 @@ class PointHelper
         $count = (count($points) - 1);
 
         for ($a = 1; $a < $count; $a++) {
-            $point = $points[$a];
+            $point = $points->get($a);
 
-            $distanceSq = self::getSquaredDistance($points[($a - 1)], $point);
+            $distanceSq = self::getSquaredDistance($points->get(($a - 1)), $point);
 
             if ($distanceSq >= $toleranceSq) {
                 $simplifiedPoints->add($point);
@@ -168,7 +168,7 @@ class PointHelper
         $count = (count($points) - 1);
 
         for ($a = 1; $a < $count; $a++) {
-            $distanceSq = self::getPerpendicularSquaredDistance($points[$a], $firstPoint, $points[$count]);
+            $distanceSq = self::getPerpendicularSquaredDistance($points->get($a), $firstPoint, $points->get($count));
 
             if ($distanceSq > $maxDistanceSq) {
                 $maxDistanceSq = $distanceSq;
@@ -179,12 +179,11 @@ class PointHelper
         $simplifiedPoints = new PointCollection();
 
         if ($maxDistanceSq > $toleranceSq) {
-            $simplifiedPoints = array_merge(
-                self::simplifyDouglasPeucker($points->slice(0, ($maxIndex + 1)), $toleranceSq),
+            $simplifiedPoints = self::simplifyDouglasPeucker($points->slice(0, ($maxIndex + 1)), $toleranceSq)->merge(
                 self::simplifyDouglasPeucker($points->slice($maxIndex, ($count - ($maxIndex + 1))), $toleranceSq)
             );
         } else {
-            $simplifiedPoints->add($firstPoint)->add($points[$count]);
+            $simplifiedPoints->add($firstPoint)->add($points->get($count));
         }
 
         return $simplifiedPoints;

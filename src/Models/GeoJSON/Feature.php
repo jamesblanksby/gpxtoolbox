@@ -37,7 +37,7 @@ class Feature extends Model
     /**
      * Set a list of properties associated with the feature.
      *
-     * @param array<int|string,int,string>
+     * @param array $properties
      * @return $this
      */
     public function setProperties(array $properties)

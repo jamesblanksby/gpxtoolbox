@@ -55,7 +55,7 @@ class Metadata extends GPXType
      *
      * @param array|null $collection
      */
-    public function __construct($collection = null)
+    public function __construct(?array $collection = null)
     {
         $this->link = new LinkCollection();
         parent::__construct($collection);

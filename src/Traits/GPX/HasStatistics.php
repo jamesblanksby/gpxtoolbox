@@ -50,7 +50,7 @@ trait HasStatistics
      * Get distance data from a list of points.
      *
      * @param PointCollection $points
-     * @return array<float>
+     * @return array
      */
     protected function getDistance(PointCollection $points): array
     {
@@ -87,7 +87,7 @@ trait HasStatistics
      * Get duration data from a list of points.
      *
      * @param PointCollection $points
-     * @return array<int>
+     * @return array
      */
     protected function getDuration(PointCollection $points): array
     {
@@ -129,7 +129,7 @@ trait HasStatistics
      * Get elevation data from a list of points.
      *
      * @param PointCollection $points
-     * @return array<float>
+     * @return array
      */
     protected function getElevation(PointCollection $points): array
     {

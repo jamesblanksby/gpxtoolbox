@@ -89,6 +89,7 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
     {
         $items = $this->getArrayableItems($collection);
 
+        // @phpstan-ignore-next-line
         return new static(array_merge($this->items, $items));
     }
 
@@ -203,6 +204,7 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
      */
     public function slice(int $offset, ?int $length = null)
     {
+        // @phpstan-ignore-next-line
         return new static(array_slice($this->items, $offset, $length, true));
     }
 

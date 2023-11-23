@@ -14,7 +14,7 @@ class GPXToolbox
     public const SIGNATURE = 'GPXToolbox';
 
     /**
-     * @var Configuration The configuration instance.
+     * @var Configuration|null The configuration instance.
      */
     protected static $configuration;
 
@@ -103,7 +103,7 @@ class GPXToolbox
                 $data = $gpx->toGeoJson();
                 break;
             default:
-                throw new RuntimeException('Unsupported file format: %s', $format);
+                throw new RuntimeException(sprintf('Unsupported file format: %s', $format));
         }
 
         $result = file_put_contents($filename, $data);
@@ -120,7 +120,7 @@ class GPXToolbox
      *
      * @return Configuration
      */
-    public static function getConfiguration()
+    public static function getConfiguration(): Configuration
     {
         return self::$configuration ?? new Configuration();
     }

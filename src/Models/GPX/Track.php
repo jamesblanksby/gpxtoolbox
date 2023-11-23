@@ -81,7 +81,7 @@ class Track extends GPXType
     /**
      * Get a list of segments associated with the track.
      *
-     * @return WaypointCollection
+     * @return SegmentCollection
      */
     public function getSegments()
     {
@@ -113,7 +113,7 @@ class Track extends GPXType
     /**
      * Set a list of points associated with the track.
      *
-     * @param array<Point>
+     * @param PointCollection $points
      * @return $this
      */
     public function setPoints(PointCollection $points)

@@ -44,7 +44,7 @@ class Geometry extends Model
     /**
      * Set a list of points associated with the geometry.
      *
-     * @param FeatureCollection
+     * @param PointCollection $coordinates
      * @return $this
      */
     public function setCoordinates(PointCollection $coordinates)

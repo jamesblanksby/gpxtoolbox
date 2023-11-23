@@ -27,6 +27,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
      * Fill the model with values.
      *
      * @param array|Arrayable|null $collection
+     * @return $this
      */
     public function fill($collection = null)
     {
