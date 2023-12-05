@@ -196,6 +196,18 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
     }
 
     /**
+     * Run a map over each of the items.
+     *
+     * @param callable $callback
+     * @return static
+     */
+    public function map(callable $callback)
+    {
+        // @phpstan-ignore-next-line
+        return new static(array_map($callback, $this->items));
+    }
+
+    /**
      * Extract a slice of the collection.
      *
      * @param int $offset

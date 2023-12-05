@@ -153,6 +153,16 @@ class Point extends GPXType
     }
 
     /**
+     * Get a the coordinates of the point.
+     *
+     * @return array
+     */
+    public function getCoordinates(): array
+    {
+        return [$this->getLongitude(), $this->getLatitude(),];
+    }
+
+    /**
      * Get the elevation value of the point.
      *
      * @return float

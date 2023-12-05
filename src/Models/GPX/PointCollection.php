@@ -18,4 +18,20 @@ class PointCollection extends Collection
     {
         return $this;
     }
+
+    /**
+     * Get a list of coordinates of the point collection.
+     *
+     * @return array
+     */
+    public function getCoordinates(): array
+    {
+        $points = $this->getPoints();
+
+        $coordinates = $points->map(function ($point) {
+            return $point->getCoordinates();
+        })->toArray();
+
+        return $coordinates;
+    }
 }

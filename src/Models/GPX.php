@@ -5,6 +5,7 @@ namespace GPXToolbox\Models;
 use GPXToolbox\Abstracts\GPX\GPXType;
 use GPXToolbox\GPXToolbox;
 use GPXToolbox\Models\GeoJSON\Feature;
+use GPXToolbox\Models\GeoJSON\FeatureCollection;
 use GPXToolbox\Models\GeoJSON\Geometry;
 use GPXToolbox\Models\GPX\Metadata;
 use GPXToolbox\Models\GPX\Point;
@@ -146,7 +147,7 @@ class GPX extends GPXType
      */
     public function serializeGeoJson(): array
     {
-        $geojson = new GeoJSON();
+        $features = new FeatureCollection();
 
         foreach ($this->getWaypoints() as $point) {
             $feature = new Feature(Geometry::POINT);
@@ -155,7 +156,7 @@ class GPX extends GPXType
             $properties = array_diff_key($point->toArray(), array_flip(['lat', 'lon',]));
             $feature->setProperties($properties);
 
-            $geojson->addFeature($feature);
+            $features->addFeature($feature);
         }
 
         foreach ($this->getRoutes() as $route) {
@@ -165,7 +166,7 @@ class GPX extends GPXType
             $properties = array_diff_key($route->toArray(), array_flip(['rtept',]));
             $feature->setProperties($properties);
 
-            $geojson->addFeature($feature);
+            $features->addFeature($feature);
         }
 
         foreach ($this->getTracks() as $track) {
@@ -175,9 +176,9 @@ class GPX extends GPXType
             $properties = array_diff_key($track->toArray(), array_flip(['trkseg',]));
             $feature->setProperties($properties);
 
-            $geojson->addFeature($feature);
+            $features->addFeature($feature);
         }
 
-        return $geojson->toArray();
+        return $features->toArray();
     }
 }

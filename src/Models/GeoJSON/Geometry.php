@@ -44,16 +44,20 @@ class Geometry extends Model
     /**
      * Set a list of points associated with the geometry.
      *
-     * @param PointCollection $coordinates
+     * @param PointCollection $points
      * @return $this
      */
-    public function setCoordinates(PointCollection $coordinates)
+    public function setCoordinates(PointCollection $points)
     {
         if ($this->type === self::POINT) {
-            $coordinates = $coordinates->first();
-        }
+            $point = $points->first();
 
-        $this->coordinates->fill($coordinates);
+            $this->addCoordinate($point->getLongitude(), $point->getLatitude());
+        } else {
+            $coordinates = $points->getCoordinates();
+
+            $this->coordinates->fill($coordinates);
+        }
 
         return $this;
     }
