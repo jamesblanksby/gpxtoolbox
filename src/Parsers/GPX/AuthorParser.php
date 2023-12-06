@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\GPX\GPXTypeParser;
 use GPXToolbox\Models\GPX\Author;
 use SimpleXMLElement;
 
-class AuthorParser extends GPXTypeParser
+final class AuthorParser extends GPXTypeParser
 {
     /**
      * Mapping of author properties to their parsing configuration.

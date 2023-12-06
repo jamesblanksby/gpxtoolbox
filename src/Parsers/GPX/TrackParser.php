@@ -7,7 +7,7 @@ use GPXToolbox\Models\GPX\Track;
 use GPXToolbox\Models\GPX\TrackCollection;
 use SimpleXMLElement;
 
-class TrackParser extends GPXTypeParser
+final class TrackParser extends GPXTypeParser
 {
     /**
      * Mapping of track properties to their parsing configuration.

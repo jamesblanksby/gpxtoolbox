@@ -8,7 +8,7 @@ use SimpleXMLElement;
 abstract class GPXTypeParser
 {
     /**
-     * Abstract method for parsing GPX data from a SimpleXMLElement.
+     * Parse data from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return GPXType|Collection

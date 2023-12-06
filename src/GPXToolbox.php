@@ -6,7 +6,7 @@ use GPXToolbox\Models\GPX;
 use GPXToolbox\Parsers\GPXParser;
 use RuntimeException;
 
-class GPXToolbox
+final class GPXToolbox
 {
     /**
      * The library signature.

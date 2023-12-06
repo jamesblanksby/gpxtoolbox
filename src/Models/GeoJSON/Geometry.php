@@ -5,7 +5,7 @@ namespace GPXToolbox\Models\GeoJSON;
 use GPXToolbox\Abstracts\Model;
 use GPXToolbox\Models\GPX\PointCollection;
 
-class Geometry extends Model
+final class Geometry extends Model
 {
     /**
      * The GeoJSON geometry types.

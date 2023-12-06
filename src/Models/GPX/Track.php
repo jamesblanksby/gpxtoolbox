@@ -7,7 +7,7 @@ use GPXToolbox\Traits\GPX\HasLinks;
 use GPXToolbox\Traits\GPX\HasPoints;
 use GPXToolbox\Traits\GPX\HasStatistics;
 
-class Track extends GPXType
+final class Track extends GPXType
 {
     use HasLinks;
     use HasPoints;

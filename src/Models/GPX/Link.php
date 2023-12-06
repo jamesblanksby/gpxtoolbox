@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GPX;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 
-class Link extends GPXType
+final class Link extends GPXType
 {
     /**
      * @var string The hyperlink reference.

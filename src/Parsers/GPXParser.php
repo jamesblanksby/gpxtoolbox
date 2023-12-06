@@ -12,7 +12,7 @@ use DateTimeImmutable;
 use GPXToolbox\GPXToolbox;
 use SimpleXMLElement;
 
-class GPXParser extends GPXTypeParser
+final class GPXParser extends GPXTypeParser
 {
     /**
      * Mapping of GPX file properties to their parsing configuration.

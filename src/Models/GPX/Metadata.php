@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\GPX\GPXType;
 use GPXToolbox\Traits\GPX\HasLinks;
 use DateTime;
 
-class Metadata extends GPXType
+final class Metadata extends GPXType
 {
     use HasLinks;
 

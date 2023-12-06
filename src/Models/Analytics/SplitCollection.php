@@ -5,7 +5,7 @@ namespace GPXToolbox\Models\Analytics;
 use GPXToolbox\Models\GPX\PointCollection;
 use GPXToolbox\Traits\GPX\HasStatistics;
 
-class SplitCollection extends PointCollection
+final class SplitCollection extends PointCollection
 {
     use HasStatistics;
 

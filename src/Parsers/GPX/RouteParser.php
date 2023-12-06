@@ -7,7 +7,7 @@ use GPXToolbox\Models\GPX\Route;
 use GPXToolbox\Models\GPX\RouteCollection;
 use SimpleXMLElement;
 
-class RouteParser extends GPXTypeParser
+final class RouteParser extends GPXTypeParser
 {
     /**
      * Mapping of route properties to their parsing configuration.

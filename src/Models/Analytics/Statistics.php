@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Analytics;
 
 use GPXToolbox\Abstracts\Model;
 
-class Statistics extends Model
+final class Statistics extends Model
 {
     /**
      * @var float The total distance covered in kilometers.

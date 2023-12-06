@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\GPX\GPXTypeParser;
 use GPXToolbox\Models\GPX\Copyright;
 use SimpleXMLElement;
 
-class CopyrightParser extends GPXTypeParser
+final class CopyrightParser extends GPXTypeParser
 {
     /**
      * Mapping of copyright properties to their parsing configuration.

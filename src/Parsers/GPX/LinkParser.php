@@ -7,7 +7,7 @@ use GPXToolbox\Models\GPX\Link;
 use GPXToolbox\Models\GPX\LinkCollection;
 use SimpleXMLElement;
 
-class LinkParser extends GPXTypeParser
+final class LinkParser extends GPXTypeParser
 {
     /**
      * Mapping of link properties to their parsing configuration.

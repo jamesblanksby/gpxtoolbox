@@ -7,7 +7,7 @@ use GPXToolbox\Models\GPX\Segment;
 use GPXToolbox\Models\GPX\SegmentCollection;
 use SimpleXMLElement;
 
-class SegmentParser extends GPXTypeParser
+final class SegmentParser extends GPXTypeParser
 {
     /**
      * Mapping of segment properties to their parsing configuration.

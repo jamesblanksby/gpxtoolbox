@@ -5,7 +5,7 @@ namespace GPXToolbox\Parsers\GPX;
 use GPXToolbox\Models\GPX\WaypointCollection;
 use SimpleXMLElement;
 
-class WaypointParser extends PointParser
+final class WaypointParser extends PointParser
 {
     /**
      * Parse waypoint from a SimpleXMLElement.

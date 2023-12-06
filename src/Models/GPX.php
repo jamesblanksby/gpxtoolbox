@@ -15,7 +15,7 @@ use GPXToolbox\Models\GPX\Track;
 use GPXToolbox\Models\GPX\TrackCollection;
 use GPXToolbox\Models\GPX\WaypointCollection;
 
-class GPX extends GPXType
+final class GPX extends GPXType
 {
     /**
      * @var string The version of the GPX file.

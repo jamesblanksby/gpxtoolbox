@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GPX;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 
-class Bounds extends GPXType
+final class Bounds extends GPXType
 {
     /**
      * @var float Minimum latitude of the bounds.

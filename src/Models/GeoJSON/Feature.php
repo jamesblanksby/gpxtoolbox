@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GeoJSON;
 
 use GPXToolbox\Abstracts\Model;
 
-class Feature extends Model
+final class Feature extends Model
 {
     /**
      * @var string The type of the feature.

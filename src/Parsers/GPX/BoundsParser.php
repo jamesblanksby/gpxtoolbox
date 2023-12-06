@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\GPX\GPXTypeParser;
 use GPXToolbox\Models\GPX\Bounds;
 use SimpleXMLElement;
 
-class BoundsParser extends GPXTypeParser
+final class BoundsParser extends GPXTypeParser
 {
     /**
      * Mapping of bounds properties to their parsing configuration.

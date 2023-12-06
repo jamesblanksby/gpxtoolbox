@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GPX;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 
-class Email extends GPXType
+final class Email extends GPXType
 {
     /**
      * @var string The identifier part of the email address.

@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GeoJSON;
 
 use GPXToolbox\Abstracts\Collection;
 
-class FeatureCollection extends Collection
+final class FeatureCollection extends Collection
 {
     /**
      * @var string The type of the collection.

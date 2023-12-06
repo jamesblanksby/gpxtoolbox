@@ -2,6 +2,6 @@
 
 namespace GPXToolbox\Models\GPX;
 
-class RouteCollection extends PointCollection
+final class RouteCollection extends PointCollection
 {
 }

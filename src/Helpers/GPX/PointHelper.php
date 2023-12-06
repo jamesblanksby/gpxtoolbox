@@ -5,7 +5,7 @@ namespace GPXToolbox\Helpers\GPX;
 use GPXToolbox\Models\GPX\Point;
 use GPXToolbox\Models\GPX\PointCollection;
 
-class PointHelper
+final class PointHelper
 {
     /**
      * The Earth's radius in meters.

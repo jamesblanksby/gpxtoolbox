@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\GPX\GPXType;
 use GPXToolbox\Traits\GPX\HasPoints;
 use GPXToolbox\Traits\GPX\HasStatistics;
 
-class Segment extends GPXType
+final class Segment extends GPXType
 {
     use HasPoints;
     use HasStatistics;

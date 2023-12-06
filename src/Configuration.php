@@ -2,7 +2,7 @@
 
 namespace GPXToolbox;
 
-class Configuration
+final class Configuration
 {
     /**
      * Number of decimal places for latitude and longitude values.

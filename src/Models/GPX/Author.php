@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GPX;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 
-class Author extends GPXType
+final class Author extends GPXType
 {
     /**
      * @var string|null The name of the author.

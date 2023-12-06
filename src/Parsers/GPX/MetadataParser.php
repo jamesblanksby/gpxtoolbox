@@ -7,7 +7,7 @@ use GPXToolbox\Models\GPX\Metadata;
 use GPXToolbox\Parsers\GPXParser;
 use SimpleXMLElement;
 
-class MetadataParser extends GPXTypeParser
+final class MetadataParser extends GPXTypeParser
 {
     /**
      * Mapping of metadata properties to their parsing configuration.

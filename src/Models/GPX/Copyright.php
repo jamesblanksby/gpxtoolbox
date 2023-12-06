@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GPX;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 
-class Copyright extends GPXType
+final class Copyright extends GPXType
 {
     /**
      * @var string The author of the copyright.
