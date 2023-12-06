@@ -1,19 +1,19 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Bounds;
 use SimpleXMLElement;
 
-final class BoundsParser extends GPXTypeParser
+final class BoundsSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of bounds properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'minlat' => [
             'type' => 'attribute',
             'cast' => 'float',
@@ -33,14 +33,14 @@ final class BoundsParser extends GPXTypeParser
     ];
 
     /**
-     * Parse bounds from a SimpleXMLElement.
+     * Serialize bounds from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return Bounds
      */
-    public static function parse(SimpleXMLElement $node): Bounds
+    public static function serialize(SimpleXMLElement $node): Bounds
     {
-        $properties = parent::propertiesFromXML($node, self::$parseMap);
+        $properties = parent::propertiesFromXML($node, self::$map);
 
         return new Bounds($properties);
     }

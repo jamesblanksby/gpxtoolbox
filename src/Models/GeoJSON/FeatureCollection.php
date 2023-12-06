@@ -1,10 +1,10 @@
 <?php
 
-namespace GPXToolbox\Models\GeoJSON;
+namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Abstracts\GPX\GeoJsonTypeCollection;
 
-final class FeatureCollection extends Collection
+final class FeatureCollection extends GeoJsonTypeCollection
 {
     /**
      * @var string The type of the collection.

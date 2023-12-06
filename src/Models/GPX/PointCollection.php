@@ -2,10 +2,10 @@
 
 namespace GPXToolbox\Models\GPX;
 
-use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Abstracts\GPX\GPXTypeCollection;
 use GPXToolbox\Traits\GPX\HasPoints;
 
-class PointCollection extends Collection
+class PointCollection extends GPXTypeCollection
 {
     use HasPoints;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace GPXToolbox\Models\GeoJSON;
+namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\GPX\GeoJsonType;
 use GPXToolbox\Models\GPX\PointCollection;
 
-final class Geometry extends Model
+final class Geometry extends GeoJsonType
 {
     /**
-     * The GeoJSON geometry types.
+     * The GeoJson geometry types.
      */
     public const POINT = 'Point';
     public const LINE_STRING = 'LineString';

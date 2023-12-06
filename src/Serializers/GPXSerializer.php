@@ -1,25 +1,25 @@
 <?php
 
-namespace GPXToolbox\Parsers;
+namespace GPXToolbox\Serializers;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX;
-use GPXToolbox\Parsers\GPX\MetadataParser;
-use GPXToolbox\Parsers\GPX\RouteParser;
-use GPXToolbox\Parsers\GPX\TrackParser;
-use GPXToolbox\Parsers\GPX\WaypointParser;
+use GPXToolbox\Serializers\GPX\MetadataSerializer;
+use GPXToolbox\Serializers\GPX\RouteSerializer;
+use GPXToolbox\Serializers\GPX\TrackSerializer;
+use GPXToolbox\Serializers\GPX\WaypointSerializer;
 use DateTimeImmutable;
 use GPXToolbox\GPXToolbox;
 use SimpleXMLElement;
 
-final class GPXParser extends GPXTypeParser
+final class GPXSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of GPX file properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'version' => [
             'type' => 'attribute',
         ],
@@ -28,64 +28,64 @@ final class GPXParser extends GPXTypeParser
         ],
         'metadata' => [
             'type' => 'node',
-            'callable' => [MetadataParser::class, 'parse',],
+            'callable' => [MetadataSerializer::class, 'serialize',],
         ],
         'wpt' => [
             'type' => 'node',
-            'callable' => [WaypointParser::class, 'parse',],
+            'callable' => [WaypointSerializer::class, 'serialize',],
         ],
         'rte' => [
             'type' => 'node',
-            'callable' => [RouteParser::class, 'parse',],
+            'callable' => [RouteSerializer::class, 'serialize',],
         ],
         'trk' => [
             'type' => 'node',
-            'callable' => [TrackParser::class, 'parse',],
+            'callable' => [TrackSerializer::class, 'serialize',],
         ],
     ];
 
     /**
-     * Parse GPX data from a SimpleXMLElement.
+     * Serialize GPX data from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return GPX
      */
-    public static function parse(SimpleXMLElement $node): GPX
+    public static function serialize(SimpleXMLElement $node): GPX
     {
-        $properties = parent::propertiesFromXML($node, self::$parseMap);
+        $properties = parent::propertiesFromXML($node, self::$map);
 
         return new GPX($properties);
     }
 
     /**
-     * Parse a coordinate value from a string.
+     * Serialize a coordinate value from a string.
      *
      * @param string $value
      * @return float
      */
-    public static function parseCoordinate(string $value): float
+    public static function serializeCoordinate(string $value): float
     {
         return round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
     }
 
     /**
-     * Parse a string representation of a date and time.
+     * Serialize a string representation of a date and time.
      *
      * @param string $value
      * @return DateTimeImmutable
      */
-    public static function parseDateTime(string $value): DateTimeImmutable
+    public static function serializeDateTime(string $value): DateTimeImmutable
     {
         return new DateTimeImmutable($value);
     }
 
     /**
-     * Parse an elevation value from a string.
+     * Serialize an elevation value from a string.
      *
      * @param string $value
      * @return float
      */
-    public static function parseElevation(string $value): float
+    public static function serializeElevation(string $value): float
     {
         return round((float) $value, GPXToolbox::getConfiguration()->getElevationPrecision());
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace GPXToolbox\Models\GeoJSON;
+namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Abstracts\GPX\GeoJsonTypeCollection;
 
-final class PropertyCollection extends Collection
+final class PropertyCollection extends GeoJsonTypeCollection
 {
 }

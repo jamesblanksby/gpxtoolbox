@@ -3,7 +3,7 @@
 namespace GPXToolbox;
 
 use GPXToolbox\Models\GPX;
-use GPXToolbox\Parsers\GPXParser;
+use GPXToolbox\Serializers\GPXSerializer;
 use RuntimeException;
 
 final class GPXToolbox
@@ -48,18 +48,18 @@ final class GPXToolbox
             throw new RuntimeException(sprintf('Failed to read file: %s', $filename));
         }
 
-        return $this->parse($xml);
+        return $this->serialize($xml);
     }
 
     /**
-     * Parse GPX data from an XML string.
+     * Serialize GPX data from an XML string.
      *
      * @param string $xml
      * @return GPX
      *
      * @throws RuntimeException If there is an issue loading or parsing the XML.
      */
-    public function parse(string $xml)
+    public function serialize(string $xml)
     {
         libxml_use_internal_errors(true);
         $node = simplexml_load_string($xml);
@@ -72,10 +72,10 @@ final class GPXToolbox
                 return $error->message;
             }, $errors);
 
-            throw new RuntimeException(sprintf('Failed to load or parse XML. Errors: %s', implode(', ', $errorMessages)));
+            throw new RuntimeException(sprintf('Failed to load or serialize XML. Errors: %s', implode(', ', $errorMessages)));
         }
 
-        return GPXParser::parse($node);
+        return GPXSerializer::serialize($node);
     }
 
     /**

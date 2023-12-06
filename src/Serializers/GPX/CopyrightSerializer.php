@@ -1,19 +1,19 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Copyright;
 use SimpleXMLElement;
 
-final class CopyrightParser extends GPXTypeParser
+final class CopyrightSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of copyright properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'author' => [
             'type' => 'attribute',
         ],
@@ -26,14 +26,14 @@ final class CopyrightParser extends GPXTypeParser
     ];
 
     /**
-     * Parse copyright from a SimpleXMLElement.
+     * Serialize copyright from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return Copyright
      */
-    public static function parse(SimpleXMLElement $node): Copyright
+    public static function serialize(SimpleXMLElement $node): Copyright
     {
-        $properties = parent::propertiesFromXML($node, self::$parseMap);
+        $properties = parent::propertiesFromXML($node, self::$map);
 
         return new Copyright($properties);
     }

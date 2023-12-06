@@ -4,9 +4,9 @@ namespace GPXToolbox\Models;
 
 use GPXToolbox\Abstracts\GPX\GPXType;
 use GPXToolbox\GPXToolbox;
-use GPXToolbox\Models\GeoJSON\Feature;
-use GPXToolbox\Models\GeoJSON\FeatureCollection;
-use GPXToolbox\Models\GeoJSON\Geometry;
+use GPXToolbox\Models\GeoJson\Feature;
+use GPXToolbox\Models\GeoJson\FeatureCollection;
+use GPXToolbox\Models\GeoJson\Geometry;
 use GPXToolbox\Models\GPX\Metadata;
 use GPXToolbox\Models\GPX\Point;
 use GPXToolbox\Models\GPX\Route;
@@ -130,7 +130,7 @@ final class GPX extends GPXType
     }
 
     /**
-     * Convert the GPX object to GeoJSON.
+     * Convert the GPX object to GeoJson.
      *
      * @param int $options
      * @return string
@@ -141,7 +141,7 @@ final class GPX extends GPXType
     }
 
     /**
-     * Serialize the GPX attributes for GeoJSON.
+     * Serialize the GPX attributes for GeoJson.
      *
      * @return array
      */

@@ -1,21 +1,21 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Point;
 use GPXToolbox\Models\GPX\PointCollection;
-use GPXToolbox\Parsers\GPXParser;
+use GPXToolbox\Serializers\GPXSerializer;
 use SimpleXMLElement;
 
-class PointParser extends GPXTypeParser
+class PointSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of point properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'lat' => [
             'type' => 'attribute',
             'cast' => 'float',
@@ -26,11 +26,11 @@ class PointParser extends GPXTypeParser
         ],
         'ele' => [
             'type' => 'node',
-            'callable' => [GPXParser::class, 'parseElevation',],
+            'callable' => [GPXSerializer::class, 'serializeElevation',],
         ],
         'time' => [
             'type' => 'node',
-            'callable' => [GPXParser::class, 'parseDateTime',],
+            'callable' => [GPXSerializer::class, 'serializeDateTime',],
         ],
         'magvar' => [
             'type' => 'node',
@@ -50,7 +50,7 @@ class PointParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'callable' => [LinkParser::class, 'parse',],
+            'callable' => [LinkSerializer::class, 'serialize',],
         ],
         'sym' => [
             'type' => 'node',
@@ -81,17 +81,17 @@ class PointParser extends GPXTypeParser
     ];
 
     /**
-     * Parse point from a SimpleXMLElement.
+     * Serialize point from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $nodes
      * @return PointCollection
      */
-    public static function parse(SimpleXMLElement $nodes): PointCollection
+    public static function serialize(SimpleXMLElement $nodes): PointCollection
     {
         $points = new PointCollection();
 
         foreach ($nodes as $node) {
-            $properties = parent::propertiesFromXML($node, self::$parseMap);
+            $properties = parent::propertiesFromXML($node, self::$map);
 
             $points->add(new Point($node->getName(), $properties));
         }

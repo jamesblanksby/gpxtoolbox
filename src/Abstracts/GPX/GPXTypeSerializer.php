@@ -2,34 +2,33 @@
 
 namespace GPXToolbox\Abstracts\GPX;
 
-use GPXToolbox\Abstracts\Collection;
 use SimpleXMLElement;
 
-abstract class GPXTypeParser
+abstract class GPXTypeSerializer
 {
     /**
-     * Parse data from a SimpleXMLElement.
+     * Serialize data from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
-     * @return GPXType|Collection
+     * @return GPXType|GPXTypeCollection
      */
-    abstract public static function parse(SimpleXMLElement $node);
+    abstract public static function serialize(SimpleXMLElement $node);
 
     /**
      * Extracts an associative array of properties from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
-     * @param array $parseMap
+     * @param array $map
      * @return array
      */
-    protected static function propertiesFromXML(SimpleXMLElement $node, array $parseMap): array
+    protected static function propertiesFromXML(SimpleXMLElement $node, array $map): array
     {
         $nodes = $node->children();
         $attributes = $node->attributes();
 
         $properties = [];
 
-        foreach ($parseMap as $key => $schema) {
+        foreach ($map as $key => $schema) {
             switch ($schema['type']) {
                 case 'node':
                     if (isset($nodes->{$key})) {

@@ -1,20 +1,20 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Track;
 use GPXToolbox\Models\GPX\TrackCollection;
 use SimpleXMLElement;
 
-final class TrackParser extends GPXTypeParser
+final class TrackSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of track properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'name' => [
             'type' => 'node',
         ],
@@ -29,7 +29,7 @@ final class TrackParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'callable' => [LinkParser::class, 'parse',],
+            'callable' => [LinkSerializer::class, 'serialize',],
         ],
         'number' => [
             'type' => 'node',
@@ -40,22 +40,22 @@ final class TrackParser extends GPXTypeParser
         ],
         'trkseg' => [
             'type' => 'node',
-            'callable' => [SegmentParser::class, 'parse',],
+            'callable' => [SegmentSerializer::class, 'serialize',],
         ],
     ];
 
     /**
-     * Parse track from a SimpleXMLElement.
+     * Serialize track from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $nodes
      * @return TrackCollection
      */
-    public static function parse(SimpleXMLElement $nodes): TrackCollection
+    public static function serialize(SimpleXMLElement $nodes): TrackCollection
     {
         $tracks = new TrackCollection();
 
         foreach ($nodes as $node) {
-            $properties = parent::propertiesFromXML($node, self::$parseMap);
+            $properties = parent::propertiesFromXML($node, self::$map);
 
             $tracks->add(new Track($properties));
         }

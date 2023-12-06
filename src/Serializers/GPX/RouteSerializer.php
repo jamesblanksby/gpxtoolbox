@@ -1,20 +1,20 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Route;
 use GPXToolbox\Models\GPX\RouteCollection;
 use SimpleXMLElement;
 
-final class RouteParser extends GPXTypeParser
+final class RouteSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of route properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'name' => [
             'type' => 'node',
         ],
@@ -29,7 +29,7 @@ final class RouteParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'callable' => [LinkParser::class, 'parse',],
+            'callable' => [LinkSerializer::class, 'serialize',],
         ],
         'number' => [
             'type' => 'node',
@@ -40,22 +40,22 @@ final class RouteParser extends GPXTypeParser
         ],
         'rtept' => [
             'type' => 'node',
-            'callable' => [PointParser::class, 'parse',],
+            'callable' => [PointSerializer::class, 'serialize',],
         ],
     ];
 
     /**
-     * Parse route from a SimpleXMLElement.
+     * Serialize route from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $nodes
      * @return RouteCollection
      */
-    public static function parse(SimpleXMLElement $nodes): RouteCollection
+    public static function serialize(SimpleXMLElement $nodes): RouteCollection
     {
         $routes = new RouteCollection();
 
         foreach ($nodes as $node) {
-            $properties = parent::propertiesFromXML($node, self::$parseMap);
+            $properties = parent::propertiesFromXML($node, self::$map);
 
             $routes->add(new Route($properties));
         }

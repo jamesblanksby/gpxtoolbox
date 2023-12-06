@@ -1,10 +1,10 @@
 <?php
 
-namespace GPXToolbox\Models\GeoJSON;
+namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\GPX\GeoJsonType;
 
-final class Feature extends Model
+final class Feature extends GeoJsonType
 {
     /**
      * @var string The type of the feature.

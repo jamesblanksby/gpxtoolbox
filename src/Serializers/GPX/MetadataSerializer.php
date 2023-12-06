@@ -1,20 +1,20 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Metadata;
-use GPXToolbox\Parsers\GPXParser;
+use GPXToolbox\Serializers\GPXSerializer;
 use SimpleXMLElement;
 
-final class MetadataParser extends GPXTypeParser
+final class MetadataSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of metadata properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'name' => [
             'type' => 'node',
         ],
@@ -23,38 +23,38 @@ final class MetadataParser extends GPXTypeParser
         ],
         'author' => [
             'type' => 'node',
-            'callable' => [AuthorParser::class, 'parse',],
+            'callable' => [AuthorSerializer::class, 'serialize',],
         ],
         'copyright' => [
             'type' => 'node',
-            'callable' => [CopyrightParser::class, 'parse',],
+            'callable' => [CopyrightSerializer::class, 'serialize',],
         ],
         'link' => [
             'type' => 'node',
-            'callable' => [LinkParser::class, 'parse',],
+            'callable' => [LinkSerializer::class, 'serialize',],
         ],
         'time' => [
             'type' => 'node',
-            'callable' => [GPXParser::class, 'parseDateTime',],
+            'callable' => [GPXSerializer::class, 'serializeDateTime',],
         ],
         'keywords' => [
             'type' => 'node',
         ],
         'bounds' => [
             'type' => 'node',
-            'callable' => [BoundsParser::class, 'parse',],
+            'callable' => [BoundsSerializer::class, 'serialize',],
         ],
     ];
 
     /**
-     * Parse metadata from a SimpleXMLElement.
+     * Serialize metadata from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return Metadata
      */
-    public static function parse(SimpleXMLElement $node): Metadata
+    public static function serialize(SimpleXMLElement $node): Metadata
     {
-        $properties = parent::propertiesFromXML($node, self::$parseMap);
+        $properties = parent::propertiesFromXML($node, self::$map);
 
         return new Metadata($properties);
     }

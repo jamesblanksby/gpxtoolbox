@@ -1,19 +1,19 @@
 <?php
 
-namespace GPXToolbox\Parsers\GPX;
+namespace GPXToolbox\Serializers\GPX;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeParser;
+use GPXToolbox\Abstracts\GPX\GPXTypeSerializer;
 use GPXToolbox\Models\GPX\Author;
 use SimpleXMLElement;
 
-final class AuthorParser extends GPXTypeParser
+final class AuthorSerializer extends GPXTypeSerializer
 {
     /**
      * Mapping of author properties to their parsing configuration.
      *
      * @var array
      */
-    protected static $parseMap = [
+    protected static $map = [
         'name' => [
             'type' => 'node',
         ],
@@ -22,19 +22,19 @@ final class AuthorParser extends GPXTypeParser
         ],
         'link' => [
             'type' => 'node',
-            'callable' => [LinkParser::class, 'parse',],
+            'callable' => [LinkSerializer::class, 'serialize',],
         ],
     ];
 
     /**
-     * Parse author from a SimpleXMLElement.
+     * Serialize author from a SimpleXMLElement.
      *
      * @param SimpleXMLElement $node
      * @return Author
      */
-    public static function parse(SimpleXMLElement $node): Author
+    public static function serialize(SimpleXMLElement $node): Author
     {
-        $properties = parent::propertiesFromXML($node, self::$parseMap);
+        $properties = parent::propertiesFromXML($node, self::$map);
 
         return new Author($properties);
     }

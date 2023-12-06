@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Models\GPX;
 
-use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Abstracts\GPX\GPXTypeCollection;
 
-final class LinkCollection extends Collection
+final class LinkCollection extends GPXTypeCollection
 {
 }
