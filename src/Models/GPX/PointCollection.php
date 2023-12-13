@@ -9,7 +9,7 @@ class PointCollection extends Collection
 {
     use HasPoints;
 
-    protected string $type = Point::class;
+    protected ?string $class = Point::class;
 
     public function getPoints(): PointCollection
     {

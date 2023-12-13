@@ -9,7 +9,7 @@ final class SplitCollection extends PointCollection
 {
     use HasStatistics;
 
-    protected string $type = Split::class;
+    protected ?string $class = Split::class;
 
     public function addSplit(PointCollection $points)
     {

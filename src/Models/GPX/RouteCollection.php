@@ -6,5 +6,5 @@ use GPXToolbox\Abstracts\Collection;
 
 final class RouteCollection extends Collection
 {
-    protected string $type = Route::class;
+    protected ?string $class = Route::class;
 }

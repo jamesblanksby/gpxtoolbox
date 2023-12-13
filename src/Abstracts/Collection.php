@@ -11,7 +11,7 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
 {
     use HasArrayable;
 
-    protected string $type;
+    protected ?string $class = null;
 
     protected array $items = [];
 
@@ -66,7 +66,7 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
 
     public function hydrate($value)
     {
-        if (!isset($this->type)) {
+        if (is_null($this->class)) {
             return $value;
         }
 
@@ -74,7 +74,7 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
             return $value;
         }
 
-        return new $this->type($value);
+        return new $this->class($value);
     }
 
     public function all(): array

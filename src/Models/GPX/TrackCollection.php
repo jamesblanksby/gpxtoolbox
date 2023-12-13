@@ -11,7 +11,7 @@ final class TrackCollection extends Collection
     use HasSplits;
     use HasStatistics;
 
-    protected string $type = Track::class;
+    protected ?string $class = Track::class;
 
     public function getPoints(): PointCollection
     {

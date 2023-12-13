@@ -11,7 +11,7 @@ final class SegmentCollection extends Collection
     use HasSplits;
     use HasStatistics;
 
-    protected string $type = Segment::class;
+    protected ?string $class = Segment::class;
 
     public function getPoints(): PointCollection
     {

@@ -6,6 +6,8 @@ use GPXToolbox\Abstracts\Collection;
 
 final class FeatureCollection extends Collection
 {
+    protected ?string $class = Feature::class;
+    
     protected string $type = 'FeatureCollection';
 
     public function addFeature(Feature $feature)
