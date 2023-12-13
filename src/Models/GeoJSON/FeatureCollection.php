@@ -2,21 +2,12 @@
 
 namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\GPX\GeoJsonTypeCollection;
+use GPXToolbox\Abstracts\Collection;
 
-final class FeatureCollection extends GeoJsonTypeCollection
+final class FeatureCollection extends Collection
 {
-    /**
-     * @var string The type of the collection.
-     */
-    protected $type = 'FeatureCollection';
+    protected string $type = 'FeatureCollection';
 
-    /**
-     * Add a feature to the collection.
-     *
-     * @param Feature $feature
-     * @return $this
-     */
     public function addFeature(Feature $feature)
     {
         $this->add($feature);
@@ -24,11 +15,6 @@ final class FeatureCollection extends GeoJsonTypeCollection
         return $this;
     }
 
-    /**
-     * Get the feature collection's attributes as an array.
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [

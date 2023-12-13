@@ -1,172 +1,79 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
-use GPXToolbox\Traits\GPX\HasLinks;
-use DateTime;
+use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Point extends GPXType
+final class Point extends Model
 {
     use HasLinks;
 
-    /**
-     * The GPX point types.
-     */
     public const WAYPOINT = 'wpt';
     public const TRACKPOINT = 'trkpt';
     public const ROUTEPOINT = 'rtept';
 
-    /**
-     * The type of the point.
-     *
-     * @var string
-     */
-    protected $type = '';
+    protected string $type = '';
 
-    /**
-     * @var float The latitude of the point.
-     */
-    public $lat = 0.0;
+    public float $lat = 0.0;
 
-    /**
-     * @var float The longitude of the point.
-     */
-    public $lon = 0.0;
+    public float $lon = 0.0;
 
-    /**
-     * @var float The elevation of the point.
-     */
-    public $ele = 0.0;
+    public ?float $ele = null;
 
-    /**
-     * @var Datetime|null The timestamp associated with the point.
-     */
-    public $time = null;
+    public ?string $time = null;
 
-    /**
-     * @var float|null The magnetic variation at the point.
-     */
-    public $magvar = null;
+    public ?float $magvar = null;
 
-    /**
-     * @var float|null The geoid height at the point.
-     */
-    public $geoidheight = null;
+    public ?float $geoidheight = null;
 
-    /**
-     * @var string|null The name associated with the point.
-     */
-    public $name = null;
+    public ?string $name = null;
 
-    /**
-     * @var string|null The comment associated with the point.
-     */
-    public $cmt = null;
+    public ?string $cmt = null;
 
-    /**
-     * @var string|null The description associated with the point.
-     */
-    public $desc = null;
+    public ?string $desc = null;
 
-    /**
-     * @var string|null The source of the point's information.
-     */
-    public $src = null;
+    public ?string $src = null;
 
-    /**
-     * @var LinkCollection A list of links associated with the point.
-     */
-    public $link;
+    public LinkCollection $link;
 
-    /**
-     * @var string|null The symbol associated with the point.
-     */
-    public $sym = null;
+    public ?string $sym = null;
 
-    /**
-     * @var string|null The fix status of the point.
-     */
-    public $fix = null;
+    public ?string $fix = null;
 
-    /**
-     * @var int|null The number of satellites used to calculate the point's position.
-     */
-    public $sat = null;
+    public ?int $sat = null;
 
-    /**
-     * @var float|null The horizontal dilution of precision at the point.
-     */
-    public $hdop = null;
+    public ?float $hdop = null;
 
-    /**
-     * @var float|null The vertical dilution of precision at the point.
-     */
-    public $vdop = null;
+    public ?float $vdop = null;
 
-    /**
-     * @var float|null The position dilution of precision at the point.
-     */
-    public $pdop = null;
+    public ?float $pdop = null;
 
-    /**
-     * @var float|null The age of the differential GPS data at the point.
-    */
-    public $ageofdgpsdata = null;
+    public ?float $ageofdgpsdata = null;
 
-    /**
-     * @var int|null The ID of the differential GPS station used to calculate the point's position.
-     */
-    public $dgpsid = null;
+    public ?int $dgpsid = null;
 
-    /**
-     * Point constructor.
-     *
-     * @param string $type
-     * @param array|null $collection
-     */
-    public function __construct(string $type, ?array $collection = null)
+    public function __construct(?array $collection = null)
     {
         $this->link = new LinkCollection();
         parent::__construct($collection);
-        $this->type = $type;
     }
 
-    /**
-     * Get the latitude value of the point.
-     *
-     * @return float
-     */
     public function getLatitude(): float
     {
         return $this->lat;
     }
 
-    /**
-     * Get the longitude value of the point.
-     *
-     * @return float
-     */
     public function getLongitude(): float
     {
         return $this->lon;
     }
 
-    /**
-     * Get a the coordinates of the point.
-     *
-     * @return array
-     */
     public function getCoordinates(): array
     {
         return [$this->getLongitude(), $this->getLatitude(),];
     }
 
-    /**
-     * Get the elevation value of the point.
-     *
-     * @return float
-     */
     public function getElevation(): float
     {
         return $this->ele;

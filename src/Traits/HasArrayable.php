@@ -7,13 +7,6 @@ use GPXToolbox\Interfaces\Arrayable;
 
 trait HasArrayable
 {
-    /**
-     * Get the arrayable items from the given collection.
-     *
-     * @param mixed $collection
-     *
-     * @return array
-     */
     protected function getArrayableItems($collection)
     {
         if ($collection instanceof Collection) {

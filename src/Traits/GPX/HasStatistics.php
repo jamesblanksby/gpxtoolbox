@@ -1,19 +1,14 @@
 <?php
 
-namespace GPXToolbox\Traits\GPX;
+namespace GPXToolbox\Traits\Gpx;
 
 use GPXToolbox\GPXToolbox;
-use GPXToolbox\Helpers\GPX\PointHelper;
+use GPXToolbox\Helpers\Gpx\PointHelper;
 use GPXToolbox\Models\Analytics\Statistics;
-use GPXToolbox\Models\GPX\PointCollection;
+use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasStatistics
 {
-    /**
-     * Get statistics for a list of points.
-     *
-     * @return Statistics
-     */
     public function getStatistics(): Statistics
     {
         $points = $this->getPoints();
@@ -46,12 +41,6 @@ trait HasStatistics
         return $statistics;
     }
 
-    /**
-     * Get distance data from a list of points.
-     *
-     * @param PointCollection $points
-     * @return array
-     */
     protected function getDistance(PointCollection $points): array
     {
         $prevPoint = $points->first();
@@ -70,7 +59,7 @@ trait HasStatistics
 
             $difference = PointHelper::get3dDistance($prevPoint, $point);
 
-            $isDistanceWithinThreshold = (!$distanceThreshold || $difference > $distanceThreshold);
+            $isDistanceWithinThreshold = ($difference > $distanceThreshold);
 
             if ($isDistanceWithinThreshold) {
                 $distance += $difference;
@@ -83,12 +72,6 @@ trait HasStatistics
         return [$distance,];
     }
 
-    /**
-     * Get duration data from a list of points.
-     *
-     * @param PointCollection $points
-     * @return array
-     */
     protected function getDuration(PointCollection $points): array
     {
         $firstPoint = $points->first();
@@ -99,7 +82,7 @@ trait HasStatistics
         $total = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
 
         $configuration = GPXToolbox::getConfiguration();
-        $distanceThreshold = $configuration->getDistanceThreshold();
+        $movingDistanceThreshold = $configuration->getMovingDistanceThreshold();
         $movingDurationThreshold = $configuration->getMovingDurationThreshold();
 
         for ($a = 0; $a < $points->count(); $a++) {
@@ -112,8 +95,8 @@ trait HasStatistics
             $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
             $durationDifference = abs(($prevPoint->time->getTimestamp() - $point->time->getTimestamp()));
 
-            $isDistanceWithinThreshold = (!$distanceThreshold || $distanceDifference > $distanceThreshold);
-            $isDurationWithinThreshold = (!$movingDurationThreshold || $durationDifference < $movingDurationThreshold);
+            $isDistanceWithinThreshold = ($distanceDifference > $movingDistanceThreshold);
+            $isDurationWithinThreshold = ($durationDifference < $movingDurationThreshold);
 
             if ($isDistanceWithinThreshold && $isDurationWithinThreshold) {
                 $moving += $durationDifference;
@@ -125,12 +108,6 @@ trait HasStatistics
         return [$moving, $total,];
     }
 
-    /**
-     * Get elevation data from a list of points.
-     *
-     * @param PointCollection $points
-     * @return array
-     */
     protected function getElevation(PointCollection $points): array
     {
         $prevPoint = $points->first();
@@ -155,7 +132,7 @@ trait HasStatistics
 
             $difference = ($prevPoint->getElevation() - $point->getElevation());
 
-            $isDistanceWithinThreshold = (!$elevationThreshold || abs($difference) > $elevationThreshold);
+            $isDistanceWithinThreshold = (abs($difference) > $elevationThreshold);
 
             if ($isDistanceWithinThreshold) {
                 $gain += $difference > 0 ? $difference : 0;
@@ -167,12 +144,6 @@ trait HasStatistics
         return [$min, $max, $gain, $loss,];
     }
 
-    /**
-     * Calculate the average values based on the provided statistics.
-     *
-     * @param Statistics $statistics
-     * @return array
-     */
     protected function getAverage(Statistics $statistics): array
     {
         $pace = 0.0;

@@ -1,7 +1,10 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-final class RouteCollection extends PointCollection
+use GPXToolbox\Abstracts\Collection;
+
+final class RouteCollection extends Collection
 {
+    protected string $type = Route::class;
 }

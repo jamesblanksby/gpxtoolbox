@@ -1,9 +1,10 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeCollection;
+use GPXToolbox\Abstracts\Collection;
 
-final class LinkCollection extends GPXTypeCollection
+final class LinkCollection extends Collection
 {
+    protected string $type = Link::class;
 }

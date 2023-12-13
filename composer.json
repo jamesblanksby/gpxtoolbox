@@ -5,7 +5,10 @@
     "autoload": {
         "psr-4": {
             "GPXToolbox\\": "src/"
-        }
+        },
+        "files": [
+			"src/Support/Debug.php"
+		]
     },
     "authors": [
         {

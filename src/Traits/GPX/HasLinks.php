@@ -1,18 +1,12 @@
 <?php
 
-namespace GPXToolbox\Traits\GPX;
+namespace GPXToolbox\Traits\Gpx;
 
-use GPXToolbox\Models\GPX\Link;
-use GPXToolbox\Models\GPX\LinkCollection;
+use GPXToolbox\Models\Gpx\Link;
+use GPXToolbox\Models\Gpx\LinkCollection;
 
 trait HasLinks
 {
-    /**
-     * Set a list of links associated with the collection.
-     *
-     * @param LinkCollection $links
-     * @return $this
-     */
     public function setLinks(LinkCollection $links)
     {
         $this->getLinks()->fill($links);
@@ -20,12 +14,6 @@ trait HasLinks
         return $this;
     }
 
-    /**
-     * Add a link to the associated links collection.
-     *
-     * @param Link $link
-     * @return $this
-     */
     public function addLink(Link $link)
     {
         $this->getLinks()->add($link);
@@ -33,11 +21,6 @@ trait HasLinks
         return $this;
     }
 
-    /**
-     * Get a list of links associated with the split.
-     *
-     * @return LinkCollection
-     */
     public function getLinks(): LinkCollection
     {
         return $this->link;

@@ -1,23 +1,14 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 
-final class Link extends GPXType
+final class Link extends Model
 {
-    /**
-     * @var string The hyperlink reference.
-     */
-    public $href = '';
+    public string $href = '';
 
-    /**
-     * @var string|null he text of the hyperlink.
-     */
-    public $text = null;
+    public ?string $text = null;
 
-    /**
-     * @var string|null The type of the hyperlink.
-     */
-    public $type = null;
+    public ?string $type = null;
 }

@@ -2,93 +2,47 @@
 
 namespace GPXToolbox;
 
-use GPXToolbox\Models\GPX;
-use GPXToolbox\Serializers\GPXSerializer;
-use RuntimeException;
+use GPXToolbox\Models\Gpx;
+use GPXToolbox\Serializers\XmlSerializer;
 
 final class GPXToolbox
 {
-    /**
-     * The library signature.
-     */
     public const SIGNATURE = 'GPXToolbox';
 
-    /**
-     * @var Configuration|null The configuration instance.
-     */
-    protected static $configuration;
+    public static $configuration;
 
-    /**
-     * GPXToolbox constructor.
-     *
-     * @param Configuration|null $configuration
-     */
     public function __construct(?Configuration $configuration = null)
     {
         self::$configuration = $configuration ?? self::getConfiguration();
     }
 
-    /**
-     * Load GPX data from a file.
-     *
-     * @param string $filename
-     * @return GPX
-     *
-     * @throws RuntimeException If the file is not found or cannot be read.
-     */
-    public function load(string $filename)
+    public function load(string $filename): Gpx
     {
         if (!file_exists($filename)) {
-            throw new RuntimeException(sprintf('File not found: %s', $filename));
+            throw new \RuntimeException(sprintf('File not found: %s', $filename));
         }
 
         $xml = file_get_contents($filename);
 
         if (!$xml) {
-            throw new RuntimeException(sprintf('Failed to read file: %s', $filename));
+            throw new \RuntimeException(sprintf('Failed to read file: %s', $filename));
         }
 
-        return $this->serialize($xml);
+        return $this->parse($xml);
     }
 
-    /**
-     * Serialize GPX data from an XML string.
-     *
-     * @param string $xml
-     * @return GPX
-     *
-     * @throws RuntimeException If there is an issue loading or parsing the XML.
-     */
-    public function serialize(string $xml)
+    public function parse(string $xml): Gpx
     {
-        libxml_use_internal_errors(true);
-        $node = simplexml_load_string($xml);
+        $doc = new \DOMDocument();
 
-        if (!$node) {
-            $errors = libxml_get_errors();
-            libxml_clear_errors();
+        $doc->loadXML($xml);
 
-            $errorMessages = array_map(function ($error) {
-                return $error->message;
-            }, $errors);
+        $properties = XmlSerializer::deserialize($doc->documentElement);
 
-            throw new RuntimeException(sprintf('Failed to load or serialize XML. Errors: %s', implode(', ', $errorMessages)));
-        }
-
-        return GPXSerializer::serialize($node);
+        return new Gpx($properties);
     }
 
-    /**
-     * Save a GPX object to a file in the specified format.
-     *
-     * @param string $filename
-     * @param string $format
-     * @param GPX $gpx
-     * @return int
-     *
-     * @throws RuntimeException If there is an issue saving the GPX file.
-     */
-    public function save(string $filename, string $format, GPX $gpx): int
+    public function save(Gpx $gpx, string $filename, string $format): int
     {
         $format = strtolower($format);
 
@@ -103,23 +57,18 @@ final class GPXToolbox
                 $data = $gpx->toGeoJson();
                 break;
             default:
-                throw new RuntimeException(sprintf('Unsupported file format: %s', $format));
+                throw new \RuntimeException(sprintf('Unsupported file format: %s', $format));
         }
 
         $result = file_put_contents($filename, $data);
 
         if (!$result) {
-            throw new RuntimeException(sprintf('Failed to write file: %s', $filename));
+            throw new \RuntimeException(sprintf('Failed to write file: %s', $filename));
         }
 
         return $result;
     }
 
-    /**
-     * Get the current configuration instance.
-     *
-     * @return Configuration
-     */
     public static function getConfiguration(): Configuration
     {
         return self::$configuration ?? new Configuration();

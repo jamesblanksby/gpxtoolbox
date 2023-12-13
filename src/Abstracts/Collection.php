@@ -6,35 +6,20 @@ use GPXToolbox\Interfaces\Arrayable;
 use GPXToolbox\Interfaces\Fillable;
 use GPXToolbox\Interfaces\Iteratorable;
 use GPXToolbox\Traits\HasArrayable;
-use ArrayIterator;
-use Countable;
-use OutOfBoundsException;
 
-abstract class Collection implements Arrayable, Countable, Fillable, Iteratorable
+abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorable
 {
     use HasArrayable;
 
-    /**
-     * @var array The collection of items.
-     */
-    protected $items = [];
+    protected string $type;
 
-    /**
-     * Collection constructor.
-     *
-     * @param array|Arrayable|null $collection
-     */
-    public function __construct($collection = null)
+    protected array $items = [];
+
+    final public function __construct($collection = null)
     {
         $this->fill($collection);
     }
 
-    /**
-     * Fill the collection with values.
-     *
-     * @param array|Arrayable|null $collection
-     * @return $this
-     */
     public function fill($collection = null)
     {
         if (is_null($collection)) {
@@ -43,6 +28,10 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
 
         $items = $this->getArrayableItems($collection);
 
+        if (!array_is_list($items)) {
+            $items = [$items,];
+        }
+
         foreach ($items as $key => $value) {
             $this->set($key, $value);
         }
@@ -50,26 +39,17 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
         return $this;
     }
 
-    /**
-     * Add a value to the collection.
-     *
-     * @param mixed $value
-     * @return $this
-     */
-    public function add($value)
+    public function clear()
     {
-        return $this->set(null, $value);
+        $this->items = [];
+
+        return $this;
     }
 
-    /**
-     * Set a key-value pair in the collection.
-     *
-     * @param mixed $key
-     * @param mixed $value
-     * @return $this
-     */
     public function set($key, $value)
     {
+        $value = $this->hydrate($value);
+
         if (isset($key)) {
             $this->items[$key] = $value;
         } else {
@@ -79,75 +59,39 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
         return $this;
     }
 
-    /**
-     * Merge the current collection with another collection.
-     *
-     * @param array|Arrayable $collection
-     * @return static
-     */
-    public function merge($collection)
+    public function add($value)
     {
-        $items = $this->getArrayableItems($collection);
-
-        // @phpstan-ignore-next-line
-        return new static(array_merge($this->items, $items));
+        return $this->set(null, $value);
     }
 
-    /**
-     * Check if the collection has an item with the given key.
-     *
-     * @param mixed $key
-     * @return bool
-     */
-    public function has($key): bool
+    public function hydrate($value)
     {
-        return isset($this->items[$key]);
-    }
-
-    /**
-     * Get an item from the collection by key.
-     *
-     * @param mixed $key
-     * @return mixed
-     *
-     * @throws OutOfBoundsException If the key is not found in the collection.
-     */
-    public function get($key)
-    {
-        if (!$this->has($key)) {
-            throw new OutOfBoundsException(sprintf('Missing collection item: %s', $key));
+        if (!isset($this->type)) {
+            return $value;
         }
 
-        return $this->items[$key];
+        if (!is_array($value)) {
+            return $value;
+        }
+
+        return new $this->type($value);
     }
 
-    /**
-     * Get all items from the collection.
-     *
-     * @return array
-     */
     public function all(): array
     {
         return $this->items;
     }
 
-    /**
-     * Clear all items from the collection.
-     *
-     * @return $this
-     */
-    public function clear()
+    public function has($key): bool
     {
-        $this->items = [];
-
-        return $this;
+        return isset($this->items[$key]);
     }
 
-    /**
-     * Reset the internal pointer of the collection to the first element.
-     *
-     * @return $this
-     */
+    public function get($key)
+    {
+        return $this->items[$key];
+    }
+
     public function reset()
     {
         reset($this->items);
@@ -155,86 +99,48 @@ abstract class Collection implements Arrayable, Countable, Fillable, Iteratorabl
         return $this;
     }
 
-    /**
-     * Get the first item in the collection.
-     *
-     * @return mixed
-     */
     public function first()
     {
         return $this->reset()->current();
     }
 
-    /**
-     * Get the last item in the collection.
-     *
-     * @return mixed
-     */
     public function last()
     {
         return end($this->items);
     }
 
-    /**
-     * Get the current item in the collection.
-     *
-     * @return mixed
-     */
     public function current()
     {
         return current($this->items);
     }
 
-    /**
-     * Count the number of items in the collection.
-     *
-     * @return int
-     */
     public function count(): int
     {
         return count($this->items);
     }
 
-    /**
-     * Run a map over each of the items.
-     *
-     * @param callable $callback
-     * @return static
-     */
     public function map(callable $callback)
     {
-        // @phpstan-ignore-next-line
         return new static(array_map($callback, $this->items));
     }
 
-    /**
-     * Extract a slice of the collection.
-     *
-     * @param int $offset
-     * @param int|null $length
-     * @return static
-     */
+    public function merge($collection)
+    {
+        $items = $this->getArrayableItems($collection);
+
+        return new static(array_merge($this->items, $items));
+    }
+
     public function slice(int $offset, ?int $length = null)
     {
-        // @phpstan-ignore-next-line
         return new static(array_slice($this->items, $offset, $length, true));
     }
 
-    /**
-     * Get an iterator for the collection.
-     *
-     * @return ArrayIterator
-     */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
-        return new ArrayIterator($this->items);
+        return new \ArrayIterator($this->items);
     }
 
-    /**
-     * Convert the collection to an array.
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [];

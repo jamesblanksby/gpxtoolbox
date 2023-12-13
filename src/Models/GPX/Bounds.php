@@ -1,28 +1,16 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 
-final class Bounds extends GPXType
+final class Bounds extends Model
 {
-    /**
-     * @var float Minimum latitude of the bounds.
-     */
-    public $minlat = 0.0;
+    public float $minlat = 0.0;
 
-    /**
-     * @var float Minimum longitude of the bounds.
-     */
-    public $minlon = 0.0;
+    public float $minlon = 0.0;
 
-    /**
-     * @var float Maximum latitude of the bounds.
-     */
-    public $maxlat = 0.0;
+    public float $maxlat = 0.0;
 
-    /**
-     * @var float Maximum longitude of the bounds.
-     */
-    public $maxlon = 0.0;
+    public float $maxlon = 0.0;
 }

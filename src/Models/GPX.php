@@ -2,56 +2,32 @@
 
 namespace GPXToolbox\Models;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 use GPXToolbox\GPXToolbox;
-use GPXToolbox\Models\GeoJson\Feature;
-use GPXToolbox\Models\GeoJson\FeatureCollection;
-use GPXToolbox\Models\GeoJson\Geometry;
-use GPXToolbox\Models\GPX\Metadata;
-use GPXToolbox\Models\GPX\Point;
-use GPXToolbox\Models\GPX\Route;
-use GPXToolbox\Models\GPX\RouteCollection;
-use GPXToolbox\Models\GPX\Track;
-use GPXToolbox\Models\GPX\TrackCollection;
-use GPXToolbox\Models\GPX\WaypointCollection;
+use GPXToolbox\Models\Gpx\Metadata;
+use GPXToolbox\Models\Gpx\Point;
+use GPXToolbox\Models\Gpx\Route;
+use GPXToolbox\Models\Gpx\RouteCollection;
+use GPXToolbox\Models\Gpx\Track;
+use GPXToolbox\Models\Gpx\TrackCollection;
+use GPXToolbox\Models\Gpx\WaypointCollection;
+use GPXToolbox\Serializers\Gpx\GeoJsonSerializer;
+use GPXToolbox\Serializers\XmlSerializer;
 
-final class GPX extends GPXType
+final class Gpx extends Model
 {
-    /**
-     * @var string The version of the GPX file.
-     */
-    public $version = '1.1';
+    public string $version = '1.1';
 
-    /**
-     * @var string The creator of the GPX file.
-     */
-    public $creator = GPXToolbox::SIGNATURE;
+    public string $creator = GPXToolbox::SIGNATURE;
 
-    /**
-     * @var Metadata|null Additional metadata associated with the GPX file.
-     */
-    public $metadata = null;
+    public ?Metadata $metadata = null;
 
-    /**
-     * @var WaypointCollection A list of GPX waypoints.
-     */
-    public $wpt;
+    public WaypointCollection $wpt;
 
-    /**
-     * @var RouteCollection A list of GPX routes.
-     */
-    public $rte;
+    public RouteCollection $rte;
 
-    /**
-     * @var TrackCollection A list of GPX tracks.
-     */
-    public $trk;
+    public TrackCollection $trk;
 
-    /**
-     * GPX constructor.
-     *
-     * @param array|null $collection
-     */
     public function __construct($collection = null)
     {
         $this->wpt = new WaypointCollection();
@@ -60,12 +36,6 @@ final class GPX extends GPXType
         parent::__construct($collection);
     }
 
-    /**
-     * Add a waypoint to the GPX file.
-     *
-     * @param Point $waypoint
-     * @return $this
-     */
     public function addWaypoint(Point $waypoint)
     {
         $this->getWaypoints()->add($waypoint);
@@ -73,12 +43,11 @@ final class GPX extends GPXType
         return $this;
     }
 
-    /**
-     * Add a route to the GPX file.
-     *
-     * @param Route $route
-     * @return $this
-     */
+    public function getWaypoints()
+    {
+        return $this->wpt;
+    }
+
     public function addRoute(Route $route)
     {
         $this->getRoutes()->add($route);
@@ -86,12 +55,11 @@ final class GPX extends GPXType
         return $this;
     }
 
-    /**
-     * Add a track to the GPX file.
-     *
-     * @param Track $track
-     * @return $this
-     */
+    public function getRoutes()
+    {
+        return $this->rte;
+    }
+
     public function addTrack(Track $track)
     {
         $this->getTracks()->add($track);
@@ -99,85 +67,33 @@ final class GPX extends GPXType
         return $this;
     }
 
-    /**
-     * Get the waypoints from GPX file.
-     *
-     * @return WaypointCollection
-     */
-    public function getWaypoints()
-    {
-        return $this->wpt;
-    }
-
-    /**
-     * Get the routes from GPX file.
-     *
-     * @return RouteCollection
-     */
-    public function getRoutes()
-    {
-        return $this->rte;
-    }
-
-    /**
-     * Get the tracks from GPX file.
-     *
-     * @return TrackCollection
-     */
     public function getTracks()
     {
         return $this->trk;
     }
 
-    /**
-     * Convert the GPX object to GeoJson.
-     *
-     * @param int $options
-     * @return string
-     */
-    public function toGeoJson(int $options = 0)
+    public function toXml(): string
+    {
+        return $this->serializeXml()->saveXML();
+    }
+
+    public function serializeXml(): \DOMDocument
+    {
+        $doc = new \DOMDocument();
+
+        $doc->appendChild(XmlSerializer::serialize($doc, 'gpx', $this->toArray()));
+
+        return $doc;
+    }
+
+    public function toGeoJson(int $options = 0): string
     {
         return json_encode($this->serializeGeoJson(), $options);
     }
 
-    /**
-     * Serialize the GPX attributes for GeoJson.
-     *
-     * @return array
-     */
     public function serializeGeoJson(): array
     {
-        $features = new FeatureCollection();
-
-        foreach ($this->getWaypoints() as $point) {
-            $feature = new Feature(Geometry::POINT);
-            $feature->getGeometry()->addCoordinate($point->getLongitude(), $point->getLatitude());
-
-            $properties = array_diff_key($point->toArray(), array_flip(['lat', 'lon',]));
-            $feature->setProperties($properties);
-
-            $features->addFeature($feature);
-        }
-
-        foreach ($this->getRoutes() as $route) {
-            $feature = new Feature(Geometry::LINE_STRING);
-            $feature->getGeometry()->setCoordinates($route->getPoints());
-
-            $properties = array_diff_key($route->toArray(), array_flip(['rtept',]));
-            $feature->setProperties($properties);
-
-            $features->addFeature($feature);
-        }
-
-        foreach ($this->getTracks() as $track) {
-            $feature = new Feature(Geometry::LINE_STRING);
-            $feature->getGeometry()->setCoordinates($track->getPoints());
-
-            $properties = array_diff_key($track->toArray(), array_flip(['trkseg',]));
-            $feature->setProperties($properties);
-
-            $features->addFeature($feature);
-        }
+        $features = GeoJsonSerializer::serialize($this);
 
         return $features->toArray();
     }

@@ -1,23 +1,14 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 
-final class Author extends GPXType
+final class Author extends Model
 {
-    /**
-     * @var string|null The name of the author.
-     */
-    public $name = null;
+    public ?string $name = null;
 
-    /**
-     * @var Email|null The email address of the author.
-     */
-    public $email = null;
+    public ?Email $email = null;
 
-    /**
-     * @var Link|null A link associated with the author.
-     */
-    public $link = null;
+    public ?Link $link = null;
 }

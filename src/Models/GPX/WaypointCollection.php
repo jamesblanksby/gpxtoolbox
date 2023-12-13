@@ -1,6 +1,6 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
 final class WaypointCollection extends PointCollection
 {

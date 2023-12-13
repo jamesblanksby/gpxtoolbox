@@ -1,25 +1,14 @@
 <?php
 
-namespace GPXToolbox\Helpers\GPX;
+namespace GPXToolbox\Helpers\Gpx;
 
-use GPXToolbox\Models\GPX\Point;
-use GPXToolbox\Models\GPX\PointCollection;
+use GPXToolbox\Models\Gpx\Point;
+use GPXToolbox\Models\Gpx\PointCollection;
 
 final class PointHelper
 {
-    /**
-     * The Earth's radius in meters.
-     */
     public const EARTH_RADIUS = 6371000;
 
-    /**
-     * Get the 2D (planar) distance between two points on the Earth's surface.
-     *
-     * @param Point $a
-     * @param Point $b
-     *
-     * @return float
-     */
     public static function get2dDistance(Point $a, Point $b): float
     {
         $dx = deg2rad(($b->getLatitude() - $a->getLatitude()));
@@ -31,14 +20,6 @@ final class PointHelper
         return (self::EARTH_RADIUS * $c);
     }
 
-    /**
-     * Get the 3D distance between two points, accounting for elevation.
-     *
-     * @param Point $a
-     * @param Point $b
-     *
-     * @return float
-     */
     public static function get3dDistance(Point $a, Point $b): float
     {
         $planar = self::get2dDistance($a, $b);
@@ -47,13 +28,6 @@ final class PointHelper
         return sqrt((pow($planar, 2) + pow($height, 2)));
     }
 
-    /**
-     * Calculate the squared distance between two points.
-     *
-     * @param Point $a
-     * @param Point $b
-     * @return float
-     */
     public static function getSquaredDistance(Point $a, Point $b): float
     {
         $dx = ($a->getLatitude() - $b->getLatitude());
@@ -62,14 +36,6 @@ final class PointHelper
         return (($dx * $dx) + ($dy * $dy));
     }
 
-    /**
-     * Calculate the squared perpendicular distance from a point to a line segment.
-     *
-     * @param Point $a
-     * @param Point $b
-     * @param Point $c
-     * @return float
-     */
     public static function getPerpendicularSquaredDistance(Point $a, Point $b, Point $c): float
     {
         $lineLengthSq = self::getSquaredDistance($b, $c);
@@ -92,7 +58,7 @@ final class PointHelper
         $latitude = ($b->getLatitude() + ($t * ($c->getLatitude() - $b->getLatitude())));
         $longitude = ($b->getLongitude() + ($t * ($c->getLongitude() - $b->getLongitude())));
 
-        $d = new Point(Point::WAYPOINT, [
+        $d = new Point([
             'lat' => $latitude,
             'lon' => $longitude,
         ]);
@@ -100,15 +66,6 @@ final class PointHelper
         return self::getSquaredDistance($a, $d);
     }
 
-    /**
-     * Simplify a list of points using a specified tolerance.
-     *
-     * @param PointCollection $points
-     * @param float $tolerance
-     * @param bool  $highestQuality
-     *
-     * @return PointCollection
-     */
     public static function simplify(PointCollection $points, float $tolerance = 1.0, bool $highestQuality = false): PointCollection
     {
         $toleranceSq = ($tolerance * $tolerance);
@@ -119,13 +76,6 @@ final class PointHelper
         return $simplifiedPoints;
     }
 
-    /**
-     * Simplify a list of points based on distance.
-     *
-     * @param PointCollection $points
-     * @param float $toleranceSq
-     * @return PointCollection
-     */
     public static function simplifyDistance(PointCollection $points, float $toleranceSq): PointCollection
     {
         $simplifiedPoints = new PointCollection();
@@ -148,13 +98,6 @@ final class PointHelper
         return $simplifiedPoints;
     }
 
-    /**
-     * Simplify a list of points using the Douglas-Peucker algorithm.
-     *
-     * @param PointCollection $points
-     * @param float $toleranceSq
-     * @return PointCollection
-     */
     public static function simplifyDouglasPeucker(PointCollection $points, float $toleranceSq): PointCollection
     {
         if ($points->count() <= 2) {

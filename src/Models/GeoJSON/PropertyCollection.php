@@ -2,8 +2,8 @@
 
 namespace GPXToolbox\Models\GeoJson;
 
-use GPXToolbox\Abstracts\GPX\GeoJsonTypeCollection;
+use GPXToolbox\Abstracts\Collection;
 
-final class PropertyCollection extends GeoJsonTypeCollection
+final class PropertyCollection extends Collection
 {
 }

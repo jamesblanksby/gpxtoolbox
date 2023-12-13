@@ -1,27 +1,14 @@
 <?php
 
-namespace GPXToolbox\Traits\GPX;
+namespace GPXToolbox\Traits\Gpx;
 
-use GPXToolbox\Helpers\GPX\PointHelper;
-use GPXToolbox\Models\GPX\Bounds;
-use GPXToolbox\Models\GPX\Point;
-use GPXToolbox\Models\GPX\PointCollection;
+use GPXToolbox\Helpers\Gpx\PointHelper;
+use GPXToolbox\Models\Gpx\Bounds;
+use GPXToolbox\Models\Gpx\Point;
+use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasPoints
 {
-    /**
-     * Get a list of points.
-     *
-     * @return PointCollection
-     */
-    abstract public function getPoints(): PointCollection;
-
-    /**
-     * Set a list of points.
-     *
-     * @param PointCollection $points
-     * @return $this
-     */
     public function setPoints(PointCollection $points)
     {
         $this->getPoints()->fill($points);
@@ -29,12 +16,6 @@ trait HasPoints
         return $this;
     }
 
-    /**
-     * Add a point.
-     *
-     * @param Point $point
-     * @return $this
-     */
     public function addPoint(Point $point)
     {
         $this->getPoints()->add($point);
@@ -42,11 +23,8 @@ trait HasPoints
         return $this;
     }
 
-    /**
-     * Get the bounds of a list of points.
-     *
-     * @return Bounds
-     */
+    abstract public function getPoints(): PointCollection;
+
     public function getBounds()
     {
         $latitudes = [];
@@ -74,13 +52,6 @@ trait HasPoints
         return new Bounds($properties);
     }
 
-    /**
-     * Simplify a list of points.
-     *
-     * @param float $tolerance
-     * @param bool $highestQuality
-     * @return $this
-     */
     public function simplify(float $tolerance = 1.0, bool $highestQuality = false)
     {
         $points = $this->getPoints();

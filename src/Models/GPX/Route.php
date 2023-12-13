@@ -1,61 +1,32 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
-use GPXToolbox\Traits\GPX\HasLinks;
-use GPXToolbox\Traits\GPX\HasPoints;
+use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Traits\Gpx\HasLinks;
+use GPXToolbox\Traits\Gpx\HasPoints;
 
-final class Route extends GPXType
+final class Route extends Model
 {
     use HasLinks;
     use HasPoints;
 
-    /**
-     * @var string|null The name of the route.
-     */
-    public $name = null;
+    public ?string $name = null;
 
-    /**
-     * @var string|null A comment or description of the route.
-     */
-    public $cmt = null;
+    public ?string $cmt = null;
 
-    /**
-     * @var string|null A more detailed description of the route.
-     */
-    public $desc = null;
+    public ?string $desc = null;
 
-    /**
-     * @var string|null The source of the route data.
-     */
-    public $src = null;
+    public ?string $src = null;
 
-    /**
-     * @var LinkCollection A list of links associated with the route.
-     */
-    public $link;
+    public LinkCollection $link;
 
-    /**
-     * @var int|null The route number.
-     */
-    public $number = null;
+    public ?int $number = null;
 
-    /**
-     * @var string|null The type or category of the route.
-     */
-    public $type = null;
+    public ?string $type = null;
 
-    /**
-     * @var PointCollection A list of points associated with the route.
-     */
-    public $rtept;
+    public PointCollection $rtept;
 
-    /**
-     * Route constructor.
-     *
-     * @param array|null $collection
-     */
     public function __construct($collection = null)
     {
         $this->link = new LinkCollection();
@@ -63,11 +34,6 @@ final class Route extends GPXType
         parent::__construct($collection);
     }
 
-    /**
-     * Get a list of points associated with the route.
-     *
-     * @return PointCollection
-     */
     public function getPoints(): PointCollection
     {
         return $this->rtept;

@@ -1,60 +1,30 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
-use GPXToolbox\Traits\GPX\HasLinks;
-use DateTime;
+use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Metadata extends GPXType
+final class Metadata extends Model
 {
     use HasLinks;
 
-    /**
-     * @var string|null The name of the GPX file.
-     */
-    public $name = null;
+    public ?string $name = null;
 
-    /**
-     * @var string|null A description of the GPX file.
-     */
-    public $desc = null;
+    public ?string $desc = null;
 
-    /**
-     * @var Author|null The author of the GPX file.
-     */
-    public $author = null;
+    public ?Author $author = null;
 
-    /**
-     * @var Copyright|null Copyright information related to the GPX file.
-     */
-    public $copyright = null;
+    public ?Copyright $copyright = null;
 
-    /**
-     * @var LinkCollection A list of links associated with the GPX file.
-     */
-    public $link;
+    public LinkCollection $link;
 
-    /**
-     * @var DateTime|null The time associated with the GPX file.
-     */
-    public $time = null;
+    public ?string $time = null;
 
-    /**
-     * @var string|null Keywords related to the GPX file.
-     */
-    public $keywords = null;
+    public ?string $keywords = null;
 
-    /**
-     * @var Bounds|null Geographic bounds associated with the GPX file.
-     */
-    public $bounds = null;
+    public ?Bounds $bounds = null;
 
-    /**
-     * Metadata constructor.
-     *
-     * @param array|null $collection
-     */
     public function __construct(?array $collection = null)
     {
         $this->link = new LinkCollection();

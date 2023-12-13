@@ -1,20 +1,18 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Traits\GPX\HasSplits;
-use GPXToolbox\Traits\GPX\HasStatistics;
+use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Traits\Gpx\HasSplits;
+use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class TrackCollection extends PointCollection
+final class TrackCollection extends Collection
 {
     use HasSplits;
     use HasStatistics;
 
-    /**
-     * Get all points from the tracks in the collection.
-     *
-     * @return PointCollection
-     */
+    protected string $type = Track::class;
+
     public function getPoints(): PointCollection
     {
         $points = new PointCollection();

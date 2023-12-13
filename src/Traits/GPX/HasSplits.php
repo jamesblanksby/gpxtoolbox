@@ -1,20 +1,14 @@
 <?php
 
-namespace GPXToolbox\Traits\GPX;
+namespace GPXToolbox\Traits\Gpx;
 
 use GPXToolbox\GPXToolbox;
-use GPXToolbox\Helpers\GPX\PointHelper;
+use GPXToolbox\Helpers\Gpx\PointHelper;
 use GPXToolbox\Models\Analytics\SplitCollection;
-use GPXToolbox\Models\GPX\PointCollection;
+use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasSplits
 {
-    /**
-     * Get splits from a list of points based on a specified interval.
-     *
-     * @param int $interval
-     * @return SplitCollection
-     */
     public function getSplits(?int $interval = 1000): SplitCollection
     {
         $points = $this->getPoints();
@@ -38,7 +32,7 @@ trait HasSplits
 
             $difference = PointHelper::get3dDistance($prevPoint, $point);
 
-            if (!$distanceThreshold || $difference > $distanceThreshold) {
+            if ($difference > $distanceThreshold) {
                 $distance += $difference;
                 $prevPoint = $point;
             }

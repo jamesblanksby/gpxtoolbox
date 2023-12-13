@@ -1,23 +1,14 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 
-final class Copyright extends GPXType
+final class Copyright extends Model
 {
-    /**
-     * @var string The author of the copyright.
-     */
-    public $author = '';
+    public string $author = '';
 
-    /**
-     * @var string|null The year of the copyright.
-     */
-    public $year = null;
+    public ?string $year = null;
 
-    /**
-     * @var string|null The license associated with the copyright.
-     */
-    public $license = null;
+    public ?string $license = null;
 }

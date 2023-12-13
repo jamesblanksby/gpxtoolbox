@@ -1,36 +1,30 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXTypeCollection;
-use GPXToolbox\Traits\GPX\HasPoints;
+use GPXToolbox\Abstracts\Collection;
+use GPXToolbox\Traits\Gpx\HasPoints;
 
-class PointCollection extends GPXTypeCollection
+class PointCollection extends Collection
 {
     use HasPoints;
 
-    /**
-     * Get a list of points associated with the collection.
-     *
-     * @return PointCollection
-     */
+    protected string $type = Point::class;
+
     public function getPoints(): PointCollection
     {
         return $this;
     }
 
-    /**
-     * Get a list of coordinates of the point collection.
-     *
-     * @return array
-     */
     public function getCoordinates(): array
     {
         $points = $this->getPoints();
 
-        $coordinates = $points->map(function ($point) {
-            return $point->getCoordinates();
-        })->toArray();
+        $coordinates = [];
+
+        foreach ($points->all() as $point) {
+            $coordinates[] = $point->getCoordinates();
+        }
 
         return $coordinates;
     }

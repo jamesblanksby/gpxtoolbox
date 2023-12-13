@@ -1,18 +1,12 @@
 <?php
 
-namespace GPXToolbox\Models\GPX;
+namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\GPX\GPXType;
+use GPXToolbox\Abstracts\Model;
 
-final class Email extends GPXType
+final class Email extends Model
 {
-    /**
-     * @var string The identifier part of the email address.
-     */
-    public $id = '';
+    public string $id = '';
 
-    /**
-     * @var string The domain part of the email address.
-     */
-    public $domain = '';
+    public string $domain = '';
 }
