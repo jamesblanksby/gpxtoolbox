@@ -86,7 +86,7 @@ final class Gpx extends Xml
         $doc->appendChild(XmlSerializer::serialize($doc, 'gpx', $this->toArray()));
 
         $doc->createAttributeNS('http://www.topografix.com/GPX/1/1', 'xmlns');
-    
+
         return $doc;
     }
 

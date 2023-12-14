@@ -5,6 +5,7 @@ namespace GPXToolbox\Abstracts;
 use GPXToolbox\Interfaces\Arrayable;
 use GPXToolbox\Interfaces\Fillable;
 use GPXToolbox\Interfaces\Jsonable;
+use GPXToolbox\Serializers\ObjectSerializer;
 use GPXToolbox\Traits\HasArrayable;
 
 abstract class Model implements Arrayable, Fillable, Jsonable
@@ -86,8 +87,8 @@ abstract class Model implements Arrayable, Fillable, Jsonable
                 $value = $property->getValue($this);
             }
 
-            if ($value instanceof Arrayable) {
-                $value = $value->toArray();
+            if (is_object($value)) {
+                $value = ObjectSerializer::serialize($value);
             }
 
             $array[$key] = $value;

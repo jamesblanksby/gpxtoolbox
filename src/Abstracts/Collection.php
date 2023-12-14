@@ -5,6 +5,7 @@ namespace GPXToolbox\Abstracts;
 use GPXToolbox\Interfaces\Arrayable;
 use GPXToolbox\Interfaces\Fillable;
 use GPXToolbox\Interfaces\Iteratorable;
+use GPXToolbox\Serializers\ObjectSerializer;
 use GPXToolbox\Traits\HasArrayable;
 
 abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorable
@@ -146,8 +147,8 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
         $array = [];
 
         foreach ($this->items as $key => $value) {
-            if ($value instanceof Arrayable) {
-                $value = $value->toArray();
+            if (is_object($value)) {
+                $value = ObjectSerializer::serialize($value);
             }
 
             $array[$key] = $value;

@@ -19,7 +19,7 @@ final class Metadata extends Xml
 
     public LinkCollection $link;
 
-    public ?string $time = null;
+    public ?Datetime $time = null;
 
     public ?string $keywords = null;
 

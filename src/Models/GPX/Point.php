@@ -23,7 +23,7 @@ final class Point extends Xml
 
     public ?float $ele = null;
 
-    public ?string $time = null;
+    public ?Datetime $time = null;
 
     public ?float $magvar = null;
 
