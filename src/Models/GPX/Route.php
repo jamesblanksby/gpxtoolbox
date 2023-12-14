@@ -2,11 +2,11 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 use GPXToolbox\Traits\Gpx\HasPoints;
 
-final class Route extends Model
+final class Route extends Xml
 {
     use HasLinks;
     use HasPoints;
@@ -37,5 +37,13 @@ final class Route extends Model
     public function getPoints(): PointCollection
     {
         return $this->rtept;
+    }
+
+    public function getProperties(): array
+    {
+        $properties = self::unwrapAttributes($this->toArray());
+        unset($properties['rtept']);
+
+        return $properties;
     }
 }

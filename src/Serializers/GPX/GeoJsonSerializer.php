@@ -27,8 +27,7 @@ final class GeoJsonSerializer
     protected static function serializeWaypoints(FeatureCollection $features, WaypointCollection $waypoints): FeatureCollection
     {
         foreach ($waypoints->all() as $point) {
-            $properties = array_diff_key($point->toArray(), array_flip(['lat', 'lon',]));
-            $feature = self::serializeFeature(Geometry::POINT, new PointCollection($point), $properties);
+            $feature = self::serializeFeature(Geometry::POINT, new PointCollection($point), $point->getProperties());
 
             $features->addFeature($feature);
         }
@@ -39,8 +38,7 @@ final class GeoJsonSerializer
     protected static function serializeRoutes(FeatureCollection $features, RouteCollection $routes): FeatureCollection
     {
         foreach ($routes->all() as $route) {
-            $properties = array_diff_key($route->toArray(), array_flip(['rtept',]));
-            $feature = self::serializeFeature(Geometry::LINE_STRING, $route->getPoints(), $properties);
+            $feature = self::serializeFeature(Geometry::LINE_STRING, $route->getPoints(), $route->getProperties());
 
             $features->addFeature($feature);
         }
@@ -51,8 +49,7 @@ final class GeoJsonSerializer
     protected static function serializeTracks(FeatureCollection $features, TrackCollection $tracks): FeatureCollection
     {
         foreach ($tracks->all() as $track) {
-            $properties = array_diff_key($track->toArray(), array_flip(['trkseg',]));
-            $feature = self::serializeFeature(Geometry::LINE_STRING, $track->getPoints(), $properties);
+            $feature = self::serializeFeature(Geometry::LINE_STRING, $track->getPoints(), $track->getProperties());
 
             $features->addFeature($feature);
         }

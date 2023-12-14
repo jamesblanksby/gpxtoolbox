@@ -2,10 +2,12 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 
-final class Bounds extends Model
+final class Bounds extends Xml
 {
+    protected ?array $attributes = ['minlat', 'minlon', 'maxlat', 'maxlon',];
+
     public float $minlat = 0.0;
 
     public float $minlon = 0.0;

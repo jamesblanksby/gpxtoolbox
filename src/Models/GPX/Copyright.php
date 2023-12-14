@@ -2,10 +2,12 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 
-final class Copyright extends Model
+final class Copyright extends Xml
 {
+    protected ?array $attributes = ['author',];
+
     public string $author = '';
 
     public ?string $year = null;

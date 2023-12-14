@@ -2,11 +2,11 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasPoints;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class Segment extends Model
+final class Segment extends Xml
 {
     use HasPoints;
     use HasStatistics;

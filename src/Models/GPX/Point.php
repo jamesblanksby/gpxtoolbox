@@ -2,16 +2,18 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Point extends Model
+final class Point extends Xml
 {
     use HasLinks;
 
     public const WAYPOINT = 'wpt';
     public const TRACKPOINT = 'trkpt';
     public const ROUTEPOINT = 'rtept';
+
+    protected ?array $attributes = ['lat', 'lon',];
 
     protected string $type = '';
 
@@ -77,5 +79,15 @@ final class Point extends Model
     public function getElevation(): float
     {
         return $this->ele;
+    }
+
+    public function getProperties(): array
+    {
+        $properties = self::unwrapAttributes($this->toArray());
+
+        $excludedKeys = ['lat', 'lon',];
+        $properties = array_diff_key($properties, array_flip($excludedKeys));
+
+        return $properties;
     }
 }

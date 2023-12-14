@@ -37,9 +37,9 @@ final class GPXToolbox
 
         $doc->loadXML($xml);
 
-        $properties = XmlSerializer::deserialize($doc->documentElement);
+        $collection = XmlSerializer::deserialize($doc->documentElement);
 
-        return new Gpx($properties);
+        return new Gpx($collection);
     }
 
     public function save(Gpx $gpx, string $filename, string $format): int

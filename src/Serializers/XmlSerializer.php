@@ -4,45 +4,58 @@ namespace GPXToolbox\Serializers;
 
 final class XmlSerializer
 {
-    public static function serialize(\DOMDocument $doc, string $root, array $properties): \DOMNode
+    public static function serialize(\DOMDocument $doc, string $root, array $data): \DOMNode
     {
-        // @TODO use schema to determine whether element or attribute
-
         $node = $doc->createElement($root);
 
-        foreach ($properties as $key => $value) {
+        foreach ($data as $key => $value) {
             if (is_null($value)) {
                 continue;
             }
 
-            if (is_array($value)) {
-                if (array_is_list($value)) {
-                    foreach ($value as $item) {
-                        $item = self::serialize($doc, $key, $item);
-                        $node->appendChild($item);
-                    }
-                } else {
-                    $value = self::serialize($doc, $key, $value);
-                    $node->appendChild($value);
-                }
+            if ($key === '@attributes') {
+                self::setAttributes($node, $value);
             } else {
-                $value = $doc->createElement($key, $value);
-                $node->appendChild($value);
+                self::appendValue($doc, $node, $key, $value);
             }
         }
 
         return $node;
     }
 
+    protected static function setAttributes(\DOMElement $element, array $attributes): void
+    {
+        foreach ($attributes as $key => $value) {
+            $element->setAttribute($key, $value);
+        }
+    }
+
+    protected static function appendValue(\DOMDocument $doc, \DOMElement $parent, string $key, $value): void
+    {
+        if (is_array($value)) {
+            self::appendArrayValues($doc, $parent, $key, $value);
+        } else {
+            $node = $doc->createElement($key, $value);
+            $parent->appendChild($node);
+        }
+    }
+
+    protected static function appendArrayValues(\DOMDocument $doc, \DOMElement $parent, string $key, array $values): void
+    {
+        if (array_is_list($values)) {
+            foreach ($values as $value) {
+                $node = self::serialize($doc, $key, $value);
+                $parent->appendChild($node);
+            }
+        } else {
+            $node = self::serialize($doc, $key, $values);
+            $parent->appendChild($node);
+        }
+    }
+
     public static function deserialize(\DOMNode $node)
     {
-        $properties = [];
-
-        if ($node->hasAttributes()) {
-            foreach ($node->attributes as $attribute) {
-                $properties[$attribute->name] = $attribute->value;
-            }
-        }
+        $data = self::getAttributes($node);
 
         if ($node->hasChildNodes()) {
             foreach ($node->childNodes as $child) {
@@ -53,21 +66,41 @@ final class XmlSerializer
                 $key = $child->nodeName;
                 $value = self::deserialize($child);
 
-                if (array_key_exists($key, $properties)) {
-                    if (!array_is_list($properties[$key])) {
-                        $properties[$key] = [$properties[$key],];
-                    }
-                    $properties[$key][] = $value;
-                } else {
-                    $properties[$key] = $value;
-                }
+                $data = self::appendChildValue($data, $key, $value);
             }
         }
 
-        if (!$properties) {
-            $properties = trim($node->textContent);
+        if (!$data) {
+            $data = trim($node->textContent);
         }
 
-        return $properties;
+        return $data;
+    }
+
+    protected static function getAttributes(\DOMNode $node): array
+    {
+        $attributes = [];
+
+        if ($node->hasAttributes()) {
+            foreach ($node->attributes as $attribute) {
+                $attributes[$attribute->name] = $attribute->value;
+            }
+        }
+
+        return $attributes ? ['@attributes' => $attributes,] : [];
+    }
+
+    protected static function appendChildValue(array $data, string $key, $value): array
+    {
+        if (array_key_exists($key, $data)) {
+            if (!array_is_list($data[$key])) {
+                $data[$key] = [$data[$key],];
+            }
+            $data[$key][] = $value;
+        } else {
+            $data[$key] = $value;
+        }
+
+        return $data;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Metadata extends Model
+final class Metadata extends Xml
 {
     use HasLinks;
 

@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Models;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\GPXToolbox;
 use GPXToolbox\Models\Gpx\Metadata;
 use GPXToolbox\Models\Gpx\Point;
@@ -14,8 +14,10 @@ use GPXToolbox\Models\Gpx\WaypointCollection;
 use GPXToolbox\Serializers\Gpx\GeoJsonSerializer;
 use GPXToolbox\Serializers\XmlSerializer;
 
-final class Gpx extends Model
+final class Gpx extends Xml
 {
+    protected ?array $attributes = ['version', 'creator',];
+
     public string $version = '1.1';
 
     public string $creator = GPXToolbox::SIGNATURE;

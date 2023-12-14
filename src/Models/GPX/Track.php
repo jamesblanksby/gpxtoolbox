@@ -2,12 +2,12 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-use GPXToolbox\Abstracts\Model;
+use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 use GPXToolbox\Traits\Gpx\HasPoints;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class Track extends Model
+final class Track extends Xml
 {
     use HasLinks;
     use HasPoints;
@@ -83,5 +83,13 @@ final class Track extends Model
         }
 
         return $points;
+    }
+
+    public function getProperties(): array
+    {
+        $properties = self::unwrapAttributes($this->toArray());
+        unset($properties['trkseg']);
+
+        return $properties;
     }
 }
