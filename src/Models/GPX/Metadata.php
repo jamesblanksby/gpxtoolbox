@@ -5,7 +5,7 @@ namespace GPXToolbox\Models\Gpx;
 use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Metadata extends Xml
+class Metadata extends Xml
 {
     use HasLinks;
 

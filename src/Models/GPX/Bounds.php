@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Gpx;
 
 use GPXToolbox\Abstracts\Xml;
 
-final class Bounds extends Xml
+class Bounds extends Xml
 {
     protected ?array $attributes = ['minlat', 'minlon', 'maxlat', 'maxlon',];
 

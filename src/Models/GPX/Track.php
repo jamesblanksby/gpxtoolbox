@@ -7,7 +7,7 @@ use GPXToolbox\Traits\Gpx\HasLinks;
 use GPXToolbox\Traits\Gpx\HasPoints;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class Track extends Xml
+class Track extends Xml
 {
     use HasLinks;
     use HasPoints;
@@ -65,9 +65,7 @@ final class Track extends Xml
         if ($segment) {
             $segment->add($point);
         } else {
-            $points = new PointCollection();
-            $points->addPoint($point);
-
+            $points = new PointCollection([$point,]);
             $this->setPoints($points);
         }
 

@@ -50,13 +50,7 @@ trait HasStatistics
         $configuration = GPXToolbox::getConfiguration();
         $distanceThreshold = $configuration->getDistanceThreshold();
 
-        for ($a = 0; $a < $points->count(); $a++) {
-            if ($a === 0) {
-                continue;
-            }
-
-            $point = $points->get($a);
-
+        foreach ($points->all() as $point) {
             $difference = PointHelper::get3dDistance($prevPoint, $point);
 
             $isDistanceWithinThreshold = ($difference > $distanceThreshold);
@@ -85,13 +79,7 @@ trait HasStatistics
         $movingDistanceThreshold = $configuration->getMovingDistanceThreshold();
         $movingDurationThreshold = $configuration->getMovingDurationThreshold();
 
-        for ($a = 0; $a < $points->count(); $a++) {
-            if ($a === 0) {
-                continue;
-            }
-
-            $point = $points->get($a);
-
+        foreach ($points->all() as $point) {
             $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
             $durationDifference = abs(($prevPoint->time->getTimestamp() - $point->time->getTimestamp()));
 
@@ -123,13 +111,7 @@ trait HasStatistics
 
         $elevationThreshold = GPXToolbox::getConfiguration()->getElevationThreshold();
 
-        for ($a = 0; $a < $points->count(); $a++) {
-            if ($a === 0) {
-                continue;
-            }
-
-            $point = $points->get($a);
-
+        foreach ($points->all() as $point) {
             $difference = ($prevPoint->getElevation() - $point->getElevation());
 
             $isDistanceWithinThreshold = (abs($difference) > $elevationThreshold);

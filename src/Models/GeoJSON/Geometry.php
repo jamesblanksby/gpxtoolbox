@@ -5,7 +5,7 @@ namespace GPXToolbox\Models\GeoJson;
 use GPXToolbox\Abstracts\Model;
 use GPXToolbox\Models\Gpx\PointCollection;
 
-final class Geometry extends Model
+class Geometry extends Model
 {
     public const POINT = 'Point';
     public const LINE_STRING = 'LineString';
@@ -33,7 +33,7 @@ final class Geometry extends Model
             $this->addCoordinate(...$point->getCoordinates());
         } else {
             $coordinates = $points->getCoordinates();
-            $this->coordinates->fill($coordinates);
+            $this->coordinates->clear()->fill($coordinates);
         }
 
         return $this;
@@ -44,7 +44,7 @@ final class Geometry extends Model
         $coordinates = [$longitude, $latitude,];
 
         if ($this->type === self::POINT) {
-            $this->coordinates->fill($coordinates);
+            $this->coordinates->clear()->fill($coordinates);
         } else {
             $this->coordinates->add($coordinates);
         }

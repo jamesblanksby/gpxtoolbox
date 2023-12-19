@@ -9,7 +9,7 @@ trait HasLinks
 {
     public function setLinks(LinkCollection $links)
     {
-        $this->getLinks()->fill($links);
+        $this->getLinks()->clear()->fill($links);
 
         return $this;
     }

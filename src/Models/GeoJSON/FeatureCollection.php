@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GeoJson;
 
 use GPXToolbox\Abstracts\Collection;
 
-final class FeatureCollection extends Collection
+class FeatureCollection extends Collection
 {
     protected ?string $class = Feature::class;
 

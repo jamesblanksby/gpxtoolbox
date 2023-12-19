@@ -46,7 +46,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
                 }
 
                 $class = $type->getName();
-                if (class_exists($class) && (!is_object($value) || get_class($value) !== $class)) {
+                if (!is_null($value) && class_exists($class) && (!is_object($value) || get_class($value) !== $class)) {
                     $value = new $class($value);
                 }
             }

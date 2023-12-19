@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasLinks;
 use GPXToolbox\Traits\Gpx\HasPoints;
 
-final class Route extends Xml
+class Route extends Xml
 {
     use HasLinks;
     use HasPoints;

@@ -16,19 +16,14 @@ trait HasSplits
         $prevPoint = $points->first();
 
         $distance = 0.0;
+
         $distanceThreshold = GPXToolbox::getConfiguration()->getDistanceThreshold();
 
         $splits = new SplitCollection();
         $splitPoints = new PointCollection();
 
-        for ($a = 0; $a < $points->count(); $a++) {
-            $point = $points->get($a);
-
+        foreach ($points->all() as $point) {
             $splitPoints->add($point);
-
-            if ($a === 0) {
-                continue;
-            }
 
             $difference = PointHelper::get3dDistance($prevPoint, $point);
 

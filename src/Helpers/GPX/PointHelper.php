@@ -5,16 +5,16 @@ namespace GPXToolbox\Helpers\Gpx;
 use GPXToolbox\Models\Gpx\Point;
 use GPXToolbox\Models\Gpx\PointCollection;
 
-final class PointHelper
+class PointHelper
 {
     public const EARTH_RADIUS = 6371000;
 
     public static function get2dDistance(Point $a, Point $b): float
     {
-        $dx = deg2rad(($b->getLatitude() - $a->getLatitude()));
-        $dy = deg2rad(($b->getLongitude() - $a->getLongitude()));
+        $dx = deg2rad(($b->getX() - $a->getX()));
+        $dy = deg2rad(($b->getY() - $a->getY()));
 
-        $r = (sin(($dx / 2)) * sin(($dx / 2)) + cos(deg2rad($a->getLatitude())) * cos(deg2rad($b->getLatitude())) * sin(($dy / 2)) * sin(($dy / 2)));
+        $r = (sin(($dx / 2)) * sin(($dx / 2)) + cos(deg2rad($a->getX())) * cos(deg2rad($b->getX())) * sin(($dy / 2)) * sin(($dy / 2)));
         $c = (2 * atan2(sqrt($r), sqrt((1 - $r))));
 
         return (self::EARTH_RADIUS * $c);
@@ -23,110 +23,129 @@ final class PointHelper
     public static function get3dDistance(Point $a, Point $b): float
     {
         $planar = self::get2dDistance($a, $b);
-        $height = abs(($b->getElevation() - $a->getElevation()));
+        $height = abs(($a->getZ() - $b->getZ()));
 
         return sqrt((pow($planar, 2) + pow($height, 2)));
     }
 
-    public static function getSquaredDistance(Point $a, Point $b): float
+    public static function getSquareDistance(Point $a, Point $b): float
     {
-        $dx = ($a->getLatitude() - $b->getLatitude());
-        $dy = ($a->getLongitude() - $b->getLongitude());
+        $dx = ($a->getX() - $b->getX());
+        $dy = ($a->getY() - $b->getY());
 
         return (($dx * $dx) + ($dy * $dy));
     }
 
-    public static function getPerpendicularSquaredDistance(Point $a, Point $b, Point $c): float
+    public static function getSquareSegmentDistance(Point $a, Point $b, Point $c): float
     {
-        $lineLengthSq = self::getSquaredDistance($b, $c);
+        $x = $b->getX();
+        $y = $b->getY();
 
-        if ($lineLengthSq === 0.0) {
-            return self::getSquaredDistance($a, $b);
+        $dx = ($c->getX() - $x);
+        $dy = ($c->getY() - $y);
+
+        $t = ((($a->getX() - $x) * $dx) + (($a->getY() - $y) * $dy)) / (($dx * $dx) + ($dy * $dy));
+
+        if ($t > 1) {
+            $x = $c->getX();
+            $y = $c->getY();
+        } elseif ($t > 0) {
+            $x += ($dx * $t);
+            $y += ($dy * $t);
         }
 
-        $dx = (($a->getLatitude() - $b->getLatitude()) * ($c->getLatitude() - $b->getLatitude()));
-        $dy = (($a->getLongitude() - $b->getLongitude()) * ($c->getLongitude() - $b->getLongitude()));
+        $dx = ($a->getX() - $x);
+        $dy = ($a->getY() - $y);
 
-        $t = (($dx + $dy) / $lineLengthSq);
-
-        if ($t < 0) {
-            return self::getSquaredDistance($a, $b);
-        } elseif ($t > 1) {
-            return self::getSquaredDistance($a, $c);
-        }
-
-        $latitude = ($b->getLatitude() + ($t * ($c->getLatitude() - $b->getLatitude())));
-        $longitude = ($b->getLongitude() + ($t * ($c->getLongitude() - $b->getLongitude())));
-
-        $d = new Point([
-            'lat' => $latitude,
-            'lon' => $longitude,
-        ]);
-
-        return self::getSquaredDistance($a, $d);
+        return (($dx * $dx) + ($dy * $dy));
     }
 
-    public static function simplify(PointCollection $points, float $tolerance = 1.0, bool $highestQuality = false): PointCollection
+    public static function simplify(PointCollection $points, float $tolerance = 0.1, bool $highestQuality = true): PointCollection
     {
+        if ($points->count() <= 2) {
+            return $points;
+        }
+
         $toleranceSq = ($tolerance * $tolerance);
 
-        $simplifiedPoints = $highestQuality ? $points : self::simplifyDistance($points, $toleranceSq);
+        $simplifiedPoints = $highestQuality ? $points : self::simplifyRadialDistance($points, $toleranceSq);
         $simplifiedPoints = self::simplifyDouglasPeucker($points, $toleranceSq);
 
         return $simplifiedPoints;
     }
 
-    public static function simplifyDistance(PointCollection $points, float $toleranceSq): PointCollection
+    public static function simplifyRadialDistance(PointCollection $points, float $toleranceSq): PointCollection
     {
-        $simplifiedPoints = new PointCollection();
-        $simplifiedPoints->add($points->first());
+        $count = $points->count();
 
-        $count = (count($points) - 1);
+        if ($count <= 2) {
+            return $points;
+        }
+
+        $prevPoint = $points->first();
+
+        $simplifiedPoints = new PointCollection([$prevPoint,]);
 
         for ($a = 1; $a < $count; $a++) {
             $point = $points->get($a);
 
-            $distanceSq = self::getSquaredDistance($points->get(($a - 1)), $point);
+            $distanceSq = self::getSquareDistance($prevPoint, $point);
 
             if ($distanceSq >= $toleranceSq) {
                 $simplifiedPoints->add($point);
+                $prevPoint = $point;
             }
         }
 
-        $simplifiedPoints->add($points->last());
+        if ($point !== $prevPoint) {
+            $simplifiedPoints->add($point);
+        }
 
         return $simplifiedPoints;
     }
 
     public static function simplifyDouglasPeucker(PointCollection $points, float $toleranceSq): PointCollection
     {
-        if ($points->count() <= 2) {
+        $count = $points->count();
+
+        if ($count <= 2) {
             return $points;
         }
 
-        $firstPoint = $points->first();
-        $maxDistanceSq = 0;
-        $maxIndex = 0;
+        $markers = array_fill(0, $count, false);
+        $markers[0] = $markers[($count - 1)] = true;
 
-        $count = (count($points) - 1);
+        $stack = [0, ($count - 1),];
 
-        for ($a = 1; $a < $count; $a++) {
-            $distanceSq = self::getPerpendicularSquaredDistance($points->get($a), $firstPoint, $points->get($count));
+        while ($stack) {
+            $last = array_pop($stack);
+            $first = array_pop($stack);
 
-            if ($distanceSq > $maxDistanceSq) {
-                $maxDistanceSq = $distanceSq;
-                $maxIndex = $a;
+            $index = null;
+            $maxDistanceSq = 0;
+
+            for ($a = ($first + 1); $a < $last; $a++) {
+                $distanceSq = self::getSquareSegmentDistance($points->get($a), $points->get($first), $points->get($last));
+
+                if ($distanceSq > $maxDistanceSq) {
+                    $index = $a;
+                    $maxDistanceSq = $distanceSq;
+                }
+            }
+
+            if ($maxDistanceSq > $toleranceSq) {
+                $markers[$index] = true;
+
+                array_push($stack, $first, $index, $index, $last);
             }
         }
 
         $simplifiedPoints = new PointCollection();
 
-        if ($maxDistanceSq > $toleranceSq) {
-            $simplifiedPoints = self::simplifyDouglasPeucker($points->slice(0, ($maxIndex + 1)), $toleranceSq)->merge(
-                self::simplifyDouglasPeucker($points->slice($maxIndex, ($count - ($maxIndex + 1))), $toleranceSq)
-            );
-        } else {
-            $simplifiedPoints->add($firstPoint)->add($points->get($count));
+        for ($a = 0; $a < $count; $a++) {
+            if ($markers[$a]) {
+                $simplifiedPoints->add($points->get($a));
+            }
         }
 
         return $simplifiedPoints;

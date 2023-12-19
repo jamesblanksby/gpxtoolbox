@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Gpx;
 
 use GPXToolbox\Abstracts\Xml;
 
-final class Link extends Xml
+class Link extends Xml
 {
     protected ?array $attributes = ['href',];
 

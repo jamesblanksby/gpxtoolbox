@@ -5,7 +5,7 @@ namespace GPXToolbox;
 use GPXToolbox\Models\Gpx;
 use GPXToolbox\Serializers\XmlSerializer;
 
-final class GPXToolbox
+class GPXToolbox
 {
     public const SIGNATURE = 'GPXToolbox';
 

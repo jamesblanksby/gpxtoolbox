@@ -11,7 +11,7 @@ trait HasPoints
 {
     public function setPoints(PointCollection $points)
     {
-        $this->getPoints()->fill($points);
+        $this->getPoints()->clear()->fill($points);
 
         return $this;
     }
@@ -52,13 +52,13 @@ trait HasPoints
         return new Bounds($properties);
     }
 
-    public function simplify(float $tolerance = 1.0, bool $highestQuality = false)
+    public function simplify(float $tolerance = 0.1, bool $highestQuality = true)
     {
         $points = $this->getPoints();
 
         $simplifiedPoints = PointHelper::simplify($points, $tolerance, $highestQuality);
 
-        $clone = clone $this;
+        $clone = unserialize(serialize($this));
         $clone->setPoints($simplifiedPoints);
 
         return $clone;

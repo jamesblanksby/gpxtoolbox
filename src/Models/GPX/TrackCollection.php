@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\Collection;
 use GPXToolbox\Traits\Gpx\HasSplits;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class TrackCollection extends Collection
+class TrackCollection extends Collection
 {
     use HasSplits;
     use HasStatistics;

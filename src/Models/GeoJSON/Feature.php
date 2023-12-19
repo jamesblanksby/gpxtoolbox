@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\GeoJson;
 
 use GPXToolbox\Abstracts\Model;
 
-final class Feature extends Model
+class Feature extends Model
 {
     protected string $type = 'Feature';
 

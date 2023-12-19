@@ -6,7 +6,7 @@ use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\Traits\Gpx\HasPoints;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class Segment extends Xml
+class Segment extends Xml
 {
     use HasPoints;
     use HasStatistics;

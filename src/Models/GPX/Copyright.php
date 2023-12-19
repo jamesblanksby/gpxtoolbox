@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Gpx;
 
 use GPXToolbox\Abstracts\Xml;
 
-final class Copyright extends Xml
+class Copyright extends Xml
 {
     protected ?array $attributes = ['author',];
 

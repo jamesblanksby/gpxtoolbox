@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Analytics;
 
 use GPXToolbox\Abstracts\Model;
 
-final class Statistics extends Model
+class Statistics extends Model
 {
     public float $distance = 0.0;
 

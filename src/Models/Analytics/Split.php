@@ -7,7 +7,7 @@ use GPXToolbox\Models\Gpx\PointCollection;
 use GPXToolbox\Traits\Gpx\HasPoints;
 use GPXToolbox\Traits\Gpx\HasStatistics;
 
-final class Split extends Model
+class Split extends Model
 {
     use HasPoints;
     use HasStatistics;

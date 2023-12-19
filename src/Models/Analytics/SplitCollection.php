@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Analytics;
 
 use GPXToolbox\Models\Gpx\PointCollection;
 
-final class SplitCollection extends PointCollection
+class SplitCollection extends PointCollection
 {
     protected ?string $class = Split::class;
 

@@ -14,7 +14,7 @@ use GPXToolbox\Models\Gpx\WaypointCollection;
 use GPXToolbox\Serializers\Gpx\GeoJsonSerializer;
 use GPXToolbox\Serializers\XmlSerializer;
 
-final class Gpx extends Xml
+class Gpx extends Xml
 {
     protected ?array $attributes = ['version', 'creator',];
 

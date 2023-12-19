@@ -4,7 +4,7 @@ namespace GPXToolbox\Models\Gpx;
 
 use GPXToolbox\Abstracts\Xml;
 
-final class Author extends Xml
+class Author extends Xml
 {
     public ?string $name = null;
 

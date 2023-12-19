@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Serializers;
 
-final class ObjectSerializer
+class ObjectSerializer
 {
     public static function serialize(object $object)
     {

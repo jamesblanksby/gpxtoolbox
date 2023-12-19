@@ -11,7 +11,7 @@ use GPXToolbox\Models\Gpx\RouteCollection;
 use GPXToolbox\Models\Gpx\TrackCollection;
 use GPXToolbox\Models\Gpx\WaypointCollection;
 
-final class GeoJsonSerializer
+class GeoJsonSerializer
 {
     public static function serialize(Gpx $gpx): FeatureCollection
     {

@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Models\Gpx;
 
-final class Datetime extends \DateTimeImmutable
+class Datetime extends \DateTimeImmutable
 {
     public function toString(): string
     {

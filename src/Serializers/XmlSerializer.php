@@ -2,7 +2,7 @@
 
 namespace GPXToolbox\Serializers;
 
-final class XmlSerializer
+class XmlSerializer
 {
     public static function serialize(\DOMDocument $doc, string $root, array $data): \DOMNode
     {

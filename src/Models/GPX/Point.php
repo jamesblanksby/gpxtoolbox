@@ -3,9 +3,10 @@
 namespace GPXToolbox\Models\Gpx;
 
 use GPXToolbox\Abstracts\Xml;
+use GPXToolbox\GPXToolbox;
 use GPXToolbox\Traits\Gpx\HasLinks;
 
-final class Point extends Xml
+class Point extends Xml
 {
     use HasLinks;
 
@@ -61,14 +62,68 @@ final class Point extends Xml
         parent::__construct($collection);
     }
 
-    public function getLatitude(): float
+    public function setLat(float $value)
+    {
+        $this->lat = round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
+
+        return $this;
+    }
+
+    public function getLat(): float
     {
         return $this->lat;
     }
 
-    public function getLongitude(): float
+    public function setLon(float $value)
+    {
+        $this->lon = round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
+
+        return $this;
+    }
+
+    public function getLon(): float
     {
         return $this->lon;
+    }
+
+    public function setLatitude(float $value)
+    {
+        return $this->setLat($value);
+    }
+
+    public function getLatitude(): float
+    {
+        return $this->getLat();
+    }
+
+    public function setLongitude(float $value)
+    {
+        return $this->setLat($value);
+    }
+
+    public function getLongitude(): float
+    {
+        return $this->getLon();
+    }
+
+    public function setX(float $value)
+    {
+        return $this->setLat($value);
+    }
+
+    public function getX(): float
+    {
+        return $this->getLat();
+    }
+
+    public function setY(float $value)
+    {
+        return $this->setLon($value);
+    }
+
+    public function getY(): float
+    {
+        return $this->getLon();
     }
 
     public function getCoordinates(): array
@@ -76,9 +131,36 @@ final class Point extends Xml
         return [$this->getLongitude(), $this->getLatitude(),];
     }
 
-    public function getElevation(): float
+    public function setEle(float $value)
+    {
+        $this->ele = round((float) $value, GPXToolbox::getConfiguration()->getElevationPrecision());
+
+        return $this;
+    }
+
+    public function getEle(): float
     {
         return $this->ele;
+    }
+
+    public function setElevation(float $value)
+    {
+        return $this->setEle($value);
+    }
+
+    public function getElevation(): float
+    {
+        return $this->getEle();
+    }
+
+    public function setZ(float $value)
+    {
+        return $this->setLat($value);
+    }
+
+    public function getZ(): float
+    {
+        return $this->getLat();
     }
 
     public function getProperties(): array

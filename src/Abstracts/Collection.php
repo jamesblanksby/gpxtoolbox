@@ -134,7 +134,7 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
 
     public function slice(int $offset, ?int $length = null)
     {
-        return new static(array_slice($this->items, $offset, $length, true));
+        return new static(array_slice($this->items, $offset, $length));
     }
 
     public function getIterator(): \ArrayIterator

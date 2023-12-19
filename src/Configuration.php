@@ -2,7 +2,7 @@
 
 namespace GPXToolbox;
 
-final class Configuration
+class Configuration
 {
     public int $coordinatePrecision = 6;
 
