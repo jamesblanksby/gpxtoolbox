@@ -7,6 +7,9 @@ use GPXToolbox\Models\Gpx\PointCollection;
 
 class Geometry extends Model
 {
+    /**
+     * Geometry types.
+     */
     public const POINT = 'Point';
     public const LINE_STRING = 'LineString';
     public const POLYGON = 'Polygon';
@@ -15,10 +18,22 @@ class Geometry extends Model
     public const MULTI_POLYGON = 'MultiPolygon';
     public const GEOMETRY_COLLECTION = 'GeometryCollection';
 
+    /**
+     * @var string The GeoJSON type.
+     */
     public string $type = '';
 
+    /**
+     * @var CoordinateCollection Coordinates associated with the geometry.
+     */
     public CoordinateCollection $coordinates;
 
+    /**
+     * Geometry constructor.
+     *
+     * @param string $type
+     * @param array|null $collection
+     */
     public function __construct(string $type, ?array $collection = null)
     {
         $this->coordinates = new CoordinateCollection();
@@ -26,6 +41,12 @@ class Geometry extends Model
         $this->type = $type;
     }
 
+    /**
+     * Set coordinates for the geometry.
+     *
+     * @param PointCollection $points
+     * @return $this
+     */
     public function setCoordinates(PointCollection $points)
     {
         if ($this->type === self::POINT) {
@@ -39,6 +60,13 @@ class Geometry extends Model
         return $this;
     }
 
+    /**
+     * Add a coordinate to the geometry.
+     *
+     * @param float $longitude
+     * @param float $latitude
+     * @return $this
+     */
     public function addCoordinate(float $longitude, float $latitude)
     {
         $coordinates = [$longitude, $latitude,];

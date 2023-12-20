@@ -12,14 +12,27 @@ class Split extends Model
     use HasPoints;
     use HasStatistics;
 
+    /**
+     * @var PointCollection Collection of points associated with the split.
+     */
     public PointCollection $points;
 
+    /**
+     * Split constructor.
+     *
+     * @param mixed $collection
+     */
     public function __construct($collection = null)
     {
         $this->points = new PointCollection();
         parent::__construct($collection);
     }
 
+    /**
+     * Get the points associated with the split.
+     *
+     * @return PointCollection
+     */
     public function getPoints(): PointCollection
     {
         return $this->points;

@@ -13,6 +13,12 @@ use GPXToolbox\Models\Gpx\WaypointCollection;
 
 class GeoJsonSerializer
 {
+    /**
+     * Serialize GPX data to GeoJSON format.
+     *
+     * @param Gpx $gpx
+     * @return FeatureCollection
+     */
     public static function serialize(Gpx $gpx): FeatureCollection
     {
         $features = new FeatureCollection();
@@ -24,6 +30,13 @@ class GeoJsonSerializer
         return $features;
     }
 
+    /**
+     * Serialize waypoints to GeoJSON features.
+     *
+     * @param FeatureCollection $features
+     * @param WaypointCollection $waypoints
+     * @return FeatureCollection
+     */
     protected static function serializeWaypoints(FeatureCollection $features, WaypointCollection $waypoints): FeatureCollection
     {
         foreach ($waypoints->all() as $point) {
@@ -35,6 +48,13 @@ class GeoJsonSerializer
         return $features;
     }
 
+    /**
+     * Serialize routes to GeoJSON features.
+     *
+     * @param FeatureCollection $features
+     * @param RouteCollection $routes
+     * @return FeatureCollection
+     */
     protected static function serializeRoutes(FeatureCollection $features, RouteCollection $routes): FeatureCollection
     {
         foreach ($routes->all() as $route) {
@@ -46,6 +66,13 @@ class GeoJsonSerializer
         return $features;
     }
 
+    /**
+     * Serialize tracks to GeoJSON features.
+     *
+     * @param FeatureCollection $features
+     * @param TrackCollection $tracks
+     * @return FeatureCollection
+     */
     protected static function serializeTracks(FeatureCollection $features, TrackCollection $tracks): FeatureCollection
     {
         foreach ($tracks->all() as $track) {
@@ -57,6 +84,14 @@ class GeoJsonSerializer
         return $features;
     }
 
+    /**
+     * Serialize a GeoJSON feature.
+     *
+     * @param string $geometry
+     * @param PointCollection $points
+     * @param array $properties
+     * @return Feature
+     */
     protected static function serializeFeature(string $geometry, PointCollection $points, array $properties): Feature
     {
         $feature = new Feature($geometry);

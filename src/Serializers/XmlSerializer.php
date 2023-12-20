@@ -4,6 +4,14 @@ namespace GPXToolbox\Serializers;
 
 class XmlSerializer
 {
+    /**
+     * Serialize data to a DOMNode.
+     *
+     * @param \DOMDocument $doc
+     * @param string $root
+     * @param array $data
+     * @return \DOMNode
+     */
     public static function serialize(\DOMDocument $doc, string $root, array $data): \DOMNode
     {
         $node = $doc->createElement($root);
@@ -23,6 +31,12 @@ class XmlSerializer
         return $node;
     }
 
+    /**
+     * Set attributes on a DOMElement.
+     *
+     * @param \DOMElement $element
+     * @param array $attributes
+     */
     protected static function setAttributes(\DOMElement $element, array $attributes): void
     {
         foreach ($attributes as $key => $value) {
@@ -30,6 +44,14 @@ class XmlSerializer
         }
     }
 
+    /**
+     * Append value to a DOMElement.
+     *
+     * @param \DOMDocument $doc
+     * @param \DOMElement $parent
+     * @param string $key
+     * @param mixed $value
+     */
     protected static function appendValue(\DOMDocument $doc, \DOMElement $parent, string $key, $value): void
     {
         if (is_array($value)) {
@@ -40,6 +62,14 @@ class XmlSerializer
         }
     }
 
+    /**
+     * Append array values to a DOMElement.
+     *
+     * @param \DOMDocument $doc
+     * @param \DOMElement $parent
+     * @param string $key
+     * @param array $values
+     */
     protected static function appendArrayValues(\DOMDocument $doc, \DOMElement $parent, string $key, array $values): void
     {
         if (array_is_list($values)) {
@@ -53,6 +83,12 @@ class XmlSerializer
         }
     }
 
+    /**
+     * Deserialize a DOMNode.
+     *
+     * @param \DOMNode $node
+     * @return mixed
+     */
     public static function deserialize(\DOMNode $node)
     {
         $data = self::getAttributes($node);
@@ -77,6 +113,12 @@ class XmlSerializer
         return $data;
     }
 
+    /**
+     * Get attributes from a DOMNode.
+     *
+     * @param \DOMNode $node
+     * @return array
+     */
     protected static function getAttributes(\DOMNode $node): array
     {
         $attributes = [];
@@ -90,6 +132,14 @@ class XmlSerializer
         return $attributes ? ['@attributes' => $attributes,] : [];
     }
 
+    /**
+     * Append child value to data array.
+     *
+     * @param array $data
+     * @param string $key
+     * @param mixed $value
+     * @return array
+     */
     protected static function appendChildValue(array $data, string $key, $value): array
     {
         if (array_key_exists($key, $data)) {

@@ -11,8 +11,16 @@ class SegmentCollection extends Collection
     use HasSplits;
     use HasStatistics;
 
+    /**
+     * @inheritDoc
+     */
     protected ?string $class = Segment::class;
 
+    /**
+     * Get the track points from all segments in the collection.
+     *
+     * @return PointCollection
+     */
     public function getPoints(): PointCollection
     {
         $points = new PointCollection();

@@ -9,13 +9,26 @@ class PointCollection extends Collection
 {
     use HasPoints;
 
+    /**
+     * @inheritDoc
+     */
     protected ?string $class = Point::class;
 
+    /**
+     * Get all points in the collection.
+     *
+     * @return PointCollection
+     */
     public function getPoints(): PointCollection
     {
         return $this;
     }
 
+    /**
+     * Get coordinates of all points in the collection.
+     *
+     * @return array
+     */
     public function getCoordinates(): array
     {
         $points = $this->getPoints();

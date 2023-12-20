@@ -4,5 +4,10 @@ namespace GPXToolbox\Interfaces;
 
 interface Fillable
 {
-    public function fill(?array $collection = null);
+    /**
+     * Fill the object with data.
+     *
+     * @param mixed $collection
+     */
+    public function fill($collection = null);
 }

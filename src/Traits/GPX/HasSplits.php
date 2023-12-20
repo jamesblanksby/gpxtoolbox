@@ -9,6 +9,12 @@ use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasSplits
 {
+    /**
+     * Get splits for the model.
+     *
+     * @param int|null $interval
+     * @return SplitCollection
+     */
     public function getSplits(?int $interval = 1000): SplitCollection
     {
         $points = $this->getPoints();

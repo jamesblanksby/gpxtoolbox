@@ -9,6 +9,11 @@ use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasStatistics
 {
+    /**
+     * Get statistics for the model.
+     *
+     * @return Statistics
+     */
     public function getStatistics(): Statistics
     {
         $points = $this->getPoints();
@@ -41,6 +46,12 @@ trait HasStatistics
         return $statistics;
     }
 
+    /**
+     * Get the distance from points.
+     *
+     * @param PointCollection $points
+     * @return array
+     */
     protected function getDistance(PointCollection $points): array
     {
         $prevPoint = $points->first();
@@ -66,6 +77,12 @@ trait HasStatistics
         return [$distance,];
     }
 
+    /**
+     * Get the duration from points.
+     *
+     * @param PointCollection $points
+     * @return array
+     */
     protected function getDuration(PointCollection $points): array
     {
         $firstPoint = $points->first();
@@ -96,6 +113,12 @@ trait HasStatistics
         return [$moving, $total,];
     }
 
+    /**
+     * Get the elevation from points.
+     *
+     * @param PointCollection $points
+     * @return array
+     */
     protected function getElevation(PointCollection $points): array
     {
         $prevPoint = $points->first();
@@ -126,6 +149,12 @@ trait HasStatistics
         return [$min, $max, $gain, $loss,];
     }
 
+    /**
+     * Get the average pace and speed from statistics.
+     *
+     * @param Statistics $statistics
+     * @return array
+     */
     protected function getAverage(Statistics $statistics): array
     {
         $pace = 0.0;

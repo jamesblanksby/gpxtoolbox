@@ -9,6 +9,12 @@ use GPXToolbox\Models\Gpx\PointCollection;
 
 trait HasPoints
 {
+    /**
+     * Set points for the model.
+     *
+     * @param PointCollection $points
+     * @return $this
+     */
     public function setPoints(PointCollection $points)
     {
         $this->getPoints()->clear()->fill($points);
@@ -16,6 +22,12 @@ trait HasPoints
         return $this;
     }
 
+    /**
+     * Add a point to the model.
+     *
+     * @param Point $point
+     * @return $this
+     */
     public function addPoint(Point $point)
     {
         $this->getPoints()->add($point);
@@ -23,8 +35,18 @@ trait HasPoints
         return $this;
     }
 
+    /**
+     * Get the points collection.
+     *
+     * @return PointCollection
+     */
     abstract public function getPoints(): PointCollection;
 
+    /**
+     * Get the bounds of the points.
+     *
+     * @return Bounds
+     */
     public function getBounds()
     {
         $latitudes = [];
@@ -52,6 +74,13 @@ trait HasPoints
         return new Bounds($properties);
     }
 
+    /**
+     * Simplify the points with a given tolerance.
+     *
+     * @param float $tolerance
+     * @param bool $highestQuality
+     * @return $this
+     */
     public function simplify(float $tolerance = 0.1, bool $highestQuality = true)
     {
         $points = $this->getPoints();

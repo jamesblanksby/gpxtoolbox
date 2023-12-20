@@ -11,8 +11,16 @@ class TrackCollection extends Collection
     use HasSplits;
     use HasStatistics;
 
+    /**
+     * @inheritDoc
+     */
     protected ?string $class = Track::class;
 
+    /**
+     * Get all track points from the collection.
+     *
+     * @return PointCollection
+     */
     public function getPoints(): PointCollection
     {
         $points = new PointCollection();

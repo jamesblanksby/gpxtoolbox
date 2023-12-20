@@ -7,8 +7,18 @@ use GPXToolbox\Models\Gpx\PointCollection;
 
 class PointHelper
 {
+    /**
+     * Earth radius in meters.
+     */
     public const EARTH_RADIUS = 6371000;
 
+    /**
+     * Calculate 2D distance between two points.
+     *
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
     public static function get2dDistance(Point $a, Point $b): float
     {
         $dx = deg2rad(($a->getX() - $b->getX()));
@@ -20,6 +30,13 @@ class PointHelper
         return (self::EARTH_RADIUS * $c);
     }
 
+    /**
+     * Calculate 3D distance between two points.
+     *
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
     public static function get3dDistance(Point $a, Point $b): float
     {
         $planar = self::get2dDistance($a, $b);
@@ -28,6 +45,13 @@ class PointHelper
         return sqrt((pow($planar, 2) + pow($height, 2)));
     }
 
+    /**
+     * Calculate square of the distance between two points.
+     *
+     * @param Point $a
+     * @param Point $b
+     * @return float
+     */
     public static function getSquareDistance(Point $a, Point $b): float
     {
         $dx = ($a->getX() - $b->getX());
@@ -36,6 +60,14 @@ class PointHelper
         return (($dx * $dx) + ($dy * $dy));
     }
 
+    /**
+     * Calculate square of the distance between a line segment and a point.
+     *
+     * @param Point $a
+     * @param Point $b
+     * @param Point $c
+     * @return float
+     */
     public static function getSquareSegmentDistance(Point $a, Point $b, Point $c): float
     {
         $x = $b->getX();
@@ -60,6 +92,14 @@ class PointHelper
         return (($dx * $dx) + ($dy * $dy));
     }
 
+    /**
+     * Simplify a collection of points.
+     *
+     * @param PointCollection $points
+     * @param float $tolerance
+     * @param bool $highestQuality
+     * @return PointCollection
+     */
     public static function simplify(PointCollection $points, float $tolerance = 0.1, bool $highestQuality = true): PointCollection
     {
         $toleranceSq = ($tolerance * $tolerance);
@@ -70,6 +110,13 @@ class PointHelper
         return $simplifiedPoints;
     }
 
+    /**
+     * Simplify a collection of points using the Radial Distance algorithm.
+     *
+     * @param PointCollection $points
+     * @param float $toleranceSq
+     * @return PointCollection
+     */
     public static function simplifyRadialDistance(PointCollection $points, float $toleranceSq): PointCollection
     {
         $count = $points->count();
@@ -100,6 +147,13 @@ class PointHelper
         return $simplifiedPoints;
     }
 
+    /**
+     * Simplify a collection of points using the Douglas-Peucker algorithm.
+     *
+     * @param PointCollection $points
+     * @param float $toleranceSq
+     * @return PointCollection
+     */
     public static function simplifyDouglasPeucker(PointCollection $points, float $toleranceSq): PointCollection
     {
         $count = $points->count();

@@ -12,11 +12,22 @@ abstract class Model implements Arrayable, Fillable, Jsonable
 {
     use HasArrayable;
 
+    /**
+     * Model constructor.
+     *
+     * @param mixed $collection
+     */
     public function __construct($collection = null)
     {
         $this->fill($collection);
     }
 
+    /**
+     * Fill the model with data.
+     *
+     * @param mixed $collection
+     * @return $this
+     */
     public function fill($collection = null)
     {
         if (is_null($collection)) {
@@ -64,6 +75,11 @@ abstract class Model implements Arrayable, Fillable, Jsonable
         return $this;
     }
 
+    /**
+     * Convert the model to an array.
+     *
+     * @return array
+     */
     public function toArray(): array
     {
         $array = [];
@@ -97,11 +113,22 @@ abstract class Model implements Arrayable, Fillable, Jsonable
         return $array;
     }
 
+    /**
+     * Convert the model to its JSON representation.
+     *
+     * @param int $options
+     * @return string
+     */
     public function toJson(int $options = 0): string
     {
         return json_encode($this->serializeJson(), $options);
     }
 
+    /**
+     * Serialize the model to JSON.
+     *
+     * @return mixed
+     */
     public function serializeJson()
     {
         return $this->toArray();

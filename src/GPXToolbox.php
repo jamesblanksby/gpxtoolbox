@@ -7,15 +7,35 @@ use GPXToolbox\Serializers\XmlSerializer;
 
 class GPXToolbox
 {
+    /**
+     * GPXToolbox signature.
+     */
     public const SIGNATURE = 'GPXToolbox';
 
-    public static $configuration;
+    /**
+     * Configuration instance.
+     *
+     * @var Configuration|null
+     */
+    public static ?Configuration $configuration = null;
 
+
+    /**
+     * GPXToolbox constructor.
+     *
+     * @param Configuration|null $configuration
+     */
     public function __construct(?Configuration $configuration = null)
     {
         self::$configuration = $configuration ?? self::getConfiguration();
     }
 
+    /**
+     * Load GPX data from a file.
+     *
+     * @param string $filename
+     * @throws \RuntimeException If the file is not found or cannot be read.
+     */
     public function load(string $filename): Gpx
     {
         if (!file_exists($filename)) {
@@ -31,6 +51,11 @@ class GPXToolbox
         return $this->parse($xml);
     }
 
+    /**
+     * Parse GPX data from XML.
+     *
+     * @param string $xml
+     */
     public function parse(string $xml): Gpx
     {
         $doc = new \DOMDocument();
@@ -42,6 +67,14 @@ class GPXToolbox
         return new Gpx($collection);
     }
 
+    /**
+     * Save GPX data to a file in specified format.
+     *
+     * @param Gpx $gpx
+     * @param string $filename
+     * @param string $format
+     * @throws \RuntimeException If an unsupported format or write failure occurs.
+     */
     public function save(Gpx $gpx, string $filename, string $format): int
     {
         $format = strtolower($format);
@@ -69,6 +102,11 @@ class GPXToolbox
         return $result;
     }
 
+    /**
+     * Get the configuration object.
+     *
+     * @return Configuration
+     */
     public static function getConfiguration(): Configuration
     {
         return self::$configuration ?? new Configuration();

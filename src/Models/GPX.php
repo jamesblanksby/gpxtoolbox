@@ -16,20 +16,58 @@ use GPXToolbox\Serializers\XmlSerializer;
 
 class Gpx extends Xml
 {
+    /**
+     * @inheritDoc
+     */
     protected ?array $attributes = ['version', 'creator',];
 
+    /**
+     * GPX version.
+     *
+     * @var string
+     */
     public string $version = '1.1';
 
+    /**
+     * Application or tool that created the GPX file.
+     *
+     * @var string
+     */
     public string $creator = GPXToolbox::SIGNATURE;
 
+    /**
+     * Metadata information for the GPX file.
+     *
+     * @var Metadata|null
+     */
     public ?Metadata $metadata = null;
 
+    /**
+     * Collection of waypoints in the GPX file.
+     *
+     * @var WaypointCollection
+     */
     public WaypointCollection $wpt;
 
+    /**
+     * Collection of routes in the GPX file.
+     *
+     * @var RouteCollection
+     */
     public RouteCollection $rte;
 
+    /**
+     * Collection of tracks in the GPX file.
+     *
+     * @var TrackCollection
+     */
     public TrackCollection $trk;
 
+    /**
+     * Gpx constructor.
+     *
+     * @param mixed|null $collection
+     */
     public function __construct($collection = null)
     {
         $this->wpt = new WaypointCollection();
@@ -38,6 +76,12 @@ class Gpx extends Xml
         parent::__construct($collection);
     }
 
+    /**
+     * Add a waypoint to the GPX file.
+     *
+     * @param Point $waypoint
+     * @return $this
+     */
     public function addWaypoint(Point $waypoint)
     {
         $this->getWaypoints()->add($waypoint);
@@ -45,11 +89,22 @@ class Gpx extends Xml
         return $this;
     }
 
+    /**
+     * Get the collection of waypoints associated with the GPX file.
+     *
+     * @return WaypointCollection
+     */
     public function getWaypoints()
     {
         return $this->wpt;
     }
 
+    /**
+     * Add a route to the GPX file.
+     *
+     * @param Route $route
+     * @return $this
+     */
     public function addRoute(Route $route)
     {
         $this->getRoutes()->add($route);
@@ -57,11 +112,22 @@ class Gpx extends Xml
         return $this;
     }
 
+    /**
+     * Get the collection of routes associated with the GPX file.
+     *
+     * @return RouteCollection
+     */
     public function getRoutes()
     {
         return $this->rte;
     }
 
+    /**
+     * Add a track to the GPX file.
+     *
+     * @param Track $track
+     * @return $this
+     */
     public function addTrack(Track $track)
     {
         $this->getTracks()->add($track);
@@ -69,16 +135,31 @@ class Gpx extends Xml
         return $this;
     }
 
+    /**
+     * Get the collection of tracks associated with the GPX file.
+     *
+     * @return TrackCollection
+     */
     public function getTracks()
     {
         return $this->trk;
     }
 
+    /**
+     * Convert the GPX data to an XML string.
+     *
+     * @return string
+     */
     public function toXml(): string
     {
         return $this->serializeXml()->saveXML();
     }
 
+    /**
+     * Serialize the GPX data to XML.
+     *
+     * @return \DOMDocument
+     */
     public function serializeXml(): \DOMDocument
     {
         $doc = new \DOMDocument();
@@ -90,11 +171,22 @@ class Gpx extends Xml
         return $doc;
     }
 
+    /**
+     * Convert the GPX data to GeoJSON format.
+     *
+     * @param int $options
+     * @return string
+     */
     public function toGeoJson(int $options = 0): string
     {
         return json_encode($this->serializeGeoJson(), $options);
     }
 
+    /**
+     * Serialize the GPX data to GeoJSON.
+     *
+     * @return array
+     */
     public function serializeGeoJson(): array
     {
         $features = GeoJsonSerializer::serialize($this);
