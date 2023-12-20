@@ -11,8 +11,8 @@ class PointHelper
 
     public static function get2dDistance(Point $a, Point $b): float
     {
-        $dx = deg2rad(($b->getX() - $a->getX()));
-        $dy = deg2rad(($b->getY() - $a->getY()));
+        $dx = deg2rad(($a->getX() - $b->getX()));
+        $dy = deg2rad(($a->getY() - $b->getY()));
 
         $r = (sin(($dx / 2)) * sin(($dx / 2)) + cos(deg2rad($a->getX())) * cos(deg2rad($b->getX())) * sin(($dy / 2)) * sin(($dy / 2)));
         $c = (2 * atan2(sqrt($r), sqrt((1 - $r))));
@@ -62,10 +62,6 @@ class PointHelper
 
     public static function simplify(PointCollection $points, float $tolerance = 0.1, bool $highestQuality = true): PointCollection
     {
-        if ($points->count() <= 2) {
-            return $points;
-        }
-
         $toleranceSq = ($tolerance * $tolerance);
 
         $simplifiedPoints = $highestQuality ? $points : self::simplifyRadialDistance($points, $toleranceSq);
