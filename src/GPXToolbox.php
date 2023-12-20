@@ -19,7 +19,6 @@ class GPXToolbox
      */
     public static ?Configuration $configuration = null;
 
-
     /**
      * GPXToolbox constructor.
      *
