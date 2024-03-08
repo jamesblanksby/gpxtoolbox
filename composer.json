@@ -1,5 +1,7 @@
 {
     "name": "gpxtoolbox/gpxtoolbox",
+    "description": "A simple library for creating, parsing, analyzing, and modifying GPX files.",
+    "version": "2.0.0",
     "type": "library",
     "license": "MIT",
     "autoload": {
