@@ -9,7 +9,6 @@ use GPXToolbox\Models\Gpx;
 use GPXToolbox\Models\Gpx\PointCollection;
 use GPXToolbox\Models\Gpx\RouteCollection;
 use GPXToolbox\Models\Gpx\TrackCollection;
-use GPXToolbox\Models\Gpx\WaypointCollection;
 
 class GeoJsonSerializer
 {
@@ -23,7 +22,7 @@ class GeoJsonSerializer
     {
         $features = new FeatureCollection();
 
-        $features = self::serializeWaypoints($features, $gpx->getWaypoints());
+        $features = self::serializePoints($features, $gpx->getPoints());
         $features = self::serializeRoutes($features, $gpx->getRoutes());
         $features = self::serializeTracks($features, $gpx->getTracks());
 
@@ -31,15 +30,15 @@ class GeoJsonSerializer
     }
 
     /**
-     * Serialize waypoints to GeoJSON features.
+     * Serialize Points to GeoJSON features.
      *
      * @param FeatureCollection $features
-     * @param WaypointCollection $waypoints
+     * @param PointCollection $Points
      * @return FeatureCollection
      */
-    protected static function serializeWaypoints(FeatureCollection $features, WaypointCollection $waypoints): FeatureCollection
+    public static function serializePoints(FeatureCollection $features, PointCollection $Points): FeatureCollection
     {
-        foreach ($waypoints->all() as $point) {
+        foreach ($Points->all() as $point) {
             $feature = self::serializeFeature(Geometry::POINT, new PointCollection($point), $point->getProperties());
 
             $features->addFeature($feature);
@@ -55,7 +54,7 @@ class GeoJsonSerializer
      * @param RouteCollection $routes
      * @return FeatureCollection
      */
-    protected static function serializeRoutes(FeatureCollection $features, RouteCollection $routes): FeatureCollection
+    public static function serializeRoutes(FeatureCollection $features, RouteCollection $routes): FeatureCollection
     {
         foreach ($routes->all() as $route) {
             $feature = self::serializeFeature(Geometry::LINE_STRING, $route->getPoints(), $route->getProperties());
@@ -73,7 +72,7 @@ class GeoJsonSerializer
      * @param TrackCollection $tracks
      * @return FeatureCollection
      */
-    protected static function serializeTracks(FeatureCollection $features, TrackCollection $tracks): FeatureCollection
+    public static function serializeTracks(FeatureCollection $features, TrackCollection $tracks): FeatureCollection
     {
         foreach ($tracks->all() as $track) {
             $feature = self::serializeFeature(Geometry::LINE_STRING, $track->getPoints(), $track->getProperties());
@@ -92,7 +91,7 @@ class GeoJsonSerializer
      * @param array $properties
      * @return Feature
      */
-    protected static function serializeFeature(string $geometry, PointCollection $points, array $properties): Feature
+    public static function serializeFeature(string $geometry, PointCollection $points, array $properties): Feature
     {
         $feature = new Feature($geometry);
 

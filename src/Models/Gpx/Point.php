@@ -11,23 +11,9 @@ class Point extends Xml
     use HasLinks;
 
     /**
-     * Point types.
-     */
-    public const WAYPOINT = 'wpt';
-    public const TRACKPOINT = 'trkpt';
-    public const ROUTEPOINT = 'rtept';
-
-    /**
      * @inheritDoc
      */
     protected ?array $attributes = ['lat', 'lon',];
-
-    /**
-     * Type of the point (e.g., wpt, trkpt, rtept).
-     *
-     * @var string
-     */
-    protected string $type = '';
 
     /**
      * Latitude of the point.
@@ -316,10 +302,10 @@ class Point extends Xml
     /**
      * Set the elevation of the point.
      *
-     * @param float $value
+     * @param float|null $value
      * @return $this
      */
-    public function setEle(float $value)
+    public function setEle(?float $value)
     {
         $this->ele = round((float) $value, GPXToolbox::getConfiguration()->getElevationPrecision());
 
@@ -329,9 +315,9 @@ class Point extends Xml
     /**
      * Get the elevation of the point.
      *
-     * @return float
+     * @return float|null
      */
-    public function getEle(): float
+    public function getEle(): ?float
     {
         return $this->ele;
     }
@@ -339,10 +325,10 @@ class Point extends Xml
     /**
      * Set the elevation of the point (alias for setEle).
      *
-     * @param float $value
+     * @param float|null $value
      * @return $this
      */
-    public function setElevation(float $value)
+    public function setElevation(?float $value)
     {
         return $this->setEle($value);
     }
@@ -350,32 +336,32 @@ class Point extends Xml
     /**
      * Get the elevation of the point (alias for getEle).
      *
-     * @return float
+     * @return float|null
      */
-    public function getElevation(): float
+    public function getElevation(): ?float
     {
         return $this->getEle();
     }
 
     /**
-     * Set the z-coordinate of the point (alias for setLat).
+     * Set the z-coordinate of the point (alias for getEle).
      *
-     * @param float $value
+     * @param float|null $value
      * @return $this
      */
-    public function setZ(float $value)
+    public function setZ(?float $value)
     {
-        return $this->setLat($value);
+        return $this->setEle($value);
     }
 
     /**
-     * Get the z-coordinate of the point (alias for getLat).
+     * Get the z-coordinate of the point (alias for getEle).
      *
-     * @return float
+     * @return float|null
      */
-    public function getZ(): float
+    public function getZ(): ?float
     {
-        return $this->getLat();
+        return $this->getEle();
     }
 
     /**

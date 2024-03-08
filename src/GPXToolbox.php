@@ -72,21 +72,23 @@ class GPXToolbox
      * @param Gpx $gpx
      * @param string $filename
      * @param string $format
+     * @param int $options
      * @throws \RuntimeException If an unsupported format or write failure occurs.
      */
-    public function save(Gpx $gpx, string $filename, string $format): int
+    public function save(Gpx $gpx, string $filename, string $format, int $options = 0): int
     {
         $format = strtolower($format);
 
         switch ($format) {
             case 'gpx':
+            case 'xml':
                 $data = $gpx->toXml();
                 break;
             case 'json':
-                $data = $gpx->toJson();
+                $data = $gpx->toJson($options);
                 break;
             case 'geojson':
-                $data = $gpx->toGeoJson();
+                $data = $gpx->toGeoJson($options);
                 break;
             default:
                 throw new \RuntimeException(sprintf('Unsupported file format: %s', $format));

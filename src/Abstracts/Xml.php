@@ -35,11 +35,23 @@ abstract class Xml extends Model
     {
         $array = parent::toArray();
 
+        unset($array['attributes']);
+
+        return $array;
+    }
+
+    /**
+     * Convert the XML model to an XML array.
+     *
+     * @return array
+     */
+    public function toXmlArray(): array
+    {
+        $array = $this->toArray();
+
         if (!is_null($this->attributes)) {
             $array = self::wrapAttributes($array, $this->attributes);
         }
-
-        unset($array['attributes']);
 
         return $array;
     }

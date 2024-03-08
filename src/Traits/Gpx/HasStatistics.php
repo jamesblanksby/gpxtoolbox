@@ -163,8 +163,10 @@ trait HasStatistics
         $distance = $statistics->getDistance();
         $movingDuration = $statistics->getMovingDuration();
 
-        $pace = ($movingDuration / ($distance / 1000));
-        $speed = (($distance / 1000) / ($movingDuration / 3600));
+        if ($movingDuration) {
+            $pace = ($movingDuration / ($distance / 1000));
+            $speed = (($distance / 1000) / ($movingDuration / 3600));
+        }
 
         $configuration = GPXToolbox::getConfiguration();
 

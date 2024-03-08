@@ -143,7 +143,7 @@ class XmlSerializer
     protected static function appendChildValue(array $data, string $key, $value): array
     {
         if (array_key_exists($key, $data)) {
-            if (!array_is_list($data[$key])) {
+            if (!is_array($data[$key]) || !array_is_list($data[$key])) {
                 $data[$key] = [$data[$key],];
             }
             $data[$key][] = $value;

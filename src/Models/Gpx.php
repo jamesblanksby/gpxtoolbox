@@ -6,11 +6,11 @@ use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\GPXToolbox;
 use GPXToolbox\Models\Gpx\Metadata;
 use GPXToolbox\Models\Gpx\Point;
+use GPXToolbox\Models\Gpx\PointCollection;
 use GPXToolbox\Models\Gpx\Route;
 use GPXToolbox\Models\Gpx\RouteCollection;
 use GPXToolbox\Models\Gpx\Track;
 use GPXToolbox\Models\Gpx\TrackCollection;
-use GPXToolbox\Models\Gpx\WaypointCollection;
 use GPXToolbox\Serializers\Gpx\GeoJsonSerializer;
 use GPXToolbox\Serializers\XmlSerializer;
 
@@ -43,11 +43,11 @@ class Gpx extends Xml
     public ?Metadata $metadata = null;
 
     /**
-     * Collection of waypoints in the GPX file.
+     * Collection of Points in the GPX file.
      *
-     * @var WaypointCollection
+     * @var PointCollection
      */
-    public WaypointCollection $wpt;
+    public PointCollection $wpt;
 
     /**
      * Collection of routes in the GPX file.
@@ -70,31 +70,31 @@ class Gpx extends Xml
      */
     public function __construct($collection = null)
     {
-        $this->wpt = new WaypointCollection();
+        $this->wpt = new PointCollection();
         $this->rte = new RouteCollection();
         $this->trk = new TrackCollection();
         parent::__construct($collection);
     }
 
     /**
-     * Add a waypoint to the GPX file.
+     * Add a Point to the GPX file.
      *
-     * @param Point $waypoint
+     * @param Point $Point
      * @return $this
      */
-    public function addWaypoint(Point $waypoint)
+    public function addPoint(Point $Point)
     {
-        $this->getWaypoints()->add($waypoint);
+        $this->getPoints()->add($Point);
 
         return $this;
     }
 
     /**
-     * Get the collection of waypoints associated with the GPX file.
+     * Get the collection of Points associated with the GPX file.
      *
-     * @return WaypointCollection
+     * @return PointCollection
      */
-    public function getWaypoints()
+    public function getPoints()
     {
         return $this->wpt;
     }
@@ -164,7 +164,10 @@ class Gpx extends Xml
     {
         $doc = new \DOMDocument();
 
-        $doc->appendChild(XmlSerializer::serialize($doc, 'gpx', $this->toArray()));
+        $doc->preserveWhiteSpace = false;
+        $doc->formatOutput = true;
+
+        $doc->appendChild(XmlSerializer::serialize($doc, 'gpx', $this->toXmlArray()));
 
         $doc->createAttributeNS('http://www.topografix.com/GPX/1/1', 'xmlns');
 
