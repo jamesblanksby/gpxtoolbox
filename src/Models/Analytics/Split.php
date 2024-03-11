@@ -13,7 +13,7 @@ class Split extends Model
     use HasStatistics;
 
     /**
-     * @var PointCollection Collection of points associated with the split.
+     * @var PointCollection A collection of points associated with the split.
      */
     public PointCollection $points;
 

@@ -63,7 +63,7 @@ class Track extends Xml
     public ?string $type = null;
 
     /**
-     * Collection of track segments.
+     * A collection of track segments.
      *
      * @var SegmentCollection
      */

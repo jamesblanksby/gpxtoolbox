@@ -43,21 +43,21 @@ class Gpx extends Xml
     public ?Metadata $metadata = null;
 
     /**
-     * Collection of Points in the GPX file.
+     * A collection of points in the GPX file.
      *
      * @var PointCollection
      */
     public PointCollection $wpt;
 
     /**
-     * Collection of routes in the GPX file.
+     * A collection of routes in the GPX file.
      *
      * @var RouteCollection
      */
     public RouteCollection $rte;
 
     /**
-     * Collection of tracks in the GPX file.
+     * A collection of tracks in the GPX file.
      *
      * @var TrackCollection
      */
@@ -90,7 +90,7 @@ class Gpx extends Xml
     }
 
     /**
-     * Get the collection of Points associated with the GPX file.
+     * Get the collection of points associated with the GPX file.
      *
      * @return PointCollection
      */
