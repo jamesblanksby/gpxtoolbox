@@ -175,7 +175,11 @@ class PointHelper
             $maxDistanceSq = 0;
 
             for ($a = ($first + 1); $a < $last; $a++) {
-                $distanceSq = self::getSquareSegmentDistance($points->get($a), $points->get($first), $points->get($last));
+                $distanceSq = self::getSquareSegmentDistance(
+                    $points->get($a),
+                    $points->get($first),
+                    $points->get($last)
+                );
 
                 if ($distanceSq > $maxDistanceSq) {
                     $index = $a;

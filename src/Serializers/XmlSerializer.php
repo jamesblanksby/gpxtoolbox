@@ -37,7 +37,7 @@ class XmlSerializer
      * @param \DOMElement $element
      * @param array $attributes
      */
-    protected static function setAttributes(\DOMElement $element, array $attributes): void
+    protected static function setAttributes(\DOMElement $element, array $attributes)
     {
         foreach ($attributes as $key => $value) {
             $element->setAttribute($key, $value);
@@ -52,7 +52,7 @@ class XmlSerializer
      * @param string $key
      * @param mixed $value
      */
-    protected static function appendValue(\DOMDocument $doc, \DOMElement $parent, string $key, $value): void
+    protected static function appendValue(\DOMDocument $doc, \DOMElement $parent, string $key, $value)
     {
         if (is_array($value)) {
             self::appendArrayValues($doc, $parent, $key, $value);
@@ -70,7 +70,7 @@ class XmlSerializer
      * @param string $key
      * @param array $values
      */
-    protected static function appendArrayValues(\DOMDocument $doc, \DOMElement $parent, string $key, array $values): void
+    protected static function appendArrayValues(\DOMDocument $doc, \DOMElement $parent, string $key, array $values)
     {
         if (array_is_list($values)) {
             foreach ($values as $value) {

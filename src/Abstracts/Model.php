@@ -39,37 +39,11 @@ abstract class Model implements Arrayable, Fillable, Jsonable
         $items = $this->getArrayableItems($collection);
 
         foreach ($items as $key => $value) {
-            if (!$reflector->hasProperty($key)) {
+            if ($this->shouldSkipProperty($reflector, $key)) {
                 continue;
             }
 
-            $property = $reflector->getProperty($key);
-
-            if ($property->isStatic()) {
-                continue;
-            }
-
-            if ($property->hasType()) {
-                $type = $property->getType();
-
-                if (!$type instanceof \ReflectionNamedType) {
-                    continue;
-                }
-
-                $class = $type->getName();
-                if (!is_null($value) && class_exists($class) && (!is_object($value) || get_class($value) !== $class)) {
-                    $value = new $class($value);
-                }
-            }
-
-            $method = sprintf('set%s', ucfirst($key));
-
-            if ($reflector->hasMethod($method)) {
-                $this->{$method}($value);
-            } else {
-                $property->setAccessible(true);
-                $property->setValue($this, $value);
-            }
+            $this->setPropertyValue($reflector, $key, $value);
         }
 
         return $this;
@@ -94,14 +68,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
             }
 
             $key = $property->getName();
-            $method = sprintf('get%s', ucfirst($key));
-
-            if ($reflector->hasMethod($method)) {
-                $value = $this->{$method}();
-            } else {
-                $property->setAccessible(true);
-                $value = $property->getValue($this);
-            }
+            $value = $this->getPropertyValue($reflector, $key);
 
             if (is_object($value)) {
                 $value = ObjectSerializer::serialize($value);
@@ -132,5 +99,92 @@ abstract class Model implements Arrayable, Fillable, Jsonable
     public function serializeJson()
     {
         return $this->toArray();
+    }
+
+    /**
+     * @param \ReflectionClass $reflector
+     * @param string $key
+     * @return boolean
+     */
+    private function shouldSkipProperty(\ReflectionClass $reflector, string $key): bool
+    {
+        if (!$reflector->hasProperty($key)) {
+            return true;
+        }
+
+        $property = $reflector->getProperty($key);
+
+        if ($property->isStatic() || !$property->hasType()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \ReflectionClass $reflector
+     * @param string $key
+     * @param mixed $value
+     * @return mixed
+     */
+    private function setPropertyValue(\ReflectionClass $reflector, string $key, $value)
+    {
+        $class = $this->getPropertyClass($reflector, $key);
+
+        if (!is_null($value) && !is_null($class) && class_exists($class) && !$value instanceof $class) {
+            $value = new $class($value);
+        }
+
+        $method = sprintf('set%s', ucfirst($key));
+
+        if ($reflector->hasMethod($method)) {
+            return $this->{$method}($value);
+        }
+
+        $property = $reflector->getProperty($key);
+        $property->setAccessible(true);
+
+        $property->setValue($this, $value);
+    }
+
+    /**
+     * @param \ReflectionClass $reflector
+     * @param string $key
+     * @return string|null
+     */
+    private function getPropertyClass(\ReflectionClass $reflector, string $key): ?string
+    {
+        $property = $reflector->getProperty($key);
+
+        if (!$property->hasType()) {
+            return null;
+        }
+
+        $type = $property->getType();
+
+        if (!$type instanceof \ReflectionNamedType) {
+            return null;
+        }
+
+        return $type->getName();
+    }
+
+    /**
+     * @param \ReflectionClass $reflector
+     * @param string $key
+     * @return mixed
+     */
+    private function getPropertyValue(\ReflectionClass $reflector, string $key)
+    {
+        $method = sprintf('get%s', ucfirst($key));
+
+        if ($reflector->hasMethod($method)) {
+            return $this->{$method}();
+        }
+
+        $property = $reflector->getProperty($key);
+        $property->setAccessible(true);
+
+        return $property->getValue($this);
     }
 }

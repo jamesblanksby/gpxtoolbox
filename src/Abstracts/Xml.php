@@ -17,7 +17,7 @@ abstract class Xml extends Model
      */
     public function fill($collection = null)
     {
-        if ($collection === null) {
+        if (is_null($collection)) {
             return $this;
         }
 
