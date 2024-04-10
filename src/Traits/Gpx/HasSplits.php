@@ -36,10 +36,10 @@ trait HasSplits
             if ($difference > $distanceThreshold) {
                 $distance += $difference;
                 $prevPoint = $point;
-            }
 
-            if ($distance < $interval) {
-                continue;
+                if ($distance < $interval) {
+                    continue;
+                }
             }
 
             $splits->addSplit(clone $splitPoints);
