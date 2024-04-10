@@ -206,10 +206,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the latitude of the point (alias for setLat).
-     *
-     * @param float $value
-     * @return $this
+     * Alias for setLat
+     * 
+     * @inheritDoc
      */
     public function setLatitude(float $value)
     {
@@ -217,9 +216,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the latitude of the point (alias for getLat).
-     *
-     * @return float
+     * Alias for getLat
+     * 
+     * @inheritDoc
      */
     public function getLatitude(): float
     {
@@ -227,10 +226,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the longitude of the point (alias for setLat).
-     *
-     * @param float $value
-     * @return $this
+     * Alias for setLat
+     * 
+     * @inheritDoc
      */
     public function setLongitude(float $value)
     {
@@ -238,9 +236,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the longitude of the point (alias for getLat).
-     *
-     * @return float
+     * Alias for getLat
+     * 
+     * @inheritDoc
      */
     public function getLongitude(): float
     {
@@ -258,10 +256,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the x-coordinate of the point (alias for setLat).
-     *
-     * @param float $value
-     * @return $this
+     * Alias for setLat
+     * 
+     * @inheritDoc
      */
     public function setX(float $value)
     {
@@ -269,9 +266,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the x-coordinate of the point (alias for getLat).
-     *
-     * @return float
+     * Alias for getLat
+     * 
+     * @inheritDoc
      */
     public function getX(): float
     {
@@ -279,10 +276,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the y-coordinate of the point (alias for setLon).
-     *
-     * @param float $value
-     * @return $this
+     * Alias for setLon
+     * 
+     * @inheritDoc
      */
     public function setY(float $value)
     {
@@ -290,9 +286,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the y-coordinate of the point (alias for getLon).
-     *
-     * @return float
+     * Alias for getLon
+     * 
+     * @inheritDoc
      */
     public function getY(): float
     {
@@ -323,10 +319,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the elevation of the point (alias for setEle).
-     *
-     * @param float|null $value
-     * @return $this
+     * Alias for setEle
+     * 
+     * @inheritDoc
      */
     public function setElevation(?float $value)
     {
@@ -334,9 +329,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the elevation of the point (alias for getEle).
-     *
-     * @return float|null
+     * Alias for getEle
+     * 
+     * @inheritDoc
      */
     public function getElevation(): ?float
     {
@@ -344,10 +339,9 @@ class Point extends Xml
     }
 
     /**
-     * Set the z-coordinate of the point (alias for getEle).
-     *
-     * @param float|null $value
-     * @return $this
+     * Alias for getEle
+     * 
+     * @inheritDoc
      */
     public function setZ(?float $value)
     {
@@ -355,9 +349,9 @@ class Point extends Xml
     }
 
     /**
-     * Get the z-coordinate of the point (alias for getEle).
-     *
-     * @return float|null
+     * Alias for getEle
+     * 
+     * @inheritDoc
      */
     public function getZ(): ?float
     {
