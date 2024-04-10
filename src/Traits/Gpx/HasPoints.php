@@ -55,8 +55,8 @@ trait HasPoints
         $points = $this->getPoints();
 
         foreach ($points as $point) {
-            $latitudes[] = $point->getLatitude();
-            $longitudes[] = $point->getLongitude();
+            $latitudes[] = $point->getLat();
+            $longitudes[] = $point->getLon();
         }
 
         $minlat = min($latitudes);

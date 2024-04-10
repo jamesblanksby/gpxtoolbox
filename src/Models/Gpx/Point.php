@@ -252,7 +252,7 @@ class Point extends Xml
      */
     public function getCoordinates(): array
     {
-        return [$this->getLongitude(), $this->getLatitude(),];
+        return [$this->getLon(), $this->getLat(),];
     }
 
     /**
