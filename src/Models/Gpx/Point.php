@@ -226,13 +226,13 @@ class Point extends Xml
     }
 
     /**
-     * Alias for setLat
+     * Alias for setLon
      * 
      * @inheritDoc
      */
     public function setLongitude(float $value)
     {
-        return $this->setLat($value);
+        return $this->setLon($value);
     }
 
     /**
