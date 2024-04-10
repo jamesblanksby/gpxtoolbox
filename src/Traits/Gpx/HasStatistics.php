@@ -59,7 +59,7 @@ trait HasStatistics
         $distance = 0.0;
 
         $configuration = GPXToolbox::getConfiguration();
-        $distanceThreshold = $configuration->getDistanceThreshold();
+        $distanceThreshold = $configuration->distanceThreshold;
 
         foreach ($points->all() as $point) {
             $difference = PointHelper::get3dDistance($prevPoint, $point);
@@ -72,7 +72,7 @@ trait HasStatistics
             }
         }
 
-        $distance = round($distance, $configuration->getDistancePrecision());
+        $distance = round($distance, $configuration->distancePrecision);
 
         return [$distance,];
     }
@@ -93,8 +93,8 @@ trait HasStatistics
         $total = ($lastPoint->time->getTimestamp() - $firstPoint->time->getTimestamp());
 
         $configuration = GPXToolbox::getConfiguration();
-        $movingDistanceThreshold = $configuration->getMovingDistanceThreshold();
-        $movingDurationThreshold = $configuration->getMovingDurationThreshold();
+        $movingDistanceThreshold = $configuration->movingDistanceThreshold;
+        $movingDurationThreshold = $configuration->movingDurationThreshold;
 
         foreach ($points->all() as $point) {
             $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
@@ -132,7 +132,7 @@ trait HasStatistics
         $gain = 0.0;
         $loss = 0.0;
 
-        $elevationThreshold = GPXToolbox::getConfiguration()->getElevationThreshold();
+        $elevationThreshold = GPXToolbox::getConfiguration()->elevationThreshold;
 
         foreach ($points->all() as $point) {
             $difference = ($prevPoint->getElevation() - $point->getElevation());
@@ -160,8 +160,8 @@ trait HasStatistics
         $pace = 0.0;
         $speed = 0.0;
 
-        $distance = $statistics->getDistance();
-        $movingDuration = $statistics->getMovingDuration();
+        $distance = $statistics->distance;
+        $movingDuration = $statistics->movingDuration;
 
         if ($movingDuration) {
             $pace = ($movingDuration / ($distance / 1000));
@@ -170,8 +170,8 @@ trait HasStatistics
 
         $configuration = GPXToolbox::getConfiguration();
 
-        $pace = round($pace, $configuration->getPacePrecision());
-        $speed = round($speed, $configuration->getSpeedPrecision());
+        $pace = round($pace, $configuration->pacePrecision);
+        $speed = round($speed, $configuration->speedPrecision);
 
         return [$pace, $speed,];
     }

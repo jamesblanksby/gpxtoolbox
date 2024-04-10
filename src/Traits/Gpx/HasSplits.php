@@ -23,7 +23,7 @@ trait HasSplits
 
         $distance = 0.0;
 
-        $distanceThreshold = GPXToolbox::getConfiguration()->getDistanceThreshold();
+        $distanceThreshold = GPXToolbox::getConfiguration()->distanceThreshold;
 
         $splits = new SplitCollection();
         $splitPoints = new PointCollection();

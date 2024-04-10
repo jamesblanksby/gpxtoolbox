@@ -167,7 +167,7 @@ class Point extends Xml
      */
     public function setLat(float $value)
     {
-        $this->lat = round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
+        $this->lat = round((float) $value, GPXToolbox::getConfiguration()->coordinatePrecision);
 
         return $this;
     }
@@ -190,7 +190,7 @@ class Point extends Xml
      */
     public function setLon(float $value)
     {
-        $this->lon = round((float) $value, GPXToolbox::getConfiguration()->getCoordinatePrecision());
+        $this->lon = round((float) $value, GPXToolbox::getConfiguration()->coordinatePrecision);
 
         return $this;
     }
@@ -303,7 +303,7 @@ class Point extends Xml
      */
     public function setEle(?float $value)
     {
-        $this->ele = round((float) $value, GPXToolbox::getConfiguration()->getElevationPrecision());
+        $this->ele = round((float) $value, GPXToolbox::getConfiguration()->elevationPrecision);
 
         return $this;
     }
