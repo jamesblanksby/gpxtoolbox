@@ -6,7 +6,7 @@
 
 A library for creating, parsing, and modifying [GPX files](https://en.wikipedia.org/wiki/GPS_Exchange_Format).
 
-## Features
+## 📍 Features
 
 * Full* support for [official specification](http://www.topografix.com/GPX/1/1).
 * High performance polyline simplification.
@@ -36,7 +36,7 @@ You can install **GPXToolbox** with **[composer](https://getcomposer.org)**.
 $ composer require jamesblanksby/gpxtoolbox
 ```
 
-## 📖 Simple Example
+## 📖 Getting Started
 
 Load a GPX file and retrieve statistical analysis.
 
