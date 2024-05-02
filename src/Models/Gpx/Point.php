@@ -207,8 +207,9 @@ class Point extends Xml
 
     /**
      * Alias for setLat
-     * 
-     * @inheritDoc
+     *
+     * @param float $value
+     * @return $this
      */
     public function setLatitude(float $value)
     {
@@ -217,8 +218,8 @@ class Point extends Xml
 
     /**
      * Alias for getLat
-     * 
-     * @inheritDoc
+     *
+     * @return float
      */
     public function getLatitude(): float
     {
@@ -227,8 +228,9 @@ class Point extends Xml
 
     /**
      * Alias for setLon
-     * 
-     * @inheritDoc
+     *
+     * @param float $value
+     * @return $this
      */
     public function setLongitude(float $value)
     {
@@ -237,8 +239,8 @@ class Point extends Xml
 
     /**
      * Alias for getLat
-     * 
-     * @inheritDoc
+     *
+     * @return float
      */
     public function getLongitude(): float
     {
@@ -257,8 +259,9 @@ class Point extends Xml
 
     /**
      * Alias for setLat
-     * 
-     * @inheritDoc
+     *
+     * @param float $value
+     * @return $this
      */
     public function setX(float $value)
     {
@@ -267,8 +270,8 @@ class Point extends Xml
 
     /**
      * Alias for getLat
-     * 
-     * @inheritDoc
+     *
+     * @return float
      */
     public function getX(): float
     {
@@ -277,8 +280,9 @@ class Point extends Xml
 
     /**
      * Alias for setLon
-     * 
-     * @inheritDoc
+     *
+     * @param float $value
+     * @return $this
      */
     public function setY(float $value)
     {
@@ -287,8 +291,8 @@ class Point extends Xml
 
     /**
      * Alias for getLon
-     * 
-     * @inheritDoc
+     *
+     * @return float
      */
     public function getY(): float
     {
@@ -320,8 +324,9 @@ class Point extends Xml
 
     /**
      * Alias for setEle
-     * 
-     * @inheritDoc
+     *
+     * @param float|null $value
+     * @return $this
      */
     public function setElevation(?float $value)
     {
@@ -330,8 +335,8 @@ class Point extends Xml
 
     /**
      * Alias for getEle
-     * 
-     * @inheritDoc
+     *
+     * @return float|null
      */
     public function getElevation(): ?float
     {
@@ -340,8 +345,9 @@ class Point extends Xml
 
     /**
      * Alias for getEle
-     * 
-     * @inheritDoc
+     *
+     * @param float|null $value
+     * @return $this
      */
     public function setZ(?float $value)
     {
@@ -350,8 +356,8 @@ class Point extends Xml
 
     /**
      * Alias for getEle
-     * 
-     * @inheritDoc
+     *
+     * @return float|null
      */
     public function getZ(): ?float
     {
