@@ -18,15 +18,17 @@ A library for creating, parsing, and modifying [GPX files](https://en.wikipedia.
 
 ### Statistics Analysis
 
-* Smoothed distance
-* Moving duration
-* Total duration
-* Minimum elevation
-* Maximum elevation
-* Elevation gain
-* Elevation loss
-* Average pace (minutes per km)
-* Average speed (kph)
+* Smoothed distance (m)
+* Moving duration (s)
+* Total duration (s)
+* Average speed (km/h)
+* Maximum speed (km/h)
+* Average pace (min/km)
+* Best pace (min/km)
+* Minimum elevation (m)
+* Maximum elevation (m)
+* Elevation gain (m)
+* Elevation loss (m)
 
 ## ⚡️ Installation
 
@@ -63,12 +65,14 @@ Array
     [distance] => 51946.58
     [movingDuration] => 29940
     [totalDuration] => 32678
+    [averageSpeed] => 6.23
+    [maxSpeed] => 13.45
+    [averagePace] => 637.46
+    [bestPace] => 267.62
     [minElevation] => 64.32
     [maxElevation] => 240.6
     [gainElevation] => 2113.4
     [lossElevation] => 2104.17
-    [averagePace] => 576.36
-    [averageSpeed] => 6.25
 )
 ```
 

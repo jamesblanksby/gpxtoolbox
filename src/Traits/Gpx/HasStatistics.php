@@ -20,30 +20,25 @@ trait HasStatistics
 
         list($distance) = $this->getDistance($points);
         list($movingDuration, $totalDuration) = $this->getDuration($points);
+        list($averageSpeed, $maxSpeed) = $this->getSpeed($points);
+        list($averagePace, $bestPace) = $this->getPace($points);
         list($minElevation, $maxElevation, $gainElevation, $lossElevation) = $this->getElevation($points);
 
         $properties = compact(
             'distance',
             'movingDuration',
             'totalDuration',
+            'averageSpeed',
+            'maxSpeed',
+            'averagePace',
+            'bestPace',
             'minElevation',
             'maxElevation',
             'gainElevation',
             'lossElevation',
         );
 
-        $statistics = new Statistics($properties);
-
-        list($averagePace, $averageSpeed) = $this->getAverage($statistics);
-
-        $properties = compact(
-            'averagePace',
-            'averageSpeed',
-        );
-
-        $statistics->fill($properties);
-
-        return $statistics;
+        return new Statistics($properties);
     }
 
     /**
@@ -114,6 +109,90 @@ trait HasStatistics
     }
 
     /**
+     * Get the speed from points.
+     *
+     * @param PointCollection $points
+     * @return array
+     */
+    protected function getSpeed(PointCollection $points): array
+    {
+        $count = 0;
+        $prevPoint = $points->first();
+
+        $total = 0.0;
+        $max = 0.0;
+
+        foreach ($points->all() as $point) {
+            $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
+            $durationDifference = abs(($prevPoint->time->getTimestamp() - $point->time->getTimestamp()));
+
+            if ($durationDifference > 0) {
+                $speed = (($distanceDifference / 1000) / ($durationDifference / 3600));
+                $total += $speed;
+
+                if ($speed > $max) {
+                    $max = $speed;
+                }
+
+                $count++;
+            }
+
+            $prevPoint = $point;
+        }
+
+        $average = $count > 0 ? ($total / $count) : 0.0;
+
+        $speedPrecision = GPXToolbox::getConfiguration()->speedPrecision;
+
+        $average = round($average, $speedPrecision);
+        $max = round($max, $speedPrecision);
+
+        return [$average, $max,];
+    }
+
+    /**
+     * Get the pace from points.
+     *
+     * @param PointCollection $points
+     * @return array
+     */
+    protected function getPace(PointCollection $points): array
+    {
+        $count = 0;
+        $prevPoint = $points->first();
+
+        $total = 0.0;
+        $best = PHP_FLOAT_MAX;
+
+        foreach ($points->all() as $point) {
+            $distanceDifference = PointHelper::get3dDistance($prevPoint, $point);
+            $durationDifference = abs(($prevPoint->time->getTimestamp() - $point->time->getTimestamp()));
+
+            if ($durationDifference > 0) {
+                $pace = ($durationDifference / ($distanceDifference / 1000));
+                $total += $pace;
+
+                if ($pace < $best) {
+                    $best = $pace;
+                }
+
+                $count++;
+            }
+
+            $prevPoint = $point;
+        }
+
+        $average = $count > 0 ? ($total / $count) : 0.0;
+
+        $pacePrecision = GPXToolbox::getConfiguration()->pacePrecision;
+
+        $average = round($average, $pacePrecision);
+        $best = round($best, $pacePrecision);
+
+        return [$average, $best,];
+    }
+
+    /**
      * Get the elevation from points.
      *
      * @param PointCollection $points
@@ -147,32 +226,5 @@ trait HasStatistics
         }
 
         return [$min, $max, $gain, $loss,];
-    }
-
-    /**
-     * Get the average pace and speed from statistics.
-     *
-     * @param Statistics $statistics
-     * @return array
-     */
-    protected function getAverage(Statistics $statistics): array
-    {
-        $pace = 0.0;
-        $speed = 0.0;
-
-        $distance = $statistics->distance;
-        $movingDuration = $statistics->movingDuration;
-
-        if ($movingDuration) {
-            $pace = ($movingDuration / ($distance / 1000));
-            $speed = (($distance / 1000) / ($movingDuration / 3600));
-        }
-
-        $configuration = GPXToolbox::getConfiguration();
-
-        $pace = round($pace, $configuration->pacePrecision);
-        $speed = round($speed, $configuration->speedPrecision);
-
-        return [$pace, $speed,];
     }
 }

@@ -22,6 +22,26 @@ class Statistics extends Model
     public int $totalDuration = 0;
 
     /**
+     * @var float Average speed during the activity.
+     */
+    public float $averageSpeed = 0.0;
+
+    /**
+     * @var float Maximum speed during the activity.
+     */
+    public float $maxSpeed = 0.0;
+
+    /**
+     * @var float Average pace during the activity.
+     */
+    public float $averagePace = 0.0;
+
+    /**
+     * @var float Best pace during the activity.
+     */
+    public float $bestPace = 0.0;
+
+    /**
      * @var float Minimum elevation during the activity.
      */
     public float $minElevation = 0.0;
@@ -40,14 +60,4 @@ class Statistics extends Model
      * @var float Elevation loss during the activity.
      */
     public float $lossElevation = 0.0;
-
-    /**
-     * @var float Average pace during the activity.
-     */
-    public float $averagePace = 0.0;
-
-    /**
-     * @var float Average speed during the activity.
-     */
-    public float $averageSpeed = 0.0;
 }
