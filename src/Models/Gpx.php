@@ -79,12 +79,12 @@ class Gpx extends Xml
     /**
      * Add a Point to the GPX file.
      *
-     * @param Point $Point
+     * @param Point $point
      * @return $this
      */
-    public function addPoint(Point $Point)
+    public function addPoint(Point $point)
     {
-        $this->getPoints()->add($Point);
+        $this->getPoints()->add($point);
 
         return $this;
     }

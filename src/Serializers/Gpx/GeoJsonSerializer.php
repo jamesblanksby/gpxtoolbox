@@ -33,12 +33,12 @@ class GeoJsonSerializer
      * Serialize Points to GeoJSON features.
      *
      * @param FeatureCollection $features
-     * @param PointCollection $Points
+     * @param PointCollection $points
      * @return FeatureCollection
      */
-    public static function serializePoints(FeatureCollection $features, PointCollection $Points): FeatureCollection
+    public static function serializePoints(FeatureCollection $features, PointCollection $points): FeatureCollection
     {
-        foreach ($Points->all() as $point) {
+        foreach ($points->all() as $point) {
             $feature = self::serializeFeature(Geometry::POINT, new PointCollection($point), $point->getProperties());
 
             $features->addFeature($feature);
