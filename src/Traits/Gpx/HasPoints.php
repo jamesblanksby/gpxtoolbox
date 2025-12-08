@@ -15,7 +15,7 @@ trait HasPoints
      * @param PointCollection $points
      * @return $this
      */
-    public function setPoints(PointCollection $points)
+    public function setPoints(PointCollection $points): self
     {
         $this->getPoints()->clear()->fill($points);
 
@@ -28,7 +28,7 @@ trait HasPoints
      * @param Point $point
      * @return $this
      */
-    public function addPoint(Point $point)
+    public function addPoint(Point $point): self
     {
         $this->getPoints()->add($point);
 
@@ -47,31 +47,11 @@ trait HasPoints
      *
      * @return Bounds
      */
-    public function getBounds()
+    public function getBounds(): Bounds
     {
-        $latitudes = [];
-        $longitudes = [];
-
         $points = $this->getPoints();
 
-        foreach ($points as $point) {
-            $latitudes[] = $point->getLat();
-            $longitudes[] = $point->getLon();
-        }
-
-        $minlat = min($latitudes);
-        $minlon = min($longitudes);
-        $maxlat = max($latitudes);
-        $maxlon = max($longitudes);
-
-        $properties = compact(
-            'minlat',
-            'minlon',
-            'maxlat',
-            'maxlon',
-        );
-
-        return new Bounds($properties);
+        return PointHelper::getBounds($points);
     }
 
     /**
@@ -81,7 +61,7 @@ trait HasPoints
      * @param bool $highestQuality
      * @return $this
      */
-    public function simplify(float $tolerance = 0.1, bool $highestQuality = true)
+    public function simplify(float $tolerance = 0.1, bool $highestQuality = true): self
     {
         $points = $this->getPoints();
 

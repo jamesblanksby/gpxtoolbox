@@ -4,6 +4,8 @@ namespace GPXToolbox\Models;
 
 use GPXToolbox\Abstracts\Xml;
 use GPXToolbox\GPXToolbox;
+use GPXToolbox\Helpers\Gpx\PointHelper;
+use GPXToolbox\Models\Gpx\Bounds;
 use GPXToolbox\Models\Gpx\Metadata;
 use GPXToolbox\Models\Gpx\Point;
 use GPXToolbox\Models\Gpx\PointCollection;
@@ -11,6 +13,7 @@ use GPXToolbox\Models\Gpx\Route;
 use GPXToolbox\Models\Gpx\RouteCollection;
 use GPXToolbox\Models\Gpx\Track;
 use GPXToolbox\Models\Gpx\TrackCollection;
+use GPXToolbox\Renderers\Gpx\ImageRenderer;
 use GPXToolbox\Serializers\Gpx\GeoJsonSerializer;
 use GPXToolbox\Serializers\XmlSerializer;
 
@@ -146,6 +149,22 @@ class Gpx extends Xml
     }
 
     /**
+     * Get the geographical bounds associated with the GPX file.
+     *
+     * @return Bounds
+     */
+    public function getBounds(): Bounds
+    {
+        $points = new PointCollection(array_merge(
+            $this->getPoints()->all(),
+            $this->getRoutes()->getPoints()->all(),
+            $this->getTracks()->getPoints()->all(),
+        ));
+
+        return PointHelper::getBounds($points);
+    }
+
+    /**
      * Convert the GPX data to an XML string.
      *
      * @return string
@@ -195,5 +214,18 @@ class Gpx extends Xml
         $features = GeoJsonSerializer::serialize($this);
 
         return $features->toArray();
+    }
+
+    /**
+     * Render the GPX data as an image.
+     *
+     * @param array $options
+     * @return \GdImage
+     */
+    public function toImage(array $options = []): \GdImage
+    {
+        $renderer = new ImageRenderer($options);
+
+        return $renderer->render($this);
     }
 }

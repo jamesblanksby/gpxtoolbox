@@ -12,17 +12,20 @@ class Link extends Xml
     protected ?array $attributes = ['href',];
 
     /**
-     * @var string The URL of the link.
+     * The URL of the link.
+     * @var string
      */
     public string $href = '';
 
     /**
-     * @var string|null The text of the link.
+     * The text of the link.
+     * @var string|null
      */
     public ?string $text = null;
 
     /**
-     * @var string|null The type of the link.
+     * The type of the link.
+     * @var string|null
      */
     public ?string $type = null;
 }

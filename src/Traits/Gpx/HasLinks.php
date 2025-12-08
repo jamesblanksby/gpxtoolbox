@@ -13,7 +13,7 @@ trait HasLinks
      * @param LinkCollection $links
      * @return $this
      */
-    public function setLinks(LinkCollection $links)
+    public function setLinks(LinkCollection $links): self
     {
         $this->getLinks()->clear()->fill($links);
 
@@ -26,7 +26,7 @@ trait HasLinks
      * @param Link $link
      * @return $this
      */
-    public function addLink(Link $link)
+    public function addLink(Link $link): self
     {
         $this->getLinks()->add($link);
 

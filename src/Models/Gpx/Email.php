@@ -12,12 +12,14 @@ class Email extends Xml
     protected ?array $attributes = ['id', 'domain',];
 
     /**
-     * @var string The local part of the email address.
+     * The local part of the email address.
+     * @var string
      */
     public string $id = '';
 
     /**
-     * @var string The domain part of the email address.
+     * The domain part of the email address.
+     * @var string
      */
     public string $domain = '';
 }

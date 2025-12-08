@@ -133,7 +133,7 @@ class Track extends Xml
         if ($segment) {
             $segment->add($point);
         } else {
-            $points = new PointCollection([$point,]);
+            $points = new PointCollection($point);
             $this->setPoints($points);
         }
 

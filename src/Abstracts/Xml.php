@@ -5,7 +5,8 @@ namespace GPXToolbox\Abstracts;
 abstract class Xml extends Model
 {
     /**
-     * @var array|null Attributes associated with the XML element.
+     * Attributes associated with the XML element.
+     * @var array|null
      */
     protected ?array $attributes = null;
 

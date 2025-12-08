@@ -19,7 +19,8 @@ class Geometry extends Model
     public const GEOMETRY_COLLECTION = 'GeometryCollection';
 
     /**
-     * @var string The GeoJSON type.
+     * The GeoJSON type.
+     * @var string
      */
     public string $type = '';
 

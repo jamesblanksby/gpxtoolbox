@@ -12,17 +12,20 @@ class Copyright extends Xml
     protected ?array $attributes = ['author',];
 
     /**
-     * @var string The author of the copyright.
+     * The author of the copyright.
+     * @var string
      */
     public string $author = '';
 
     /**
-     * @var string|null The year of the copyright.
+     * The year of the copyright.
+     * @var string|null
      */
     public ?string $year = null;
 
     /**
-     * @var string|null The license information.
+     * The license information.
+     * @var string|null
      */
     public ?string $license = null;
 }

@@ -12,22 +12,26 @@ class Bounds extends Xml
     protected ?array $attributes = ['minlat', 'minlon', 'maxlat', 'maxlon',];
 
     /**
-     * @var float The minimum latitude of the bounds.
+     * The minimum latitude of the bounds.
+     * @var float
      */
     public float $minlat = 0.0;
 
     /**
-     * @var float The minimum longitude of the bounds.
+     * The minimum longitude of the bounds.
+     * @var float
      */
     public float $minlon = 0.0;
 
     /**
-     * @var float The maximum latitude of the bounds.
+     * The maximum latitude of the bounds.
+     * @var float
      */
     public float $maxlat = 0.0;
 
     /**
-     * @var float The maximum longitude of the bounds.
+     * The maximum longitude of the bounds.
+     * @var float
      */
     public float $maxlon = 0.0;
 }

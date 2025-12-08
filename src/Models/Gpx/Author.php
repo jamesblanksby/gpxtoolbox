@@ -7,17 +7,20 @@ use GPXToolbox\Abstracts\Xml;
 class Author extends Xml
 {
     /**
-     * @var string|null The name of the author.
+     * The name of the author.
+     * @var string|null
      */
     public ?string $name = null;
 
     /**
-     * @var Email|null Email address of the author.
+     * Email address of the author.
+     * @var Email|null
      */
     public ?Email $email = null;
 
     /**
-     * @var Link|null A link to additional information about the author.
+     * A link to additional information about the author.
+     * @var Link|null
      */
     public ?Link $link = null;
 }

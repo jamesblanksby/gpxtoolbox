@@ -13,12 +13,14 @@ abstract class Collection implements Arrayable, \Countable, Fillable, Iteratorab
     use HasArrayable;
 
     /**
-     * @var string|null The class name used for hydration.
+     * The class name used for hydration.
+     * @var string|null
      */
     protected ?string $class = null;
 
     /**
-     * @var array The collection items.
+     * The collection items.
+     * @var array
      */
     protected array $items = [];
 

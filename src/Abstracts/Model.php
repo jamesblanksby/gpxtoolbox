@@ -106,7 +106,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
      * @param string $key
      * @return boolean
      */
-    private function shouldSkipProperty(\ReflectionClass $reflector, string $key): bool
+    protected function shouldSkipProperty(\ReflectionClass $reflector, string $key): bool
     {
         if (!$reflector->hasProperty($key)) {
             return true;
@@ -127,7 +127,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
      * @param mixed $value
      * @return mixed
      */
-    private function setPropertyValue(\ReflectionClass $reflector, string $key, $value)
+    protected function setPropertyValue(\ReflectionClass $reflector, string $key, $value)
     {
         $class = $this->getPropertyClass($reflector, $key);
 
@@ -152,7 +152,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
      * @param string $key
      * @return string|null
      */
-    private function getPropertyClass(\ReflectionClass $reflector, string $key): ?string
+    protected function getPropertyClass(\ReflectionClass $reflector, string $key): ?string
     {
         $property = $reflector->getProperty($key);
 
@@ -174,7 +174,7 @@ abstract class Model implements Arrayable, Fillable, Jsonable
      * @param string $key
      * @return mixed
      */
-    private function getPropertyValue(\ReflectionClass $reflector, string $key)
+    protected function getPropertyValue(\ReflectionClass $reflector, string $key)
     {
         $method = sprintf('get%s', ucfirst($key));
 

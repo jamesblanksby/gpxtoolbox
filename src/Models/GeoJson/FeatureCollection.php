@@ -12,7 +12,8 @@ class FeatureCollection extends Collection
     protected ?string $class = Feature::class;
 
     /**
-     * @var string The GeoJSON type.
+     * The GeoJSON type.
+     * @var string
      */
     protected string $type = 'FeatureCollection';
 

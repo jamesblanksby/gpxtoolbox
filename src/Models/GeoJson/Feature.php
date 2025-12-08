@@ -7,17 +7,20 @@ use GPXToolbox\Abstracts\Model;
 class Feature extends Model
 {
     /**
-     * @var string The GeoJSON type.
+     * The GeoJSON type.
+     * @var string
      */
     protected string $type = 'Feature';
 
     /**
-     * @var Geometry The geometry associated with the feature.
+     * The geometry associated with the feature.
+     * @var Geometry
      */
     public Geometry $geometry;
 
     /**
-     * @var array Properties associated with the feature.
+     * Properties associated with the feature.
+     * @var array
      */
     public array $properties = [];
 

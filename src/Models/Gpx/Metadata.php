@@ -10,42 +10,50 @@ class Metadata extends Xml
     use HasLinks;
 
     /**
-     * @var string|null The name of the GPX file.
+     * The name of the GPX file.
+     * @var string|null
      */
     public ?string $name = null;
 
     /**
-     * @var string|null A description of the GPX file.
+     * A description of the GPX file.
+     * @var string|null
      */
     public ?string $desc = null;
 
     /**
-     * @var Author|null The author of the GPX file.
+     * The author of the GPX file.
+     * @var Author|null
      */
     public ?Author $author = null;
 
     /**
-     * @var Copyright|null Copyright information for the GPX file.
+     * Copyright information for the GPX file.
+     * @var Copyright|null
      */
     public ?Copyright $copyright = null;
 
     /**
-     * @var LinkCollection A collection of links associated with the GPX file.
+     * A collection of links associated with the GPX file.
+     * @var LinkCollection
      */
     public LinkCollection $link;
 
     /**
-     * @var Datetime|null The timestamp of when the GPX file was created.
+     * The timestamp of when the GPX file was created.
+     * @var Datetime|null
      */
     public ?Datetime $time = null;
 
     /**
-     * @var string|null Keywords associated with the GPX file.
+     * Keywords associated with the GPX file.
+     * @var string|null
      */
     public ?string $keywords = null;
 
     /**
-     * @var Bounds|null Bounding box information for the GPX file.
+     * Bounding box information for the GPX file.
+     * @var Bounds|null
      */
     public ?Bounds $bounds = null;
 

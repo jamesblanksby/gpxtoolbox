@@ -2,6 +2,7 @@
 
 namespace GPXToolbox\Helpers\Gpx;
 
+use GPXToolbox\Models\Gpx\Bounds;
 use GPXToolbox\Models\Gpx\Point;
 use GPXToolbox\Models\Gpx\PointCollection;
 
@@ -93,6 +94,37 @@ class PointHelper
     }
 
     /**
+     * Calculate the geographic bounds for a collection of points.
+     *
+     * @param PointCollection $points
+     * @return Bounds
+     */
+    public static function getBounds(PointCollection $points): Bounds
+    {
+        $latitudes = [];
+        $longitudes = [];
+
+        foreach ($points as $point) {
+            $latitudes[] = $point->getLat();
+            $longitudes[] = $point->getLon();
+        }
+
+        $minlat = min($latitudes);
+        $minlon = min($longitudes);
+        $maxlat = max($latitudes);
+        $maxlon = max($longitudes);
+
+        $properties = compact(
+            'minlat',
+            'minlon',
+            'maxlat',
+            'maxlon',
+        );
+
+        return new Bounds($properties);
+    }
+
+    /**
      * Simplify a collection of points.
      *
      * @param PointCollection $points
@@ -127,7 +159,7 @@ class PointHelper
 
         $prevPoint = $points->first();
 
-        $simplifiedPoints = new PointCollection([$prevPoint,]);
+        $simplifiedPoints = new PointCollection($prevPoint);
 
         for ($a = 1; $a < $count; $a++) {
             $point = $points->get($a);

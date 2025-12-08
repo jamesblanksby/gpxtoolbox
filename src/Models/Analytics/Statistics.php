@@ -7,57 +7,68 @@ use GPXToolbox\Abstracts\Model;
 class Statistics extends Model
 {
     /**
-     * @var float Distance covered in the activity.
+     * Distance covered in the activity.
+     * @var float
      */
     public float $distance = 0.0;
 
     /**
-     * @var int Duration of movement during the activity.
+     * Duration of movement during the activity.
+     * @var int
      */
     public int $movingDuration = 0;
 
     /**
-     * @var int Total duration of the activity.
+     * Total duration of the activity.
+     * @var int
      */
     public int $totalDuration = 0;
 
     /**
-     * @var float Average speed during the activity.
+     * Average speed during the activity.
+     * @var float
      */
     public float $averageSpeed = 0.0;
 
     /**
-     * @var float Maximum speed during the activity.
+     * Maximum speed during the activity.
+     * @var float
      */
     public float $maxSpeed = 0.0;
 
     /**
-     * @var float Average pace during the activity.
+     * Average pace during the activity.
+     * @var float
      */
     public float $averagePace = 0.0;
 
     /**
-     * @var float Best pace during the activity.
+     * Best pace during the activity.
+     * @var float
      */
     public float $bestPace = 0.0;
 
     /**
-     * @var float Minimum elevation during the activity.
+     * Minimum elevation during the activity.
+     * @var float
      */
     public float $minElevation = 0.0;
 
     /**
-     * @var float Maximum elevation during the activity.
+     * Maximum elevation during the activity.
+     * @var float
      */
     public float $maxElevation = 0.0;
 
     /**
-     * @var float Elevation gain during the activity.
+     * Elevation gain during the activity.
+     * @var float
      */
     public float $gainElevation = 0.0;
 
     /**
-     * @var float Elevation loss during the activity.
+     * Elevation loss during the activity.
+     * @var float
      */
     public float $lossElevation = 0.0;
 }
